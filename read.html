@@ -70,14 +70,11 @@
       max-width: 600px;
     }
 
-    /* ✅ Hide download button from native audio bar */
-    audio::-internal-media-controls-download-button {
-      display: none;
-    }
-    audio::-webkit-media-controls-enclosure {
+    /* ✅ Hide download button but keep playback speed */
+    audio[controls]::-webkit-media-controls-enclosure {
       overflow: hidden;
     }
-    audio::-webkit-media-controls-panel {
+    audio[controls]::-webkit-media-controls-panel {
       justify-content: center;
     }
   </style>
@@ -100,7 +97,7 @@
   </div>
 
   <!-- Audio bar above the text -->
-  <audio id="audioBar" controls></audio>
+  <audio id="audioBar" controls controlsList="nodownload"></audio>
 
   <!-- Story text -->
   <div id="storyText"></div>

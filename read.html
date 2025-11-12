@@ -6,99 +6,63 @@
   <title>Story Reader</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --icon-color: #2196F3;
-    }
     body {
       margin: 0;
       padding: 20px;
       font-family: 'Quicksand', sans-serif;
-      position: relative;
-      color: #333;
       background-color: #f5f5f5;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('bg-light.png') center center no-repeat;
-      background-size: cover;
-      opacity: 0.2;
-      z-index: -1;
-    }
-    .container {
-      background-color: rgba(255, 255, 255, 0.0);
-      padding: 10px;
-      border-radius: 12px;
-      max-width: 800px;
-      margin: auto;
-    }
-    .controls {
+      color: #333;
       text-align: center;
-      margin-bottom: 15px;
     }
-    .circle-button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 18px;
       border: none;
-      font-size: 20px;
-      font-weight: bold;
-      background-color: var(--icon-color);
+      border-radius: 8px;
+      background-color: #4CAF50;
       color: white;
-      margin: 0 10px;
       cursor: pointer;
     }
-    .story-image {
-      display: block;
+    .small-button {
+      padding: 6px 12px;
+      font-size: 16px;
+      background-color: #2196F3;
+    }
+    #storyImage {
+      display: none;
       margin: 20px auto;
       max-width: 100%;
       border-radius: 8px;
     }
     #storyText {
-      white-space: pre-wrap;
-      font-size: 18px;
-      text-align: justify;
-      line-height: 1.3;
       display: none;
-      transition: font-size 0.3s ease;
+      white-space: pre-wrap;
+      text-align: justify;
+      font-size: 18px;
+      line-height: 1.3;
+      margin-top: 20px;
     }
     .resize-controls {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .action-buttons button {
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
+      display: none;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="action-buttons controls">
-      <button onclick="readStory()">📖 Read</button>
-      <button onclick="playAudio('woman')">🎧 Listen (Woman)</button>
-      <button onclick="playAudio('man')">🎧 Listen (Man)</button>
-    </div>
+  <button onclick="showPicture()">Picture</button>
+  <img id="storyImage" src="" alt="Story Illustration" />
 
-    <div class="resize-controls">
-      <button class="circle-button" onclick="adjustFontSize(-2)">−</button>
-      <button class="circle-button" onclick="adjustFontSize(2)">+</button>
-    </div>
-
-    <img id="storyImage" class="story-image" src="" alt="Story Illustration" />
-    <div id="storyText"></div>
+  <button onclick="readStory()">Read</button>
+  <div class="resize-controls">
+    <button class="small-button" onclick="adjustFontSize(-2)">−</button>
+    <button class="small-button" onclick="adjustFontSize(2)">+</button>
   </div>
+
+  <button onclick="playAudio('man')">Listen (Man)</button>
+  <button onclick="playAudio('woman')">Listen (Woman)</button>
+
+  <div id="storyText"></div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -108,32 +72,39 @@
     const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
     let currentFontSize = 18;
     let audioPlayer = new Audio();
+    let storyData;
 
     fetch(jsonUrl)
       .then(res => res.json())
       .then(data => {
-        const story = data[id];
-        if (!story) throw new Error("Story not found");
+        storyData = data[id];
+        if (!storyData) throw new Error("Story not found");
 
-        fetch(`https://kiabatha.github.io/ssm/${story.text}`)
+        fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
           .then(res => res.text())
           .then(text => {
             document.getElementById("storyText").innerText = text;
-            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${story.image}`;
+            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
           });
-
-        window.playAudio = function(gender) {
-          const audioPath = gender === "woman" ? story.audio_woman : story.audio_man;
-          audioPlayer.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-          audioPlayer.play();
-        };
       })
       .catch(() => {
         document.getElementById("storyText").innerText = "Failed to load story.";
       });
 
+    function showPicture() {
+      document.getElementById("storyImage").style.display = "block";
+    }
+
     function readStory() {
       document.getElementById("storyText").style.display = "block";
+      document.querySelector(".resize-controls").style.display = "block";
+      document.getElementById("storyImage").style.display = "block";
+    }
+
+    function playAudio(gender) {
+      const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+      audioPlayer.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+      audioPlayer.play();
     }
 
     function adjustFontSize(change) {

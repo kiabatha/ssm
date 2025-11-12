@@ -17,17 +17,20 @@
     .button-row {
       display: flex;
       justify-content: center;
-      gap: 8px;
       flex-wrap: wrap;
+      gap: 8px;
       margin-top: 20px;
     }
     .action-button {
-      padding: 6px 12px;
-      font-size: 14px;
+      min-width: 80px;
+      padding: 6px 10px;
+      font-size: 13px;
       border: none;
       border-radius: 5px;
       color: white;
       cursor: pointer;
+      flex: 1 1 auto;
+      max-width: 100px;
     }
     .red-button { background-color: #E53935; }
     .green-button { background-color: #4CAF50; }
@@ -85,8 +88,8 @@
 
   <div class="button-row">
     <button class="action-button red-button" onclick="readStory()" id="readBtn">Read</button>
-    <button class="action-button green-button" onclick="playAudio('man')">Listen (Man)</button>
-    <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
+    <button class="action-button green-button" onclick="playAudio('man')">Man</button>
+    <button class="action-button green-button" onclick="playAudio('woman')">Woman</button>
   </div>
 
   <div class="resize-controls">
@@ -156,7 +159,6 @@
       document.getElementById("storyText").style.fontSize = currentFontSize + "px";
     }
 
-    // ✅ Stop audio when user leaves the page or presses back
     document.addEventListener("visibilitychange", () => {
       if (document.hidden && !audioBar.paused) {
         audioBar.pause();

@@ -24,10 +24,20 @@
       color: white;
       cursor: pointer;
     }
-    .small-button {
-      padding: 6px 12px;
-      font-size: 16px;
+    .red-button {
+      background-color: #E53935;
+    }
+    .round-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: bold;
       background-color: #2196F3;
+      color: white;
+      border: none;
+      margin: 0 10px;
+      cursor: pointer;
     }
     #storyImage {
       display: none;
@@ -45,24 +55,23 @@
     }
     .resize-controls {
       display: none;
-      margin-top: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <button onclick="showPicture()">Picture</button>
-  <img id="storyImage" src="" alt="Story Illustration" />
-
-  <button onclick="readStory()">Read</button>
-  <div class="resize-controls">
-    <button class="small-button" onclick="adjustFontSize(-2)">−</button>
-    <button class="small-button" onclick="adjustFontSize(2)">+</button>
-  </div>
-
+  <button class="red-button" onclick="readStory()">Read</button>
   <button onclick="playAudio('man')">Listen (Man)</button>
   <button onclick="playAudio('woman')">Listen (Woman)</button>
 
+  <img id="storyImage" src="" alt="Story Illustration" />
+
   <div id="storyText"></div>
+
+  <div class="resize-controls">
+    <button class="round-button" onclick="adjustFontSize(-2)">−</button>
+    <button class="round-button" onclick="adjustFontSize(2)">+</button>
+  </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -91,14 +100,10 @@
         document.getElementById("storyText").innerText = "Failed to load story.";
       });
 
-    function showPicture() {
-      document.getElementById("storyImage").style.display = "block";
-    }
-
     function readStory() {
+      document.getElementById("storyImage").style.display = "block";
       document.getElementById("storyText").style.display = "block";
       document.querySelector(".resize-controls").style.display = "block";
-      document.getElementById("storyImage").style.display = "block";
     }
 
     function playAudio(gender) {

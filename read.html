@@ -28,19 +28,19 @@
       background-color: #E53935;
     }
     .round-button {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
       background-color: #2196F3;
       color: white;
       border: none;
-      margin: 0 10px;
+      margin: 0 8px;
       cursor: pointer;
     }
     #storyImage {
-      display: none;
+      display: block;
       margin: 20px auto;
       max-width: 100%;
       border-radius: 8px;
@@ -60,14 +60,18 @@
   </style>
 </head>
 <body>
+  <!-- Image always shown at top -->
+  <img id="storyImage" src="" alt="Story Illustration" />
+
+  <!-- Buttons shown below image -->
   <button class="red-button" onclick="readStory()">Read</button>
   <button onclick="playAudio('man')">Listen (Man)</button>
   <button onclick="playAudio('woman')">Listen (Woman)</button>
 
-  <img id="storyImage" src="" alt="Story Illustration" />
-
+  <!-- Story text -->
   <div id="storyText"></div>
 
+  <!-- Font resize buttons -->
   <div class="resize-controls">
     <button class="round-button" onclick="adjustFontSize(-2)">−</button>
     <button class="round-button" onclick="adjustFontSize(2)">+</button>
@@ -101,7 +105,6 @@
       });
 
     function readStory() {
-      document.getElementById("storyImage").style.display = "block";
       document.getElementById("storyText").style.display = "block";
       document.querySelector(".resize-controls").style.display = "block";
     }

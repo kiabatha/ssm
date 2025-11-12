@@ -15,29 +15,43 @@
       text-align: center;
     }
     button {
-      padding: 12px 24px;
-      margin: 10px;
-      font-size: 18px;
+      padding: 7px 16px;
+      margin: 6px;
+      font-size: 15px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       background-color: #4CAF50;
       color: white;
       cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    button:active {
+      background-color: #357a38;
     }
     .red-button {
       background-color: #E53935;
     }
     .round-button {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
       background-color: #2196F3;
       color: white;
       border: none;
       margin: 0 8px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.13);
+      line-height: 1;
+      transition: background 0.2s;
+    }
+    .round-button:active {
+      background: #1565c0;
     }
     #storyImage {
       display: block;
@@ -55,7 +69,11 @@
     }
     .resize-controls {
       display: none;
-      margin-top: 20px;
+      margin-top: 28px;
+      margin-bottom: 0;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
@@ -71,10 +89,10 @@
   <!-- Story text -->
   <div id="storyText"></div>
 
-  <!-- Font resize buttons -->
+  <!-- Font resize buttons, always centered and round -->
   <div class="resize-controls">
-    <button class="round-button" onclick="adjustFontSize(-2)">−</button>
-    <button class="round-button" onclick="adjustFontSize(2)">+</button>
+    <button class="round-button" onclick="adjustFontSize(-2)" title="Decrease font size">−</button>
+    <button class="round-button" onclick="adjustFontSize(2)" title="Increase font size">+</button>
   </div>
 
   <script>
@@ -106,7 +124,7 @@
 
     function readStory() {
       document.getElementById("storyText").style.display = "block";
-      document.querySelector(".resize-controls").style.display = "block";
+      document.querySelector(".resize-controls").style.display = "flex";
     }
 
     function playAudio(gender) {

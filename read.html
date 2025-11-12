@@ -69,6 +69,8 @@
       width: 100%;
       max-width: 600px;
     }
+
+    /* ✅ Hide download button from native audio bar */
     audio::-internal-media-controls-download-button {
       display: none;
     }
@@ -81,17 +83,17 @@
   </style>
 </head>
 <body>
-  <!-- Story image always shown at top -->
+  <!-- Story image -->
   <img id="storyImage" src="" alt="Story Illustration" />
 
-  <!-- Three buttons below image -->
+  <!-- Top button row -->
   <div class="button-row">
     <button class="action-button red-button" onclick="readStory()" id="readBtn">Read</button>
     <button class="action-button green-button" onclick="playAudio('man')">Listen (Man)</button>
     <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
   </div>
 
-  <!-- Font resize buttons below the three buttons -->
+  <!-- Font resize buttons -->
   <div class="resize-controls">
     <button class="round-button" onclick="adjustFontSize(-2)">−</button>
     <button class="round-button" onclick="adjustFontSize(2)">+</button>
@@ -100,7 +102,7 @@
   <!-- Audio bar above the text -->
   <audio id="audioBar" controls></audio>
 
-  <!-- Story text at the bottom -->
+  <!-- Story text -->
   <div id="storyText"></div>
 
   <script>
@@ -142,7 +144,7 @@
       const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
       audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
       audioBar.style.display = "block";
-      audioBar.volume = 1.0; // ✅ Max volume
+      audioBar.volume = 1.0;
       audioBar.play();
 
       document.querySelector(".resize-controls").style.display = "none";

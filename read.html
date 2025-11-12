@@ -65,9 +65,12 @@
     }
     #audioBar {
       display: none;
-      margin-top: 20px;
+      margin: 20px auto 0;
       width: 100%;
       max-width: 600px;
+    }
+    audio::-internal-media-controls-download-button {
+      display: none;
     }
   </style>
 </head>
@@ -88,11 +91,11 @@
     <button class="round-button" onclick="adjustFontSize(2)">+</button>
   </div>
 
+  <!-- Audio bar above the text -->
+  <audio id="audioBar" controls></audio>
+
   <!-- Story text at the bottom -->
   <div id="storyText"></div>
-
-  <!-- Audio bar -->
-  <audio id="audioBar" controls></audio>
 
   <script>
     const params = new URLSearchParams(window.location.search);
@@ -133,6 +136,7 @@
       const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
       audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
       audioBar.style.display = "block";
+      audioBar.volume = 1.0; // ✅ Max volume
       audioBar.play();
 
       document.querySelector(".resize-controls").style.display = "none";

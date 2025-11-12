@@ -69,8 +69,12 @@
       width: 100%;
       max-width: 600px;
     }
-
-    /* ✅ Hide download button but keep playback speed */
+    #languageSelect {
+      margin-top: 10px;
+      font-size: 16px;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
     audio[controls]::-webkit-media-controls-enclosure {
       overflow: hidden;
     }
@@ -80,8 +84,15 @@
   </style>
 </head>
 <body>
-  <!-- Story image -->
   <img id="storyImage" src="" alt="Story Illustration" />
+
+  <!-- Language selector -->
+  <select id="languageSelect" onchange="loadStoryText()">
+    <option value="default">English</option>
+    <option value="urdu">اردو</option>
+    <option value="spanish">Español</option>
+    <option value="french">Français</option>
+  </select>
 
   <!-- Top button row -->
   <div class="button-row">
@@ -90,13 +101,21 @@
     <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
   </div>
 
+  <!-- Multilingual audio buttons -->
+  <div class="button-row">
+    <button class="action-button green-button" onclick="playAudio('urdu_man')">سنیں (مرد)</button>
+    <button class="action-button green-button" onclick="playAudio('urdu_woman')">سنیں (عورت)</button>
+    <button class="action-button green-button" onclick="playAudio('spanish_man')">Escuchar (Hombre)</button>
+    <button class="action-button green-button" onclick="playAudio('french_woman')">Écouter (Femme)</button>
+  </div>
+
   <!-- Font resize buttons -->
   <div class="resize-controls">
     <button class="round-button" onclick="adjustFontSize(-2)">−</button>
     <button class="round-button" onclick="adjustFontSize(2)">+</button>
   </div>
 
-  <!-- Audio bar above the text -->
+  <!-- Audio bar -->
   <audio id="audioBar" controls controlsList="nodownload"></audio>
 
   <!-- Story text -->
@@ -120,16 +139,27 @@
         storyData = data[id];
         if (!storyData) throw new Error("Story not found");
 
-        fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-          .then(res => res.text())
-          .then(text => {
-            document.getElementById("storyText").innerText = text;
-            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
-          });
+        document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+        loadStoryText(); // Load default text
       })
       .catch(() => {
         document.getElementById("storyText").innerText = "Failed to load story.";
       });
+
+    function loadStoryText() {
+      const lang = document.getElementById("languageSelect").value;
+      let textPath = storyData.text;
+
+      if (lang === "urdu") textPath = storyData.text_urdu;
+      else if (lang === "spanish") textPath = storyData.text_spanish;
+      else if (lang === "french") textPath = storyData.text_french;
+
+      fetch(`https://kiabatha.github.io/ssm/${textPath}`)
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById("storyText").innerText = text;
+        });
+    }
 
     function readStory() {
       document.getElementById("storyText").style.display = "block";
@@ -137,8 +167,10 @@
       document.getElementById("readBtn").style.display = "none";
     }
 
-    function playAudio(gender) {
-      const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+    function playAudio(voiceKey) {
+      const audioPath = storyData[`audio_${voiceKey}`];
+      if (!audioPath) return;
+
       audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
       audioBar.style.display = "block";
       audioBar.volume = 1.0;
@@ -151,19 +183,27 @@
         document.getElementById("storyText").scrollBy(0, 1);
       }, 50);
 
-      audioBar.addEventListener("pause", () => {
-        clearInterval(scrollInterval);
-      });
-
-      audioBar.addEventListener("ended", () => {
-        clearInterval(scrollInterval);
-      });
+      audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+      audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
     }
 
     function adjustFontSize(change) {
       currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
       document.getElementById("storyText").style.fontSize = currentFontSize + "px";
     }
+
+    // ✅ Stop audio if user leaves the page
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && !audioBar.paused) {
+        audioBar.pause();
+        clearInterval(scrollInterval);
+      }
+    });
+
+    window.addEventListener("beforeunload", () => {
+      audioBar.pause();
+      clearInterval(scrollInterval);
+    });
   </script>
 </body>
 </html>

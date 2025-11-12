@@ -56,10 +56,18 @@
       font-size: 18px;
       line-height: 1.3;
       margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
     }
     .resize-controls {
       display: none;
       margin-top: 10px;
+    }
+    #audioBar {
+      display: none;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
     }
   </style>
 </head>
@@ -83,6 +91,9 @@
   <!-- Story text at the bottom -->
   <div id="storyText"></div>
 
+  <!-- Audio bar -->
+  <audio id="audioBar" controls></audio>
+
   <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
@@ -90,8 +101,10 @@
 
     const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
     let currentFontSize = 18;
-    let audioPlayer = new Audio();
     let storyData;
+    let scrollInterval;
+
+    const audioBar = document.getElementById("audioBar");
 
     fetch(jsonUrl)
       .then(res => res.json())
@@ -113,13 +126,29 @@
     function readStory() {
       document.getElementById("storyText").style.display = "block";
       document.querySelector(".resize-controls").style.display = "block";
-      document.getElementById("readBtn").style.display = "none"; // ✅ Hide Read button
+      document.getElementById("readBtn").style.display = "none";
     }
 
     function playAudio(gender) {
       const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-      audioPlayer.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-      audioPlayer.play();
+      audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+      audioBar.style.display = "block";
+      audioBar.play();
+
+      document.querySelector(".resize-controls").style.display = "none";
+      document.getElementById("storyText").style.display = "block";
+
+      scrollInterval = setInterval(() => {
+        document.getElementById("storyText").scrollBy(0, 1);
+      }, 50);
+
+      audioBar.addEventListener("pause", () => {
+        clearInterval(scrollInterval);
+      });
+
+      audioBar.addEventListener("ended", () => {
+        clearInterval(scrollInterval);
+      });
     }
 
     function adjustFontSize(change) {

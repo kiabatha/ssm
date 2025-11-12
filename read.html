@@ -86,8 +86,9 @@
 <body>
   <div class="container">
     <div class="action-buttons controls">
-      <button onclick="readStory()">Read</button>
-      <button onclick="listenStory()">Listen</button>
+      <button onclick="readStory()">📖 Read</button>
+      <button onclick="playAudio('woman')">🎧 Listen (Woman)</button>
+      <button onclick="playAudio('man')">🎧 Listen (Man)</button>
     </div>
 
     <div class="resize-controls">
@@ -96,7 +97,6 @@
     </div>
 
     <img id="storyImage" class="story-image" src="" alt="Story Illustration" />
-
     <div id="storyText"></div>
   </div>
 
@@ -105,18 +105,28 @@
     const id = params.get("id");
     const folder = params.get("folder");
 
-    const textUrl = `${folder}/${id}.txt`;
-    const imageUrl = `${folder}/${id}.jpg`;
-    const audioUrl = `${folder}/${id}.mp3`;
-
+    const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
     let currentFontSize = 18;
+    let audioPlayer = new Audio();
 
-    fetch(textUrl)
-      .then(res => res.text())
+    fetch(jsonUrl)
+      .then(res => res.json())
       .then(data => {
-        document.getElementById("storyText").innerText = data;
-        document.getElementById("storyImage").src = imageUrl;
-        window.audio = new Audio(audioUrl);
+        const story = data[id];
+        if (!story) throw new Error("Story not found");
+
+        fetch(`https://kiabatha.github.io/ssm/${story.text}`)
+          .then(res => res.text())
+          .then(text => {
+            document.getElementById("storyText").innerText = text;
+            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${story.image}`;
+          });
+
+        window.playAudio = function(gender) {
+          const audioPath = gender === "woman" ? story.audio_woman : story.audio_man;
+          audioPlayer.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+          audioPlayer.play();
+        };
       })
       .catch(() => {
         document.getElementById("storyText").innerText = "Failed to load story.";
@@ -126,10 +136,6 @@
       document.getElementById("storyText").style.display = "block";
     }
 
-    function listenStory() {
-      if (window.audio) window.audio.play();
-    }
-
     function adjustFontSize(change) {
       currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
       document.getElementById("storyText").style.fontSize = currentFontSize + "px";
@@ -137,4 +143,3 @@
   </script>
 </body>
 </html>
-

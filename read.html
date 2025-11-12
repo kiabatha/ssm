@@ -19,7 +19,7 @@
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
     .action-button {
       padding: 10px 16px;
@@ -67,20 +67,20 @@
   <!-- Story image always shown at top -->
   <img id="storyImage" src="" alt="Story Illustration" />
 
-  <!-- Top button row -->
-  <div class="button-row">
-    <button class="action-button red-button" onclick="readStory()">Read</button>
-    <button class="action-button green-button" onclick="playAudio('man')">Listen (Man)</button>
-    <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
+  <!-- Font resize buttons (above text) -->
+  <div class="resize-controls">
+    <button class="round-button" onclick="adjustFontSize(-2)">−</button>
+    <button class="round-button" onclick="adjustFontSize(2)">+</button>
   </div>
 
   <!-- Story text -->
   <div id="storyText"></div>
 
-  <!-- Font resize buttons -->
-  <div class="resize-controls">
-    <button class="round-button" onclick="adjustFontSize(-2)">−</button>
-    <button class="round-button" onclick="adjustFontSize(2)">+</button>
+  <!-- Button row below text -->
+  <div class="button-row">
+    <button class="action-button red-button" onclick="readStory()">Read</button>
+    <button class="action-button green-button" onclick="playAudio('man')">Listen (Man)</button>
+    <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
   </div>
 
   <script>

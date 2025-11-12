@@ -69,7 +69,7 @@
 
   <!-- Three buttons below image -->
   <div class="button-row">
-    <button class="action-button red-button" onclick="readStory()">Read</button>
+    <button class="action-button red-button" onclick="readStory()" id="readBtn">Read</button>
     <button class="action-button green-button" onclick="playAudio('man')">Listen (Man)</button>
     <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
   </div>
@@ -113,6 +113,7 @@
     function readStory() {
       document.getElementById("storyText").style.display = "block";
       document.querySelector(".resize-controls").style.display = "block";
+      document.getElementById("readBtn").style.display = "none"; // ✅ Hide Read button
     }
 
     function playAudio(gender) {

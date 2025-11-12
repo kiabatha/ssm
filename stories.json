@@ -1,0 +1,126 @@
+{
+  "the-monkeys-secret-path": {
+    "title": "The Monkey’s Secret Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-monkeys-secret-path.txt",
+    "image": "short-stories/the-monkeys-secret-path.webp",
+    "audio_woman": "short-stories/audio/the-monkeys-secret-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-monkeys-secret-path-man.mp3"
+ },
+
+"the-lost-button": {
+    "title": "The Lost Button",
+    "folder": "short-stories",
+    "text": "short-stories/the-lost-button.txt",
+    "image": "short-stories/the-lost-button.webp",
+    "audio_woman": "short-stories/audio/the-lost-button-woman.mp3",
+    "audio_man": "short-stories/audio/the-lost-button-man.mp3"
+
+ },
+
+"the-cloud-that-couldnt-cry": {
+    "title": "The Cloud That Couldn’t Cry",
+    "folder": "short-stories",
+    "text": "short-stories/the-cloud-that-couldnt-cry.txt",
+    "image": "short-stories/the-cloud-that-couldnt-cry.webp",
+    "audio_woman": "short-stories/audio/the-cloud-that-couldnt-cry-woman.mp3",
+    "audio_man": "short-stories/audio/the-cloud-that-couldnt-cry-man.mp3"
+
+ },
+
+"the-brave-little-ant": {
+    "title": "The Brave Little Ant",
+    "folder": "short-stories",
+    "text": "short-stories/the-brave-little-ant.txt",
+    "image": "short-stories/the-brave-little-ant.webp",
+    "audio_woman": "short-stories/audio/the-brave-little-ant-woman.mp3",
+    "audio_man": "short-stories/audio/the-brave-little-ant-man.mp3"
+
+},
+
+"the-balloon-that-flew-too-far": {
+    "title": "The Balloon That Flew Too Far",
+    "folder": "short-stories",
+    "text": "short-stories/the-balloon-that-flew-too-far.txt",
+    "image": "short-stories/the-balloon-that-flew-too-far.webp",
+    "audio_woman": "short-stories/audio/the-balloon-that-flew-too-far-woman.mp3",
+    "audio_man": "short-stories/audio/the-balloon-that-flew-too-far-man.mp3"
+
+
+
+
+ },
+
+  "princess-rania-and-the-sorcerer-of-the-white-fortress": {
+    "title": "Princess Rania and the Sorcerer",
+    "folder": "long-stories",
+    "text": "long-stories/princess-rania-and-the-sorcerer-of-the-white-fortress.txt",
+    "image": "long-stories/princess-rania-and-the-sorcerer-of-the-white-fortress.webp",
+    "audio_woman": "long-stories/audio/princess-rania-and-the-sorcerer-of-the-white-fortress-woman.mp3",
+    "audio_man": "long-stories/audio/princess-rania-and-the-sorcerer-of-the-white-fortress-man.mp3"
+
+},
+
+  "princess-neelofer-and-the-evil-sorcerer": {
+    "title": "Princess Neelofer and the Evil Sorcerer",
+    "folder": "long-stories",
+    "text": "long-stories/princess-neelofer-and-the-evil-sorcerer.txt",
+    "image": "long-stories/princess-neelofer-and-the-evil-sorcerer.webp",
+    "audio_woman": "long-stories/audio/princess-neelofer-and-the-evil-sorcerer-woman.mp3",
+    "audio_man": "long-stories/audio/princess-neelofer-and-the-evil-sorcerer-man.mp3"
+
+},
+
+  "fairies-and-the-strange-tree-story": {
+    "title": "Fairies and the Strange Tree Story",
+    "folder": "long-stories",
+    "text": "long-stories/fairies-and-the-strange-tree-story.txt",
+    "image": "long-stories/fairies-and-the-strange-tree-story.webp",
+    "audio_woman": "long-stories/audio/fairies-and-the-strange-tree-story-woman.mp3",
+    "audio_man": "long-stories/audio/fairies-and-the-strange-tree-story-man.mp3"
+
+},
+
+  "bear-and-the-magical-beehive": {
+    "title": "Bear and the Magical Beehive",
+    "folder": "long-stories",
+    "text": "long-stories/bear-and-the-magical-beehive.txt",
+    "image": "long-stories/bear-and-the-magical-beehive.webp",
+    "audio_woman": "long-stories/audio/bear-and-the-magical-beehive-woman.mp3",
+    "audio_man": "long-stories/audio/bear-and-the-magical-beehive-man.mp3"
+
+},
+
+  "androcles-and-the-lion": {
+    "title": "Androcles and the Lion",
+    "folder": "long-stories",
+    "text": "long-stories/androcles-and-the-lion.txt",
+    "image": "long-stories/androcles-and-the-lion.webp",
+    "audio_woman": "long-stories/audio/androcles-and-the-lion-woman.mp3",
+    "audio_man": "long-stories/audio/androcles-and-the-lion-man.mp3"
+
+},
+
+  "amelia-and-the-swan-queen": {
+    "title": "Amelia and the Swan Queen",
+    "folder": "long-stories",
+    "text": "long-stories/amelia-and-the-swan-queen.txt",
+    "image": "long-stories/amelia-and-the-swan-queen.webp",
+    "audio_woman": "long-stories/audio/amelia-and-the-swan-queen-woman.mp3",
+    "audio_man": "long-stories/audio/amelia-and-the-swan-queen-man.mp3"
+
+
+
+
+
+  },
+
+  "the-new-kid-in-the-playground": {
+    "title": "The New Kid in the Playground",
+    "folder": "friendship-bravery",
+    "text": "friendship-bravery/the-new-kid-in-the-playground.txt",
+    "image": "friendship-bravery/the-new-kid-in-the-playground.webp",
+    "audio_woman": "friendship-bravery/audio/the-new-kid-in-the-playground-woman.mp3",
+    "audio_man": "friendship-bravery/audio/the-new-kid-in-the-playground-man.mp3"
+  }
+}

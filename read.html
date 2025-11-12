@@ -67,21 +67,21 @@
   <!-- Story image always shown at top -->
   <img id="storyImage" src="" alt="Story Illustration" />
 
-  <!-- Font resize buttons (above text) -->
-  <div class="resize-controls">
-    <button class="round-button" onclick="adjustFontSize(-2)">−</button>
-    <button class="round-button" onclick="adjustFontSize(2)">+</button>
-  </div>
-
-  <!-- Story text -->
-  <div id="storyText"></div>
-
-  <!-- Button row below text -->
+  <!-- Three buttons below image -->
   <div class="button-row">
     <button class="action-button red-button" onclick="readStory()">Read</button>
     <button class="action-button green-button" onclick="playAudio('man')">Listen (Man)</button>
     <button class="action-button green-button" onclick="playAudio('woman')">Listen (Woman)</button>
   </div>
+
+  <!-- Font resize buttons below the three buttons -->
+  <div class="resize-controls">
+    <button class="round-button" onclick="adjustFontSize(-2)">−</button>
+    <button class="round-button" onclick="adjustFontSize(2)">+</button>
+  </div>
+
+  <!-- Story text at the bottom -->
+  <div id="storyText"></div>
 
   <script>
     const params = new URLSearchParams(window.location.search);

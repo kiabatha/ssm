@@ -17,11 +17,11 @@
 
 .content {
   max-width: 800px;
-  margin-top: 10px;     /* Top margin */
-  margin-right: 15px;   /* Right margin (auto centers horizontally) */
-  margin-bottom: auto;  /* Bottom margin */
-  margin-left: 15px;    /* Left margin (auto centers horizontally) */
-  padding: 20px;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-bottom: 20px;  /* 👈 reduced bottom margin */
+  margin-left: auto;
+  padding: 20px 20px 10px 20px;  /* 👈 reduced bottom padding */
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -35,16 +35,15 @@
       color: #E53935;
     }
 
-    #storyImage {
-      display: block;
-      margin: 10px auto 16px;
-      width: 95%;
-      max-width: 420px;
-      height: auto;
-      border-radius: 16px;
-      object-fit: cover;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
+#storyImage {
+  display: block;
+  margin: 10px auto 12px;  /* 👈 reduced bottom margin */
+  width: 95%;
+  max-width: 420px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
 
     .button-row {
       display: flex;

@@ -56,7 +56,7 @@
     }
 
     .red-button { background-color: #E53935; }
-    .green-button { background-color: #4CAF50; }
+    .green-button { background-color: #E53935; } /* red-style green buttons */
 
     .round-button {
       width: 30px;
@@ -134,6 +134,7 @@
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const folder = params.get("folder");
+    const mode = params.get("mode");
 
     const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
     let currentFontSize = 18;
@@ -152,7 +153,15 @@
           .then(res => res.text())
           .then(text => {
             document.getElementById("storyText").innerText = text;
-            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+
+            if (mode === "manual") {
+              document.getElementById("storyImage").src = "https://kiabatha.github.io/ssm/images/mira-forest.jpg"; // ✅ your new image
+              document.getElementById("readBtn").style.display = "none";
+              document.getElementById("storyText").style.display = "block";
+              document.querySelector(".resize-controls").style.display = "block";
+            } else {
+              document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+            }
           });
       })
       .catch(() => {

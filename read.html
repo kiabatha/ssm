@@ -153,13 +153,13 @@
           .then(text => {
             document.getElementById("storyText").innerText = text;
 
+            const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
+            document.getElementById("storyImage").src = imagePath;
+
             if (mode === "manual") {
-              document.getElementById("storyImage").src = "https://kiabatha.github.io/ssm/images/mira-forest.jpg";
               document.getElementById("readBtn").style.display = "none";
               document.getElementById("storyText").style.display = "block";
               document.querySelector(".resize-controls").style.display = "flex";
-            } else {
-              document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
             }
           });
       })

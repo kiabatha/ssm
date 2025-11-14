@@ -18,10 +18,7 @@
 
     .content {
       max-width: 800px;
-      margin-top: 20px;
-      margin-right: 15px;
-      margin-bottom: 30px;
-      margin-left: 15px;
+      margin: 20px 15px 30px 15px;
       padding: 20px 20px 10px 20px;
       background-color: rgba(255, 255, 255, 0.95);
       border-radius: 16px;
@@ -39,8 +36,8 @@
     #storyImage {
       display: block;
       margin: 10px auto 12px;
-      width: 100%;
-      max-width: 420px;
+      width: 98%;
+      max-width: 480px;
       height: auto;
       border-radius: 16px;
       object-fit: cover;
@@ -55,8 +52,8 @@
     }
 
     .action-button {
-      min-width: 100px;
-      padding: 6px 10px;
+      min-width: 80px;
+      padding: 6px 8px;
       font-size: 13px;
       border: none;
       border-radius: 5px;
@@ -66,6 +63,8 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      max-width: 100px;
+      flex: 1 1 auto;
     }
 
     .green-button {
@@ -81,22 +80,14 @@
       background-color: #2196F3;
       color: white;
       border: none;
-      margin: 8px;
       cursor: pointer;
-    }
-
-    .resize-controls {
-      display: none;
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
     }
 
     #storyText {
       display: none;
       white-space: pre-wrap;
       text-align: justify;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.4;
       margin-top: 20px;
       max-height: 400px;
@@ -111,11 +102,10 @@
     }
 
     .icon {
-  width: 18px;
-  height: 18px;
-  fill: white;
-}
-    
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
   </style>
 </head>
 <body>
@@ -123,24 +113,23 @@
     <div id="storyTitle">Loading title...</div>
     <img id="storyImage" src="" alt="Story Illustration" />
 
-<div class="button-row">
-  <button class="action-button green-button" onclick="playAudio('man')">
-    <svg class="icon" viewBox="0 0 24 24">
-      <path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2a2.5 2.5 0 0 0-2.45 2h1.7a1 1 0 1 1 0 2h-1.7a2.5 2.5 0 1 0 2.45-4z" fill="white"/>
-    </svg>
-    Man
-  </button>
-  <button class="action-button green-button" onclick="playAudio('woman')">
-    <svg class="icon" viewBox="0 0 24 24">
-      <path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2a2.5 2.5 0 0 0-2.45 2h1.7a1 1 0 1 1 0 2h-1.7a2.5 2.5 0 1 0 2.45-4z" fill="white"/>
-    </svg>
-    Woman
-  </button>
-</div>
+    <div class="button-row">
+      <button class="action-button green-button" onclick="playAudio('man')">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2a2.5 2.5 0 0 0-2.45 2h1.7a1 1 0 1 1 0 2h-1.7a2.5 2.5 0 1 0 2.45-4z" fill="white"/>
+        </svg>
+        Man
+      </button>
 
-    <div class="resize-controls">
       <button class="round-button" onclick="adjustFontSize(-2)">−</button>
       <button class="round-button" onclick="adjustFontSize(2)">+</button>
+
+      <button class="action-button green-button" onclick="playAudio('woman')">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2a2.5 2.5 0 0 0-2.45 2h1.7a1 1 0 1 1 0 2h-1.7a2.5 2.5 0 1 0 2.45-4z" fill="white"/>
+        </svg>
+        Woman
+      </button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
@@ -178,7 +167,6 @@
 
             if (mode === "manual") {
               document.getElementById("storyText").style.display = "block";
-              document.querySelector(".resize-controls").style.display = "flex";
             }
           });
       })
@@ -194,7 +182,6 @@
       audioBar.volume = 1.0;
       audioBar.play();
 
-      document.querySelector(".resize-controls").style.display = "none";
       document.getElementById("storyText").style.display = "block";
 
       scrollInterval = setInterval(() => {

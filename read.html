@@ -87,22 +87,25 @@
       display: none;
       white-space: pre-wrap;
       text-align: justify;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.4;
       margin-top: 20px;
       max-height: 400px;
       overflow-y: auto;
     }
 
-#audioBar {
-  display: none;
-  margin: 20px auto 0;
-  width: 100%;
-  max-width: 600px;
-  background-color: #FFC4C4; /* 👈 light gray background */
-  border-radius: 20px;
-  padding: 6px;
-}
+    .audio-wrapper {
+      background-color: #fff9c4; /* 👈 change this to any color you like */
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      max-width: 600px;
+      margin: 20px auto 0;
+    }
+
+    #audioBar {
+      width: 100%;
+    }
 
     .icon {
       width: 20px;
@@ -135,7 +138,10 @@
       </button>
     </div>
 
-    <audio id="audioBar" controls controlsList="nodownload"></audio>
+    <div class="audio-wrapper">
+      <audio id="audioBar" controls controlsList="nodownload"></audio>
+    </div>
+
     <div id="storyText"></div>
   </div>
 

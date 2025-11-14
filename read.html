@@ -26,14 +26,19 @@
       text-align: center;
     }
 
-  #storyTitle {
-  font-size: 20px;       /* 👈 slightly larger */
-  font-weight: 800;      /* 👈 extra bold */
-  margin-bottom: 8px;
-  color: #E53935;        /* 👈 keep your signature red */
-  text-transform: uppercase; /* 👈 optional: makes it all caps */
-  letter-spacing: 1px;   /* 👈 optional: adds spacing between letters */
-}
+    #storyTitle {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #E53935;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .image-container {
+      position: relative;
+      display: inline-block;
+    }
 
     #storyImage {
       display: block;
@@ -43,6 +48,22 @@
       height: auto;
       border-radius: 16px;
       object-fit: cover;
+    }
+
+    .favorite-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 28px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.2s ease;
+    }
+
+    .favorite-icon:hover {
+      transform: scale(1.1);
     }
 
     .button-row {
@@ -96,15 +117,15 @@
       overflow-y: auto;
     }
 
-#audioBar {
-  display: none;
-  margin: 20px auto 0;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 0; /* optional: remove rounded corners */
-  padding: 0;       /* optional: remove extra spacing */
-  background-color: transparent; /* 👈 removes background color */
-}
+    #audioBar {
+      display: none;
+      margin: 20px auto 0;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 0;
+      padding: 0;
+      background-color: transparent;
+    }
 
     .icon {
       width: 20px;
@@ -116,7 +137,11 @@
 <body>
   <div class="content">
     <div id="storyTitle">Loading title...</div>
-    <img id="storyImage" src="" alt="Story Illustration" />
+
+    <div class="image-container">
+      <img id="storyImage" src="" alt="Story Illustration" />
+      <button class="favorite-icon" onclick="toggleFavorite()">🤍</button>
+    </div>
 
     <div class="button-row">
       <button class="action-button green-button" onclick="playAudio('man')">
@@ -200,6 +225,15 @@
     function adjustFontSize(change) {
       currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
       document.getElementById("storyText").style.fontSize = currentFontSize + "px";
+    }
+
+    function toggleFavorite() {
+      const icon = document.querySelector(".favorite-icon");
+      const isNowFavorite = icon.innerText === "🤍";
+      icon.innerText = isNowFavorite ? "❤️" : "🤍";
+
+      // Later: save to Android SharedPreferences or localStorage
+      console.log("Favorite status:", isNowFavorite);
     }
 
     document.addEventListener("visibilitychange", () => {

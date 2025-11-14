@@ -87,26 +87,22 @@
       display: none;
       white-space: pre-wrap;
       text-align: justify;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.4;
       margin-top: 20px;
       max-height: 400px;
       overflow-y: auto;
     }
 
-    .audio-wrapper {
-      display: none; /* 👈 hidden until narration starts */
-      background-color: #fff9c4; /* 👈 change this to your preferred color */
-      border-radius: 12px;
-      padding: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      max-width: 600px;
-      margin: 20px auto 0;
-    }
-
-    #audioBar {
-      width: 100%;
-    }
+#audioBar {
+  display: none;
+  margin: 20px auto 0;
+  width: 100%;
+  max-width: 600px;
+  background-color: #FFC4C4; /* 👈 light gray background */
+  border-radius: 20px;
+  padding: 6px;
+}
 
     .icon {
       width: 20px;
@@ -139,10 +135,7 @@
       </button>
     </div>
 
-    <div class="audio-wrapper">
-      <audio id="audioBar" controls controlsList="nodownload"></audio>
-    </div>
-
+    <audio id="audioBar" controls controlsList="nodownload"></audio>
     <div id="storyText"></div>
   </div>
 
@@ -188,7 +181,7 @@
     function playAudio(gender) {
       const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
       audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-      document.querySelector(".audio-wrapper").style.display = "block"; // 👈 show wrapper
+      audioBar.style.display = "block";
       audioBar.volume = 1.0;
       audioBar.play();
 

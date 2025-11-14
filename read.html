@@ -96,7 +96,7 @@
       display: none;
       white-space: pre-wrap;
       text-align: justify;
-      font-size: 18px;
+      font-size: 14px;
       line-height: 1.4;
       margin-top: 20px;
       max-height: 400px;
@@ -109,6 +109,13 @@
       width: 100%;
       max-width: 600px;
     }
+
+    .icon {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+    
   </style>
 </head>
 <body>
@@ -116,14 +123,20 @@
     <div id="storyTitle">Loading title...</div>
     <img id="storyImage" src="" alt="Story Illustration" />
 
-    <div class="button-row">
-      <button class="action-button green-button" onclick="playAudio('man')">
-        <span style="margin-right: 6px;">🎧</span>Man
-      </button>
-      <button class="action-button green-button" onclick="playAudio('woman')">
-        <span style="margin-right: 6px;">🎧</span>Woman
-      </button>
-    </div>
+<div class="button-row">
+  <button class="action-button green-button" onclick="playAudio('man')">
+    <svg class="icon" viewBox="0 0 24 24">
+      <path fill="white" d="M12 1C6.48 1 2 5.48 2 11v6c0 1.1.9 2 2 2h1v-8H4v-1c0-4.08 3.05-7.44 7-7.93V3h2v1.07c3.95.49 7 3.85 7 7.93v1h-1v8h1c1.1 0 2-.9 2-2v-6c0-5.52-4.48-10-10-10z"/>
+    </svg>
+    Man
+  </button>
+  <button class="action-button green-button" onclick="playAudio('woman')">
+    <svg class="icon" viewBox="0 0 24 24">
+      <path fill="white" d="M12 1C6.48 1 2 5.48 2 11v6c0 1.1.9 2 2 2h1v-8H4v-1c0-4.08 3.05-7.44 7-7.93V3h2v1.07c3.95.49 7 3.85 7 7.93v1h-1v8h1c1.1 0 2-.9 2-2v-6c0-5.52-4.48-10-10-10z"/>
+    </svg>
+    Woman
+  </button>
+</div>
 
     <div class="resize-controls">
       <button class="round-button" onclick="adjustFontSize(-2)">−</button>

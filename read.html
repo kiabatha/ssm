@@ -48,6 +48,8 @@
       height: auto;
       border-radius: 16px;
       object-fit: cover;
+      position: relative;
+      z-index: 1;
     }
 
     .favorite-icon {
@@ -60,6 +62,7 @@
       cursor: pointer;
       z-index: 2;
       transition: transform 0.2s ease;
+      display: none;
     }
 
     .favorite-icon:hover {
@@ -193,7 +196,12 @@
             document.getElementById("storyText").innerText = text;
 
             const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
-            document.getElementById("storyImage").src = imagePath;
+            const storyImage = document.getElementById("storyImage");
+            storyImage.src = imagePath;
+
+            storyImage.onload = () => {
+              document.querySelector(".favorite-icon").style.display = "inline";
+            };
 
             if (mode === "manual") {
               document.getElementById("storyText").style.display = "block";
@@ -232,9 +240,11 @@
       const isNowFavorite = icon.innerText === "🤍";
       icon.innerText = isNowFavorite ? "❤️" : "🤍";
 
-      // Later: save to Android SharedPreferences or localStorage
+      // ✅ Later: Save to SharedPreferences or localStorage
       console.log("Favorite status:", isNowFavorite);
     }
+
+
 
     document.addEventListener("visibilitychange", () => {
       if (document.hidden && !audioBar.paused) {

@@ -95,7 +95,8 @@
     }
 
     .audio-wrapper {
-      background-color: #FFC4C4; /* 👈 change this to any color you like */
+      display: none; /* 👈 hidden until narration starts */
+      background-color: #fff9c4; /* 👈 change this to your preferred color */
       border-radius: 12px;
       padding: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
@@ -187,7 +188,7 @@
     function playAudio(gender) {
       const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
       audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-      audioBar.style.display = "block";
+      document.querySelector(".audio-wrapper").style.display = "block"; // 👈 show wrapper
       audioBar.volume = 1.0;
       audioBar.play();
 

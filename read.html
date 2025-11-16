@@ -221,18 +221,17 @@
 
   // ✅ Wait until audio is ready before playing
   audioBar.oncanplaythrough = () => {
-    audioBar.play();
+audioBar.play();
+document.getElementById("storyText").style.display = "block";
 
-// ✅ Add a gentle delay before scrolling starts
+// ✅ Delay scroll start by 1 second
 setTimeout(() => {
   startScrolling();
+
+  scrollInterval = setInterval(() => {
+    document.getElementById("storyText").scrollBy(0, 1);
+  }, 50);
 }, 1000); // 1000 milliseconds = 1 second
-
-    document.getElementById("storyText").style.display = "block";
-
-    scrollInterval = setInterval(() => {
-      document.getElementById("storyText").scrollBy(0, 1);
-    }, 50);
   };
 
   // ✅ Stop scrolling if audio is paused or ends

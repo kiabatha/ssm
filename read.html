@@ -231,25 +231,25 @@
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
-    audioBar.oncanplaythrough = () => {
-      document.getElementById("storyText").scrollTop = 0;
-      clearInterval(scrollInterval);
+audioBar.oncanplaythrough = () => {
+  document.getElementById("storyText").scrollTop = 0;
+  clearInterval(scrollInterval);
 
-      document.getElementById("loadingSpinner").style.display = "block";
+  document.getElementById("loadingSpinner").style.display = "block";
 
-      audioBar.play().then(() => {
-        document.getElementById("storyText").style.display = "block";
-
-        setTimeout(() => {
-          document.getElementById("loadingSpinner").style.display = "none";
-          startScrolling();
-        }, 6000); // or 3000 or 6000 for longer delay
-      }).catch((error) => {
-        console.warn("Autoplay blocked:", error);
-        alert("Tap the play button on the audio bar to start narration.");
-        document.getElementById("loadingSpinner").style.display = "none";
-      });
+  audioBar.play().then(() => {
+    document.getElementById("storyText").style.display = "block";
+    // ✅ Wait for actual playback to begin
+    audioBar.onplaying = () => {
+      document.getElementById("loadingSpinner").style.display = "none";
+      startScrolling();
     };
+  }).catch((error) => {
+    console.warn("Autoplay blocked:", error);
+    alert("Tap the play button on the audio bar to start narration.");
+    document.getElementById("loadingSpinner").style.display = "none";
+  });
+};
 
     audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
     audioBar.addEventListener("ended", () => clearInterval(scrollInterval));

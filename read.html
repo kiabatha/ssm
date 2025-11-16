@@ -213,22 +213,27 @@
         document.getElementById("storyTitle").innerText = "Story not found";
       });
 
-    function playAudio(gender) {
-      const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-      audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-      audioBar.style.display = "block";
-      audioBar.volume = 1.0;
-      audioBar.play();
+  function playAudio(gender) {
+  const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+  audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+  audioBar.style.display = "block";
+  audioBar.volume = 1.0;
 
-      document.getElementById("storyText").style.display = "block";
+  // ✅ Wait until audio is ready before playing
+  audioBar.oncanplaythrough = () => {
+    audioBar.play();
 
-      scrollInterval = setInterval(() => {
-        document.getElementById("storyText").scrollBy(0, 1);
-      }, 50);
+    document.getElementById("storyText").style.display = "block";
 
-      audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-      audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
-    }
+    scrollInterval = setInterval(() => {
+      document.getElementById("storyText").scrollBy(0, 1);
+    }, 50);
+  };
+
+  // ✅ Stop scrolling if audio is paused or ends
+  audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+  audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+}
 
     function adjustFontSize(change) {
       currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));

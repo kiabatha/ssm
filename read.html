@@ -224,6 +224,7 @@
     audioBar.volume = 1.0;
 
     audioBar.oncanplaythrough = () => {
+      document.getElementById("storyText").scrollTop = 0;
       audioBar.play();
       document.getElementById("storyText").style.display = "block";
 

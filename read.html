@@ -199,9 +199,7 @@
           const storyImage = document.getElementById("storyImage");
           storyImage.src = imagePath;
 
-          storyImage.onload = () => {
-            document.querySelector(".favorite-icon").style.display = "inline";
-          };
+          // ✅ Removed favorite icon logic here
 
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
@@ -225,18 +223,15 @@
     audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    // ✅ Wait until audio is ready before playing
     audioBar.oncanplaythrough = () => {
       audioBar.play();
       document.getElementById("storyText").style.display = "block";
 
-      // ✅ Delay scroll start by 1 second
       setTimeout(() => {
         startScrolling();
       }, 1000);
     };
 
-    // ✅ Stop scrolling if audio is paused or ends
     audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
     audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
   }
@@ -244,13 +239,6 @@
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
-  }
-
-  function toggleFavorite() {
-    const icon = document.querySelector(".favorite-icon");
-    const isNowFavorite = icon.innerText === "🤍";
-    icon.innerText = isNowFavorite ? "❤️" : "🤍";
-    console.log("Favorite status:", isNowFavorite);
   }
 
   document.addEventListener("visibilitychange", () => {

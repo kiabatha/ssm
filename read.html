@@ -145,7 +145,6 @@
 </head>
 <body>
   <div class="content">
-    <h2 id="storyTitle">Story Title</h2> <!-- You can remove this line later if needed -->
 
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
@@ -209,8 +208,6 @@
           const storyImage = document.getElementById("storyImage");
           storyImage.src = imagePath;
 
-          const title = document.getElementById("storyTitle");
-          if (storyData.title) title.innerText = storyData.title;
 
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";

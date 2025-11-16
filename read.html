@@ -217,25 +217,29 @@
     }, 60);
   }
 
-  function playAudio(gender) {
-    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.style.display = "block";
-    audioBar.volume = 1.0;
+function playAudio(gender) {
+  const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+  audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+  audioBar.style.display = "block";
+  audioBar.volume = 1.0;
 
-    audioBar.oncanplaythrough = () => {
-      document.getElementById("storyText").scrollTop = 0;
-      audioBar.play();
-      document.getElementById("storyText").style.display = "block";
+  // ✅ Reset scroll position and clear old interval
+  document.getElementById("storyText").scrollTop = 0;
+  clearInterval(scrollInterval); // ✅ Stop previous scroll
 
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
-    };
+  audioBar.oncanplaythrough = () => {
+    audioBar.play();
+    document.getElementById("storyText").style.display = "block";
 
-    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
-  }
+    // ✅ Restart scroll with fresh delay
+    setTimeout(() => {
+      startScrolling();
+    }, 6000); // or 3000 for 3-second delay
+  };
+
+  audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+  audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+}
 
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));

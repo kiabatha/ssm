@@ -214,7 +214,7 @@
   function startScrolling() {
     scrollInterval = setInterval(() => {
       document.getElementById("storyText").scrollBy(0, 1);
-    }, 50);
+    }, 60);
   }
 
   function playAudio(gender) {
@@ -229,7 +229,7 @@
 
       setTimeout(() => {
         startScrolling();
-      }, 5000);
+      }, 6000);
     };
 
     audioBar.addEventListener("pause", () => clearInterval(scrollInterval));

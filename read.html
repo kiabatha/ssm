@@ -169,103 +169,101 @@
     <div id="storyText"></div>
   </div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    const folder = params.get("folder");
-    const mode = params.get("mode");
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const folder = params.get("folder");
+  const mode = params.get("mode");
 
-    const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
-    let currentFontSize = 18;
-    let storyData;
-    let scrollInterval;
+  const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
+  let currentFontSize = 18;
+  let storyData;
+  let scrollInterval;
 
-    const audioBar = document.getElementById("audioBar");
+  const audioBar = document.getElementById("audioBar");
 
-    fetch(jsonUrl)
-      .then(res => res.json())
-      .then(data => {
-        storyData = data[id];
-        if (!storyData) throw new Error("Story not found");
+  fetch(jsonUrl)
+    .then(res => res.json())
+    .then(data => {
+      storyData = data[id];
+      if (!storyData) throw new Error("Story not found");
 
-        document.getElementById("storyTitle").innerText = storyData.title;
+      document.getElementById("storyTitle").innerText = storyData.title;
 
-        fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-          .then(res => res.text())
-          .then(text => {
-            document.getElementById("storyText").innerText = text;
+      fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById("storyText").innerText = text;
 
-            const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
-            const storyImage = document.getElementById("storyImage");
-            storyImage.src = imagePath;
+          const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
+          const storyImage = document.getElementById("storyImage");
+          storyImage.src = imagePath;
 
-            storyImage.onload = () => {
-              document.querySelector(".favorite-icon").style.display = "inline";
-            };
+          storyImage.onload = () => {
+            document.querySelector(".favorite-icon").style.display = "inline";
+          };
 
-            if (mode === "manual") {
-              document.getElementById("storyText").style.display = "block";
-            }
-          });
-      })
-      .catch(() => {
-        document.getElementById("storyText").innerText = "Failed to load story.";
-        document.getElementById("storyTitle").innerText = "Story not found";
-      });
+          if (mode === "manual") {
+            document.getElementById("storyText").style.display = "block";
+          }
+        });
+    })
+    .catch(() => {
+      document.getElementById("storyText").innerText = "Failed to load story.";
+      document.getElementById("storyTitle").innerText = "Story not found";
+    });
+
+  function startScrolling() {
+    scrollInterval = setInterval(() => {
+      document.getElementById("storyText").scrollBy(0, 1);
+    }, 50);
+  }
 
   function playAudio(gender) {
-  const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-  audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-  audioBar.style.display = "block";
-  audioBar.volume = 1.0;
+    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.style.display = "block";
+    audioBar.volume = 1.0;
 
-  // ✅ Wait until audio is ready before playing
-  audioBar.oncanplaythrough = () => {
-audioBar.play();
-document.getElementById("storyText").style.display = "block";
+    // ✅ Wait until audio is ready before playing
+    audioBar.oncanplaythrough = () => {
+      audioBar.play();
+      document.getElementById("storyText").style.display = "block";
 
-// ✅ Delay scroll start by 1 second
-setTimeout(() => {
-  startScrolling();
+      // ✅ Delay scroll start by 1 second
+      setTimeout(() => {
+        startScrolling();
+      }, 1000);
+    };
 
-  scrollInterval = setInterval(() => {
-    document.getElementById("storyText").scrollBy(0, 1);
-  }, 50);
-}, 1000); // 1000 milliseconds = 1 second
-  };
+    // ✅ Stop scrolling if audio is paused or ends
+    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+  }
 
-  // ✅ Stop scrolling if audio is paused or ends
-  audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-  audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
-}
+  function adjustFontSize(change) {
+    currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
+    document.getElementById("storyText").style.fontSize = currentFontSize + "px";
+  }
 
-    function adjustFontSize(change) {
-      currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
-      document.getElementById("storyText").style.fontSize = currentFontSize + "px";
-    }
+  function toggleFavorite() {
+    const icon = document.querySelector(".favorite-icon");
+    const isNowFavorite = icon.innerText === "🤍";
+    icon.innerText = isNowFavorite ? "❤️" : "🤍";
+    console.log("Favorite status:", isNowFavorite);
+  }
 
-    function toggleFavorite() {
-      const icon = document.querySelector(".favorite-icon");
-      const isNowFavorite = icon.innerText === "🤍";
-      icon.innerText = isNowFavorite ? "❤️" : "🤍";
-
-      // ✅ Later: Save to SharedPreferences or localStorage
-      console.log("Favorite status:", isNowFavorite);
-    }
-
-
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden && !audioBar.paused) {
-        audioBar.pause();
-        clearInterval(scrollInterval);
-      }
-    });
-
-    window.addEventListener("beforeunload", () => {
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       clearInterval(scrollInterval);
-    });
-  </script>
+    }
+  });
+
+  window.addEventListener("beforeunload", () => {
+    audioBar.pause();
+    clearInterval(scrollInterval);
+  });
+</script>
 </body>
 </html>

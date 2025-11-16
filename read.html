@@ -5,152 +5,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Story Reader</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet" />
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: url('https://kiabatha.github.io/ssm/bg.jpg') center center no-repeat fixed;
-      background-size: cover;
-      overflow-x: hidden;
-    }
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    background: url('https://kiabatha.github.io/ssm/bg.jpg') center center no-repeat fixed;
+    background-size: cover;
+    overflow-x: hidden;
+  }
 
-    .content {
-      max-width: 800px;
-      margin: 20px 15px 30px 15px;
-      padding: 20px 20px 10px 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      border-radius: 16px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
-    }
+  .content {
+    max-width: 800px;
+    margin: 20px 15px 30px 15px;
+    padding: 20px 20px 10px 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    text-align: center;
+  }
 
-    .image-container {
-      position: relative;
-      display: inline-block;
-    }
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
 
-    #storyImage {
-      display: block;
-      margin: 10px auto 12px;
-      width: 98%;
-      max-width: 480px;
-      height: auto;
-      border-radius: 16px;
-      object-fit: cover;
-      position: relative;
-      z-index: 1;
-    }
+  #storyImage {
+    display: block;
+    margin: 10px auto 12px;
+    width: 98%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+  }
 
-    .favorite-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 28px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 2;
-      transition: transform 0.2s ease;
-      display: none;
-    }
+  .favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.2s ease;
+    display: none;
+  }
 
-    .favorite-icon:hover {
-      transform: scale(1.1);
-    }
+  .favorite-icon:hover {
+    transform: scale(1.1);
+  }
 
-    .button-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
+  .button-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
 
-    .action-button {
-      min-width: 80px;
-      padding: 6px 8px;
-      font-size: 13px;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      max-width: 100px;
-      flex: 1 1 auto;
-    }
+  .action-button {
+    min-width: 80px;
+    padding: 6px 8px;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    max-width: 100px;
+    flex: 1 1 auto;
+  }
 
-    .green-button {
-      background-color: #E53935;
-    }
+  .green-button {
+    background-color: #E53935;
+  }
 
-    .round-button {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      font-size: 16px;
-      font-weight: bold;
-      background-color: #2196F3;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+  .round-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
 
-    #storyText {
-      display: none;
-      white-space: pre-wrap;
-      text-align: justify;
-      font-size: 16px;
-      line-height: 1.4;
-      margin-top: 20px;
-      max-height: 400px;
-      overflow-y: auto;
-    }
+  #storyText {
+    display: none;
+    white-space: pre-wrap;
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
 
-    #audioBar {
-      display: none;
-      margin: 20px auto 0;
-      width: 100%;
-      max-width: 600px;
-      border-radius: 0;
-      padding: 0;
-      background-color: transparent;
-    }
+  #audioBar {
+    display: none;
+    margin: 20px auto 0;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 0;
+    padding: 0;
+    background-color: transparent;
+  }
 
-    .icon {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
+  .icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
 
-    // ✅ Spinner CSS
-const style = document.createElement("style");
-style.innerHTML = `
-.spinner {
-  width: 30px;
-  height: 30px;
-  border: 4px solid #ccc;
-  border-top: 4px solid #E53935;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: auto;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}`;
-document.head.appendChild(style);
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #E53935;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+  }
 
-    
-  </style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+  
 </head>
 <body>
   <div class="content">
-
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
       <button class="favorite-icon" onclick="toggleFavorite()">🤍</button>
@@ -176,6 +171,11 @@ document.head.appendChild(style);
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
+
+    <div id="loadingSpinner" style="display:none; text-align:center; margin-top:10px;">
+      <div class="spinner"></div>
+    </div>
+
     <div id="storyText"></div>
   </div>
 
@@ -198,7 +198,6 @@ document.head.appendChild(style);
       storyData = data[id];
       if (!storyData) throw new Error("Story not found");
 
-
       fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
         .then(res => res.text())
         .then(text => {
@@ -208,8 +207,6 @@ document.head.appendChild(style);
           const storyImage = document.getElementById("storyImage");
           storyImage.src = imagePath;
 
-          // ✅ Removed favorite icon logic here
-
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
           }
@@ -217,7 +214,6 @@ document.head.appendChild(style);
     })
     .catch(() => {
       document.getElementById("storyText").innerText = "Failed to load story.";
-
     });
 
   function startScrolling() {
@@ -226,34 +222,38 @@ document.head.appendChild(style);
     }, 60);
   }
 
-function playAudio(gender) {
-  const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-  audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-  audioBar.style.display = "block";
-  audioBar.volume = 1.0;
+  function playAudio(gender) {
+    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.style.display = "block";
+    audioBar.volume = 1.0;
 
-  // ✅ Reset scroll position and clear old interval
-  document.getElementById("storyText").scrollTop = 0;
-  clearInterval(scrollInterval); // ✅ Stop previous scroll
+    document.getElementById("storyText").scrollTop = 0;
+    clearInterval(scrollInterval);
 
-audioBar.oncanplaythrough = () => {
-  document.getElementById("storyText").scrollTop = 0;
-  clearInterval(scrollInterval);
+    audioBar.oncanplaythrough = () => {
+      document.getElementById("storyText").scrollTop = 0;
+      clearInterval(scrollInterval);
 
-  document.getElementById("loadingSpinner").style.display = "block"; // ✅ Show spinner
+      document.getElementById("loadingSpinner").style.display = "block";
 
-  audioBar.play();
-  document.getElementById("storyText").style.display = "block";
+      audioBar.play().then(() => {
+        document.getElementById("storyText").style.display = "block";
 
-  setTimeout(() => {
-    document.getElementById("loadingSpinner").style.display = "none"; // ✅ Hide spinner
-    startScrolling();
-  }, 6000); // or 3000 for longer delay
-};
+        setTimeout(() => {
+          document.getElementById("loadingSpinner").style.display = "none";
+          startScrolling();
+        }, 6000); // or 3000 or 6000 for longer delay
+      }).catch((error) => {
+        console.warn("Autoplay blocked:", error);
+        alert("Tap the play button on the audio bar to start narration.");
+        document.getElementById("loadingSpinner").style.display = "none";
+      });
+    };
 
-  audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-  audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
-}
+    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+  }
 
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
@@ -271,17 +271,6 @@ audioBar.oncanplaythrough = () => {
     audioBar.pause();
     clearInterval(scrollInterval);
   });
-
-  // ✅ Add spinner element to show during audio load
-const spinner = document.createElement("div");
-spinner.id = "loadingSpinner";
-spinner.style.display = "none";
-spinner.style.textAlign = "center";
-spinner.style.marginTop = "10px";
-spinner.innerHTML = '<div class="spinner"></div>';
-document.body.insertBefore(spinner, document.getElementById("storyText"));
-
-  
 </script>
 </body>
 </html>

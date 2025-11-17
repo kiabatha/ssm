@@ -122,6 +122,12 @@
       background-color: transparent;
     }
 
+    /* ============ CHANGED: Scroll speed container hidden by default ============ */
+    #scrollSpeedContainer {
+      display: none;
+      margin-top: 20px;
+    }
+
     .icon {
       width: 20px;
       height: 20px;
@@ -173,7 +179,8 @@
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
-    <div style="margin-top: 20px;">
+    <!-- ============ CHANGED: Added ID to scroll speed container and hidden by default ============ -->
+    <div id="scrollSpeedContainer">
       <label for="scrollSpeedSlider">Scroll Speed:</label>
       <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
     </div>
@@ -182,8 +189,7 @@
   </div>
 
 <script>
-
-   // ============ PASTE THE AUDIO DETECTION CODE RIGHT HERE - START ============
+  // ============ AUDIO DETECTION CODE ============
   // Function to detect audio state changes
   function setupAudioListeners() {
       const audioElements = document.querySelectorAll('audio, video');
@@ -231,8 +237,8 @@
 
   // If page loads dynamically, also call this after content loads
   window.addEventListener('load', setupAudioListeners);
-  // ============ PASTE THE AUDIO DETECTION CODE RIGHT HERE - END ============
-  
+  // ============ END AUDIO DETECTION CODE ============
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const folder = params.get("folder");
@@ -259,7 +265,6 @@
           const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
           const storyImage = document.getElementById("storyImage");
           storyImage.src = imagePath;
-
 
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
@@ -292,6 +297,9 @@
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.style.display = "block";
     audioBar.volume = 1.0;
+
+    // ============ CHANGED: Show scroll speed container when audio starts ============
+    document.getElementById("scrollSpeedContainer").style.display = "block";
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);

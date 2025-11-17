@@ -182,6 +182,57 @@
   </div>
 
 <script>
+
+   // ============ PASTE THE AUDIO DETECTION CODE RIGHT HERE - START ============
+  // Function to detect audio state changes
+  function setupAudioListeners() {
+      const audioElements = document.querySelectorAll('audio, video');
+      
+      audioElements.forEach(audio => {
+          // When audio starts playing
+          audio.addEventListener('play', function() {
+              if (window.Android) {
+                  window.Android.onAudioStateChange(true);
+              }
+          });
+          
+          // When audio pauses or ends
+          audio.addEventListener('pause', function() {
+              if (window.Android) {
+                  window.Android.onAudioStateChange(false);
+              }
+          });
+          
+          audio.addEventListener('ended', function() {
+              if (window.Android) {
+                  window.Android.onAudioStateChange(false);
+              }
+          });
+      });
+  }
+
+  // Also monitor for dynamically added audio elements
+  const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+          if (mutation.addedNodes.length) {
+              setupAudioListeners();
+          }
+      });
+  });
+
+  // Start observing when DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+      setupAudioListeners();
+      observer.observe(document.body, {
+          childList: true,
+          subtree: true
+      });
+  });
+
+  // If page loads dynamically, also call this after content loads
+  window.addEventListener('load', setupAudioListeners);
+  // ============ PASTE THE AUDIO DETECTION CODE RIGHT HERE - END ============
+  
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const folder = params.get("folder");

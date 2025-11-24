@@ -122,5 +122,16 @@
     "image": "friendship-bravery/the-new-kid-in-the-playground.webp",
     "audio_woman": "friendship-bravery/audio/the-new-kid-in-the-playground-woman.mp3",
     "audio_man": "friendship-bravery/audio/the-new-kid-in-the-playground-man.mp3"
+
+     },
+
+  "the-courage-to-say-i-am-sorry": {
+    "title": "The courage to say "I am sorry"",
+    "folder": "friendship-bravery",
+    "text": "the-courage-to-say-i-am-sorry.txt",
+    "image": "the-courage-to-say-i-am-sorry.webp",
+    "audio_woman": "the-courage-to-say-i-am-sorry-woman.mp3",
+    "audio_man": "the-courage-to-say-i-am-sorry-man.mp3"
   }
+
 }

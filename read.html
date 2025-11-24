@@ -11,12 +11,12 @@
       margin: 0;
       padding: 0;
       font-family: 'Quicksand', sans-serif;
-      background-color: #04A2B6; /* ✅ Light mode background */
+      background-color: #04A2B6;
     }
 
     @media (prefers-color-scheme: dark) {
       html, body {
-        background-color: #333333; /* ✅ Night mode background */
+        background-color: #333333;
         color: #FFF;
       }
     }
@@ -24,8 +24,8 @@
     .content {
       max-width: 800px;
       margin: 20px 15px 30px 15px;
-      padding: 13px 13px 10px 13px;
-      background-color: #ffffff; /* ✅ solid white */
+      padding: 13px;
+      background-color: #ffffff;
       border-radius: 16px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
@@ -39,7 +39,7 @@
     #storyImage {
       display: block;
       margin-top: 5px;
-      margin-bottom: 0px;
+      margin-bottom: 0;
       width: 100%;
       max-width: 600px;
       height: auto;
@@ -47,7 +47,24 @@
       object-fit: cover;
       position: relative;
       z-index: 1;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* ✅ shadow below image */
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .favorite-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 28px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.2s ease;
+      display: none;
+    }
+
+    .favorite-icon:hover {
+      transform: scale(1.1);
     }
 
     .button-row {
@@ -74,7 +91,7 @@
       flex: 1 1 auto;
     }
 
-    .green-button {
+    .red-button {
       background-color: #E53935;
     }
 
@@ -92,9 +109,10 @@
 
     #storyText {
       display: block;
+      white-space: pre-wrap;
       text-align: justify;
       font-size: 14px;
-      line-height: 1.4; /* ✅ line spacing */
+      line-height: 1.4;
       margin-top: 20px;
       max-height: 400px;
       overflow-y: auto;
@@ -105,25 +123,40 @@
       padding: 12px;
     }
 
-    /* ✅ Paragraph spacing */
-    #storyText p {
-      margin-bottom: 1.3em;
-    }
-
     #audioBar {
       display: none;
       margin: 10px auto 0;
       width: 100%;
       max-width: 600px;
-      border-radius: 12px;
+      border-radius: 0;
       padding: 0;
-      background-color: #ffffff;
-      box-shadow: none;
+      background-color: transparent;
     }
 
     #scrollSpeedContainer {
       display: none;
       margin-top: 20px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 4px solid #ccc;
+      border-top: 4px solid #E53935;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -131,13 +164,14 @@
   <div class="content">
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
+      <button class="favorite-icon" onclick="toggleFavorite()">🤍</button>
     </div>
 
     <div class="button-row">
-      <button class="action-button green-button" onclick="playAudio('man')">Man</button>
+      <button class="action-button red-button" onclick="playAudio('man')">Man</button>
       <button class="round-button" onclick="adjustFontSize(-2)">−</button>
       <button class="round-button" onclick="adjustFontSize(2)">+</button>
-      <button class="action-button green-button" onclick="playAudio('woman')">Woman</button>
+      <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
@@ -151,6 +185,38 @@
   </div>
 
 <script>
+  function toggleFavorite() {
+    console.log("Favorite toggled");
+  }
+
+  function setupAudioListeners() {
+    const audioElements = document.querySelectorAll('audio, video');
+    audioElements.forEach(audio => {
+      audio.addEventListener('play', () => {
+        if (window.Android) window.Android.onAudioStateChange(true);
+      });
+      audio.addEventListener('pause', () => {
+        if (window.Android) window.Android.onAudioStateChange(false);
+      });
+      audio.addEventListener('ended', () => {
+        if (window.Android) window.Android.onAudioStateChange(false);
+      });
+    });
+  }
+
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) setupAudioListeners();
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setupAudioListeners();
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+
+  window.addEventListener('load', setupAudioListeners);
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
@@ -170,17 +236,8 @@
       fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
         .then(res => res.text())
         .then(text => {
-          // ✅ Convert plain text into paragraphs
-          const formatted = text
-            .split(/\n\s*\n/) // split on blank lines
-            .map(p => `<p>${p.trim()}</p>`)
-            .join("");
-
-          document.getElementById("storyText").innerHTML = formatted;
-
-          const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
-          document.getElementById("storyImage").src = imagePath;
-
+          document.getElementById("storyText").innerText = text;
+          document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
           }
@@ -193,11 +250,9 @@
   function startScrolling() {
     const speedSlider = document.getElementById("scrollSpeedSlider");
     let speed = parseInt(speedSlider.value);
-
     scrollInterval = setInterval(() => {
       document.getElementById("storyText").scrollBy(0, 1);
     }, speed);
-
     speedSlider.addEventListener("input", () => {
       clearInterval(scrollInterval);
       let newSpeed = parseInt(speedSlider.value);
@@ -220,10 +275,8 @@
     audioBar.oncanplaythrough = () => {
       document.getElementById("storyText").scrollTop = 0;
       clearInterval(scrollInterval);
-
       audioBar.play();
       document.getElementById("storyText").style.display = "block";
-
       setTimeout(() => {
         startScrolling();
       }, 6000);

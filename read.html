@@ -6,21 +6,20 @@
   <title>Story Reader</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet" />
   <style>
-  html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Quicksand', sans-serif;
-  background-color: #04A2B6; /* ✅ Light mode background */
-}
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #04A2B6; /* ✅ Light mode background */
+    }
 
-@media (prefers-color-scheme: dark) {
-  html, body {
-    background-color: #333333; /* ✅ Night mode background */
-    color: #FFF; /* optional: text outside story box */
-  }
-}
-
+    @media (prefers-color-scheme: dark) {
+      html, body {
+        background-color: #333333; /* ✅ Night mode background */
+        color: #FFF;
+      }
+    }
 
     .content {
       max-width: 800px;
@@ -39,33 +38,16 @@
 
     #storyImage {
       display: block;
-      margin-top: 5px;  /* Try 4px or 0 */
-      margin-bottom: 0px; /* Try 4px or 0 */
+      margin-top: 5px;
+      margin-bottom: 0px;
       width: 100%;
-     max-width: 600px; /* Try 500px or 600px */
+      max-width: 600px;
       height: auto;
       border-radius: 16px;
       object-fit: cover;
       position: relative;
       z-index: 1;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-    }
-
-    .favorite-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 28px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 2;
-      transition: transform 0.2s ease;
-      display: none;
-    }
-
-    .favorite-icon:hover {
-      transform: scale(1.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* ✅ shadow below image */
     }
 
     .button-row {
@@ -108,91 +90,58 @@
       cursor: pointer;
     }
 
-#storyText {
-    display: block; /* ✅ Show the story box */
-    white-space: pre-wrap;
-    text-align: justify;
-    font-size: 14px;
-    line-height: 1.3; /* line spacing */
-    padding-bottom: 1.3em;
-    line-height: 1.4;
-    margin-top: 20px;
-    max-height: 400px;
-    overflow-y: auto;
-    background-color: white; /* ✅ Always white */
-    border-radius: 12px;
-    color: #000;
-    box-shadow: none;
-}
+    #storyText {
+      display: block;
+      text-align: justify;
+      font-size: 14px;
+      line-height: 1.4; /* ✅ line spacing */
+      margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+      background-color: white;
+      border-radius: 12px;
+      color: #000;
+      box-shadow: none;
+      padding: 12px;
+    }
+
+    /* ✅ Paragraph spacing */
+    #storyText p {
+      margin-bottom: 1.3em;
+    }
 
     #audioBar {
       display: none;
       margin: 10px auto 0;
       width: 100%;
       max-width: 600px;
-      border-radius: 0;
+      border-radius: 12px;
       padding: 0;
-      background-color: transparent;
+      background-color: #ffffff;
+      box-shadow: none;
     }
 
-    /* ============ CHANGED: Scroll speed container hidden by default ============ */
     #scrollSpeedContainer {
       display: none;
       margin-top: 20px;
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-
-    .spinner {
-      width: 30px;
-      height: 30px;
-      border: 4px solid #ccc;
-      border-top: 4px solid #E53935;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: auto;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
   <div class="content">
-
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
-      <button class="favorite-icon" onclick="toggleFavorite()">🤍</button>
     </div>
 
     <div class="button-row">
-      <button class="action-button green-button" onclick="playAudio('man')">
-        <svg class="icon" viewBox="0 0 24 24">
-          <path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2a2.5 2.5 0 0 0-2.45 2h1.7a1 1 0 1 1 0 2h-1.7a2.5 2.5 0 1 0 2.45-4z" fill="white"/>
-        </svg>
-        Man
-      </button>
-
+      <button class="action-button green-button" onclick="playAudio('man')">Man</button>
       <button class="round-button" onclick="adjustFontSize(-2)">−</button>
       <button class="round-button" onclick="adjustFontSize(2)">+</button>
-
-      <button class="action-button green-button" onclick="playAudio('woman')">
-        <svg class="icon" viewBox="0 0 24 24">
-          <path d="M3 10v4h4l5 5V5l-5 5H3zm13.5 2a2.5 2.5 0 0 0-2.45 2h1.7a1 1 0 1 1 0 2h-1.7a2.5 2.5 0 1 0 2.45-4z" fill="white"/>
-        </svg>
-        Woman
-      </button>
+      <button class="action-button green-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
-    <!-- ============ CHANGED: Added ID to scroll speed container and hidden by default ============ -->
     <div id="scrollSpeedContainer">
       <label for="scrollSpeedSlider">Scroll Speed:</label>
       <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
@@ -202,66 +151,14 @@
   </div>
 
 <script>
-  // ============ AUDIO DETECTION CODE ============
-  // Function to detect audio state changes
-  function setupAudioListeners() {
-      const audioElements = document.querySelectorAll('audio, video');
-      
-      audioElements.forEach(audio => {
-          // When audio starts playing
-          audio.addEventListener('play', function() {
-              if (window.Android) {
-                  window.Android.onAudioStateChange(true);
-              }
-          });
-          
-          // When audio pauses or ends
-          audio.addEventListener('pause', function() {
-              if (window.Android) {
-                  window.Android.onAudioStateChange(false);
-              }
-          });
-          
-          audio.addEventListener('ended', function() {
-              if (window.Android) {
-                  window.Android.onAudioStateChange(false);
-              }
-          });
-      });
-  }
-
-  // Also monitor for dynamically added audio elements
-  const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-          if (mutation.addedNodes.length) {
-              setupAudioListeners();
-          }
-      });
-  });
-
-  // Start observing when DOM is ready
-  document.addEventListener('DOMContentLoaded', function() {
-      setupAudioListeners();
-      observer.observe(document.body, {
-          childList: true,
-          subtree: true
-      });
-  });
-
-  // If page loads dynamically, also call this after content loads
-  window.addEventListener('load', setupAudioListeners);
-  // ============ END AUDIO DETECTION CODE ============
-
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  const folder = params.get("folder");
   const mode = params.get("mode");
 
   const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
   let currentFontSize = 18;
   let storyData;
   let scrollInterval;
-
   const audioBar = document.getElementById("audioBar");
 
   fetch(jsonUrl)
@@ -273,11 +170,16 @@
       fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
         .then(res => res.text())
         .then(text => {
-          document.getElementById("storyText").innerText = text;
+          // ✅ Convert plain text into paragraphs
+          const formatted = text
+            .split(/\n\s*\n/) // split on blank lines
+            .map(p => `<p>${p.trim()}</p>`)
+            .join("");
+
+          document.getElementById("storyText").innerHTML = formatted;
 
           const imagePath = `https://kiabatha.github.io/ssm/${storyData.image}`;
-          const storyImage = document.getElementById("storyImage");
-          storyImage.src = imagePath;
+          document.getElementById("storyImage").src = imagePath;
 
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
@@ -311,9 +213,7 @@
     audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    // ============ CHANGED: Show scroll speed container when audio starts ============
     document.getElementById("scrollSpeedContainer").style.display = "block";
-
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
@@ -326,7 +226,7 @@
 
       setTimeout(() => {
         startScrolling();
-      }, 6000); // or 3000 or 6000
+      }, 6000);
     };
 
     audioBar.addEventListener("pause", () => clearInterval(scrollInterval));

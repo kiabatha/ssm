@@ -128,13 +128,14 @@
   "the-courage-to-say-i-am-sorry": {
     "title": "The Courage To Say, I Am Sorry",
     "folder": "friendship-bravery",
-    "text": "the-courage-to-say-i-am-sorry.txt",
+    "text": "friendship-bravery/the-courage-to-say-i-am-sorry.txt",
     "image": "friendship-bravery/the-courage-to-say-i-am-sorry.webp",
     "audio_woman": "friendship-bravery/audio/the-courage-to-say-i-am-sorry-woman.mp3",
     "audio_man": "friendship-bravery/audio/the-courage-to-say-i-am-sorry-man.mp3"
   }
 
 }
+
 
 
 

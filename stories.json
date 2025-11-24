@@ -72,7 +72,7 @@
 },
 
   "fairies-and-the-strange-tree-story": {
-    "title": "Fairies and the Strange Tree Story",
+    "title": "Fairies and the Strange Tree",
     "folder": "long-stories",
     "text": "long-stories/fairies-and-the-strange-tree-story.txt",
     "image": "long-stories/fairies-and-the-strange-tree-story.webp",
@@ -135,5 +135,6 @@
   }
 
 }
+
 
 

@@ -131,18 +131,25 @@
       background-color: transparent;
     }
 
-    #scrollSpeedContainer {
-      display: none;
-      margin-top: 20px;
-      font-size: 12px; /* smaller label */
-      text-align: left;
-    }
+ #scrollSpeedContainer {
+  display: none;
+  margin-top: 20px;
+  font-size: 12px;       /* smaller label */
+  text-align: center;    /* ✅ center label and slider */
+}
 
-    #scrollSpeedSlider {
-      width: 150px;
-      height: 6px; /* thinner slider */
-      margin-top: 4px;
-    }
+#scrollSpeedContainer label {
+  display: block;
+  margin-bottom: 6px;    /* space between text and slider */
+  font-weight: 600;      /* make label clearer */
+}
+
+#scrollSpeedSlider {
+  width: 160px;          /* smaller width */
+  height: 6px;           /* thinner bar */
+  margin: 0 auto;        /* ✅ center horizontally */
+  display: block;        /* ensures centering works */
+}
 
     .icon {
       width: 20px;
@@ -182,10 +189,10 @@
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
-    <div id="scrollSpeedContainer">
-      <label for="scrollSpeedSlider">Scroll Speed:</label><br />
-      <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
-    </div>
+ <div id="scrollSpeedContainer">
+  <label for="scrollSpeedSlider">Scroll Speed:</label>
+  <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
+</div>
 
     <div id="storyText"></div>
   </div>

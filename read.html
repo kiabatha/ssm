@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -136,6 +134,14 @@
     #scrollSpeedContainer {
       display: none;
       margin-top: 20px;
+      font-size: 12px; /* smaller label */
+      text-align: left;
+    }
+
+    #scrollSpeedSlider {
+      width: 150px;
+      height: 6px; /* thinner slider */
+      margin-top: 4px;
     }
 
     .icon {
@@ -169,15 +175,15 @@
 
     <div class="button-row">
       <button class="action-button red-button" onclick="playAudio('man')">Man</button>
-      <button class="round-button" onclick="adjustFontSize(-2)">−</button>
-      <button class="round-button" onclick="adjustFontSize(2)">+</button>
+      <button class="round-button" onclick="adjustFontSize(-1)">−</button>
+      <button class="round-button" onclick="adjustFontSize(1)">+</button>
       <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
     <div id="scrollSpeedContainer">
-      <label for="scrollSpeedSlider">Scroll Speed:</label>
+      <label for="scrollSpeedSlider">Scroll Speed:</label><br />
       <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
     </div>
 
@@ -222,10 +228,12 @@
   const mode = params.get("mode");
 
   const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
-  let currentFontSize = 18;
   let storyData;
   let scrollInterval;
   const audioBar = document.getElementById("audioBar");
+
+  // ✅ Start font size from actual CSS value
+  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
 
   fetch(jsonUrl)
     .then(res => res.json())
@@ -305,3 +313,4 @@
 </script>
 </body>
 </html>
+   

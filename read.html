@@ -154,6 +154,25 @@
   display: block;        /* ensures centering works */
 }
 
+    .scroll-speed-row {
+  display: flex;
+  justify-content: center;     /* ✅ center horizontally */
+  align-items: center;         /* ✅ align vertically */
+  gap: 10px;                   /* space between label and slider */
+  font-size: 12px;             /* smaller label */
+  margin-top: 10px;
+}
+
+.scroll-speed-row label {
+  font-weight: 600;
+  color: #000;
+}
+
+#scrollSpeedSlider {
+  width: 160px;
+  height: 6px;
+}
+
     .icon {
       width: 20px;
       height: 20px;
@@ -193,8 +212,10 @@
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
 <div id="scrollSpeedContainer">
-  <label for="scrollSpeedSlider">Scroll Speed:</label>
-  <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
+  <div class="scroll-speed-row">
+    <label for="scrollSpeedSlider">Scroll Speed:</label>
+    <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
+  </div>
 </div>
 
     <div id="storyText"></div>

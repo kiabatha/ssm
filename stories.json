@@ -141,7 +141,7 @@
     "text": "friendship-bravery/the-secret-of-the-stolen-lunch.txt",
     "image": "friendship-bravery/the-secret-of-the-stolen-lunch.webp",
     "audio_woman": "friendship-bravery/audio/the-secret-of-the-stolen-lunch-woman.mp3",
-    "audio_man": "friendship-bravery/audio/the-secret-of-the-stolen-lunch.mp3"
+    "audio_man": "friendship-bravery/audio/the-secret-of-the-stolen-lunch-man.mp3"
 
 },
 
@@ -151,7 +151,7 @@
     "text": "friendship-bravery/the-team-that-almost-was-not.txt",
     "image": "friendship-bravery/the-team-that-almost-was-not.webp",
     "audio_woman": "friendship-bravery/audio/the-team-that-almost-was-not-woman.mp3",
-    "audio_man": "friendship-bravery/audio/the-team-that-almost-was-not.mp3"
+    "audio_man": "friendship-bravery/audio/the-team-that-almost-was-not-man.mp3"
 
 },
 
@@ -161,10 +161,11 @@
     "text": "friendship-bravery/when-best-friends-disagree.txt",
     "image": "friendship-bravery/when-best-friends-disagree.webp",
     "audio_woman": "friendship-bravery/audio/when-best-friends-disagree-woman.mp3",
-    "audio_man": "friendship-bravery/audio/when-best-friends-disagree.mp3"
+    "audio_man": "friendship-bravery/audio/when-best-friends-disagree-man.mp3"
   }
 
 }
+
 
 
 

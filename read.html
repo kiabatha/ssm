@@ -134,10 +134,12 @@
 #scrollSpeedContainer {
   display: none;
   margin-top: 20px;
-  font-size: 12px;       /* smaller label */
-  text-align: center;    /* center everything */
+  font-size: 12px;       /* smaller text */
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* align vertically */
+  gap: 8px;                /* space between text and bar */
+  display: flex;           /* ✅ flexbox for side-by-side */
 }
-
 #scrollSpeedContainer label {
   display: block;        /* ✅ force label to show */
   margin-bottom: 6px;    /* space between text and slider */
@@ -190,7 +192,7 @@
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
- <div id="scrollSpeedContainer">
+<div id="scrollSpeedContainer">
   <label for="scrollSpeedSlider">Scroll Speed:</label>
   <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
 </div>

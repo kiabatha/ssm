@@ -131,17 +131,18 @@
       background-color: transparent;
     }
 
- #scrollSpeedContainer {
+#scrollSpeedContainer {
   display: none;
   margin-top: 20px;
   font-size: 12px;       /* smaller label */
-  text-align: center;    /* ✅ center label and slider */
+  text-align: center;    /* center everything */
 }
 
 #scrollSpeedContainer label {
-  display: block;
+  display: block;        /* ✅ force label to show */
   margin-bottom: 6px;    /* space between text and slider */
-  font-weight: 600;      /* make label clearer */
+  font-weight: 600;      /* make text clearer */
+  color: #000;           /* ensure visible on light background */
 }
 
 #scrollSpeedSlider {

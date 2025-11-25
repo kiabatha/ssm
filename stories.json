@@ -133,12 +133,12 @@
     "audio_woman": "friendship-bravery/audio/the-courage-to-say-i-am-sorry-woman.mp3",
     "audio_man": "friendship-bravery/audio/the-courage-to-say-i-am-sorry-man.mp3"
 
-    },
+},
 
   "the-secret-of-the-stolen-lunch": {
     "title": "The Secret Of The Stolen Lunch",
     "folder": "friendship-bravery",
-    "text": "the-secret-of-the-stolen-lunch.txt",
+    "text": "friendship-bravery/the-secret-of-the-stolen-lunch.txt",
     "image": "friendship-bravery/the-secret-of-the-stolen-lunch.webp",
     "audio_woman": "friendship-bravery/audio/the-secret-of-the-stolen-lunch-woman.mp3",
     "audio_man": "friendship-bravery/audio/the-secret-of-the-stolen-lunch.mp3"
@@ -148,7 +148,7 @@
   "the-team-that-almost-was-not": {
     "title": "The Team That Almost Was Not",
     "folder": "friendship-bravery",
-    "text": "the-team-that-almost-was-not.txt",
+    "text": "friendship-bravery/the-team-that-almost-was-not.txt",
     "image": "friendship-bravery/the-team-that-almost-was-not.webp",
     "audio_woman": "friendship-bravery/audio/the-team-that-almost-was-not-woman.mp3",
     "audio_man": "friendship-bravery/audio/the-team-that-almost-was-not.mp3"
@@ -158,13 +158,14 @@
   "when-best-friends-disagree": {
     "title": "When Best Friends Disagree",
     "folder": "friendship-bravery",
-    "text": "when-best-friends-disagree.txt",
+    "text": "friendship-bravery/when-best-friends-disagree.txt",
     "image": "friendship-bravery/when-best-friends-disagree.webp",
     "audio_woman": "friendship-bravery/audio/when-best-friends-disagree-woman.mp3",
     "audio_man": "friendship-bravery/audio/when-best-friends-disagree.mp3"
   }
 
 }
+
 
 
 

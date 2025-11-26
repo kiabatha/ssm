@@ -59,6 +59,16 @@
     "audio_woman": "long-stories/audio/princess-rania-and-the-sorcerer-of-the-white-fortress-woman.mp3",
     "audio_man": "long-stories/audio/princess-rania-and-the-sorcerer-of-the-white-fortress-man.mp3"
 
+    },
+
+  "the-painted-sky": {
+    "title": "When Best Friends Disagree",
+    "folder": "long-stories",
+    "text": "long-stories/the-painted-sky.txt",
+    "image": "long-stories/the-painted-sky.webp",
+    "audio_woman": "long-stories/audio/the-painted-sky-woman.mp3",
+    "audio_man": "long-stories/audio/the-painted-sky-man.mp3"
+
 },
 
   "princess-neelofer-and-the-evil-sorcerer": {
@@ -165,6 +175,7 @@
   }
 
 }
+
 
 
 

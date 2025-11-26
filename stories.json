@@ -195,16 +195,6 @@
 
 },
 
-  "the-found-wallet": {
-    "title": "The Found Wallet",
-    "folder": "moral-courage",
-    "text": "moral-courage/the-found-wallet.txt",
-    "image": "moral-courage/the-found-wallet.webp",
-    "audio_woman": "moral-courage/audio/the-found-wallet-woman.mp3",
-    "audio_man": "moral-courage/audio/the-found-wallet-man.mp3"
-
-},
-
   "the-truth-about-the-science-project": {
     "title": "The Truth About The Science Project",
     "folder": "moral-courage",
@@ -489,6 +479,7 @@
   }
 
 }
+
 
 
 

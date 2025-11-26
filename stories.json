@@ -172,9 +172,324 @@
     "image": "friendship-bravery/when-best-friends-disagree.webp",
     "audio_woman": "friendship-bravery/audio/when-best-friends-disagree-woman.mp3",
     "audio_man": "friendship-bravery/audio/when-best-friends-disagree-man.mp3"
+
+    },
+
+  "the-broken-window": {
+    "title": "The Broken Window",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-broken-window.txt",
+    "image": "moral-courage/the-broken-window.webp",
+    "audio_woman": "moral-courage/audio/the-broken-window-woman.mp3",
+    "audio_man": "moral-courage/audio/the-broken-window-man.mp3"
+
+},
+
+  "the-fair-play-promise": {
+    "title": "The Fair Play Promise",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-fair-play-promise.txt",
+    "image": "moral-courage/the-fair-play-promise.webp",
+    "audio_woman": "moral-courage/audio/the-fair-play-promise-woman.mp3",
+    "audio_man": "moral-courage/audio/the-fair-play-promise-man.mp3"
+
+},
+
+  "the-found-wallet": {
+    "title": "The Found Wallet",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-found-wallet.txt",
+    "image": "moral-courage/the-found-wallet.webp",
+    "audio_woman": "moral-courage/audio/the-found-wallet-woman.mp3",
+    "audio_man": "moral-courage/audio/the-found-wallet-man.mp3"
+
+},
+
+  "the-truth-about-the-science-project": {
+    "title": "The Truth About The Science Project",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-truth-about-the-science-project.txt",
+    "image": "moral-courage/the-truth-about-the-science-project.webp",
+    "audio_woman": "moral-courage/audio/the-truth-about-the-science-project-woman.mp3",
+    "audio_man": "moral-courage/audio/the-truth-about-the-science-project-man.mp3"
+
+},
+
+  "the-voice-of-the-voiceless": {
+    "title": "The Voice Of The Voiceless",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-voice-of-the-voiceless.txt",
+    "image": "moral-courage/the-voice-of-the-voiceless.webp",
+    "audio_woman": "moral-courage/audio/the-voice-of-the-voiceless-woman.mp3",
+    "audio_man": "moral-courage/audio/the-voice-of-the-voiceless-man.mp3"
+
+},
+
+  "the-broken-vase": {
+    "title": "The Broken Vase",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-broken-vase.txt",
+    "image": "moral-courage/the-broken-vase.webp",
+    "audio_woman": "moral-courage/audio/the-broken-vase-woman.mp3",
+    "audio_man": "moral-courage/audio/the-broken-vase-man.mp3"
+
+},
+
+  "the-fair-game": {
+    "title": "The Fair Game",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-fair-game.txt",
+    "image": "moral-courage/the-fair-game.webp",
+    "audio_woman": "moral-courage/audio/the-fair-game-woman.mp3",
+    "audio_man": "moral-courage/audio/the-fair-game-man.mp3"
+
+},
+
+  "the-fair-race": {
+    "title": "The Fair Race",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-fair-race.txt",
+    "image": "moral-courage/the-fair-race.webp",
+    "audio_woman": "moral-courage/audio/the-fair-race-woman.mp3",
+    "audio_man": "moral-courage/audio/the-fair-race-man.mp3"
+
+},
+
+  "the-fair-turn": {
+    "title": "The Fair Turn",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-fair-turn.txt",
+    "image": "moral-courage/the-fair-turn.webp",
+    "audio_woman": "moral-courage/audio/the-fair-turn-woman.mp3",
+    "audio_man": "moral-courage/audio/the-fair-turn-man.mp3"
+
+},
+
+  "the-found-wallet": {
+    "title": "The Found Wallet",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-found-wallet.txt",
+    "image": "moral-courage/the-found-wallet.webp",
+    "audio_woman": "moral-courage/audio/the-found-wallet-woman.mp3",
+    "audio_man": "moral-courage/audio/the-found-wallet-man.mp3"
+
+},
+
+  "the-honest-answer": {
+    "title": "The Honest Answer",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-honest-answer.txt",
+    "image": "moral-courage/the-painted-sky.webp",
+    "audio_woman": "moral-courage/audio/the-honest-answer-woman.mp3",
+    "audio_man": "moral-courage/audio/the-honest-answer-man.mp3"
+
+},
+
+  "the-library-whisper": {
+    "title": "The Library Whisper",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-library-whisper.txt",
+    "image": "moral-courage/the-library-whisper.webp",
+    "audio_woman": "moral-courage/audio/the-library-whisper-woman.mp3",
+    "audio_man": "moral-courage/audio/the-library-whisper-man.mp3"
+
+},
+
+  "the-lost-bracelet": {
+    "title": "The Lost Bracelet",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-lost-bracelet.txt",
+    "image": "moral-courage/the-lost-bracelet.webp",
+    "audio_woman": "moral-courage/audio/the-lost-bracelet-woman.mp3",
+    "audio_man": "moral-courage/audio/the-lost-bracelet-man.mp3"
+
+},
+
+  "the-lunch-share": {
+    "title": "The Lunch Share",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-lunch-share.txt",
+    "image": "moral-courage/the-lunch-share.webp",
+    "audio_woman": "moral-courage/audio/the-lunch-share-woman.mp3",
+    "audio_man": "moral-courage/audio/the-lunch-share-man.mp3"
+
+},
+
+  "the-playground-apology": {
+    "title": "The Playground Apology",
+    "folder": "moral-courage",
+    "text": "moral-courage/the-playground-apology.txt",
+    "image": "moral-courage/the-playground-apology.webp",
+    "audio_woman": "moral-courage/audio/the-playground-apology-woman.mp3",
+    "audio_man": "moral-courage/audio/the-playground-apology-man.mp3"
+
+},
+
+  "a-castle-made-of-code": {
+    "title": "A Castle Made Of Code",
+    "folder": "creative-courage",
+    "text": "moral-courage/a-castle-made-of-code.txt",
+    "image": "moral-courage/a-castle-made-of-code.webp",
+    "audio_woman": "moral-courage/audio/a-castle-made-of-code-woman.mp3",
+    "audio_man": "moral-courage/audio/a-castle-made-of-code-man.mp3"
+
+},
+
+  "the-blank-page-monster": {
+    "title": "The Blank Page Monster",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-blank-page-monster.txt",
+    "image": "moral-courage/the-blank-page-monster.webp",
+    "audio_woman": "moral-courage/audio/the-blank-page-monster-woman.mp3",
+    "audio_man": "moral-courage/audio/the-blank-page-monster-man.mp3"
+
+
+},
+
+  "the-dance-of-the-butterflies": {
+    "title": "The Dance Of The Butterflies",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-dance-of-the-butterflies.txt",
+    "image": "moral-courage/the-dance-of-the-butterflies.webp",
+    "audio_woman": "moral-courage/audio/the-dance-of-the-butterflies-woman.mp3",
+    "audio_man": "moral-courage/audio/the-dance-of-the-butterflies-man.mp3"
+
+
+},
+
+  "the-science-fair-spark": {
+    "title": "The Science Fair Spark",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-science-fair-spark.txt",
+    "image": "moral-courage/the-science-fair-spark.webp",
+    "audio_woman": "moral-courage/audio/the-science-fair-spark-woman.mp3",
+    "audio_man": "moral-courage/audio/the-science-fair-spark-man.mp3"
+
+
+},
+
+  "the-song-no-one-heard": {
+    "title": "The Song No One Heard",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-song-no-one-heard.txt",
+    "image": "moral-courage/the-song-no-one-heard.webp",
+    "audio_woman": "moral-courage/audio/the-song-no-one-heard-woman.mp3",
+    "audio_man": "moral-courage/audio/the-song-no-one-heard-man.mp3"
+
+
+},
+
+  "the-chalk-adventure": {
+    "title": "The Chalk Adventure",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-chalk-adventure.txt",
+    "image": "moral-courage/the-chalk-adventure.webp",
+    "audio_woman": "moral-courage/audio/the-chalk-adventure-woman.mp3",
+    "audio_man": "moral-courage/audio/the-chalk-adventure-man.mp3"
+
+
+},
+
+  "the-costume-of-stars": {
+    "title": "The Costume Of Stars",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-costume-of-stars.txt",
+    "image": "moral-courage/the-costume-of-stars.webp",
+    "audio_woman": "moral-courage/audio/the-costume-of-stars-woman.mp3",
+    "audio_man": "moral-courage/audio/the-costume-of-stars-man.mp3"
+
+
+},
+
+  "the-garden-of-music": {
+    "title": "The Garden Of Music",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-garden-of-music.txt",
+    "image": "moral-courage/the-garden-of-music.webp",
+    "audio_woman": "moral-courage/audio/the-garden-of-music-woman.mp3",
+    "audio_man": "moral-courage/audio/the-garden-of-music-man.mp3"
+
+
+},
+
+  "the-hidden-dance": {
+    "title": "The Hidden Dance",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-hidden-dance.txt",
+    "image": "moral-courage/the-hidden-dance.webp",
+    "audio_woman": "moral-courage/audio/the-hidden-dance-woman.mp3",
+    "audio_man": "moral-courage/audio/the-hidden-dance-man.mp3"
+
+
+},
+
+  "the-paper-dragon": {
+    "title": "The Paper Dragon",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-paper-dragon.txt",
+    "image": "moral-courage/the-paper-dragon.webp",
+    "audio_woman": "moral-courage/audio/the-paper-dragon-woman.mp3",
+    "audio_man": "moral-courage/audio/the-paper-dragon-man.mp3"
+
+
+},
+
+  "the-puppet-show": {
+    "title": "The Puppet Show",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-puppet-show.txt",
+    "image": "moral-courage/the-puppet-show.webp",
+    "audio_woman": "moral-courage/audio/the-puppet-show-woman.mp3",
+    "audio_man": "moral-courage/audio/the-puppet-show-man.mp3"
+
+
+},
+
+  "the-robot-that-danced": {
+    "title": "The Robot That Danced",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-robot-that-danced.txt",
+    "image": "moral-courage/the-robot-that-danced.webp",
+    "audio_woman": "moral-courage/audio/the-robot-that-danced-woman.mp3",
+    "audio_man": "moral-courage/audio/the-robot-that-danced-man.mp3"
+
+
+},
+
+  "the-song-of-the-river": {
+    "title": "The Song Of The River",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-song-of-the-river.txt",
+    "image": "moral-courage/the-song-of-the-river.webp",
+    "audio_woman": "moral-courage/audio/the-song-of-the-river-woman.mp3",
+    "audio_man": "moral-courage/audio/the-song-of-the-river-man.mp3"
+
+
+},
+
+  "the-story-in-the-sand": {
+    "title": "The Story in The Sand",
+    "folder": "creative-courage",
+    "text": "moral-courage/the-story-in-the-sand.txt",
+    "image": "moral-courage/the-story-in-the-sand.webp",
+    "audio_woman": "moral-courage/audio/the-story-in-the-sand-woman.mp3",
+    "audio_man": "moral-courage/audio/the-story-in-the-sand-man.mp3"
+
+
+},
+
+  "the-story-in-the-stars": {
+    "title": "The Story in The Stars",
+    "folder": "creative-courage",
+    "text": "moral-courage/a-castle-made-of-code.txt",
+    "image": "moral-courage/a-castle-made-of-code.webp",
+    "audio_woman": "moral-courage/audio/a-castle-made-of-code-woman.mp3",
+    "audio_man": "moral-courage/audio/a-castle-made-of-code-man.mp3"
+
   }
 
 }
+
 
 
 

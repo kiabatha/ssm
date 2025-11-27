@@ -48,6 +48,23 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
+    .favorite-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 28px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.2s ease;
+      display: none;
+    }
+
+    .favorite-icon:hover {
+      transform: scale(1.1);
+    }
+
     .button-row {
       display: flex;
       justify-content: center;
@@ -64,6 +81,15 @@
       border-radius: 5px;
       color: white;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      max-width: 100px;
+      flex: 1 1 auto;
+    }
+
+    .red-button {
       background-color: #E53935;
     }
 
@@ -91,6 +117,7 @@
       background-color: white;
       border-radius: 12px;
       color: #000;
+      box-shadow: none;
       padding: 12px;
     }
 
@@ -99,19 +126,22 @@
       margin: 10px auto 0;
       width: 100%;
       max-width: 600px;
+      border-radius: 0;
+      padding: 0;
+      background-color: transparent;
     }
 
     #scrollSpeedContainer {
-      display: none;
+      display: none;              /* hidden by default */
       margin-top: 10px;
     }
 
     .scroll-speed-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
+      display: flex;               /* ✅ side-by-side */
+      justify-content: center;     /* center horizontally */
+      align-items: center;         /* align vertically */
+      gap: 10px;                   /* space between label and slider */
+      font-size: 12px;             /* smaller label */
     }
 
     .scroll-speed-row label {
@@ -129,13 +159,14 @@
   <div class="content">
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
+      <button class="favorite-icon" onclick="toggleFavorite()">🤍</button>
     </div>
 
     <div class="button-row">
-      <button class="action-button" onclick="playAudio('man')">Man</button>
+      <button class="action-button red-button" onclick="playAudio('man')">Man</button>
       <button class="round-button" onclick="adjustFontSize(-1)">−</button>
       <button class="round-button" onclick="adjustFontSize(1)">+</button>
-      <button class="action-button" onclick="playAudio('woman')">Woman</button>
+      <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
@@ -151,59 +182,125 @@
   </div>
 
 <script>
+  // Category to JSON file mapping
+  const categoryJsonMap = {
+    'moral': 'moral-stories.json',
+    'adventure': 'adventure-stories.json',
+    'fantasy': 'fantasy-stories.json',
+    'educational': 'educational-stories.json',
+    'bedtime': 'bedtime-stories.json'
+    // Add more categories and their corresponding JSON files here
+  };
+
+  function toggleFavorite() {
+    console.log("Favorite toggled");
+  }
+
+  function setupAudioListeners() {
+    const audioElements = document.querySelectorAll('audio, video');
+    audioElements.forEach(audio => {
+      audio.addEventListener('play', () => {
+        if (window.Android) window.Android.onAudioStateChange(true);
+      });
+      audio.addEventListener('pause', () => {
+        if (window.Android) window.Android.onAudioStateChange(false);
+      });
+      audio.addEventListener('ended', () => {
+        if (window.Android) window.Android.onAudioStateChange(false);
+      });
+    });
+  }
+
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) setupAudioListeners();
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setupAudioListeners();
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+
+  window.addEventListener('load', setupAudioListeners);
+
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
+  const category = params.get("category"); // New parameter for category
   const mode = params.get("mode");
-  const folder = params.get("folder"); // ✅ passed from Java
-
-  const jsonUrl = `https://kiabatha.github.io/ssm/${folder}.json`;
 
   let storyData;
   let scrollInterval;
   const audioBar = document.getElementById("audioBar");
+
+  // ✅ Start font size from actual CSS value
   let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
 
+  // Function to determine which JSON file to load based on category
+  function getJsonFileForCategory() {
+    // If category is specified in URL, use the mapping
+    if (category && categoryJsonMap[category]) {
+      return categoryJsonMap[category];
+    }
+    
+    // Fallback: try to determine category from the ID pattern or use default
+    // You can modify this logic based on your ID naming convention
+    if (id && id.includes('moral')) return 'moral-stories.json';
+    if (id && id.includes('adventure')) return 'adventure-stories.json';
+    if (id && id.includes('fantasy')) return 'fantasy-stories.json';
+    if (id && id.includes('educational')) return 'educational-stories.json';
+    if (id && id.includes('bedtime')) return 'bedtime-stories.json';
+    
+    // Default fallback
+    return 'stories.json';
+  }
+
+  // Load the appropriate JSON file
+  const jsonFileName = getJsonFileForCategory();
+  const jsonUrl = `https://kiabatha.github.io/ssm/${jsonFileName}`;
+
   fetch(jsonUrl)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Failed to load ${jsonFileName}`);
+      }
+      return res.json();
+    })
     .then(data => {
-      storyData = data[id];
+      // Handle different JSON structures - array or object
+      if (Array.isArray(data)) {
+        // If JSON is an array, find story by ID
+        storyData = data.find(story => story.id === id);
+      } else {
+        // If JSON is an object, get story by ID key
+        storyData = data[id];
+      }
+      
       if (!storyData) throw new Error("Story not found");
 
       fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) {
+            throw new Error("Failed to load story text");
+          }
+          return res.text();
+        })
         .then(text => {
           document.getElementById("storyText").innerText = text;
           document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
           }
+        })
+        .catch(err => {
+          console.error("Error loading story text:", err);
+          document.getElementById("storyText").innerText = "Failed to load story content.";
         });
     })
-    .catch(() => {
-      document.getElementById("storyText").innerText = "Failed to load story.";
+    .catch(err => {
+      console.error("Error loading story data:", err);
+      document.getElementById("storyText").innerText = "Failed to load story. Please check if the story exists.";
     });
-
-  function playAudio(gender) {
-    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.style.display = "block";
-    audioBar.volume = 1.0;
-
-    document.getElementById("scrollSpeedContainer").style.display = "block";
-    document.getElementById("storyText").scrollTop = 0;
-    clearInterval(scrollInterval);
-
-    audioBar.oncanplaythrough = () => {
-      document.getElementById("storyText").scrollTop = 0;
-      clearInterval(scrollInterval);
-      audioBar.play();
-      document.getElementById("storyText").style.display = "block";
-      setTimeout(() => { startScrolling(); }, 6000);
-    };
-
-    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
-  }
 
   function startScrolling() {
     const speedSlider = document.getElementById("scrollSpeedSlider");
@@ -220,9 +317,58 @@
     });
   }
 
+  function playAudio(gender) {
+    if (!storyData) {
+      console.error("Story data not loaded");
+      return;
+    }
+
+    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+    if (!audioPath) {
+      console.error("Audio path not found for gender:", gender);
+      return;
+    }
+
+    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.style.display = "block";
+    audioBar.volume = 1.0;
+
+    // ✅ Show scroll speed controls only when audio starts
+    document.getElementById("scrollSpeedContainer").style.display = "block";
+
+    document.getElementById("storyText").scrollTop = 0;
+    clearInterval(scrollInterval);
+
+    audioBar.oncanplaythrough = () => {
+      document.getElementById("storyText").scrollTop = 0;
+      clearInterval(scrollInterval);
+      audioBar.play();
+      document.getElementById("storyText").style.display = "block";
+      setTimeout(() => {
+        startScrolling();
+      }, 6000);
+    };
+
+    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+  }
+
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !audioBar.paused) {
+      audioBar.pause();
+      clearInterval(scrollInterval);
+    }
+  });
+
+  window.addEventListener("beforeunload", () => {
+    audioBar.pause();
+    clearInterval(scrollInterval);
+  });
 </script>
 </body>
+</html>

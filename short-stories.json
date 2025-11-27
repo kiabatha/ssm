@@ -1,0 +1,67 @@
+{
+  "the-monkeys-secret-path": {
+    "title": "The Monkey’s Secret Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-monkeys-secret-path.txt",
+    "image": "short-stories/the-monkeys-secret-path.webp",
+    "audio_woman": "short-stories/audio/the-monkeys-secret-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-monkeys-secret-path-man.mp3"
+ },
+
+"the-lost-button": {
+    "title": "The Lost Button",
+    "folder": "short-stories",
+    "text": "short-stories/the-lost-button.txt",
+    "image": "short-stories/the-lost-button.webp",
+    "audio_woman": "short-stories/audio/the-lost-button-woman.mp3",
+    "audio_man": "short-stories/audio/the-lost-button-man.mp3"
+
+ },
+
+"the-cloud-that-couldnt-cry": {
+    "title": "The Cloud That Couldn’t Cry",
+    "folder": "short-stories",
+    "text": "short-stories/the-cloud-that-couldnt-cry.txt",
+    "image": "short-stories/the-cloud-that-couldnt-cry.webp",
+    "audio_woman": "short-stories/audio/the-cloud-that-couldnt-cry-woman.mp3",
+    "audio_man": "short-stories/audio/the-cloud-that-couldnt-cry-man.mp3"
+
+ },
+
+"the-brave-little-ant": {
+    "title": "The Brave Little Ant",
+    "folder": "short-stories",
+    "text": "short-stories/the-brave-little-ant.txt",
+    "image": "short-stories/the-brave-little-ant.webp",
+    "audio_woman": "short-stories/audio/the-brave-little-ant-woman.mp3",
+    "audio_man": "short-stories/audio/the-brave-little-ant-man.mp3"
+
+},
+
+"the-balloon-that-flew-too-far": {
+    "title": "The Balloon That Flew Too Far",
+    "folder": "short-stories",
+    "text": "short-stories/the-balloon-that-flew-too-far.txt",
+    "image": "short-stories/the-balloon-that-flew-too-far.webp",
+    "audio_woman": "short-stories/audio/the-balloon-that-flew-too-far-woman.mp3",
+    "audio_man": "short-stories/audio/the-balloon-that-flew-too-far-man.mp3"
+
+
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

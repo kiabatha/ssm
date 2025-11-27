@@ -182,14 +182,13 @@
   </div>
 
 <script>
-  // Category to JSON file mapping
+  // Category to JSON file mapping based on your GitHub structure
   const categoryJsonMap = {
-    'moral': 'moral-stories.json',
-    'adventure': 'adventure-stories.json',
-    'fantasy': 'fantasy-stories.json',
-    'educational': 'educational-stories.json',
-    'bedtime': 'bedtime-stories.json'
-    // Add more categories and their corresponding JSON files here
+    'creative-courage': 'creative-courage.json',
+    'friendship': 'friendship.json',  
+    'long-stories': 'long-stories.json',
+    'moral-courage': 'moral-courage.json',
+    'short-stories': 'short-stories.json'
   };
 
   function toggleFavorite() {
@@ -226,7 +225,7 @@
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  const category = params.get("category"); // New parameter for category
+  const category = params.get("category"); // Get category from URL
   const mode = params.get("mode");
 
   let storyData;
@@ -236,71 +235,72 @@
   // ✅ Start font size from actual CSS value
   let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
 
-  // Function to determine which JSON file to load based on category
+  // Function to get the correct JSON file based on category
   function getJsonFileForCategory() {
-    // If category is specified in URL, use the mapping
+    // If category is specified in URL and exists in our mapping
     if (category && categoryJsonMap[category]) {
       return categoryJsonMap[category];
     }
     
-    // Fallback: try to determine category from the ID pattern or use default
-    // You can modify this logic based on your ID naming convention
-    if (id && id.includes('moral')) return 'moral-stories.json';
-    if (id && id.includes('adventure')) return 'adventure-stories.json';
-    if (id && id.includes('fantasy')) return 'fantasy-stories.json';
-    if (id && id.includes('educational')) return 'educational-stories.json';
-    if (id && id.includes('bedtime')) return 'bedtime-stories.json';
-    
-    // Default fallback
-    return 'stories.json';
+    // If no category specified, show error
+    console.error("No category specified in URL. Please add ?category=category-name to the URL");
+    return null;
   }
 
   // Load the appropriate JSON file
   const jsonFileName = getJsonFileForCategory();
-  const jsonUrl = `https://kiabatha.github.io/ssm/${jsonFileName}`;
+  
+  if (!jsonFileName) {
+    document.getElementById("storyText").innerText = "Error: No category specified. Please check the URL.";
+  } else {
+    const jsonUrl = `https://kiabatha.github.io/ssm/${jsonFileName}`;
 
-  fetch(jsonUrl)
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`Failed to load ${jsonFileName}`);
-      }
-      return res.json();
-    })
-    .then(data => {
-      // Handle different JSON structures - array or object
-      if (Array.isArray(data)) {
-        // If JSON is an array, find story by ID
-        storyData = data.find(story => story.id === id);
-      } else {
-        // If JSON is an object, get story by ID key
-        storyData = data[id];
-      }
-      
-      if (!storyData) throw new Error("Story not found");
+    fetch(jsonUrl)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Failed to load ${jsonFileName}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        // Handle different JSON structures - array or object
+        if (Array.isArray(data)) {
+          // If JSON is an array, find story by ID
+          storyData = data.find(story => story.id === id);
+        } else {
+          // If JSON is an object, get story by ID key
+          storyData = data[id];
+        }
+        
+        if (!storyData) {
+          throw new Error(`Story with ID "${id}" not found in ${jsonFileName}`);
+        }
 
-      fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error("Failed to load story text");
-          }
-          return res.text();
-        })
-        .then(text => {
-          document.getElementById("storyText").innerText = text;
-          document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
-          if (mode === "manual") {
-            document.getElementById("storyText").style.display = "block";
-          }
-        })
-        .catch(err => {
-          console.error("Error loading story text:", err);
-          document.getElementById("storyText").innerText = "Failed to load story content.";
-        });
-    })
-    .catch(err => {
-      console.error("Error loading story data:", err);
-      document.getElementById("storyText").innerText = "Failed to load story. Please check if the story exists.";
-    });
+        // Load story text
+        fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
+          .then(res => {
+            if (!res.ok) {
+              throw new Error("Failed to load story text");
+            }
+            return res.text();
+          })
+          .then(text => {
+            document.getElementById("storyText").innerText = text;
+            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+            if (mode === "manual") {
+              document.getElementById("storyText").style.display = "block";
+            }
+          })
+          .catch(err => {
+            console.error("Error loading story text:", err);
+            document.getElementById("storyText").innerText = "Failed to load story content.";
+          });
+      })
+      .catch(err => {
+        console.error("Error loading story data:", err);
+        document.getElementById("storyText").innerText = "Failed to load story. Please check if the story exists.";
+      });
+  }
 
   function startScrolling() {
     const speedSlider = document.getElementById("scrollSpeedSlider");

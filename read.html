@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -132,16 +134,16 @@
     }
 
     #scrollSpeedContainer {
-      display: none;              /* hidden by default */
+      display: none;
       margin-top: 10px;
     }
 
     .scroll-speed-row {
-      display: flex;               /* ✅ side-by-side */
-      justify-content: center;     /* center horizontally */
-      align-items: center;         /* align vertically */
-      gap: 10px;                   /* space between label and slider */
-      font-size: 12px;             /* smaller label */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
     }
 
     .scroll-speed-row label {
@@ -186,44 +188,17 @@
     console.log("Favorite toggled");
   }
 
-  function setupAudioListeners() {
-    const audioElements = document.querySelectorAll('audio, video');
-    audioElements.forEach(audio => {
-      audio.addEventListener('play', () => {
-        if (window.Android) window.Android.onAudioStateChange(true);
-      });
-      audio.addEventListener('pause', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-      });
-      audio.addEventListener('ended', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-      });
-    });
-  }
-
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.addedNodes.length) setupAudioListeners();
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    setupAudioListeners();
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-
-  window.addEventListener('load', setupAudioListeners);
-
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
+  const folder = params.get("folder"); // ✅ new: category folder passed from Java
 
-  const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
+  // ✅ Use category JSON instead of fixed stories.json
+  const jsonUrl = `https://kiabatha.github.io/ssm/${folder}.json`;
+
   let storyData;
   let scrollInterval;
   const audioBar = document.getElementById("audioBar");
-
-  // ✅ Start font size from actual CSS value
   let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
 
   fetch(jsonUrl)
@@ -267,9 +242,7 @@
     audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    // ✅ Show scroll speed controls only when audio starts
     document.getElementById("scrollSpeedContainer").style.display = "block";
-
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
@@ -278,9 +251,7 @@
       clearInterval(scrollInterval);
       audioBar.play();
       document.getElementById("storyText").style.display = "block";
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
+      setTimeout(() => { startScrolling(); }, 6000);
     };
 
     audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
@@ -291,19 +262,6 @@
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !audioBar.paused) {
-      audioBar.pause();
-      clearInterval(scrollInterval);
-    }
-  });
-
-  window.addEventListener("beforeunload", () => {
-    audioBar.pause();
-    clearInterval(scrollInterval);
-  });
 </script>
 </body>
 </html>
-   

@@ -1,4 +1,4 @@
- }
+ {
 
   "the-new-kid-in-the-playground": {
     "title": "The New Kid in the Playground",
@@ -226,7 +226,7 @@
 },
 
   "the-little-helpers-big-day": {
-    "title": "The Little Helpers Big Day",
+    "title": "The Little Helper's Big Day",
     "folder": "friendship-bravery",
     "text": "friendship-bravery/the-little-helpers-big-day.txt",
     "image": "friendship-bravery/the-little-helpers-big-day.webp",
@@ -327,3 +327,4 @@
 
    }
 }
+

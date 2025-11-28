@@ -132,16 +132,16 @@
     }
 
     #scrollSpeedContainer {
-      display: none;              /* hidden by default */
+      display: none; /* hidden by default */
       margin-top: 10px;
     }
 
     .scroll-speed-row {
-      display: flex;               /* ✅ side-by-side */
-      justify-content: center;     /* center horizontally */
-      align-items: center;         /* align vertically */
-      gap: 10px;                   /* space between label and slider */
-      font-size: 12px;             /* smaller label */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
     }
 
     .scroll-speed-row label {
@@ -217,13 +217,15 @@
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
+  const file = params.get("file"); // ✅ UPDATED: new parameter for category JSON
 
-  const jsonUrl = "https://kiabatha.github.io/ssm/stories.json";
+  // ✅ UPDATED: build JSON URL dynamically based on file parameter
+  const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
+
   let storyData;
   let scrollInterval;
   const audioBar = document.getElementById("audioBar");
 
-  // ✅ Start font size from actual CSS value
   let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
 
   fetch(jsonUrl)
@@ -267,7 +269,6 @@
     audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    // ✅ Show scroll speed controls only when audio starts
     document.getElementById("scrollSpeedContainer").style.display = "block";
 
     document.getElementById("storyText").scrollTop = 0;

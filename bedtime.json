@@ -1,0 +1,387 @@
+{
+
+  "the-bedtime-treasure-box": {
+    "title": "The Bedtime Treasure Box",
+    "folder": "bedtime",
+    "text": "bedtime/the-bedtime-treasure-box.txt",
+    "image": "bedtime/the-bedtime-treasure-box.webp",
+    "audio_woman": "bedtime/audio/the-bedtime-treasure-box-woman.mp3",
+    "audio_man": "bedtime/audio/the-bedtime-treasure-box-man.mp3"
+
+},
+
+  "the-blanket-of-dreams": {
+    "title": "The Blanket of Dreams",
+    "folder": "bedtime",
+    "text": "bedtime/the-blanket-of-dreams.txt",
+    "image": "bedtime/the-blanket-of-dreams.webp",
+    "audio_woman": "bedtime/audio/the-blanket-of-dreams-woman.mp3",
+    "audio_man": "bedtime/audio/the-blanket-of-dreams-man.mp3"
+
+},
+
+  "the-carousel-of-dreams": {
+    "title": "The Carousel of Dreams",
+    "folder": "bedtime",
+    "text": "bedtime/the-carousel-of-dreams.txt",
+    "image": "bedtime/the-carousel-of-dreams.webp",
+    "audio_woman": "bedtime/audio/the-carousel-of-dreams-woman.mp3",
+    "audio_man": "bedtime/audio/the-carousel-of-dreams-man.mp3"
+
+
+},
+
+  "the-dreamy-balloon-journey": {
+    "title": "The Dreamy Balloon Journey",
+    "folder": "bedtime",
+    "text": "bedtime/the-dreamy-balloon-journey.txt",
+    "image": "bedtime/the-dreamy-balloon-journey.webp",
+    "audio_woman": "bedtime/audio/the-dreamy-balloon-journey-woman.mp3",
+    "audio_man": "bedtime/audio/the-dreamy-balloon-journey-man.mp3"
+
+
+},
+
+  "the-dreamy-bedtime-bell": {
+    "title": "The Dreamy Bedtime Bell",
+    "folder": "bedtime",
+    "text": "bedtime/the-dreamy-bedtime-bell.txt",
+    "image": "bedtime/the-dreamy-bedtime-bell.webp",
+    "audio_woman": "bedtime/audio/the-dreamy-bedtime-bell-woman.mp3",
+    "audio_man": "bedtime/audio/the-dreamy-bedtime-bell-man.mp3"
+
+
+},
+
+  "the-dreamy-carousel": {
+    "title": "The Dreamy Carousel",
+    "folder": "bedtime",
+    "text": "bedtime/the-dreamy-carousel.txt",
+    "image": "bedtime/the-dreamy-carousel.webp",
+    "audio_woman": "bedtime/audio/the-dreamy-carousel-woman.mp3",
+    "audio_man": "bedtime/audio/the-dreamy-carousel-man.mp3"
+
+
+},
+
+  "the-dreamy-castle": {
+    "title": "The Dreamy Castle",
+    "folder": "bedtime",
+    "text": "bedtime/the-dreamy-castle.txt",
+    "image": "bedtime/the-dreamy-castle.webp",
+    "audio_woman": "bedtime/audio/the-dreamy-castle-woman.mp3",
+    "audio_man": "bedtime/audio/the-dreamy-castle-man.mp3"
+
+
+},
+
+  "the-dreamy-forest-path": {
+    "title": "The Dreamy Forest Path",
+    "folder": "bedtime",
+    "text": "bedtime/the-dreamy-forest-path.txt",
+    "image": "bedtime/the-dreamy-forest-path.webp",
+    "audio_woman": "bedtime/audio/the-dreamy-forest-path-woman.mp3",
+    "audio_man": "bedtime/audio/the-dreamy-forest-path-man.mp3"
+
+
+},
+
+  "the-feather-of-gentle-flight": {
+    "title": "The Feather Of Gentle Flight",
+    "folder": "bedtime",
+    "text": "bedtime/the-feather-of-gentle-flight.txt",
+    "image": "bedtime/the-feather-of-gentle-flight.webp",
+    "audio_woman": "bedtime/audio/the-feather-of-gentle-flight-woman.mp3",
+    "audio_man": "bedtime/audio/the-feather-of-gentle-flight-man.mp3"
+
+
+},
+
+  "the-gentle-song-of-the-lanterns": {
+    "title": "The Gentle Song of the Lanterns",
+    "folder": "bedtime",
+    "text": "bedtime/the-gentle-song-of-the-lanterns.txt",
+    "image": "bedtime/the-gentle-song-of-the-lanterns.webp",
+    "audio_woman": "bedtime/audio/the-gentle-song-of-the-lanterns-woman.mp3",
+    "audio_man": "bedtime/audio/the-gentle-song-of-the-lanterns-man.mp3"
+
+
+},
+
+  "the-giants-of-gentle-strength": {
+    "title": "The Giants of Gentle Strength",
+    "folder": "bedtime",
+    "text": "bedtime/the-giants-of-gentle-strength.txt",
+    "image": "bedtime/the-giants-of-gentle-strength.webp",
+    "audio_woman": "bedtime/audio/the-giants-of-gentle-strength-woman.mp3",
+    "audio_man": "bedtime/audio/the-giants-of-gentle-strength-man.mp3"
+
+
+},
+
+  "the-golden-moon-promise": {
+    "title": "The Golden Moon’s Promise",
+    "folder": "bedtime",
+    "text": "bedtime/the-golden-moon-promise.txt",
+    "image": "bedtime/the-golden-moon-promise.webp",
+    "audio_woman": "bedtime/audio/the-golden-moon-promise-woman.mp3",
+    "audio_man": "bedtime/audio/the-golden-moon-promise-man.mp3"
+
+
+},
+
+  "the-moon-gentle-hug": {
+    "title": "The Moon’s Gentle Hug",
+    "folder": "bedtime",
+    "text": "bedtime/the-moon-gentle-hug.txt",
+    "image": "bedtime/the-moon-gentle-hug.webp",
+    "audio_woman": "bedtime/audio/the-moon-gentle-hug-woman.mp3",
+    "audio_man": "bedtime/audio/the-moon-gentle-hug-man.mp3"
+
+
+},
+
+  "the-night-of-the-friendly-fireflies": {
+    "title": "The Night of the Friendly",
+    "folder": "bedtime",
+    "text": "bedtime/the-night-of-the-friendly-fireflies.txt",
+    "image": "bedtime/the-night-of-the-friendly-fireflies.webp",
+    "audio_woman": "bedtime/audio/the-night-of-the-friendly-fireflies-woman.mp3",
+    "audio_man": "bedtime/audio/the-night-of-the-friendly-fireflies-man.mp3"
+
+
+},
+
+  "the-night-of-the-gentle-giants": {
+    "title": "The Night of the Gentle Giants",
+    "folder": "bedtime",
+    "text": "bedtime/the-night-of-the-gentle-giants.txt",
+    "image": "bedtime/the-night-of-the-gentle-giants.webp",
+    "audio_woman": "bedtime/audio/the-night-of-the-gentle-giants-woman.mp3",
+    "audio_man": "bedtime/audio/the-night-of-the-gentle-giants-man.mp3"
+
+
+},
+
+  "the-night-of-the-golden-moon": {
+    "title": "The Night of the Golden Moon",
+    "folder": "bedtime",
+    "text": "bedtime/the-night-of-the-golden-moon.txt",
+    "image": "bedtime/the-night-of-the-golden-moon.webp",
+    "audio_woman": "bedtime/audio/the-night-of-the-golden-moon-woman.mp3",
+    "audio_man": "bedtime/audio/the-night-of-the-golden-moon-man.mp3"
+
+
+},
+
+  "the-night-of-the-magic-pillow": {
+    "title": "The Night of the Magic Pillow",
+    "folder": "bedtime",
+    "text": "bedtime/the-night-of-the-magic-pillow.txt",
+    "image": "bedtime/the-night-of-the-magic-pillow.webp",
+    "audio_woman": "bedtime/audio/the-night-of-the-magic-pillow-woman.mp3",
+    "audio_man": "bedtime/audio/the-night-of-the-magic-pillow-man.mp3"
+
+
+},
+
+  "the-night-of-the-whispering-owls": {
+    "title": "The Night of the Whispering Owls",
+    "folder": "bedtime",
+    "text": "bedtime/the-night-of-the-whispering-owls.txt",
+    "image": "bedtime/the-night-of-the-whispering-owls.webp",
+    "audio_woman": "bedtime/audio/the-night-of-the-whispering-owls-woman.mp3",
+    "audio_man": "bedtime/audio/the-night-of-the-whispering-owls-man.mp3"
+
+
+},
+
+  "the-pillow-that-told-stories": {
+    "title": "The Pillow That Told Stories",
+    "folder": "bedtime",
+    "text": "bedtime/the-pillow-that-told-stories.txt",
+    "image": "bedtime/the-pillow-that-told-stories.webp",
+    "audio_woman": "bedtime/audio/the-pillow-that-told-stories-woman.mp3",
+    "audio_man": "bedtime/audio/the-pillow-that-told-stories-man.mp3"
+
+
+},
+
+  "the-rainbow-of-sleepy-hills": {
+    "title": "The Rainbow of Sleepy Hills",
+    "folder": "bedtime",
+    "text": "bedtime/the-rainbow-of-sleepy-hills.txt",
+    "image": "bedtime/the-rainbow-of-sleepy-hills.webp",
+    "audio_woman": "bedtime/audio/the-rainbow-of-sleepy-hills-woman.mp3",
+    "audio_man": "bedtime/audio/the-rainbow-of-sleepy-hills-man.mp3"
+
+
+},
+
+  "the-secret-of-the-sleepy-cloud": {
+    "title": "The Secret of the Sleepy Cloud",
+    "folder": "bedtime",
+    "text": "bedtime/the-secret-of-the-sleepy-cloud.txt",
+    "image": "bedtime/the-secret-of-the-sleepy-cloud.webp",
+    "audio_woman": "bedtime/audio/the-secret-of-the-sleepy-cloud-woman.mp3",
+    "audio_man": "bedtime/audio/the-secret-of-the-sleepy-cloud-man.mp3"
+
+
+},
+
+  "the-silver-bridge-of-dreams": {
+    "title": "The Silver Bridge of Dreams",
+    "folder": "bedtime",
+    "text": "bedtime/the-silver-bridge-of-dreams.txt",
+    "image": "bedtime/the-silver-bridge-of-dreams.webp",
+    "audio_woman": "bedtime/audio/the-silver-bridge-of-dreams-woman.mp3",
+    "audio_man": "bedtime/audio/the-silver-bridge-of-dreams-man.mp3"
+
+
+},
+
+  "the-sleepy-feather": {
+    "title": "The Sleepy Feather",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-feather.txt",
+    "image": "bedtime/the-sleepy-feather.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-feather-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-feather-man.mp3"
+
+
+},
+
+  "the-sleepy-garden": {
+    "title": "The Sleepy Garden",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-garden.txt",
+    "image": "bedtime/the-sleepy-garden.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-garden-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-garden-man.mp3"
+
+
+},
+
+  "the-sleepy-lantern": {
+    "title": "The Sleepy Lantern",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-lantern.txt",
+    "image": "bedtime/the-sleepy-lantern.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-lantern-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-lantern-man.mp3"
+
+
+},
+
+  "the-sleepy-rainbow": {
+    "title": "The Sleepy Rainbow",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-rainbow.txt",
+    "image": "bedtime/the-sleepy-rainbow.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-rainbow-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-rainbow-man.mp3"
+
+
+},
+
+  "the-sleepy-song-of-the-sea": {
+    "title": "The Sleepy Song of the Sea",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-song-of-the-sea.txt",
+    "image": "bedtime/the-sleepy-song-of-the-sea.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-song-of-the-sea-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-song-of-the-sea-man.mp3"
+
+
+},
+
+  "the-sleepy-starfish": {
+    "title": "The Sleepy Starfish",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-starfish.txt",
+    "image": "bedtime/the-sleepy-starfish.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-starfish-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-starfish-man.mp3"
+
+
+},
+
+  "the-sleepy-star-parade": {
+    "title": "The Sleepy Star Parade",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-star-parade.txt",
+    "image": "bedtime/the-sleepy-star-parade.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-star-parade-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-star-parade-man.mp3"
+
+
+},
+
+  "the-sleepy-teddy-adventure": {
+    "title": "The Sleepy Teddy’s Adventure",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-teddy-adventure.txt",
+    "image": "bedtime/the-sleepy-teddy-adventure.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-teddy-adventure-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-teddy-adventure-man.mp3"
+
+
+},
+
+  "the-sleepy-train-ride": {
+    "title": "The Sleepy Train Ride",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-train-ride.txt",
+    "image": "bedtime/the-sleepy-train-ride.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-train-ride-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-train-ride-man.mp3"
+
+
+},
+
+  "the-sleepy-whisper": {
+    "title": "The Sleepy Whisper",
+    "folder": "bedtime",
+    "text": "bedtime/the-sleepy-whisper.txt",
+    "image": "bedtime/the-sleepy-whisper.webp",
+    "audio_woman": "bedtime/audio/the-sleepy-whisper-woman.mp3",
+    "audio_man": "bedtime/audio/the-sleepy-whisper-man.mp3"
+
+
+},
+
+  "the-starfish-of-golden-waves": {
+    "title": "The Starfish of Golden Waves",
+    "folder": "bedtime",
+    "text": "bedtime/the-starfish-of-golden-waves.txt",
+    "image": "bedtime/the-starfish-of-golden-waves.webp",
+    "audio_woman": "bedtime/audio/the-starfish-of-golden-waves-woman.mp3",
+    "audio_man": "bedtime/audio/the-starfish-of-golden-waves-man.mp3"
+
+},
+
+  "the-teddy-secret-journey": {
+    "title": "The Teddy’s Secret Journey",
+    "folder": "bedtime",
+    "text": "bedtime/the-teddy-secret-journey.txt",
+    "image": "bedtime/the-teddy-secret-journey.webp",
+    "audio_woman": "bedtime/audio/the-teddy-secret-journey-woman.mp3",
+    "audio_man": "bedtime/audio/the-teddy-secret-journey-man.mp3"
+
+
+},
+
+  "the-whispering-forest-path": {
+    "title": "The Whispering Forest Path",
+    "folder": "bedtime",
+    "text": "bedtime/the-whispering-forest-path.txt",
+    "image": "bedtime/the-whispering-forest-path.webp",
+    "audio_woman": "bedtime/audio/the-whispering-forest-path-woman.mp3",
+    "audio_man": "bedtime/audio/the-whispering-forest-path-man.mp3"
+
+
+
+
+  }
+
+}

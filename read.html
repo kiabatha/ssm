@@ -198,38 +198,38 @@
     document.getElementById("scrollSpeedContainer").style.display = "none";
   }
 
-  function setupAudioListeners() {
-    const audioElements = document.querySelectorAll('audio, video');
-    audioElements.forEach(audio => {
-      audio.addEventListener('play', () => {
+  let audioEventListenersAdded = false;
+
+  function setupAudioEventListeners() {
+    if (audioEventListenersAdded) return;
+    
+    const audioBar = document.getElementById("audioBar");
+    
+    audioBar.addEventListener("play", () => {
         if (window.Android) window.Android.onAudioStateChange(true);
-        showAudioControls(); // Show when audio plays
-      });
-      audio.addEventListener('pause', () => {
+        showAudioControls();
+    });
+    
+    audioBar.addEventListener("pause", () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        hideAudioControls(); // Hide when audio pauses
-      });
-      audio.addEventListener('ended', () => {
+        hideAudioControls();
+    });
+    
+    audioBar.addEventListener("ended", () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        hideAudioControls(); // Hide when audio ends
+        hideAudioControls();
         // Send specific ended event to Java for autoplay
         if (window.Android) window.Android.onAudioEnded();
-      });
     });
+    
+    audioEventListenersAdded = true;
   }
 
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.addedNodes.length) setupAudioListeners();
-    });
-  });
-
   document.addEventListener('DOMContentLoaded', () => {
-    setupAudioListeners();
-    observer.observe(document.body, { childList: true, subtree: true });
+    setupAudioEventListeners();
   });
 
-  window.addEventListener('load', setupAudioListeners);
+  window.addEventListener('load', setupAudioEventListeners);
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -290,6 +290,9 @@
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
+    // Setup event listeners (in case they were removed)
+    setupAudioEventListeners();
+
     audioBar.oncanplaythrough = () => {
       document.getElementById("storyText").scrollTop = 0;
       clearInterval(scrollInterval);
@@ -299,23 +302,6 @@
         startScrolling();
       }, 6000);
     };
-
-    // Clear previous event listeners to avoid duplicates
-    audioBar.replaceWith(audioBar.cloneNode(true));
-    const newAudioBar = document.getElementById("audioBar");
-    
-    newAudioBar.addEventListener("pause", () => {
-      clearInterval(scrollInterval);
-      hideAudioControls(); // Hide when manually paused
-      if (window.Android) window.Android.onAudioStateChange(false);
-    });
-    
-    newAudioBar.addEventListener("ended", () => {
-      clearInterval(scrollInterval);
-      hideAudioControls(); // Hide when audio ends
-      // Send specific ended event to Java for autoplay
-      if (window.Android) window.Android.onAudioEnded();
-    });
   }
 
   function adjustFontSize(change) {
@@ -327,14 +313,14 @@
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       clearInterval(scrollInterval);
-      hideAudioControls(); // Hide when page becomes hidden
+      hideAudioControls();
     }
   });
 
   window.addEventListener("beforeunload", () => {
     audioBar.pause();
     clearInterval(scrollInterval);
-    hideAudioControls(); // Hide when leaving page
+    hideAudioControls();
   });
 </script>
 </body>

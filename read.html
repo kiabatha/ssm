@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -132,7 +134,7 @@
     }
 
     #scrollSpeedContainer {
-      display: none; /* hidden by default */
+      display: none;
       margin-top: 10px;
     }
 
@@ -193,6 +195,15 @@
     console.log("Favorite toggled");
   }
 
+  // Function to hide audio controls
+  function hideAudioControls() {
+    console.log("Hiding audio controls");
+    document.getElementById("audioBar").style.display = "none";
+    document.getElementById("scrollSpeedContainer").style.display = "none";
+    document.getElementById("audioBar").src = ""; // Clear audio source
+    clearInterval(scrollInterval);
+  }
+
   // SINGLE SET of audio listeners that handle both modes
   function setupAudioListeners() {
     // Remove any existing listeners first
@@ -237,13 +248,15 @@
       }
       clearInterval(scrollInterval);
       
-      // Hide controls after audio ends
-      document.getElementById("audioBar").style.display = "none";
-      document.getElementById("scrollSpeedContainer").style.display = "none";
+      // Hide controls after audio ends (only for manual mode)
+      if (!isAutoplayMode) {
+        hideAudioControls();
+      }
     });
 
     // User interaction listeners
     newAudioBar.addEventListener('click', (e) => {
+      console.log("User interacted with audio controls");
       if (window.Android) window.Android.onUserInteraction();
     });
     
@@ -335,6 +348,9 @@
     console.log("Autoplay playback started for:", gender);
     isAutoplayMode = true;
     
+    // HIDE controls before starting new audio (fixes the control visibility issue)
+    hideAudioControls();
+    
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
@@ -350,6 +366,14 @@
       setTimeout(() => {
         startScrolling();
       }, 6000);
+    };
+
+    // Handle case where audio fails to load
+    audioBar.onerror = () => {
+      console.error("Audio failed to load for autoplay");
+      if (window.Android && window.Android.onAutoplayAudioEnd) {
+        window.Android.onAutoplayAudioEnd();
+      }
     };
   }
 
@@ -368,6 +392,23 @@
   window.addEventListener("beforeunload", () => {
     audioBar.pause();
     clearInterval(scrollInterval);
+  });
+
+  // Test function for Java communication
+  function testAndroidConnection() {
+    if (window.Android) {
+      console.log("Android connection is working");
+      if (window.Android.testCallback) {
+        window.Android.testCallback();
+      }
+    } else {
+      console.log("Android interface not available");
+    }
+  }
+
+  // Test connection on load
+  window.addEventListener('load', () => {
+    setTimeout(testAndroidConnection, 1000);
   });
 </script>
 </body>

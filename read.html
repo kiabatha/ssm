@@ -122,18 +122,18 @@
     }
 
     #audioBar {
-      display: none;
       margin: 10px auto 0;
       width: 100%;
       max-width: 600px;
       border-radius: 0;
       padding: 0;
       background-color: transparent;
+      display: none; /* Hidden by default */
     }
 
     #scrollSpeedContainer {
-      display: none; /* hidden by default */
       margin-top: 10px;
+      display: none; /* Hidden by default */
     }
 
     .scroll-speed-row {
@@ -191,14 +191,29 @@
     audioElements.forEach(audio => {
       audio.addEventListener('play', () => {
         if (window.Android) window.Android.onAudioStateChange(true);
+        showAudioControls(); // Show controls when audio starts
       });
       audio.addEventListener('pause', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
+        hideAudioControls(); // Hide controls when audio pauses
       });
       audio.addEventListener('ended', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
+        hideAudioControls(); // Hide controls when audio ends
       });
     });
+  }
+
+  function showAudioControls() {
+    // Show audio bar and scroll speed controls
+    document.getElementById("audioBar").style.display = "block";
+    document.getElementById("scrollSpeedContainer").style.display = "block";
+  }
+
+  function hideAudioControls() {
+    // Hide audio bar and scroll speed controls
+    document.getElementById("audioBar").style.display = "none";
+    document.getElementById("scrollSpeedContainer").style.display = "none";
   }
 
   const observer = new MutationObserver(mutations => {
@@ -217,9 +232,8 @@
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
-  const file = params.get("file"); // ✅ UPDATED: new parameter for category JSON
+  const file = params.get("file");
 
-  // ✅ UPDATED: build JSON URL dynamically based on file parameter
   const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
   let storyData;
@@ -266,10 +280,10 @@
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    document.getElementById("scrollSpeedContainer").style.display = "block";
+    // Show controls immediately when play is triggered
+    showAudioControls();
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
@@ -284,8 +298,15 @@
       }, 6000);
     };
 
-    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+    audioBar.addEventListener("pause", () => {
+      clearInterval(scrollInterval);
+      hideAudioControls(); // Hide when manually paused
+    });
+    
+    audioBar.addEventListener("ended", () => {
+      clearInterval(scrollInterval);
+      hideAudioControls(); // Hide when audio ends
+    });
   }
 
   function adjustFontSize(change) {
@@ -297,14 +318,15 @@
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       clearInterval(scrollInterval);
+      hideAudioControls(); // Hide when page becomes hidden
     }
   });
 
   window.addEventListener("beforeunload", () => {
     audioBar.pause();
     clearInterval(scrollInterval);
+    hideAudioControls(); // Hide when leaving page
   });
 </script>
 </body>
 </html>
-   

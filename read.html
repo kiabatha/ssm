@@ -228,24 +228,35 @@
     audioBar.style.display = "none";
     document.getElementById("scrollSpeedContainer").style.display = "none";
     
-    if (isAutoplayActive && !audioBar.ended) {
-      console.log("User stopped audio manually");
+    // Check if audio actually ended (currentTime equals duration) or was manually paused
+    const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
+    
+    if (isAutoplayActive && !hasEnded) {
+      console.log("User stopped audio manually at", audioBar.currentTime, "of", audioBar.duration);
       if (window.Android) window.Android.onUserStoppedAudio();
       isAutoplayActive = false;
+    } else if (hasEnded) {
+      console.log("Audio paused because it ended naturally, ignoring");
     }
   }
 
   function handleEnded() {
-    console.log("Audio ended naturally");
+    console.log("Audio ended naturally. isAutoplayActive:", isAutoplayActive);
     const audioBar = document.getElementById("audioBar");
     if (window.Android) window.Android.onAudioStateChange(false);
     clearInterval(scrollInterval);
     audioBar.style.display = "none";
     document.getElementById("scrollSpeedContainer").style.display = "none";
     
-    if (isAutoplayActive && window.Android) {
-      console.log("Calling onAudioEnded for next story");
-      window.Android.onAudioEnded();
+    if (isAutoplayActive) {
+      console.log("Autoplay is active, calling onAudioEnded");
+      if (window.Android) {
+        window.Android.onAudioEnded();
+      } else {
+        console.error("Android interface not available!");
+      }
+    } else {
+      console.log("Autoplay not active, skipping onAudioEnded");
     }
   }
 

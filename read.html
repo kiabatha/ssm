@@ -189,8 +189,18 @@
 function setupAudioListeners() {
   const audioElements = document.querySelectorAll('audio, video');
   audioElements.forEach(audio => {
-    // Detect when user manually interacts with audio controls
+    // Detect ALL user interactions with audio controls
     audio.addEventListener('click', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+    
+    // Also detect when user manually seeks the audio
+    audio.addEventListener('seeked', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+    
+    // Also detect volume changes
+    audio.addEventListener('volumechange', (e) => {
       if (window.Android) window.Android.onUserInteraction();
     });
     

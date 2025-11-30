@@ -122,18 +122,18 @@
     }
 
     #audioBar {
+      display: none;
       margin: 10px auto 0;
       width: 100%;
       max-width: 600px;
       border-radius: 0;
       padding: 0;
       background-color: transparent;
-      display: none; /* Hidden by default */
     }
 
     #scrollSpeedContainer {
+      display: none; /* hidden by default */
       margin-top: 10px;
-      display: none; /* Hidden by default */
     }
 
     .scroll-speed-row {
@@ -186,34 +186,34 @@
     console.log("Favorite toggled");
   }
 
+  // Function to show audio controls
+  function showAudioControls() {
+    document.getElementById("audioBar").style.display = "block";
+    document.getElementById("scrollSpeedContainer").style.display = "block";
+  }
+
+  // Function to hide audio controls
+  function hideAudioControls() {
+    document.getElementById("audioBar").style.display = "none";
+    document.getElementById("scrollSpeedContainer").style.display = "none";
+  }
+
   function setupAudioListeners() {
     const audioElements = document.querySelectorAll('audio, video');
     audioElements.forEach(audio => {
       audio.addEventListener('play', () => {
         if (window.Android) window.Android.onAudioStateChange(true);
-        showAudioControls(); // Show controls when audio starts
+        showAudioControls(); // Show when audio plays
       });
       audio.addEventListener('pause', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        hideAudioControls(); // Hide controls when audio pauses
+        hideAudioControls(); // Hide when audio pauses
       });
       audio.addEventListener('ended', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        hideAudioControls(); // Hide controls when audio ends
+        hideAudioControls(); // Hide when audio ends
       });
     });
-  }
-
-  function showAudioControls() {
-    // Show audio bar and scroll speed controls
-    document.getElementById("audioBar").style.display = "block";
-    document.getElementById("scrollSpeedContainer").style.display = "block";
-  }
-
-  function hideAudioControls() {
-    // Hide audio bar and scroll speed controls
-    document.getElementById("audioBar").style.display = "none";
-    document.getElementById("scrollSpeedContainer").style.display = "none";
   }
 
   const observer = new MutationObserver(mutations => {

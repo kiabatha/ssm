@@ -182,123 +182,115 @@
   </div>
 
 <script>
+  // Global variables
+  let isAutoplayMode = false;
+  let storyData;
+  let scrollInterval;
+  const audioBar = document.getElementById("audioBar");
+  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
+
   function toggleFavorite() {
     console.log("Favorite toggled");
   }
 
-  // SEPARATE: Manual audio listeners (for manual buttons only)
-  function setupManualAudioListeners() {
-    const audioBar = document.getElementById("audioBar");
+  // SINGLE SET of audio listeners that handle both modes
+  function setupAudioListeners() {
+    // Remove any existing listeners first
+    audioBar.replaceWith(audioBar.cloneNode(true));
+    const newAudioBar = document.getElementById("audioBar");
     
-    audioBar.addEventListener('play', () => {
-      if (window.Android) window.Android.onManualAudioPlay();
+    newAudioBar.addEventListener('play', () => {
+      console.log("Audio PLAY - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
+      if (window.Android) {
+        if (isAutoplayMode) {
+          window.Android.onAutoplayAudioPlay();
+        } else {
+          window.Android.onManualAudioPlay();
+        }
+      }
+      
+      // Show audio controls for both modes
       document.getElementById("audioBar").style.display = "block";
       document.getElementById("scrollSpeedContainer").style.display = "block";
     });
     
-    audioBar.addEventListener('pause', () => {
-      if (window.Android) window.Android.onManualAudioPause();
-      clearInterval(scrollInterval);
-      document.getElementById("audioBar").style.display = "none";
-      document.getElementById("scrollSpeedContainer").style.display = "none";
-    });
-    
-    audioBar.addEventListener('ended', () => {
-      if (window.Android) window.Android.onManualAudioEnd();
-      clearInterval(scrollInterval);
-      document.getElementById("audioBar").style.display = "none";
-      document.getElementById("scrollSpeedContainer").style.display = "none";
-    });
-  }
-
-  // SEPARATE: Autoplay audio listeners (for autoplay only)
-  function setupAutoplayAudioListeners() {
-    const audioBar = document.getElementById("audioBar");
-    
-    audioBar.addEventListener('play', () => {
-      if (window.Android) window.Android.onAutoplayAudioPlay();
-    });
-    
-    audioBar.addEventListener('pause', () => {
-      if (window.Android) window.Android.onAutoplayAudioPause();
-      clearInterval(scrollInterval);
-    });
-    
-    audioBar.addEventListener('ended', () => {
-      if (window.Android) window.Android.onAutoplayAudioEnd();
-      clearInterval(scrollInterval);
-    });
-  }
-
-  // SEPARATE: User interaction listeners (for both)
-  function setupUserInteractionListeners() {
-    const audioBar = document.getElementById("audioBar");
-    
-    audioBar.addEventListener('click', (e) => {
-      if (window.Android) window.Android.onUserInteraction();
-    });
-    
-    audioBar.addEventListener('seeked', (e) => {
-      if (window.Android) window.Android.onUserInteraction();
-    });
-    
-    audioBar.addEventListener('volumechange', (e) => {
-      if (window.Android) window.Android.onUserInteraction();
-    });
-  }
-
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.addedNodes.length) {
-        setupManualAudioListeners();
-        setupUserInteractionListeners();
+    newAudioBar.addEventListener('pause', () => {
+      console.log("Audio PAUSE - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
+      if (window.Android) {
+        if (isAutoplayMode) {
+          window.Android.onAutoplayAudioPause();
+        } else {
+          window.Android.onManualAudioPause();
+        }
       }
+      clearInterval(scrollInterval);
     });
-  });
+    
+    newAudioBar.addEventListener('ended', () => {
+      console.log("Audio ENDED - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
+      if (window.Android) {
+        if (isAutoplayMode) {
+          window.Android.onAutoplayAudioEnd();
+        } else {
+          window.Android.onManualAudioEnd();
+        }
+      }
+      clearInterval(scrollInterval);
+      
+      // Hide controls after audio ends
+      document.getElementById("audioBar").style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
+    });
 
+    // User interaction listeners
+    newAudioBar.addEventListener('click', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+    
+    newAudioBar.addEventListener('seeked', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+    
+    newAudioBar.addEventListener('volumechange', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+  }
+
+  // Initialize when page loads
   document.addEventListener('DOMContentLoaded', () => {
-    setupManualAudioListeners();
-    setupUserInteractionListeners();
-    observer.observe(document.body, { childList: true, subtree: true });
+    setupAudioListeners();
+    loadStoryData();
   });
 
-  window.addEventListener('load', () => {
-    setupManualAudioListeners();
-    setupUserInteractionListeners();
-  });
+  // Load story data
+  function loadStoryData() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const mode = params.get("mode");
+    const file = params.get("file");
 
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  const mode = params.get("mode");
-  const file = params.get("file");
+    const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
-  const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
+    fetch(jsonUrl)
+      .then(res => res.json())
+      .then(data => {
+        storyData = data[id];
+        if (!storyData) throw new Error("Story not found");
 
-  let storyData;
-  let scrollInterval;
-  const audioBar = document.getElementById("audioBar");
-
-  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
-
-  fetch(jsonUrl)
-    .then(res => res.json())
-    .then(data => {
-      storyData = data[id];
-      if (!storyData) throw new Error("Story not found");
-
-      fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-        .then(res => res.text())
-        .then(text => {
-          document.getElementById("storyText").innerText = text;
-          document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
-          if (mode === "manual") {
-            document.getElementById("storyText").style.display = "block";
-          }
-        });
-    })
-    .catch(() => {
-      document.getElementById("storyText").innerText = "Failed to load story.";
-    });
+        fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
+          .then(res => res.text())
+          .then(text => {
+            document.getElementById("storyText").innerText = text;
+            document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+            if (mode === "manual") {
+              document.getElementById("storyText").style.display = "block";
+            }
+          });
+      })
+      .catch(() => {
+        document.getElementById("storyText").innerText = "Failed to load story.";
+      });
+  }
 
   function startScrolling() {
     const speedSlider = document.getElementById("scrollSpeedSlider");
@@ -315,8 +307,11 @@
     });
   }
 
-  // SEPARATE: Manual audio playback (for manual buttons)
+  // MANUAL audio playback (for manual buttons)
   function playAudioManual(gender) {
+    console.log("Manual playback started for:", gender);
+    isAutoplayMode = false;
+    
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
@@ -335,14 +330,14 @@
     };
   }
 
-  // SEPARATE: Autoplay audio playback (called from Java)
+  // AUTOPLAY audio playback (called from Java)
   function playAudioAutoplay(gender) {
+    console.log("Autoplay playback started for:", gender);
+    isAutoplayMode = true;
+    
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
-
-    // Setup autoplay listeners for this session
-    setupAutoplayAudioListeners();
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);

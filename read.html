@@ -189,28 +189,25 @@
 function setupAudioListeners() {
   const audioElements = document.querySelectorAll('audio, video');
   audioElements.forEach(audio => {
-    // Add click listener to detect manual interactions with audio controls
+    // Detect when user manually interacts with audio controls
     audio.addEventListener('click', (e) => {
-      if (window.Android) window.Android.onManualStop();
+      if (window.Android) window.Android.onUserInteraction();
     });
     
     audio.addEventListener('play', () => {
       if (window.Android) window.Android.onAudioStateChange(true);
-      // Show controls when audio plays
       document.getElementById("audioBar").style.display = "block";
       document.getElementById("scrollSpeedContainer").style.display = "block";
     });
     
     audio.addEventListener('pause', () => {
       if (window.Android) window.Android.onAudioStateChange(false);
-      // Hide controls when audio pauses
       document.getElementById("audioBar").style.display = "none";
       document.getElementById("scrollSpeedContainer").style.display = "none";
     });
     
     audio.addEventListener('ended', () => {
       if (window.Android) window.Android.onAudioStateChange(false);
-      // Hide controls when audio ends
       document.getElementById("audioBar").style.display = "none";
       document.getElementById("scrollSpeedContainer").style.display = "none";
     });

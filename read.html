@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -132,7 +134,7 @@
     }
 
     #scrollSpeedContainer {
-      display: none; /* hidden by default */
+      display: none;
       margin-top: 10px;
     }
 
@@ -182,62 +184,52 @@
   </div>
 
 <script>
+  let isAutoplayActive = false;
+  let userInteractedWithAudio = false;
+
   function toggleFavorite() {
     console.log("Favorite toggled");
   }
 
   function setupAudioListeners() {
-    const audioElements = document.querySelectorAll('audio, video');
-    audioElements.forEach(audio => {
-      // Detect ALL user interactions with audio controls
-      audio.addEventListener('click', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
+    const audioBar = document.getElementById("audioBar");
+    
+    audioBar.addEventListener('play', () => {
+      if (window.Android) window.Android.onAudioStateChange(true);
+      audioBar.style.display = "block";
+      document.getElementById("scrollSpeedContainer").style.display = "block";
+      userInteractedWithAudio = false;
+    });
+    
+    audioBar.addEventListener('pause', () => {
+      if (window.Android) window.Android.onAudioStateChange(false);
+      clearInterval(scrollInterval);
+      audioBar.style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
       
-      // Also detect when user manually seeks the audio
-      audio.addEventListener('seeked', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
+      if (isAutoplayActive && !audioBar.ended) {
+        if (window.Android) window.Android.onUserStoppedAudio();
+        isAutoplayActive = false;
+      }
+    });
+    
+    audioBar.addEventListener('ended', () => {
+      if (window.Android) window.Android.onAudioStateChange(false);
+      clearInterval(scrollInterval);
+      audioBar.style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
       
-      // Also detect volume changes
-      audio.addEventListener('volumechange', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      audio.addEventListener('play', () => {
-        if (window.Android) window.Android.onAudioStateChange(true);
-        document.getElementById("audioBar").style.display = "block";
-        document.getElementById("scrollSpeedContainer").style.display = "block";
-      });
-      
-      audio.addEventListener('pause', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-        clearInterval(scrollInterval); // STOP SCROLLING
-        document.getElementById("audioBar").style.display = "none";
-        document.getElementById("scrollSpeedContainer").style.display = "none";
-      });
-      
-      audio.addEventListener('ended', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-        clearInterval(scrollInterval); // STOP SCROLLING
-        document.getElementById("audioBar").style.display = "none";
-        document.getElementById("scrollSpeedContainer").style.display = "none";
-      });
+      if (isAutoplayActive && window.Android) {
+        window.Android.onAudioEnded();
+      }
+    });
+
+    audioBar.addEventListener('seeked', () => {
+      if (isAutoplayActive) {
+        userInteractedWithAudio = true;
+      }
     });
   }
-
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.addedNodes.length) setupAudioListeners();
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    setupAudioListeners();
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-
-  window.addEventListener('load', setupAudioListeners);
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -292,9 +284,6 @@
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
 
-    // Reset manual stop detection when starting new audio
-    if (window.Android) window.Android.onUserInteraction();
-
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
@@ -307,6 +296,12 @@
         startScrolling();
       }, 6000);
     };
+  }
+
+  function playAudioFromApp(gender) {
+    isAutoplayActive = true;
+    userInteractedWithAudio = false;
+    playAudio(gender);
   }
 
   function adjustFontSize(change) {
@@ -325,6 +320,9 @@
     audioBar.pause();
     clearInterval(scrollInterval);
   });
+
+  window.addEventListener('load', setupAudioListeners);
+  setupAudioListeners();
 </script>
 </body>
 </html>

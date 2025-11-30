@@ -124,7 +124,7 @@
     }
 
     #audioBar {
-      display: none;
+      display: block; /* CHANGED: Always show by default */
       margin: 10px auto 0;
       width: 100%;
       max-width: 600px;
@@ -134,7 +134,7 @@
     }
 
     #scrollSpeedContainer {
-      display: none;
+      display: block; /* CHANGED: Always show by default */
       margin-top: 10px;
     }
 
@@ -171,6 +171,7 @@
       <button class="action-button red-button" onclick="playAudioManual('woman')">Woman</button>
     </div>
 
+    <!-- CHANGED: Controls always visible by default -->
     <audio id="audioBar" controls controlsList="nodownload"></audio>
 
     <div id="scrollSpeedContainer">
@@ -189,98 +190,97 @@
   let storyData;
   let scrollInterval;
   const audioBar = document.getElementById("audioBar");
-  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
+  let currentFontSize = 14;
 
   function toggleFavorite() {
     console.log("Favorite toggled");
   }
 
-  // Function to hide audio controls
-  function hideAudioControls() {
-    console.log("Hiding audio controls");
-    document.getElementById("audioBar").style.display = "none";
-    document.getElementById("scrollSpeedContainer").style.display = "none";
-    document.getElementById("audioBar").src = ""; // Clear audio source
-    clearInterval(scrollInterval);
-  }
-
-  // SINGLE SET of audio listeners that handle both modes
+  // SIMPLIFIED audio listeners - no more hiding/showing controls
   function setupAudioListeners() {
-    // Remove any existing listeners first
-    audioBar.replaceWith(audioBar.cloneNode(true));
-    const newAudioBar = document.getElementById("audioBar");
+    console.log("Setting up audio listeners");
     
-    newAudioBar.addEventListener('play', () => {
-      console.log("Audio PLAY - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
+    // Remove existing listeners and re-add
+    const newAudioBar = audioBar.cloneNode(true);
+    audioBar.parentNode.replaceChild(newAudioBar, audioBar);
+    
+    // Get reference to the new audio element
+    const audioElement = document.getElementById("audioBar");
+    
+    // PLAY event
+    audioElement.addEventListener('play', function() {
+      console.log("Audio PLAY event - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
       if (window.Android) {
         if (isAutoplayMode) {
+          console.log("Calling onAutoplayAudioPlay");
           window.Android.onAutoplayAudioPlay();
         } else {
+          console.log("Calling onManualAudioPlay");
           window.Android.onManualAudioPlay();
         }
       }
-      
-      // Show audio controls for both modes
-      document.getElementById("audioBar").style.display = "block";
-      document.getElementById("scrollSpeedContainer").style.display = "block";
     });
     
-    newAudioBar.addEventListener('pause', () => {
-      console.log("Audio PAUSE - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
+    // PAUSE event  
+    audioElement.addEventListener('pause', function() {
+      console.log("Audio PAUSE event - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
       if (window.Android) {
         if (isAutoplayMode) {
+          console.log("Calling onAutoplayAudioPause");
           window.Android.onAutoplayAudioPause();
         } else {
+          console.log("Calling onManualAudioPause");
           window.Android.onManualAudioPause();
         }
       }
       clearInterval(scrollInterval);
     });
     
-    newAudioBar.addEventListener('ended', () => {
-      console.log("Audio ENDED - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
+    // ENDED event - THIS IS CRITICAL FOR AUTOPLAY
+    audioElement.addEventListener('ended', function() {
+      console.log("Audio ENDED event - Mode:", isAutoplayMode ? "AUTOPLAY" : "MANUAL");
       if (window.Android) {
         if (isAutoplayMode) {
+          console.log("Calling onAutoplayAudioEnd - this should trigger next story");
           window.Android.onAutoplayAudioEnd();
         } else {
+          console.log("Calling onManualAudioEnd");
           window.Android.onManualAudioEnd();
         }
       }
       clearInterval(scrollInterval);
-      
-      // Hide controls after audio ends (only for manual mode)
-      if (!isAutoplayMode) {
-        hideAudioControls();
-      }
     });
 
     // User interaction listeners
-    newAudioBar.addEventListener('click', (e) => {
-      console.log("User interacted with audio controls");
-      if (window.Android) window.Android.onUserInteraction();
+    audioElement.addEventListener('click', function(e) {
+      console.log("User clicked audio controls");
+      if (window.Android) {
+        window.Android.onUserInteraction();
+      }
     });
     
-    newAudioBar.addEventListener('seeked', (e) => {
-      if (window.Android) window.Android.onUserInteraction();
-    });
-    
-    newAudioBar.addEventListener('volumechange', (e) => {
-      if (window.Android) window.Android.onUserInteraction();
-    });
+    console.log("Audio listeners setup complete");
   }
 
   // Initialize when page loads
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Content Loaded");
     setupAudioListeners();
     loadStoryData();
+    
+    // Set initial font size
+    document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   });
 
   // Load story data
   function loadStoryData() {
+    console.log("Loading story data");
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const mode = params.get("mode");
     const file = params.get("file");
+
+    console.log("Story params:", {id, mode, file});
 
     const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
@@ -288,29 +288,35 @@
       .then(res => res.json())
       .then(data => {
         storyData = data[id];
-        if (!storyData) throw new Error("Story not found");
+        if (!storyData) throw new Error("Story not found for ID: " + id);
+
+        console.log("Story data loaded:", storyData);
 
         fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
           .then(res => res.text())
           .then(text => {
             document.getElementById("storyText").innerText = text;
             document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
-            if (mode === "manual") {
-              document.getElementById("storyText").style.display = "block";
-            }
+            document.getElementById("storyText").style.display = "block";
+            console.log("Story content loaded successfully");
           });
       })
-      .catch(() => {
-        document.getElementById("storyText").innerText = "Failed to load story.";
+      .catch((error) => {
+        console.error("Error loading story:", error);
+        document.getElementById("storyText").innerText = "Failed to load story: " + error.message;
       });
   }
 
   function startScrolling() {
+    console.log("Starting auto-scroll");
+    clearInterval(scrollInterval);
     const speedSlider = document.getElementById("scrollSpeedSlider");
     let speed = parseInt(speedSlider.value);
+    
     scrollInterval = setInterval(() => {
       document.getElementById("storyText").scrollBy(0, 1);
     }, speed);
+    
     speedSlider.addEventListener("input", () => {
       clearInterval(scrollInterval);
       let newSpeed = parseInt(speedSlider.value);
@@ -325,90 +331,128 @@
     console.log("Manual playback started for:", gender);
     isAutoplayMode = false;
     
+    if (!storyData) {
+      console.error("Story data not loaded yet");
+      return;
+    }
+    
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.volume = 1.0;
+    console.log("Loading audio from:", audioPath);
+    
+    const audioElement = document.getElementById("audioBar");
+    audioElement.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioElement.volume = 1.0;
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
-    audioBar.oncanplaythrough = () => {
+    // Reset event handlers
+    audioElement.oncanplaythrough = function() {
+      console.log("Audio can play through - starting playback");
       document.getElementById("storyText").scrollTop = 0;
       clearInterval(scrollInterval);
-      audioBar.play();
-      document.getElementById("storyText").style.display = "block";
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
+      audioElement.play().then(() => {
+        console.log("Manual audio playback started successfully");
+        document.getElementById("storyText").style.display = "block";
+        setTimeout(() => {
+          startScrolling();
+        }, 2000);
+      }).catch(error => {
+        console.error("Manual audio play failed:", error);
+      });
+    };
+
+    audioElement.onerror = function() {
+      console.error("Manual audio loading failed");
     };
   }
 
   // AUTOPLAY audio playback (called from Java)
   function playAudioAutoplay(gender) {
-    console.log("Autoplay playback started for:", gender);
+    console.log("=== AUTOPLAY PLAYBACK STARTED ===");
+    console.log("Voice:", gender);
     isAutoplayMode = true;
     
-    // HIDE controls before starting new audio (fixes the control visibility issue)
-    hideAudioControls();
+    if (!storyData) {
+      console.error("Story data not loaded for autoplay");
+      return;
+    }
     
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.volume = 1.0;
+    console.log("Autoplay loading audio from:", audioPath);
+    
+    const audioElement = document.getElementById("audioBar");
+    audioElement.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioElement.volume = 1.0;
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
-    audioBar.oncanplaythrough = () => {
+    // Reset event handlers for autoplay
+    audioElement.oncanplaythrough = function() {
+      console.log("Autoplay audio can play through - starting playback");
       document.getElementById("storyText").scrollTop = 0;
       clearInterval(scrollInterval);
-      audioBar.play();
-      document.getElementById("storyText").style.display = "block";
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
+      audioElement.play().then(() => {
+        console.log("Autoplay audio playback started successfully");
+        document.getElementById("storyText").style.display = "block";
+        setTimeout(() => {
+          startScrolling();
+        }, 2000);
+      }).catch(error => {
+        console.error("Autoplay audio play failed:", error);
+      });
     };
 
-    // Handle case where audio fails to load
-    audioBar.onerror = () => {
-      console.error("Audio failed to load for autoplay");
+    audioElement.onerror = function() {
+      console.error("Autoplay audio loading failed");
+      // If audio fails, notify Android to move to next story
       if (window.Android && window.Android.onAutoplayAudioEnd) {
+        console.log("Notifying Android of audio failure");
         window.Android.onAutoplayAudioEnd();
       }
     };
+
+    console.log("Autoplay setup complete - waiting for audio to load");
   }
 
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
+    console.log("Font size adjusted to:", currentFontSize);
   }
 
-  document.addEventListener("visibilitychange", () => {
+  // Test function to verify Android connection
+  function testAndroidConnection() {
+    console.log("Testing Android connection...");
+    if (window.Android) {
+      console.log("✓ Android interface is available");
+      console.log("Available methods:", Object.keys(window.Android));
+      return true;
+    } else {
+      console.log("✗ Android interface not available");
+      return false;
+    }
+  }
+
+  // Test on load
+  window.addEventListener('load', function() {
+    console.log("Window loaded");
+    setTimeout(() => {
+      testAndroidConnection();
+    }, 1000);
+  });
+
+  document.addEventListener("visibilitychange", function() {
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       clearInterval(scrollInterval);
     }
   });
 
-  window.addEventListener("beforeunload", () => {
+  window.addEventListener("beforeunload", function() {
     audioBar.pause();
     clearInterval(scrollInterval);
-  });
-
-  // Test function for Java communication
-  function testAndroidConnection() {
-    if (window.Android) {
-      console.log("Android connection is working");
-      if (window.Android.testCallback) {
-        window.Android.testCallback();
-      }
-    } else {
-      console.log("Android interface not available");
-    }
-  }
-
-  // Test connection on load
-  window.addEventListener('load', () => {
-    setTimeout(testAndroidConnection, 1000);
   });
 </script>
 </body>

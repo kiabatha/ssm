@@ -189,14 +189,39 @@
   function setupAudioListeners() {
     const audioElements = document.querySelectorAll('audio, video');
     audioElements.forEach(audio => {
+      // Detect ALL user interactions with audio controls
+      audio.addEventListener('click', (e) => {
+        if (window.Android) window.Android.onUserInteraction();
+      });
+      
+      // Also detect when user manually seeks the audio
+      audio.addEventListener('seeked', (e) => {
+        if (window.Android) window.Android.onUserInteraction();
+      });
+      
+      // Also detect volume changes
+      audio.addEventListener('volumechange', (e) => {
+        if (window.Android) window.Android.onUserInteraction();
+      });
+      
       audio.addEventListener('play', () => {
         if (window.Android) window.Android.onAudioStateChange(true);
+        document.getElementById("audioBar").style.display = "block";
+        document.getElementById("scrollSpeedContainer").style.display = "block";
       });
+      
       audio.addEventListener('pause', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
+        clearInterval(scrollInterval); // STOP SCROLLING
+        document.getElementById("audioBar").style.display = "none";
+        document.getElementById("scrollSpeedContainer").style.display = "none";
       });
+      
       audio.addEventListener('ended', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
+        clearInterval(scrollInterval); // STOP SCROLLING
+        document.getElementById("audioBar").style.display = "none";
+        document.getElementById("scrollSpeedContainer").style.display = "none";
       });
     });
   }
@@ -217,9 +242,8 @@
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
-  const file = params.get("file"); // ✅ UPDATED: new parameter for category JSON
+  const file = params.get("file");
 
-  // ✅ UPDATED: build JSON URL dynamically based on file parameter
   const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
   let storyData;
@@ -266,10 +290,10 @@
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    document.getElementById("scrollSpeedContainer").style.display = "block";
+    // Reset manual stop detection when starting new audio
+    if (window.Android) window.Android.onUserInteraction();
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
@@ -283,9 +307,6 @@
         startScrolling();
       }, 6000);
     };
-
-    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
   }
 
   function adjustFontSize(change) {
@@ -307,4 +328,3 @@
 </script>
 </body>
 </html>
-   

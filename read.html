@@ -186,20 +186,29 @@
     console.log("Favorite toggled");
   }
 
-  function setupAudioListeners() {
-    const audioElements = document.querySelectorAll('audio, video');
-    audioElements.forEach(audio => {
-      audio.addEventListener('play', () => {
-        if (window.Android) window.Android.onAudioStateChange(true);
-      });
-      audio.addEventListener('pause', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-      });
-      audio.addEventListener('ended', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-      });
+function setupAudioListeners() {
+  const audioElements = document.querySelectorAll('audio, video');
+  audioElements.forEach(audio => {
+    audio.addEventListener('play', () => {
+      if (window.Android) window.Android.onAudioStateChange(true);
+      // Show controls when audio plays
+      document.getElementById("audioBar").style.display = "block";
+      document.getElementById("scrollSpeedContainer").style.display = "block";
     });
-  }
+    audio.addEventListener('pause', () => {
+      if (window.Android) window.Android.onAudioStateChange(false);
+      // Hide controls when audio pauses
+      document.getElementById("audioBar").style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
+    });
+    audio.addEventListener('ended', () => {
+      if (window.Android) window.Android.onAudioStateChange(false);
+      // Hide controls when audio ends
+      document.getElementById("audioBar").style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
+    });
+  });
+}
 
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {

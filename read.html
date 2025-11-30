@@ -186,56 +186,40 @@
     console.log("Favorite toggled");
   }
 
-  // Function to show audio controls
-  function showAudioControls() {
-    document.getElementById("audioBar").style.display = "block";
-    document.getElementById("scrollSpeedContainer").style.display = "block";
-  }
-
-  // Function to hide audio controls
-  function hideAudioControls() {
-    document.getElementById("audioBar").style.display = "none";
-    document.getElementById("scrollSpeedContainer").style.display = "none";
-  }
-
-  let audioEventListenersAdded = false;
-
-  function setupAudioEventListeners() {
-    if (audioEventListenersAdded) return;
-    
-    const audioBar = document.getElementById("audioBar");
-    
-    audioBar.addEventListener("play", () => {
+  function setupAudioListeners() {
+    const audioElements = document.querySelectorAll('audio, video');
+    audioElements.forEach(audio => {
+      audio.addEventListener('play', () => {
         if (window.Android) window.Android.onAudioStateChange(true);
-        showAudioControls();
-    });
-    
-    audioBar.addEventListener("pause", () => {
+      });
+      audio.addEventListener('pause', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        hideAudioControls();
-    });
-    
-    audioBar.addEventListener("ended", () => {
+      });
+      audio.addEventListener('ended', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        hideAudioControls();
-        // Send specific ended event to Java for autoplay
-        if (window.Android) window.Android.onAudioEnded();
+      });
     });
-    
-    audioEventListenersAdded = true;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    setupAudioEventListeners();
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) setupAudioListeners();
+    });
   });
 
-  window.addEventListener('load', setupAudioEventListeners);
+  document.addEventListener('DOMContentLoaded', () => {
+    setupAudioListeners();
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+
+  window.addEventListener('load', setupAudioListeners);
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
-  const file = params.get("file");
+  const file = params.get("file"); // ✅ UPDATED: new parameter for category JSON
 
+  // ✅ UPDATED: build JSON URL dynamically based on file parameter
   const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
   let storyData;
@@ -282,16 +266,13 @@
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    // Show controls immediately when play is triggered
-    showAudioControls();
+    document.getElementById("scrollSpeedContainer").style.display = "block";
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
-
-    // Setup event listeners (in case they were removed)
-    setupAudioEventListeners();
 
     audioBar.oncanplaythrough = () => {
       document.getElementById("storyText").scrollTop = 0;
@@ -302,6 +283,9 @@
         startScrolling();
       }, 6000);
     };
+
+    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
   }
 
   function adjustFontSize(change) {
@@ -313,15 +297,14 @@
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       clearInterval(scrollInterval);
-      hideAudioControls();
     }
   });
 
   window.addEventListener("beforeunload", () => {
     audioBar.pause();
     clearInterval(scrollInterval);
-    hideAudioControls();
   });
 </script>
 </body>
 </html>
+   

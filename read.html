@@ -163,10 +163,10 @@
     </div>
 
     <div class="button-row">
-      <button class="action-button red-button" onclick="playAudio('man')">Man</button>
+      <button class="action-button red-button" onclick="playAudioManual('man')">Man</button>
       <button class="round-button" onclick="adjustFontSize(-1)">−</button>
       <button class="round-button" onclick="adjustFontSize(1)">+</button>
-      <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
+      <button class="action-button red-button" onclick="playAudioManual('woman')">Woman</button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
@@ -186,58 +186,86 @@
     console.log("Favorite toggled");
   }
 
-  function setupAudioListeners() {
-    const audioElements = document.querySelectorAll('audio, video');
-    audioElements.forEach(audio => {
-      // Detect ALL user interactions with audio controls
-      audio.addEventListener('click', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      // Also detect when user manually seeks the audio
-      audio.addEventListener('seeked', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      // Also detect volume changes
-      audio.addEventListener('volumechange', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      audio.addEventListener('play', () => {
-        if (window.Android) window.Android.onAudioStateChange(true);
-        document.getElementById("audioBar").style.display = "block";
-        document.getElementById("scrollSpeedContainer").style.display = "block";
-      });
-      
-      audio.addEventListener('pause', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-        clearInterval(scrollInterval); // STOP SCROLLING
-        document.getElementById("audioBar").style.display = "none";
-        document.getElementById("scrollSpeedContainer").style.display = "none";
-      });
-      
-      audio.addEventListener('ended', () => {
-        if (window.Android) window.Android.onAudioStateChange(false);
-        clearInterval(scrollInterval); // STOP SCROLLING
-        document.getElementById("audioBar").style.display = "none";
-        document.getElementById("scrollSpeedContainer").style.display = "none";
-      });
+  // SEPARATE: Manual audio listeners (for manual buttons only)
+  function setupManualAudioListeners() {
+    const audioBar = document.getElementById("audioBar");
+    
+    audioBar.addEventListener('play', () => {
+      if (window.Android) window.Android.onManualAudioPlay();
+      document.getElementById("audioBar").style.display = "block";
+      document.getElementById("scrollSpeedContainer").style.display = "block";
+    });
+    
+    audioBar.addEventListener('pause', () => {
+      if (window.Android) window.Android.onManualAudioPause();
+      clearInterval(scrollInterval);
+      document.getElementById("audioBar").style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
+    });
+    
+    audioBar.addEventListener('ended', () => {
+      if (window.Android) window.Android.onManualAudioEnd();
+      clearInterval(scrollInterval);
+      document.getElementById("audioBar").style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
+    });
+  }
+
+  // SEPARATE: Autoplay audio listeners (for autoplay only)
+  function setupAutoplayAudioListeners() {
+    const audioBar = document.getElementById("audioBar");
+    
+    audioBar.addEventListener('play', () => {
+      if (window.Android) window.Android.onAutoplayAudioPlay();
+    });
+    
+    audioBar.addEventListener('pause', () => {
+      if (window.Android) window.Android.onAutoplayAudioPause();
+      clearInterval(scrollInterval);
+    });
+    
+    audioBar.addEventListener('ended', () => {
+      if (window.Android) window.Android.onAutoplayAudioEnd();
+      clearInterval(scrollInterval);
+    });
+  }
+
+  // SEPARATE: User interaction listeners (for both)
+  function setupUserInteractionListeners() {
+    const audioBar = document.getElementById("audioBar");
+    
+    audioBar.addEventListener('click', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+    
+    audioBar.addEventListener('seeked', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
+    });
+    
+    audioBar.addEventListener('volumechange', (e) => {
+      if (window.Android) window.Android.onUserInteraction();
     });
   }
 
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
-      if (mutation.addedNodes.length) setupAudioListeners();
+      if (mutation.addedNodes.length) {
+        setupManualAudioListeners();
+        setupUserInteractionListeners();
+      }
     });
   });
 
   document.addEventListener('DOMContentLoaded', () => {
-    setupAudioListeners();
+    setupManualAudioListeners();
+    setupUserInteractionListeners();
     observer.observe(document.body, { childList: true, subtree: true });
   });
 
-  window.addEventListener('load', setupAudioListeners);
+  window.addEventListener('load', () => {
+    setupManualAudioListeners();
+    setupUserInteractionListeners();
+  });
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -287,13 +315,34 @@
     });
   }
 
-  function playAudio(gender) {
+  // SEPARATE: Manual audio playback (for manual buttons)
+  function playAudioManual(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
 
-    // Reset manual stop detection when starting new audio
-    if (window.Android) window.Android.onUserInteraction();
+    document.getElementById("storyText").scrollTop = 0;
+    clearInterval(scrollInterval);
+
+    audioBar.oncanplaythrough = () => {
+      document.getElementById("storyText").scrollTop = 0;
+      clearInterval(scrollInterval);
+      audioBar.play();
+      document.getElementById("storyText").style.display = "block";
+      setTimeout(() => {
+        startScrolling();
+      }, 6000);
+    };
+  }
+
+  // SEPARATE: Autoplay audio playback (called from Java)
+  function playAudioAutoplay(gender) {
+    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.volume = 1.0;
+
+    // Setup autoplay listeners for this session
+    setupAutoplayAudioListeners();
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);

@@ -286,29 +286,30 @@ function setupAudioListeners() {
     });
   }
 
-  function playAudio(gender) {
+function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-   
     audioBar.volume = 1.0;
 
+    // Reset manual stop detection when starting new audio
+    if (window.Android) window.Android.onUserInteraction(); // This resets the flag
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
     audioBar.oncanplaythrough = () => {
-      document.getElementById("storyText").scrollTop = 0;
-      clearInterval(scrollInterval);
-      audioBar.play();
-      document.getElementById("storyText").style.display = "block";
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
+        document.getElementById("storyText").scrollTop = 0;
+        clearInterval(scrollInterval);
+        audioBar.play();
+        document.getElementById("storyText").style.display = "block";
+        setTimeout(() => {
+            startScrolling();
+        }, 6000);
     };
 
     audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
     audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
-  }
+}
 
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));

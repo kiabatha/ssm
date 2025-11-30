@@ -132,7 +132,7 @@
     }
 
     #scrollSpeedContainer {
-      display: none;
+      display: none; /* hidden by default */
       margin-top: 10px;
     }
 
@@ -163,10 +163,10 @@
     </div>
 
     <div class="button-row">
-      <button class="action-button red-button" onclick="playAudioManual('man')">Man</button>
+      <button class="action-button red-button" onclick="playAudio('man')">Man</button>
       <button class="round-button" onclick="adjustFontSize(-1)">−</button>
       <button class="round-button" onclick="adjustFontSize(1)">+</button>
-      <button class="action-button red-button" onclick="playAudioManual('woman')">Woman</button>
+      <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
     <audio id="audioBar" controls controlsList="nodownload"></audio>
@@ -182,53 +182,21 @@
   </div>
 
 <script>
-  // Global variables
-  let isAutoplayActive = false;
-  let storyData;
-  let scrollInterval;
-  const audioBar = document.getElementById("audioBar");
-  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
-
   function toggleFavorite() {
     console.log("Favorite toggled");
   }
 
-  // SEPARATE audio listeners for both manual and autoplay
   function setupAudioListeners() {
     const audioElements = document.querySelectorAll('audio, video');
     audioElements.forEach(audio => {
-      // Detect ALL user interactions with audio controls
-      audio.addEventListener('click', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      audio.addEventListener('seeked', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      audio.addEventListener('volumechange', (e) => {
-        if (window.Android) window.Android.onUserInteraction();
-      });
-      
-      // Audio state changes (works for both manual and autoplay)
       audio.addEventListener('play', () => {
         if (window.Android) window.Android.onAudioStateChange(true);
-        document.getElementById("audioBar").style.display = "block";
-        document.getElementById("scrollSpeedContainer").style.display = "block";
       });
-      
       audio.addEventListener('pause', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        clearInterval(scrollInterval);
-        document.getElementById("audioBar").style.display = "none";
-        document.getElementById("scrollSpeedContainer").style.display = "none";
       });
-      
       audio.addEventListener('ended', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
-        clearInterval(scrollInterval);
-        document.getElementById("audioBar").style.display = "none";
-        document.getElementById("scrollSpeedContainer").style.display = "none";
       });
     });
   }
@@ -249,9 +217,16 @@
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
-  const file = params.get("file");
+  const file = params.get("file"); // ✅ UPDATED: new parameter for category JSON
 
+  // ✅ UPDATED: build JSON URL dynamically based on file parameter
   const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
+
+  let storyData;
+  let scrollInterval;
+  const audioBar = document.getElementById("audioBar");
+
+  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
 
   fetch(jsonUrl)
     .then(res => res.json())
@@ -288,17 +263,13 @@
     });
   }
 
-  // SEPARATE: Manual audio playback (for Man/Woman buttons)
-  function playAudioManual(gender) {
-    console.log("Manual playback:", gender);
-    isAutoplayActive = false;
-    
+  function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    // Notify Android of manual interaction
-    if (window.Android) window.Android.onUserInteraction();
+    document.getElementById("scrollSpeedContainer").style.display = "block";
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
@@ -312,29 +283,9 @@
         startScrolling();
       }, 6000);
     };
-  }
 
-  // SEPARATE: Autoplay audio playback (called from Java)
-  function playAudioAutoplay(gender) {
-    console.log("Autoplay playback:", gender);
-    isAutoplayActive = true;
-    
-    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.volume = 1.0;
-
-    document.getElementById("storyText").scrollTop = 0;
-    clearInterval(scrollInterval);
-
-    audioBar.oncanplaythrough = () => {
-      document.getElementById("storyText").scrollTop = 0;
-      clearInterval(scrollInterval);
-      audioBar.play();
-      document.getElementById("storyText").style.display = "block";
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
-    };
+    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
+    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
   }
 
   function adjustFontSize(change) {
@@ -356,3 +307,4 @@
 </script>
 </body>
 </html>
+   

@@ -186,17 +186,34 @@
     console.log("Favorite toggled");
   }
 
+  // Function to show audio controls
+  function showAudioControls() {
+    document.getElementById("audioBar").style.display = "block";
+    document.getElementById("scrollSpeedContainer").style.display = "block";
+  }
+
+  // Function to hide audio controls
+  function hideAudioControls() {
+    document.getElementById("audioBar").style.display = "none";
+    document.getElementById("scrollSpeedContainer").style.display = "none";
+  }
+
   function setupAudioListeners() {
     const audioElements = document.querySelectorAll('audio, video');
     audioElements.forEach(audio => {
       audio.addEventListener('play', () => {
         if (window.Android) window.Android.onAudioStateChange(true);
+        showAudioControls(); // Show when audio plays
       });
       audio.addEventListener('pause', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
+        hideAudioControls(); // Hide when audio pauses
       });
       audio.addEventListener('ended', () => {
         if (window.Android) window.Android.onAudioStateChange(false);
+        hideAudioControls(); // Hide when audio ends
+        // Send specific ended event to Java for autoplay
+        if (window.Android) window.Android.onAudioEnded();
       });
     });
   }
@@ -217,9 +234,8 @@
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const mode = params.get("mode");
-  const file = params.get("file"); // ✅ UPDATED: new parameter for category JSON
+  const file = params.get("file");
 
-  // ✅ UPDATED: build JSON URL dynamically based on file parameter
   const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
   let storyData;
@@ -266,10 +282,10 @@
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.style.display = "block";
     audioBar.volume = 1.0;
 
-    document.getElementById("scrollSpeedContainer").style.display = "block";
+    // Show controls immediately when play is triggered
+    showAudioControls();
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
@@ -284,8 +300,22 @@
       }, 6000);
     };
 
-    audioBar.addEventListener("pause", () => clearInterval(scrollInterval));
-    audioBar.addEventListener("ended", () => clearInterval(scrollInterval));
+    // Clear previous event listeners to avoid duplicates
+    audioBar.replaceWith(audioBar.cloneNode(true));
+    const newAudioBar = document.getElementById("audioBar");
+    
+    newAudioBar.addEventListener("pause", () => {
+      clearInterval(scrollInterval);
+      hideAudioControls(); // Hide when manually paused
+      if (window.Android) window.Android.onAudioStateChange(false);
+    });
+    
+    newAudioBar.addEventListener("ended", () => {
+      clearInterval(scrollInterval);
+      hideAudioControls(); // Hide when audio ends
+      // Send specific ended event to Java for autoplay
+      if (window.Android) window.Android.onAudioEnded();
+    });
   }
 
   function adjustFontSize(change) {
@@ -297,14 +327,15 @@
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       clearInterval(scrollInterval);
+      hideAudioControls(); // Hide when page becomes hidden
     }
   });
 
   window.addEventListener("beforeunload", () => {
     audioBar.pause();
     clearInterval(scrollInterval);
+    hideAudioControls(); // Hide when leaving page
   });
 </script>
 </body>
 </html>
-   

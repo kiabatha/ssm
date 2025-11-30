@@ -186,49 +186,73 @@
 <script>
   let isAutoplayActive = false;
   let userInteractedWithAudio = false;
+  let audioListenersSetup = false;
 
   function toggleFavorite() {
     console.log("Favorite toggled");
   }
 
   function setupAudioListeners() {
+    if (audioListenersSetup) return;
+    
     const audioBar = document.getElementById("audioBar");
-    
-    audioBar.addEventListener('play', () => {
-      if (window.Android) window.Android.onAudioStateChange(true);
-      audioBar.style.display = "block";
-      document.getElementById("scrollSpeedContainer").style.display = "block";
-      userInteractedWithAudio = false;
-    });
-    
-    audioBar.addEventListener('pause', () => {
-      if (window.Android) window.Android.onAudioStateChange(false);
-      clearInterval(scrollInterval);
-      audioBar.style.display = "none";
-      document.getElementById("scrollSpeedContainer").style.display = "none";
-      
-      if (isAutoplayActive && !audioBar.ended) {
-        if (window.Android) window.Android.onUserStoppedAudio();
-        isAutoplayActive = false;
-      }
-    });
-    
-    audioBar.addEventListener('ended', () => {
-      if (window.Android) window.Android.onAudioStateChange(false);
-      clearInterval(scrollInterval);
-      audioBar.style.display = "none";
-      document.getElementById("scrollSpeedContainer").style.display = "none";
-      
-      if (isAutoplayActive && window.Android) {
-        window.Android.onAudioEnded();
-      }
-    });
+    if (!audioBar) return;
 
-    audioBar.addEventListener('seeked', () => {
-      if (isAutoplayActive) {
-        userInteractedWithAudio = true;
-      }
-    });
+    audioBar.removeEventListener('play', handlePlay);
+    audioBar.removeEventListener('pause', handlePause);
+    audioBar.removeEventListener('ended', handleEnded);
+    audioBar.removeEventListener('seeked', handleSeeked);
+
+    audioBar.addEventListener('play', handlePlay);
+    audioBar.addEventListener('pause', handlePause);
+    audioBar.addEventListener('ended', handleEnded);
+    audioBar.addEventListener('seeked', handleSeeked);
+    
+    audioListenersSetup = true;
+    console.log("Audio listeners setup complete");
+  }
+
+  function handlePlay() {
+    console.log("Audio playing");
+    if (window.Android) window.Android.onAudioStateChange(true);
+    document.getElementById("audioBar").style.display = "block";
+    document.getElementById("scrollSpeedContainer").style.display = "block";
+    userInteractedWithAudio = false;
+  }
+
+  function handlePause() {
+    console.log("Audio paused");
+    const audioBar = document.getElementById("audioBar");
+    if (window.Android) window.Android.onAudioStateChange(false);
+    clearInterval(scrollInterval);
+    audioBar.style.display = "none";
+    document.getElementById("scrollSpeedContainer").style.display = "none";
+    
+    if (isAutoplayActive && !audioBar.ended) {
+      console.log("User stopped audio manually");
+      if (window.Android) window.Android.onUserStoppedAudio();
+      isAutoplayActive = false;
+    }
+  }
+
+  function handleEnded() {
+    console.log("Audio ended naturally");
+    const audioBar = document.getElementById("audioBar");
+    if (window.Android) window.Android.onAudioStateChange(false);
+    clearInterval(scrollInterval);
+    audioBar.style.display = "none";
+    document.getElementById("scrollSpeedContainer").style.display = "none";
+    
+    if (isAutoplayActive && window.Android) {
+      console.log("Calling onAudioEnded for next story");
+      window.Android.onAudioEnded();
+    }
+  }
+
+  function handleSeeked() {
+    if (isAutoplayActive) {
+      userInteractedWithAudio = true;
+    }
   }
 
   const params = new URLSearchParams(window.location.search);
@@ -258,6 +282,7 @@
           if (mode === "manual") {
             document.getElementById("storyText").style.display = "block";
           }
+          setupAudioListeners();
         });
     })
     .catch(() => {
@@ -290,7 +315,7 @@
     audioBar.oncanplaythrough = () => {
       document.getElementById("storyText").scrollTop = 0;
       clearInterval(scrollInterval);
-      audioBar.play();
+      audioBar.play().catch(err => console.error("Play error:", err));
       document.getElementById("storyText").style.display = "block";
       setTimeout(() => {
         startScrolling();
@@ -299,6 +324,7 @@
   }
 
   function playAudioFromApp(gender) {
+    console.log("playAudioFromApp called with voice:", gender);
     isAutoplayActive = true;
     userInteractedWithAudio = false;
     playAudio(gender);
@@ -321,7 +347,10 @@
     clearInterval(scrollInterval);
   });
 
-  window.addEventListener('load', setupAudioListeners);
+  window.addEventListener('load', () => {
+    setupAudioListeners();
+  });
+
   setupAudioListeners();
 </script>
 </body>

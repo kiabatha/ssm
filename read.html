@@ -197,6 +197,8 @@ function setupAudioListeners() {
     });
     audio.addEventListener('pause', () => {
       if (window.Android) window.Android.onAudioStateChange(false);
+      // Notify Java that this was a manual stop
+      if (window.Android) window.Android.onManualStop();
       // Hide controls when audio pauses
       document.getElementById("audioBar").style.display = "none";
       document.getElementById("scrollSpeedContainer").style.display = "none";

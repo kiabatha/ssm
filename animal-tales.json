@@ -1,0 +1,505 @@
+{
+
+  "the-bear-cub-gentle-hug": {
+    "title": "The Bear Cub’s Gentle Hug",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-bear-cub-gentle-hug.txt",
+    "image": "animal-tales/the-bear-cub-gentle-hug.webp",
+    "audio_woman": "animal-tales/audio/the-bear-cub-gentle-hug-woman.mp3",
+    "audio_man": "animal-tales/audio/the-bear-cub-gentle-hug-man.mp3"
+
+},
+
+  "the-bear-secret-picnic": {
+    "title": "The Bear’s Secret Picnic",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-bear-secret-picnic.txt",
+    "image": "animal-tales/the-bear-secret-picnic.webp",
+    "audio_woman": "animal-tales/audio/the-bear-secret-picnic-woman.mp3",
+    "audio_man": "animal-tales/audio/the-bear-secret-picnic-man.mp3"
+
+},
+
+  "the-bird-who-wanted-to-swim": {
+    "title": "The Bird Who Wanted to Swim",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-bird-who-wanted-to-swim.txt",
+    "image": "animal-tales/the-bird-who-wanted-to-swim.webp",
+    "audio_woman": "animal-tales/audio/the-bird-who-wanted-to-swim-woman.mp3",
+    "audio_man": "animal-tales/audio/the-bird-who-wanted-to-swim-man.mp3"
+
+},
+
+  "the-bunny-kind-lantern": {
+    "title": "The Bunny’s Kind Lantern",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-bunny-kind-lantern.txt",
+    "image": "animal-tales/the-bunny-kind-lantern.webp",
+    "audio_woman": "animal-tales/audio/the-bunny-kind-lantern-woman.mp3",
+    "audio_man": "animal-tales/audio/the-bunny-kind-lantern-man.mp3"
+
+},
+
+  "the-camel-gentle-journey": {
+    "title": "The Camel’s Gentle Journey",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-camel-gentle-journey.txt",
+    "image": "animal-tales/the-camel-gentle-journey.webp",
+    "audio_woman": "animal-tales/audio/the-camel-gentle-journey-woman.mp3",
+    "audio_man": "animal-tales/audio/the-camel-gentle-journey-man.mp3"
+
+},
+
+  "the-cat-who-painted-rainbows": {
+    "title": "The Cat Who Painted Rainbows",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-cat-who-painted-rainbows.txt",
+    "image": "animal-tales/the-cat-who-painted-rainbows.webp",
+    "audio_woman": "animal-tales/audio/the-cat-who-painted-rainbows-woman.mp3",
+    "audio_man": "animal-tales/audio/the-cat-who-painted-rainbows-man.mp3"
+
+},
+
+  "the-chick-brave-first-step": {
+    "title": "The Chick’s Brave First Step",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-chick-brave-first-step.txt",
+    "image": "animal-tales/the-chick-brave-first-step.webp",
+    "audio_woman": "animal-tales/audio/the-chick-brave-first-step-woman.mp3",
+    "audio_man": "animal-tales/audio/the-chick-brave-first-step-man.mp3"
+
+},
+
+  "the-chipmunk-secret-treasure": {
+    "title": "The Chipmunk’s Secret Treasure",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-chipmunk-secret-treasure.txt",
+    "image": "animal-tales/the-chipmunk-secret-treasure.webp",
+    "audio_woman": "animal-tales/audio/the-chipmunk-secret-treasure-woman.mp3",
+    "audio_man": "animal-tales/audio/the-chipmunk-secret-treasure-man.mp3"
+
+},
+
+  "the-cub-courageous-roar": {
+    "title": "The Cub’s Courageous Roar",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-cub-courageous-roar.txt",
+    "image": "animal-tales/the-cub-courageous-roar.webp",
+    "audio_woman": "animal-tales/audio/the-cub-courageous-roar-woman.mp3",
+    "audio_man": "animal-tales/audio/the-cub-courageous-roar-man.mp3"
+
+},
+
+  "the-deer-sharing-meadow": {
+    "title": "The Deer’s Sharing Meadow",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-deer-sharing-meadow.txt",
+    "image": "animal-tales/the-deer-sharing-meadow.webp",
+    "audio_woman": "animal-tales/audio/the-deer-sharing-meadow-woman.mp3",
+    "audio_man": "animal-tales/audio/the-deer-sharing-meadow-man.mp3"
+
+},
+
+  "the-dog-who-loved-to-dance": {
+    "title": "The Dog Who Loved to Dance",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-dog-who-loved-to-dance.txt",
+    "image": "animal-tales/the-dog-who-loved-to-dance.webp",
+    "audio_woman": "animal-tales/audio/the-dog-who-loved-to-dance-woman.mp3",
+    "audio_man": "animal-tales/audio/the-dog-who-loved-to-dance-man.mp3"
+
+},
+
+  "the-dolphin-brave-leap": {
+    "title": "The Dolphin’s Brave Leap",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-dolphin-brave-leap.txt",
+    "image": "animal-tales/the-dolphin-brave-leap.webp",
+    "audio_woman": "animal-tales/audio/the-dolphin-brave-leap-woman.mp3",
+    "audio_man": "animal-tales/audio/the-dolphin-brave-leap-man.mp3"
+
+},
+
+  "the-dove-peaceful-gift": {
+    "title": "The Dove’s Peaceful Gift",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-dove-peaceful-gift.txt",
+    "image": "animal-tales/the-dove-peaceful-gift.webp",
+    "audio_woman": "animal-tales/audio/the-dove-peaceful-gift-woman.mp3",
+    "audio_man": "animal-tales/audio/the-dove-peaceful-gift-man.mp3"
+
+},
+
+  "the-duck-courageous-swim": {
+    "title": "The Duck’s Courageous Swim",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-duck-courageous-swim.txt",
+    "image": "animal-tales/the-duck-courageous-swim.webp",
+    "audio_woman": "animal-tales/audio/the-duck-courageous-swim-woman.mp3",
+    "audio_man": "animal-tales/audio/the-duck-courageous-swim-man.mp3"
+
+},
+
+  "the-elephant-gentle-song": {
+    "title": "The Elephant’s Gentle Song",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-elephant-gentle-song.txt",
+    "image": "animal-tales/the-elephant-gentle-song.webp",
+    "audio_woman": "animal-tales/audio/the-elephant-gentle-song-woman.mp3",
+    "audio_man": "animal-tales/audio/the-elephant-gentle-song-man.mp3"
+
+},
+
+  "the-fish-who-loved-the-sky": {
+    "title": "The Fish Who Loved the Sky",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-fish-who-loved-the-sky.txt",
+    "image": "animal-tales/the-fish-who-loved-the-sky.webp",
+    "audio_woman": "animal-tales/audio/the-fish-who-loved-the-sky-woman.mp3",
+    "audio_man": "animal-tales/audio/the-fish-who-loved-the-sky-man.mp3"
+
+},
+
+  "the-fox-honest-tale": {
+    "title": "The Fox’s Honest Tale",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-fox-honest-tale.txt",
+    "image": "animal-tales/the-fox-honest-tale.webp",
+    "audio_woman": "animal-tales/audio/the-fox-honest-tale-woman.mp3",
+    "audio_man": "animal-tales/audio/the-fox-honest-tale-man.mp3"
+
+},
+
+  "the-giraffe-tall-dream": {
+    "title": "The Giraffe’s Tall Dream",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-giraffe-tall-dream.txt",
+    "image": "animal-tales/the-giraffe-tall-dream.webp",
+    "audio_woman": "animal-tales/audio/the-giraffe-tall-dream-woman.mp3",
+    "audio_man": "animal-tales/audio/the-giraffe-tall-dream-man.mp3"
+
+},
+
+  "the-goat-gentle-smile": {
+    "title": "The Goat’s Gentle Smile",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-goat-gentle-smile.txt",
+    "image": "animal-tales/the-goat-gentle-smile.webp",
+    "audio_woman": "animal-tales/audio/the-goat-gentle-smile-woman.mp3",
+    "audio_man": "animal-tales/audio/the-goat-gentle-smile-man.mp3"
+
+},
+
+  "the-goldfish-gentle-glow": {
+    "title": "The Goldfish’s Gentle Glow",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-goldfish-gentle-glow.txt",
+    "image": "animal-tales/the-goldfish-gentle-glow.webp",
+    "audio_woman": "animal-tales/audio/the-goldfish-gentle-glow-woman.mp3",
+    "audio_man": "animal-tales/audio/the-goldfish-gentle-glow-man.mp3"
+
+},
+
+  "the-hare-honest-path": {
+    "title": "The Hare’s Honest Path",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-hare-honest-path.txt",
+    "image": "animal-tales/the-hare-honest-path.webp",
+    "audio_woman": "animal-tales/audio/the-hare-honest-path-woman.mp3",
+    "audio_man": "animal-tales/audio/the-hare-honest-path-man.mp3"
+
+},
+
+  "the-horse-secret-star": {
+    "title": "The Horse’s Secret Star",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-horse-secret-star.txt",
+    "image": "animal-tales/the-horse-secret-star.webp",
+    "audio_woman": "animal-tales/audio/the-horse-secret-star-woman.mp3",
+    "audio_man": "animal-tales/audio/the-horse-secret-star-man.mp3"
+
+},
+
+  "the-hound-gentle-guard": {
+    "title": "The Hound’s Gentle Guard",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-hound-gentle-guard.txt",
+    "image": "animal-tales/the-hound-gentle-guard.webp",
+    "audio_woman": "animal-tales/audio/the-hound-gentle-guard-woman.mp3",
+    "audio_man": "animal-tales/audio/the-hound-gentle-guard-man.mp3"
+
+},
+
+  "the-kangaroo-kind-jump": {
+    "title": "The Kangaroo’s Kind Jump",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-kangaroo-kind-jump.txt",
+    "image": "animal-tales/the-kangaroo-kind-jump.webp",
+    "audio_woman": "animal-tales/audio/the-kangaroo-kind-jump-woman.mp3",
+    "audio_man": "animal-tales/audio/the-kangaroo-kind-jump-man.mp3"
+
+},
+
+  "the-kid-goat-brave-leap": {
+    "title": "The Kid Goat’s Brave Leap",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-kid-goat-brave-leap.txt",
+    "image": "animal-tales/the-kid-goat-brave-leap.webp",
+    "audio_woman": "animal-tales/audio/the-kid-goat-brave-leap-woman.mp3",
+    "audio_man": "animal-tales/audio/the-kid-goat-brave-leap-man.mp3"
+
+},
+
+  "the-kitten-brave-climb": {
+    "title": "The Kitten’s Brave Climb",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-kitten-brave-climb.txt",
+    "image": "animal-tales/the-kitten-brave-climb.webp",
+    "audio_woman": "animal-tales/audio/the-kitten-brave-climb-woman.mp3",
+    "audio_man": "animal-tales/audio/the-kitten-brave-climb-man.mp3"
+
+},
+
+  "the-lamb-caring-song": {
+    "title": "The Lamb’s Caring Song",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-lamb-caring-song.txt",
+    "image": "animal-tales/the-lamb-caring-song.webp",
+    "audio_woman": "animal-tales/audio/the-lamb-caring-song-woman.mp3",
+    "audio_man": "animal-tales/audio/the-lamb-caring-song-man.mp3"
+
+},
+
+  "the-little-owl-courageous-flight": {
+    "title": "The Little Owl’s Courageous Flight",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-little-owl-courageous-flight.txt",
+    "image": "animal-tales/the-little-owl-courageous-flight.webp",
+    "audio_woman": "animal-tales/audio/the-little-owl-courageous-flight-woman.mp3",
+    "audio_man": "animal-tales/audio/the-little-owl-courageous-flight-man.mp3"
+
+},
+
+  "the-little-turtle-dreamy-shell": {
+    "title": "The Little Turtle’s Dreamy Shell",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-little-turtle-dreamy-shell.txt",
+    "image": "animal-tales/the-little-turtle-dreamy-shell.webp",
+    "audio_woman": "animal-tales/audio/the-little-turtle-dreamy-shell-woman.mp3",
+    "audio_man": "animal-tales/audio/the-little-turtle-dreamy-shell-man.mp3"
+
+},
+
+  "the-monkey-kind-trick": {
+    "title": "The Monkey’s Kind Trick",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-monkey-kind-trick.txt",
+    "image": "animal-tales/the-monkey-kind-trick.webp",
+    "audio_woman": "animal-tales/audio/the-monkey-kind-trick-woman.mp3",
+    "audio_man": "animal-tales/audio/the-monkey-kind-trick-man.mp3"
+
+},
+
+  "the-mouse-brave-cheese-hunt": {
+    "title": "The Mouse’s Brave Cheese Hunt",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-mouse-brave-cheese-hunt.txt",
+    "image": "animal-tales/the-mouse-brave-cheese-hunt.webp",
+    "audio_woman": "animal-tales/audio/the-mouse-brave-cheese-hunt-woman.mp3",
+    "audio_man": "animal-tales/audio/the-mouse-brave-cheese-hunt-man.mp3"
+
+},
+
+  "the-owl-wise-gift": {
+    "title": "The Owl’s Wise Gift",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-owl-wise-gift.txt",
+    "image": "animal-tales/the-owl-wise-gift.webp",
+    "audio_woman": "animal-tales/audio/the-owl-wise-gift-woman.mp3",
+    "audio_man": "animal-tales/audio/the-owl-wise-gift-man.mp3"
+
+},
+
+  "the-panda-secret-hug": {
+    "title": "The Panda’s Secret Hug",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-panda-secret-hug.txt",
+    "image": "animal-tales/the-panda-secret-hug.webp",
+    "audio_woman": "animal-tales/audio/the-panda-secret-hug-woman.mp3",
+    "audio_man": "animal-tales/audio/the-panda-secret-hug-man.mp3"
+
+},
+
+  "the-parrot-honest-song": {
+    "title": "The Parrot’s Honest Song",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-parrot-honest-song.txt",
+    "image": "animal-tales/the-parrot-honest-song.webp",
+    "audio_woman": "animal-tales/audio/the-parrot-honest-song-woman.mp3",
+    "audio_man": "animal-tales/audio/the-parrot-honest-song-man.mp3"
+
+},
+
+  "the-penguin-brave-slide": {
+    "title": "The Penguin’s Brave Slide",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-penguin-brave-slide.txt",
+    "image": "animal-tales/the-penguin-brave-slide.webp",
+    "audio_woman": "animal-tales/audio/the-penguin-brave-slide-woman.mp3",
+    "audio_man": "animal-tales/audio/the-penguin-brave-slide-man.mp3"
+
+},
+
+  "the-pony-gentle-journey": {
+    "title": "The Pony’s Gentle Journey",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-pony-gentle-journey.txt",
+    "image": "animal-tales/the-pony-gentle-journey.webp",
+    "audio_woman": "animal-tales/audio/the-pony-gentle-journey-woman.mp3",
+    "audio_man": "animal-tales/audio/the-pony-gentle-journey-man.mp3"
+
+},
+
+  "the-puppy-secret-melody": {
+    "title": "The Puppy’s Secret Melody",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-puppy-secret-melody.txt",
+    "image": "animal-tales/the-puppy-secret-melody.webp",
+    "audio_woman": "animal-tales/audio/the-puppy-secret-melody-woman.mp3",
+    "audio_man": "animal-tales/audio/the-puppy-secret-melody-man.mp3"
+
+},
+
+  "the-rabbit-secret-garden": {
+    "title": "The Rabbit’s Secret Garden",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-rabbit-secret-garden.txt",
+    "image": "animal-tales/the-rabbit-secret-garden.webp",
+    "audio_woman": "animal-tales/audio/the-rabbit-secret-garden-woman.mp3",
+    "audio_man": "animal-tales/audio/the-rabbit-secret-garden-man.mp3"
+
+},
+
+  "the-rooster-honest-morning": {
+    "title": "The Rooster’s Honest Morning",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-rooster-honest-morning.txt",
+    "image": "animal-tales/the-rooster-honest-morning.webp",
+    "audio_woman": "animal-tales/audio/the-rooster-honest-morning-woman.mp3",
+    "audio_man": "animal-tales/audio/the-rooster-honest-morning-man.mp3"
+
+},
+
+  "the-sheep-secret-blanket": {
+    "title": "The Sheep’s Secret Blanket",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-sheep-secret-blanket.txt",
+    "image": "animal-tales/the-sheep-secret-blanket.webp",
+    "audio_woman": "animal-tales/audio/the-sheep-secret-blanket-woman.mp3",
+    "audio_man": "animal-tales/audio/the-sheep-secret-blanket-man.mp3"
+
+},
+
+  "the-shepherd-dog-loyal-promise": {
+    "title": "The Shepherd Dog’s Loyal Promise",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-shepherd-dog-loyal-promise.txt",
+    "image": "animal-tales/the-shepherd-dog-loyal-promise.webp",
+    "audio_woman": "animal-tales/audio/the-shepherd-dog-loyal-promise-woman.mp3",
+    "audio_man": "animal-tales/audio/the-shepherd-dog-loyal-promise-man.mp3"
+
+},
+
+  "the-snail-patient-journey": {
+    "title": "The Snail’s Patient Journey",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-snail-patient-journey.txt",
+    "image": "animal-tales/the-snail-patient-journey.webp",
+    "audio_woman": "animal-tales/audio/the-snail-patient-journey-woman.mp3",
+    "audio_man": "animal-tales/audio/the-snail-patient-journey-man.mp3"
+
+},
+
+  "the-sparrow-kind-flight": {
+    "title": "The Sparrow’s Kind Flight",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-sparrow-kind-flight.txt",
+    "image": "animal-tales/the-sparrow-kind-flight.webp",
+    "audio_woman": "animal-tales/audio/the-sparrow-kind-flight-woman.mp3",
+    "audio_man": "animal-tales/audio/the-sparrow-kind-flight-man.mp3"
+
+},
+
+  "the-squirrel-sharing-nuts": {
+    "title": "The Squirrel’s Sharing Nuts",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-squirrel-sharing-nuts.txt",
+    "image": "animal-tales/the-squirrel-sharing-nuts.webp",
+    "audio_woman": "animal-tales/audio/the-squirrel-sharing-nuts-woman.mp3",
+    "audio_man": "animal-tales/audio/the-squirrel-sharing-nuts-man.mp3"
+
+},
+
+  "the-stallion-honest-heart": {
+    "title": "The Stallion’s Honest Heart",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-stallion-honest-heart.txt",
+    "image": "animal-tales/the-stallion-honest-heart.webp",
+    "audio_woman": "animal-tales/audio/the-stallion-honest-heart-woman.mp3",
+    "audio_man": "animal-tales/audio/the-stallion-honest-heart-man.mp3"
+
+},
+
+  "the-swan-kind-dance": {
+    "title": "The Swan’s Kind Dance",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-swan-kind-dance.txt",
+    "image": "animal-tales/the-swan-kind-dance.webp",
+    "audio_woman": "animal-tales/audio/the-swan-kind-dance-woman.mp3",
+    "audio_man": "animal-tales/audio/the-swan-kind-dance-man.mp3"
+
+},
+
+  "the-terrier-sharing-game": {
+    "title": "The Terrier’s Sharing Game",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-terrier-sharing-game.txt",
+    "image": "animal-tales/the-terrier-sharing-game.webp",
+    "audio_woman": "animal-tales/audio/the-terrier-sharing-game-woman.mp3",
+    "audio_man": "animal-tales/audio/the-terrier-sharing-game-man.mp3"
+
+},
+
+  "the-tiger-kind-roar": {
+    "title": "The Tiger’s Kind Roar",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-tiger-kind-roar.txt",
+    "image": "animal-tales/the-tiger-kind-roar.webp",
+    "audio_woman": "animal-tales/audio/the-tiger-kind-roar-woman.mp3",
+    "audio_man": "animal-tales/audio/the-tiger-kind-roar-man.mp3"
+
+},
+
+  "the-turtle-big-race": {
+    "title": "The Turtle’s Big Race",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-turtle-big-race.txt",
+    "image": "animal-tales/the-turtle-big-race.webp",
+    "audio_woman": "animal-tales/audio/the-turtle-big-race-woman.mp3",
+    "audio_man": "animal-tales/audio/the-turtle-big-race-man.mp3"
+
+},
+
+  "the-young-penguin-starry-wish": {
+    "title": "The Young Penguin’s Starry Wish",
+    "folder": "animal-tales",
+    "text": "animal-tales/the-young-penguin-starry-wish.txt",
+    "image": "animal-tales/the-young-penguin-starry-wish.webp",
+    "audio_woman": "animal-tales/audio/the-young-penguin-starry-wish-woman.mp3",
+    "audio_man": "animal-tales/audio/the-young-penguin-starry-wish-man.mp3"
+
+
+
+  }
+
+}

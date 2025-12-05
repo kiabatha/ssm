@@ -320,6 +320,69 @@
     .replay-btn.show {
       display: flex;
     }
+
+    .menu-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: transparent;
+      color: #757575;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .speed-menu {
+      display: none;
+      position: absolute;
+      bottom: 45px;
+      right: 0;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 8px 0;
+      min-width: 120px;
+      z-index: 1000;
+    }
+
+    .speed-menu.show {
+      display: block;
+    }
+
+    .speed-option {
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #424242;
+      transition: background-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .speed-option:hover {
+      background-color: #f5f5f5;
+    }
+
+    .speed-option.active {
+      color: #2196F3;
+      font-weight: 600;
+    }
+
+    .speed-option .checkmark {
+      display: none;
+      color: #2196F3;
+      font-size: 16px;
+    }
+
+    .speed-option.active .checkmark {
+      display: inline;
+    }
   </style>
 </head>
 <body>
@@ -354,6 +417,35 @@
         </div>
         <span class="time-display" id="totalTime">0:00</span>
         <button class="replay-btn" id="replayBtn" onclick="replayAudio()">↻</button>
+        <button class="menu-btn" id="menuBtn" onclick="toggleSpeedMenu()">
+          ⋮
+          <div class="speed-menu" id="speedMenu">
+            <div class="speed-option" onclick="setPlaybackSpeed(0.5)" data-speed="0.5">
+              <span>0.5x</span>
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="speed-option" onclick="setPlaybackSpeed(0.75)" data-speed="0.75">
+              <span>0.75x</span>
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="speed-option active" onclick="setPlaybackSpeed(1)" data-speed="1">
+              <span>Normal</span>
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="speed-option" onclick="setPlaybackSpeed(1.25)" data-speed="1.25">
+              <span>1.25x</span>
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="speed-option" onclick="setPlaybackSpeed(1.5)" data-speed="1.5">
+              <span>1.5x</span>
+              <span class="checkmark">✓</span>
+            </div>
+            <div class="speed-option" onclick="setPlaybackSpeed(2)" data-speed="2">
+              <span>2x</span>
+              <span class="checkmark">✓</span>
+            </div>
+          </div>
+        </button>
       </div>
       <div class="scroll-speed-control">
         <label for="scrollSpeedSlider">Scroll Speed:</label>
@@ -547,6 +639,38 @@
       showError();
     });
   }
+
+  function toggleSpeedMenu(event) {
+    if (event) event.stopPropagation();
+    const menu = document.getElementById("speedMenu");
+    menu.classList.toggle("show");
+  }
+
+  function setPlaybackSpeed(speed, event) {
+    if (event) event.stopPropagation();
+    const audioBar = document.getElementById("audioBar");
+    audioBar.playbackRate = speed;
+    
+    // Update active state
+    document.querySelectorAll('.speed-option').forEach(option => {
+      option.classList.remove('active');
+      if (parseFloat(option.dataset.speed) === speed) {
+        option.classList.add('active');
+      }
+    });
+    
+    // Close menu
+    document.getElementById("speedMenu").classList.remove("show");
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById("speedMenu");
+    const menuBtn = document.getElementById("menuBtn");
+    if (menu && !menuBtn.contains(e.target)) {
+      menu.classList.remove("show");
+    }
+  });
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");

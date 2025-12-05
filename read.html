@@ -24,7 +24,7 @@
     .content {
       max-width: 800px;
       margin: 10px 15px 30px 15px;
-      padding: 13px;
+      padding: 10px;
       background-color: #ffffff;
       border-radius: 16px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -50,23 +50,6 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
-    .favorite-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 28px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 2;
-      transition: transform 0.2s ease;
-      display: none;
-    }
-
-    .favorite-icon:hover {
-      transform: scale(1.1);
-    }
-
     .button-row {
       display: flex;
       justify-content: center;
@@ -89,14 +72,6 @@
       gap: 6px;
       max-width: 100px;
       flex: 1 1 auto;
-      transition: transform 0.1s ease;
-    }
-
-    .action-button:active {
-      transform: scale(0.95);
-    }
-
-    .red-button {
       background-color: #E53935;
     }
 
@@ -110,11 +85,6 @@
       color: white;
       border: none;
       cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-
-    .round-button:active {
-      transform: scale(0.9);
     }
 
     #storyText {
@@ -129,16 +99,13 @@
       background-color: white;
       border-radius: 12px;
       color: #000;
-      box-shadow: none;
       padding: 12px;
     }
 
-    /* Hide native audio element */
     #audioBar {
       display: none;
     }
 
-    /* Custom Audio Player Container */
     #customAudioPlayer {
       display: none;
       margin: 15px auto 0;
@@ -236,12 +203,6 @@
       background-color: #2196F3;
       border-radius: 50%;
       box-shadow: 0 2px 4px rgba(0,0,0,0.25);
-      opacity: 1;
-    }
-
-    .progress-bar[style*="width: 0"] .progress-handle {
-      right: -7px;
-      opacity: 1;
     }
 
     .scroll-speed-control {
@@ -310,11 +271,6 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: transform 0.15s ease;
-    }
-
-    .replay-btn:active {
-      transform: scale(0.9);
     }
 
     .replay-btn.show {
@@ -359,7 +315,6 @@
       cursor: pointer;
       font-size: 13px;
       color: #424242;
-      transition: background-color 0.2s;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -389,20 +344,17 @@
   <div class="content">
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
-      <button class="favorite-icon" onclick="toggleFavorite()">🤍</button>
     </div>
 
     <div class="button-row">
-      <button class="action-button red-button" onclick="playAudio('man')">Man</button>
+      <button class="action-button" onclick="playAudio('man')">Man</button>
       <button class="round-button" onclick="adjustFontSize(-1)">−</button>
       <button class="round-button" onclick="adjustFontSize(1)">+</button>
-      <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
+      <button class="action-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
-    <!-- Hidden native audio element -->
     <audio id="audioBar" preload="auto"></audio>
 
-    <!-- Custom Audio Player -->
     <div id="customAudioPlayer">
       <div class="audio-controls">
         <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
@@ -417,7 +369,7 @@
         </div>
         <span class="time-display" id="totalTime">0:00</span>
         <button class="replay-btn" id="replayBtn" onclick="replayAudio()">↻</button>
-        <button class="menu-btn" id="menuBtn" onclick="toggleSpeedMenu()">
+        <button class="menu-btn" id="menuBtn" onclick="toggleSpeedMenu(event)">
           ⋮
           <div class="speed-menu" id="speedMenu">
             <div class="speed-option" onclick="setPlaybackSpeed(0.5, event)" data-speed="0.5">
@@ -449,7 +401,7 @@
       </div>
       <div class="scroll-speed-control">
         <label for="scrollSpeedSlider">Scroll Speed:</label>
-        <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
+        <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" oninput="updateScrollSpeed()" />
       </div>
       <div class="error-message" id="errorMessage">Failed to load audio. Please try again.</div>
     </div>
@@ -459,147 +411,101 @@
 
 <script>
   let isAutoplayActive = false;
-  let userInteractedWithAudio = false;
-  let audioListenersSetup = false;
   let scrollInterval = null;
   let currentScrollSpeed = 60;
-  let savedAudioTime = 0;
+  let storyData;
+  let currentFontSize = 14;
 
-  function toggleFavorite() {
-    console.log("Favorite toggled");
-  }
+  const params = new URLSearchParams(window.location.search);
+  const audioBar = document.getElementById("audioBar");
 
-  function setupAudioListeners() {
-    if (audioListenersSetup) return;
-    
-    const audioBar = document.getElementById("audioBar");
-    if (!audioBar) return;
-
-    audioBar.removeEventListener('play', handlePlay);
-    audioBar.removeEventListener('pause', handlePause);
-    audioBar.removeEventListener('ended', handleEnded);
-    audioBar.removeEventListener('seeked', handleSeeked);
-    audioBar.removeEventListener('timeupdate', updateProgress);
-    audioBar.removeEventListener('loadedmetadata', updateTotalTime);
-    audioBar.removeEventListener('canplay', hideLoading);
-    audioBar.removeEventListener('error', showError);
-    audioBar.removeEventListener('waiting', showLoading);
-
-    audioBar.addEventListener('play', handlePlay);
-    audioBar.addEventListener('pause', handlePause);
-    audioBar.addEventListener('ended', handleEnded);
-    audioBar.addEventListener('seeked', handleSeeked);
-    audioBar.addEventListener('timeupdate', updateProgress);
-    audioBar.addEventListener('loadedmetadata', updateTotalTime);
-    audioBar.addEventListener('canplay', hideLoading);
-    audioBar.addEventListener('error', showError);
-    audioBar.addEventListener('waiting', showLoading);
-    
-    audioListenersSetup = true;
-    console.log("Audio listeners setup complete");
-  }
-
-  function showLoading() {
-    document.getElementById("playPauseBtn").classList.add("loading");
-  }
-
-  function hideLoading() {
-    document.getElementById("playPauseBtn").classList.remove("loading");
-  }
-
-  function showError() {
-    console.error("Audio failed to load");
-    document.getElementById("errorMessage").style.display = "block";
-    hideLoading();
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
-  }
-
-  function handlePlay() {
-    console.log("Audio playing");
+  // Setup audio event listeners
+  audioBar.addEventListener('play', () => {
     if (window.Android) window.Android.onAudioStateChange(true);
     document.getElementById("customAudioPlayer").style.display = "block";
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "⏸";
     document.getElementById("replayBtn").classList.remove("show");
     document.getElementById("errorMessage").style.display = "none";
-    userInteractedWithAudio = false;
     startScrolling();
-  }
+  });
 
-  function handlePause() {
-    console.log("Audio paused");
-    const audioBar = document.getElementById("audioBar");
-    savedAudioTime = audioBar.currentTime;
-    
+  audioBar.addEventListener('pause', () => {
     if (window.Android) window.Android.onAudioStateChange(false);
-    
     clearInterval(scrollInterval);
     scrollInterval = null;
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
     
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
-    
     if (hasEnded) {
-      console.log("Audio ended, showing replay button");
       document.getElementById("replayBtn").classList.add("show");
-    } else {
-      console.log("Audio paused by user, keeping controls visible");
     }
     
     if (isAutoplayActive && !hasEnded) {
-      console.log("User stopped audio manually at", audioBar.currentTime, "of", audioBar.duration);
       if (window.Android) window.Android.onUserStoppedAudio();
       isAutoplayActive = false;
     }
-  }
+  });
 
-  function handleEnded() {
-    console.log("Audio ended naturally. isAutoplayActive:", isAutoplayActive);
-    const audioBar = document.getElementById("audioBar");
+  audioBar.addEventListener('ended', () => {
     if (window.Android) window.Android.onAudioStateChange(false);
     clearInterval(scrollInterval);
     scrollInterval = null;
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
     document.getElementById("replayBtn").classList.add("show");
     
-    if (isAutoplayActive) {
-      console.log("Autoplay is active, calling onAudioEnded");
-      if (window.Android) {
-        window.Android.onAudioEnded();
-      } else {
-        console.error("Android interface not available!");
-      }
-    } else {
-      console.log("Autoplay not active, skipping onAudioEnded");
+    if (isAutoplayActive && window.Android) {
+      window.Android.onAudioEnded();
     }
-  }
+  });
 
-  function handleSeeked() {
-    if (isAutoplayActive) {
-      userInteractedWithAudio = true;
-    }
-    savedAudioTime = document.getElementById("audioBar").currentTime;
-  }
-
-  function updateProgress() {
-    const audioBar = document.getElementById("audioBar");
-    const progressBar = document.getElementById("progressBar");
-    const currentTimeDisplay = document.getElementById("currentTime");
-    
+  audioBar.addEventListener('timeupdate', () => {
     if (audioBar.duration) {
       const progress = (audioBar.currentTime / audioBar.duration) * 100;
-      progressBar.style.width = Math.max(0, progress) + '%';
-      currentTimeDisplay.textContent = formatTime(audioBar.currentTime);
-      savedAudioTime = audioBar.currentTime;
+      document.getElementById("progressBar").style.width = Math.max(0, progress) + '%';
+      document.getElementById("currentTime").textContent = formatTime(audioBar.currentTime);
     }
-  }
+  });
 
-  function updateTotalTime() {
-    const audioBar = document.getElementById("audioBar");
-    const totalTimeDisplay = document.getElementById("totalTime");
+  audioBar.addEventListener('loadedmetadata', () => {
     if (audioBar.duration && !isNaN(audioBar.duration)) {
-      totalTimeDisplay.textContent = formatTime(audioBar.duration);
+      document.getElementById("totalTime").textContent = formatTime(audioBar.duration);
     }
-  }
+  });
+
+  audioBar.addEventListener('canplay', () => {
+    document.getElementById("playPauseBtn").classList.remove("loading");
+  });
+
+  audioBar.addEventListener('error', () => {
+    document.getElementById("errorMessage").style.display = "block";
+    document.getElementById("playPauseBtn").classList.remove("loading");
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
+  });
+
+  audioBar.addEventListener('waiting', () => {
+    document.getElementById("playPauseBtn").classList.add("loading");
+  });
+
+  // Load story data
+  fetch(`https://kiabatha.github.io/ssm/${params.get("file")}.json`)
+    .then(res => res.json())
+    .then(data => {
+      storyData = data[params.get("id")];
+      if (!storyData) throw new Error("Story not found");
+
+      fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById("storyText").innerText = text;
+          document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+          if (params.get("mode") === "manual") {
+            document.getElementById("storyText").style.display = "block";
+          }
+        });
+    })
+    .catch(() => {
+      document.getElementById("storyText").innerText = "Failed to load story.";
+    });
 
   function formatTime(seconds) {
     if (isNaN(seconds) || seconds === Infinity) return '0:00';
@@ -609,49 +515,35 @@
   }
 
   function togglePlayPause() {
-    const audioBar = document.getElementById("audioBar");
     if (audioBar.paused) {
-      audioBar.play().catch(err => {
-        console.error("Play error:", err);
-        showError();
-      });
+      audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
     } else {
       audioBar.pause();
     }
   }
 
   function seekAudio(event) {
-    const audioBar = document.getElementById("audioBar");
-    const progressContainer = document.getElementById("progressContainer");
-    const rect = progressContainer.getBoundingClientRect();
+    const rect = event.target.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
-    const width = rect.width;
-    const seekTime = (clickX / width) * audioBar.duration;
+    const seekTime = (clickX / rect.width) * audioBar.duration;
     audioBar.currentTime = Math.max(0, Math.min(seekTime, audioBar.duration));
   }
 
   function replayAudio() {
-    const audioBar = document.getElementById("audioBar");
     audioBar.currentTime = 0;
     document.getElementById("storyText").scrollTop = 0;
-    audioBar.play().catch(err => {
-      console.error("Replay error:", err);
-      showError();
-    });
+    audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
   }
 
   function toggleSpeedMenu(event) {
-    if (event) event.stopPropagation();
-    const menu = document.getElementById("speedMenu");
-    menu.classList.toggle("show");
+    event.stopPropagation();
+    document.getElementById("speedMenu").classList.toggle("show");
   }
 
   function setPlaybackSpeed(speed, event) {
-    if (event) event.stopPropagation();
-    const audioBar = document.getElementById("audioBar");
+    event.stopPropagation();
     audioBar.playbackRate = speed;
     
-    // Update active state
     document.querySelectorAll('.speed-option').forEach(option => {
       option.classList.remove('active');
       if (parseFloat(option.dataset.speed) === speed) {
@@ -659,60 +551,12 @@
       }
     });
     
-    // Close menu
     document.getElementById("speedMenu").classList.remove("show");
   }
 
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    const menu = document.getElementById("speedMenu");
-    const menuBtn = document.getElementById("menuBtn");
-    if (menu && !menuBtn.contains(e.target)) {
-      menu.classList.remove("show");
-    }
-  });
-
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  const mode = params.get("mode");
-  const file = params.get("file");
-
-  const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
-
-  let storyData;
-  const audioBar = document.getElementById("audioBar");
-
-  let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
-
-  fetch(jsonUrl)
-    .then(res => res.json())
-    .then(data => {
-      storyData = data[id];
-      if (!storyData) throw new Error("Story not found");
-
-      fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-        .then(res => res.text())
-        .then(text => {
-          document.getElementById("storyText").innerText = text;
-          document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
-          if (mode === "manual") {
-            document.getElementById("storyText").style.display = "block";
-          }
-          setupAudioListeners();
-        });
-    })
-    .catch(() => {
-      document.getElementById("storyText").innerText = "Failed to load story.";
-    });
-
   function startScrolling() {
-    if (scrollInterval) {
-      clearInterval(scrollInterval);
-    }
-    
-    const speedSlider = document.getElementById("scrollSpeedSlider");
-    currentScrollSpeed = parseInt(speedSlider.value);
-    
+    if (scrollInterval) clearInterval(scrollInterval);
+    currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
     scrollInterval = setInterval(() => {
       document.getElementById("storyText").scrollBy(0, 1);
     }, currentScrollSpeed);
@@ -721,42 +565,31 @@
   function updateScrollSpeed() {
     if (scrollInterval) {
       clearInterval(scrollInterval);
-      const speedSlider = document.getElementById("scrollSpeedSlider");
-      currentScrollSpeed = parseInt(speedSlider.value);
+      currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
       scrollInterval = setInterval(() => {
         document.getElementById("storyText").scrollBy(0, 1);
       }, currentScrollSpeed);
     }
   }
 
-  document.getElementById("scrollSpeedSlider").addEventListener("input", updateScrollSpeed);
-
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
-
     document.getElementById("storyText").scrollTop = 0;
-    clearInterval(scrollInterval);
+    if (scrollInterval) clearInterval(scrollInterval);
     scrollInterval = null;
-    savedAudioTime = 0;
-
-    showLoading();
-
+    document.getElementById("playPauseBtn").classList.add("loading");
+    
     audioBar.oncanplaythrough = () => {
       document.getElementById("storyText").scrollTop = 0;
-      audioBar.play().catch(err => {
-        console.error("Play error:", err);
-        showError();
-      });
+      audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
       document.getElementById("storyText").style.display = "block";
     };
   }
 
   function playAudioFromApp(gender) {
-    console.log("playAudioFromApp called with voice:", gender);
     isAutoplayActive = true;
-    userInteractedWithAudio = false;
     playAudio(gender);
   }
 
@@ -765,98 +598,11 @@
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
 
-  // Save state to sessionStorage to survive page reloads
-  function saveState() {
-    const audioBar = document.getElementById("audioBar");
-    if (audioBar.src && audioBar.duration > 0) {
-      sessionStorage.setItem('audioSrc', audioBar.src);
-      sessionStorage.setItem('audioTime', audioBar.currentTime.toString());
-      sessionStorage.setItem('wasPlaying', (!audioBar.paused).toString());
-      sessionStorage.setItem('playerVisible', document.getElementById("customAudioPlayer").style.display);
-      sessionStorage.setItem('scrollSpeed', currentScrollSpeed.toString());
-    }
-  }
-
-  function restoreState() {
-    const audioSrc = sessionStorage.getItem('audioSrc');
-    const audioTime = parseFloat(sessionStorage.getItem('audioTime') || '0');
-    const wasPlaying = sessionStorage.getItem('wasPlaying') === 'true';
-    const playerVisible = sessionStorage.getItem('playerVisible');
-    const scrollSpeed = parseInt(sessionStorage.getItem('scrollSpeed') || '60');
-
-    if (audioSrc && storyData) {
-      console.log("Restoring audio state:", {audioSrc, audioTime, wasPlaying});
-      const audioBar = document.getElementById("audioBar");
-      audioBar.src = audioSrc;
-      currentScrollSpeed = scrollSpeed;
-      document.getElementById("scrollSpeedSlider").value = scrollSpeed;
-      
-      audioBar.addEventListener('loadedmetadata', function restorePlayback() {
-        audioBar.currentTime = audioTime;
-        if (playerVisible === 'block') {
-          document.getElementById("customAudioPlayer").style.display = "block";
-          document.getElementById("storyText").style.display = "block";
-        }
-        if (wasPlaying) {
-          setTimeout(() => {
-            audioBar.play().catch(err => console.error("Restore play error:", err));
-          }, 100);
-        }
-        audioBar.removeEventListener('loadedmetadata', restorePlayback);
-      }, {once: true});
-    }
-  }
-
-  // Save state periodically and on critical events
-  setInterval(saveState, 1000);
-  
-  window.addEventListener('beforeunload', saveState);
-  window.addEventListener('pagehide', saveState);
-  
-  // Restore state after page loads
-  window.addEventListener('load', () => {
-    setupAudioListeners();
-    setTimeout(() => {
-      if (storyData) {
-        restoreState();
-      }
-    }, 500);
-  });
-
-  // Detect orientation change and save immediately
-  window.addEventListener("orientationchange", () => {
-    console.log("Orientation changing, saving state");
-    saveState();
-  });
-
-  // Preserve audio position and playback on orientation change or resize
-  let wasPlayingBeforeChange = false;
-  let playerWasVisible = false;
-  
-  window.addEventListener("resize", () => {
-    const audioBar = document.getElementById("audioBar");
-    const player = document.getElementById("customAudioPlayer");
-    
-    // Check if this is likely an orientation change (big dimension swap)
-    if (Math.abs(window.innerWidth - window.innerHeight) > 100) {
-      console.log("Orientation/resize detected, preserving state");
-      
-      // Save states
-      wasPlayingBeforeChange = !audioBar.paused;
-      playerWasVisible = player.style.display === "block";
-      
-      saveState();
-      
-      // Restore after brief delay
-      setTimeout(() => {
-        if (playerWasVisible) {
-          player.style.display = "block";
-        }
-        if (wasPlayingBeforeChange && audioBar.paused) {
-          console.log("Resuming playback after orientation change");
-          audioBar.play().catch(err => console.error("Resume error:", err));
-        }
-      }, 50);
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById("speedMenu");
+    const menuBtn = document.getElementById("menuBtn");
+    if (menu && !menuBtn.contains(e.target)) {
+      menu.classList.remove("show");
     }
   });
 
@@ -870,19 +616,6 @@
     }
   });
 
-  window.addEventListener("beforeunload", () => {
-    audioBar.pause();
-    if (scrollInterval) {
-      clearInterval(scrollInterval);
-      scrollInterval = null;
-    }
-  });
-
-  window.addEventListener('load', () => {
-    setupAudioListeners();
-  });
-
-  // Keyboard support
   document.addEventListener('keydown', (e) => {
     if (document.getElementById("customAudioPlayer").style.display === "block") {
       if (e.code === 'Space') {
@@ -897,8 +630,6 @@
       }
     }
   });
-
-  setupAudioListeners();
 </script>
 </body>
 </html>

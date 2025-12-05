@@ -341,6 +341,27 @@
     playAudio(gender);
   }
 
+  // ✅ NEW FUNCTIONS for Java integration
+  function pauseAudioFromApp() {
+    console.log("pauseAudioFromApp called");
+    const audioBar = document.getElementById("audioBar");
+    if (!audioBar.paused) {
+      audioBar.pause();
+    }
+  }
+
+  function stopAudioFromApp() {
+    console.log("stopAudioFromApp called");
+    const audioBar = document.getElementById("audioBar");
+    audioBar.pause();
+    audioBar.currentTime = 0;
+    clearInterval(scrollInterval);
+    document.getElementById("scrollSpeedContainer").style.display = "none";
+    document.getElementById("audioBar").style.display = "none";
+  }
+
+
+
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";

@@ -170,6 +170,11 @@
       flex-shrink: 0;
       box-shadow: 0 2px 8px rgba(33, 150, 243, 0.35);
       position: relative;
+      transition: background-color 0.2s ease;
+    }
+
+    .play-pause-btn:active {
+      background-color: #1976D2;
     }
 
     .play-pause-btn .spinner {
@@ -636,6 +641,70 @@
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
 
+  // Save state to sessionStorage to survive page reloads
+  function saveState() {
+    const audioBar = document.getElementById("audioBar");
+    if (audioBar.src && audioBar.duration > 0) {
+      sessionStorage.setItem('audioSrc', audioBar.src);
+      sessionStorage.setItem('audioTime', audioBar.currentTime.toString());
+      sessionStorage.setItem('wasPlaying', (!audioBar.paused).toString());
+      sessionStorage.setItem('playerVisible', document.getElementById("customAudioPlayer").style.display);
+      sessionStorage.setItem('scrollSpeed', currentScrollSpeed.toString());
+    }
+  }
+
+  function restoreState() {
+    const audioSrc = sessionStorage.getItem('audioSrc');
+    const audioTime = parseFloat(sessionStorage.getItem('audioTime') || '0');
+    const wasPlaying = sessionStorage.getItem('wasPlaying') === 'true';
+    const playerVisible = sessionStorage.getItem('playerVisible');
+    const scrollSpeed = parseInt(sessionStorage.getItem('scrollSpeed') || '60');
+
+    if (audioSrc && storyData) {
+      console.log("Restoring audio state:", {audioSrc, audioTime, wasPlaying});
+      const audioBar = document.getElementById("audioBar");
+      audioBar.src = audioSrc;
+      currentScrollSpeed = scrollSpeed;
+      document.getElementById("scrollSpeedSlider").value = scrollSpeed;
+      
+      audioBar.addEventListener('loadedmetadata', function restorePlayback() {
+        audioBar.currentTime = audioTime;
+        if (playerVisible === 'block') {
+          document.getElementById("customAudioPlayer").style.display = "block";
+          document.getElementById("storyText").style.display = "block";
+        }
+        if (wasPlaying) {
+          setTimeout(() => {
+            audioBar.play().catch(err => console.error("Restore play error:", err));
+          }, 100);
+        }
+        audioBar.removeEventListener('loadedmetadata', restorePlayback);
+      }, {once: true});
+    }
+  }
+
+  // Save state periodically and on critical events
+  setInterval(saveState, 1000);
+  
+  window.addEventListener('beforeunload', saveState);
+  window.addEventListener('pagehide', saveState);
+  
+  // Restore state after page loads
+  window.addEventListener('load', () => {
+    setupAudioListeners();
+    setTimeout(() => {
+      if (storyData) {
+        restoreState();
+      }
+    }, 500);
+  });
+
+  // Detect orientation change and save immediately
+  window.addEventListener("orientationchange", () => {
+    console.log("Orientation changing, saving state");
+    saveState();
+  });
+
   // Preserve audio position and playback on orientation change or resize
   let wasPlayingBeforeChange = false;
   let playerWasVisible = false;
@@ -651,6 +720,8 @@
       // Save states
       wasPlayingBeforeChange = !audioBar.paused;
       playerWasVisible = player.style.display === "block";
+      
+      saveState();
       
       // Restore after brief delay
       setTimeout(() => {

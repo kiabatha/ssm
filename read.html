@@ -315,11 +315,12 @@
     });
   }
 
-  function playAudio(gender) {
-    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-    audioBar.volume = 1.0;
+function playAudio(gender) {
+  const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
 
+  // Only set src if it's a new file or not already loaded
+  if (!audioBar.src.includes(audioPath)) {
+    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
 
@@ -332,7 +333,11 @@
         startScrolling();
       }, 6000);
     };
+  } else {
+    // If already loaded, just resume from current position
+    audioBar.play().catch(err => console.error("Resume error:", err));
   }
+}
 
   function playAudioFromApp(gender) {
     console.log("playAudioFromApp called with voice:", gender);
@@ -340,26 +345,6 @@
     userInteractedWithAudio = false;
     playAudio(gender);
   }
-
-  // ✅ NEW FUNCTIONS for Java integration
-  function pauseAudioFromApp() {
-    console.log("pauseAudioFromApp called");
-    const audioBar = document.getElementById("audioBar");
-    if (!audioBar.paused) {
-      audioBar.pause();
-    }
-  }
-
-  function stopAudioFromApp() {
-    console.log("stopAudioFromApp called");
-    const audioBar = document.getElementById("audioBar");
-    audioBar.pause();
-    audioBar.currentTime = 0;
-    clearInterval(scrollInterval);
-    document.getElementById("scrollSpeedContainer").style.display = "none";
-    document.getElementById("audioBar").style.display = "none";
-  }
-
 
 
   function adjustFontSize(change) {

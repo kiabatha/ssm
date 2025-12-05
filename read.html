@@ -317,26 +317,21 @@
 
 function playAudio(gender) {
   const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+  audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+  audioBar.volume = 1.0;
 
-  // Only set src if it's a new file or not already loaded
-  if (!audioBar.src.includes(audioPath)) {
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+  document.getElementById("storyText").scrollTop = 0;
+  clearInterval(scrollInterval);
+
+  audioBar.oncanplaythrough = () => {
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
-
-    audioBar.oncanplaythrough = () => {
-      document.getElementById("storyText").scrollTop = 0;
-      clearInterval(scrollInterval);
-      audioBar.play().catch(err => console.error("Play error:", err));
-      document.getElementById("storyText").style.display = "block";
-      setTimeout(() => {
-        startScrolling();
-      }, 6000);
-    };
-  } else {
-    // If already loaded, just resume from current position
-    audioBar.play().catch(err => console.error("Resume error:", err));
-  }
+    audioBar.play().catch(err => console.error("Play error:", err));
+    document.getElementById("storyText").style.display = "block";
+    setTimeout(() => {
+      startScrolling();
+    }, 6000);
+  };
 }
 
   function playAudioFromApp(gender) {

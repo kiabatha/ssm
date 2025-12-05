@@ -89,6 +89,11 @@
       gap: 6px;
       max-width: 100px;
       flex: 1 1 auto;
+      transition: transform 0.1s ease;
+    }
+
+    .action-button:active {
+      transform: scale(0.95);
     }
 
     .red-button {
@@ -105,6 +110,11 @@
       color: white;
       border: none;
       cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .round-button:active {
+      transform: scale(0.9);
     }
 
     #storyText {
@@ -113,7 +123,7 @@
       text-align: justify;
       font-size: 14px;
       line-height: 1.4;
-      margin-top: 20px;
+      margin-top: 15px;
       max-height: 400px;
       overflow-y: auto;
       background-color: white;
@@ -128,47 +138,72 @@
       display: none;
     }
 
-    /* Custom Audio Player */
+    /* Custom Audio Player Container */
     #customAudioPlayer {
       display: none;
-      margin: 20px auto 0;
+      margin: 15px auto 0;
       max-width: 600px;
-      background-color: white;
-      border-radius: 0;
-      padding: 0;
-      box-shadow: none;
+      background-color: #fafafa;
+      border-radius: 10px;
+      padding: 12px 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
     .audio-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .play-pause-btn {
-      width: 36px;
-      height: 36px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background-color: #2196F3;
       color: white;
       border: none;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+      box-shadow: 0 2px 8px rgba(33, 150, 243, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
     }
 
     .play-pause-btn:active {
       transform: scale(0.92);
+      box-shadow: 0 1px 4px rgba(33, 150, 243, 0.4);
+    }
+
+    .play-pause-btn .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .play-pause-btn.loading .spinner {
+      display: block;
+    }
+
+    .play-pause-btn.loading .btn-icon {
+      display: none;
     }
 
     .time-display {
       font-size: 11px;
-      color: #2196F3;
-      min-width: 35px;
+      color: #424242;
+      min-width: 38px;
       text-align: center;
       font-weight: 600;
     }
@@ -176,9 +211,9 @@
     .progress-container {
       flex: 1;
       position: relative;
-      height: 4px;
+      height: 8px;
       background-color: #E3F2FD;
-      border-radius: 2px;
+      border-radius: 4px;
       cursor: pointer;
       margin: 0 4px;
     }
@@ -186,7 +221,7 @@
     .progress-bar {
       height: 100%;
       background-color: #2196F3;
-      border-radius: 2px;
+      border-radius: 4px;
       width: 0%;
       position: relative;
       transition: width 0.1s linear;
@@ -194,51 +229,43 @@
 
     .progress-handle {
       position: absolute;
-      right: -6px;
+      right: -7px;
       top: 50%;
       transform: translateY(-50%);
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       background-color: #2196F3;
       border-radius: 50%;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      opacity: 1;
     }
 
-    .volume-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background-color: transparent;
-      color: #757575;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      flex-shrink: 0;
+    .progress-bar[style*="width: 0"] .progress-handle {
+      right: -7px;
+      opacity: 1;
     }
 
-    #scrollSpeedContainer {
-      display: none;
-      margin-top: 15px;
-    }
-
-    .scroll-speed-row {
+    .scroll-speed-control {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      font-size: 12px;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #e0e0e0;
     }
 
-    .scroll-speed-row label {
+    .scroll-speed-control label {
+      font-size: 11px;
       font-weight: 600;
-      color: #000;
+      color: #424242;
     }
 
     #scrollSpeedSlider {
-      width: 170px;
+      width: 140px;
       height: 6px;
       -webkit-appearance: none;
-      background: #e0e0e0;
+      background: #E3F2FD;
       border-radius: 3px;
       outline: none;
     }
@@ -250,6 +277,7 @@
       background: #2196F3;
       border-radius: 50%;
       cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
 
     #scrollSpeedSlider::-moz-range-thumb {
@@ -259,6 +287,39 @@
       border-radius: 50%;
       cursor: pointer;
       border: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .error-message {
+      display: none;
+      color: #E53935;
+      font-size: 12px;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .replay-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #E3F2FD;
+      color: #2196F3;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.15s ease;
+    }
+
+    .replay-btn:active {
+      transform: scale(0.9);
+    }
+
+    .replay-btn.show {
+      display: flex;
     }
   </style>
 </head>
@@ -277,12 +338,15 @@
     </div>
 
     <!-- Hidden native audio element -->
-    <audio id="audioBar"></audio>
+    <audio id="audioBar" preload="auto"></audio>
 
     <!-- Custom Audio Player -->
     <div id="customAudioPlayer">
       <div class="audio-controls">
-        <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">▶</button>
+        <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
+          <span class="btn-icon">▶</span>
+          <span class="spinner"></span>
+        </button>
         <span class="time-display" id="currentTime">0:00</span>
         <div class="progress-container" id="progressContainer" onclick="seekAudio(event)">
           <div class="progress-bar" id="progressBar">
@@ -290,15 +354,13 @@
           </div>
         </div>
         <span class="time-display" id="totalTime">0:00</span>
-        <button class="volume-btn" onclick="toggleMute()">🔊</button>
+        <button class="replay-btn" id="replayBtn" onclick="replayAudio()">↻</button>
       </div>
-    </div>
-
-    <div id="scrollSpeedContainer">
-      <div class="scroll-speed-row">
+      <div class="scroll-speed-control">
         <label for="scrollSpeedSlider">Scroll Speed:</label>
         <input type="range" id="scrollSpeedSlider" min="10" max="200" value="60" />
       </div>
+      <div class="error-message" id="errorMessage">Failed to load audio. Please try again.</div>
     </div>
 
     <div id="storyText"></div>
@@ -308,6 +370,9 @@
   let isAutoplayActive = false;
   let userInteractedWithAudio = false;
   let audioListenersSetup = false;
+  let scrollInterval = null;
+  let currentScrollSpeed = 60;
+  let savedAudioTime = 0;
 
   function toggleFavorite() {
     console.log("Favorite toggled");
@@ -325,6 +390,9 @@
     audioBar.removeEventListener('seeked', handleSeeked);
     audioBar.removeEventListener('timeupdate', updateProgress);
     audioBar.removeEventListener('loadedmetadata', updateTotalTime);
+    audioBar.removeEventListener('canplay', hideLoading);
+    audioBar.removeEventListener('error', showError);
+    audioBar.removeEventListener('waiting', showLoading);
 
     audioBar.addEventListener('play', handlePlay);
     audioBar.addEventListener('pause', handlePause);
@@ -332,17 +400,36 @@
     audioBar.addEventListener('seeked', handleSeeked);
     audioBar.addEventListener('timeupdate', updateProgress);
     audioBar.addEventListener('loadedmetadata', updateTotalTime);
+    audioBar.addEventListener('canplay', hideLoading);
+    audioBar.addEventListener('error', showError);
+    audioBar.addEventListener('waiting', showLoading);
     
     audioListenersSetup = true;
     console.log("Audio listeners setup complete");
+  }
+
+  function showLoading() {
+    document.getElementById("playPauseBtn").classList.add("loading");
+  }
+
+  function hideLoading() {
+    document.getElementById("playPauseBtn").classList.remove("loading");
+  }
+
+  function showError() {
+    console.error("Audio failed to load");
+    document.getElementById("errorMessage").style.display = "block";
+    hideLoading();
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
   }
 
   function handlePlay() {
     console.log("Audio playing");
     if (window.Android) window.Android.onAudioStateChange(true);
     document.getElementById("customAudioPlayer").style.display = "block";
-    document.getElementById("scrollSpeedContainer").style.display = "block";
-    document.getElementById("playPauseBtn").textContent = "⏸";
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "⏸";
+    document.getElementById("replayBtn").classList.remove("show");
+    document.getElementById("errorMessage").style.display = "none";
     userInteractedWithAudio = false;
     startScrolling();
   }
@@ -350,17 +437,19 @@
   function handlePause() {
     console.log("Audio paused");
     const audioBar = document.getElementById("audioBar");
+    savedAudioTime = audioBar.currentTime;
+    
     if (window.Android) window.Android.onAudioStateChange(false);
     
     clearInterval(scrollInterval);
-    document.getElementById("playPauseBtn").textContent = "▶";
+    scrollInterval = null;
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
     
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
     
     if (hasEnded) {
-      console.log("Audio ended, hiding controls");
-      document.getElementById("customAudioPlayer").style.display = "none";
-      document.getElementById("scrollSpeedContainer").style.display = "none";
+      console.log("Audio ended, showing replay button");
+      document.getElementById("replayBtn").classList.add("show");
     } else {
       console.log("Audio paused by user, keeping controls visible");
     }
@@ -377,9 +466,9 @@
     const audioBar = document.getElementById("audioBar");
     if (window.Android) window.Android.onAudioStateChange(false);
     clearInterval(scrollInterval);
-    document.getElementById("customAudioPlayer").style.display = "none";
-    document.getElementById("scrollSpeedContainer").style.display = "none";
-    document.getElementById("playPauseBtn").textContent = "▶";
+    scrollInterval = null;
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
+    document.getElementById("replayBtn").classList.add("show");
     
     if (isAutoplayActive) {
       console.log("Autoplay is active, calling onAudioEnded");
@@ -397,6 +486,7 @@
     if (isAutoplayActive) {
       userInteractedWithAudio = true;
     }
+    savedAudioTime = document.getElementById("audioBar").currentTime;
   }
 
   function updateProgress() {
@@ -404,19 +494,24 @@
     const progressBar = document.getElementById("progressBar");
     const currentTimeDisplay = document.getElementById("currentTime");
     
-    const progress = (audioBar.currentTime / audioBar.duration) * 100;
-    progressBar.style.width = progress + '%';
-    currentTimeDisplay.textContent = formatTime(audioBar.currentTime);
+    if (audioBar.duration) {
+      const progress = (audioBar.currentTime / audioBar.duration) * 100;
+      progressBar.style.width = Math.max(0, progress) + '%';
+      currentTimeDisplay.textContent = formatTime(audioBar.currentTime);
+      savedAudioTime = audioBar.currentTime;
+    }
   }
 
   function updateTotalTime() {
     const audioBar = document.getElementById("audioBar");
     const totalTimeDisplay = document.getElementById("totalTime");
-    totalTimeDisplay.textContent = formatTime(audioBar.duration);
+    if (audioBar.duration && !isNaN(audioBar.duration)) {
+      totalTimeDisplay.textContent = formatTime(audioBar.duration);
+    }
   }
 
   function formatTime(seconds) {
-    if (isNaN(seconds)) return '0:00';
+    if (isNaN(seconds) || seconds === Infinity) return '0:00';
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return mins + ':' + (secs < 10 ? '0' : '') + secs;
@@ -425,7 +520,10 @@
   function togglePlayPause() {
     const audioBar = document.getElementById("audioBar");
     if (audioBar.paused) {
-      audioBar.play();
+      audioBar.play().catch(err => {
+        console.error("Play error:", err);
+        showError();
+      });
     } else {
       audioBar.pause();
     }
@@ -434,17 +532,21 @@
   function seekAudio(event) {
     const audioBar = document.getElementById("audioBar");
     const progressContainer = document.getElementById("progressContainer");
-    const clickX = event.offsetX;
-    const width = progressContainer.offsetWidth;
+    const rect = progressContainer.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const width = rect.width;
     const seekTime = (clickX / width) * audioBar.duration;
-    audioBar.currentTime = seekTime;
+    audioBar.currentTime = Math.max(0, Math.min(seekTime, audioBar.duration));
   }
 
-  function toggleMute() {
+  function replayAudio() {
     const audioBar = document.getElementById("audioBar");
-    const volumeBtn = event.target;
-    audioBar.muted = !audioBar.muted;
-    volumeBtn.textContent = audioBar.muted ? '🔇' : '🔊';
+    audioBar.currentTime = 0;
+    document.getElementById("storyText").scrollTop = 0;
+    audioBar.play().catch(err => {
+      console.error("Replay error:", err);
+      showError();
+    });
   }
 
   const params = new URLSearchParams(window.location.search);
@@ -455,7 +557,6 @@
   const jsonUrl = `https://kiabatha.github.io/ssm/${file}.json`;
 
   let storyData;
-  let scrollInterval;
   const audioBar = document.getElementById("audioBar");
 
   let currentFontSize = parseInt(window.getComputedStyle(document.getElementById("storyText")).fontSize);
@@ -482,20 +583,30 @@
     });
 
   function startScrolling() {
-    clearInterval(scrollInterval);
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+    }
+    
     const speedSlider = document.getElementById("scrollSpeedSlider");
-    let speed = parseInt(speedSlider.value);
+    currentScrollSpeed = parseInt(speedSlider.value);
+    
     scrollInterval = setInterval(() => {
       document.getElementById("storyText").scrollBy(0, 1);
-    }, speed);
-    speedSlider.addEventListener("input", () => {
+    }, currentScrollSpeed);
+  }
+
+  function updateScrollSpeed() {
+    if (scrollInterval) {
       clearInterval(scrollInterval);
-      let newSpeed = parseInt(speedSlider.value);
+      const speedSlider = document.getElementById("scrollSpeedSlider");
+      currentScrollSpeed = parseInt(speedSlider.value);
       scrollInterval = setInterval(() => {
         document.getElementById("storyText").scrollBy(0, 1);
-      }, newSpeed);
-    });
+      }, currentScrollSpeed);
+    }
   }
+
+  document.getElementById("scrollSpeedSlider").addEventListener("input", updateScrollSpeed);
 
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
@@ -504,11 +615,17 @@
 
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
+    scrollInterval = null;
+    savedAudioTime = 0;
+
+    showLoading();
 
     audioBar.oncanplaythrough = () => {
       document.getElementById("storyText").scrollTop = 0;
-      clearInterval(scrollInterval);
-      audioBar.play().catch(err => console.error("Play error:", err));
+      audioBar.play().catch(err => {
+        console.error("Play error:", err);
+        showError();
+      });
       document.getElementById("storyText").style.display = "block";
     };
   }
@@ -525,20 +642,47 @@
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
 
+  // Preserve audio position on orientation change
+  window.addEventListener("orientationchange", () => {
+    console.log("Orientation changed, preserving audio position:", savedAudioTime);
+  });
+
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
-      clearInterval(scrollInterval);
+      if (scrollInterval) {
+        clearInterval(scrollInterval);
+        scrollInterval = null;
+      }
     }
   });
 
   window.addEventListener("beforeunload", () => {
     audioBar.pause();
-    clearInterval(scrollInterval);
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+      scrollInterval = null;
+    }
   });
 
   window.addEventListener('load', () => {
     setupAudioListeners();
+  });
+
+  // Keyboard support
+  document.addEventListener('keydown', (e) => {
+    if (document.getElementById("customAudioPlayer").style.display === "block") {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlayPause();
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        audioBar.currentTime = Math.max(0, audioBar.currentTime - 5);
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        audioBar.currentTime = Math.min(audioBar.duration, audioBar.currentTime + 5);
+      }
+    }
   });
 
   setupAudioListeners();

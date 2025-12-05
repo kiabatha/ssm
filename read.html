@@ -218,25 +218,34 @@
     document.getElementById("audioBar").style.display = "block";
     document.getElementById("scrollSpeedContainer").style.display = "block";
     userInteractedWithAudio = false;
+    startScrolling();
   }
 
   function handlePause() {
     console.log("Audio paused");
     const audioBar = document.getElementById("audioBar");
     if (window.Android) window.Android.onAudioStateChange(false);
-    clearInterval(scrollInterval);
-    audioBar.style.display = "none";
-    document.getElementById("scrollSpeedContainer").style.display = "none";
     
-    // Check if audio actually ended (currentTime equals duration) or was manually paused
+    // Stop scrolling when paused
+    clearInterval(scrollInterval);
+    
+    // Check if audio ended naturally
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
+    
+    // Only hide controls if audio ended, NOT on regular pause
+    if (hasEnded) {
+      console.log("Audio ended, hiding controls");
+      audioBar.style.display = "none";
+      document.getElementById("scrollSpeedContainer").style.display = "none";
+    } else {
+      console.log("Audio paused by user, keeping controls visible");
+      // Controls stay visible so user can resume
+    }
     
     if (isAutoplayActive && !hasEnded) {
       console.log("User stopped audio manually at", audioBar.currentTime, "of", audioBar.duration);
       if (window.Android) window.Android.onUserStoppedAudio();
       isAutoplayActive = false;
-    } else if (hasEnded) {
-      console.log("Audio paused because it ended naturally, ignoring");
     }
   }
 
@@ -301,6 +310,7 @@
     });
 
   function startScrolling() {
+    clearInterval(scrollInterval);
     const speedSlider = document.getElementById("scrollSpeedSlider");
     let speed = parseInt(speedSlider.value);
     scrollInterval = setInterval(() => {
@@ -315,24 +325,21 @@
     });
   }
 
-function playAudio(gender) {
-  const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-  audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
-  audioBar.volume = 1.0;
+  function playAudio(gender) {
+    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
+    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    audioBar.volume = 1.0;
 
-  document.getElementById("storyText").scrollTop = 0;
-  clearInterval(scrollInterval);
-
-  audioBar.oncanplaythrough = () => {
     document.getElementById("storyText").scrollTop = 0;
     clearInterval(scrollInterval);
-    audioBar.play().catch(err => console.error("Play error:", err));
-    document.getElementById("storyText").style.display = "block";
-    setTimeout(() => {
-      startScrolling();
-    }, 6000);
-  };
-}
+
+    audioBar.oncanplaythrough = () => {
+      document.getElementById("storyText").scrollTop = 0;
+      clearInterval(scrollInterval);
+      audioBar.play().catch(err => console.error("Play error:", err));
+      document.getElementById("storyText").style.display = "block";
+    };
+  }
 
   function playAudioFromApp(gender) {
     console.log("playAudioFromApp called with voice:", gender);
@@ -340,7 +347,6 @@ function playAudio(gender) {
     userInteractedWithAudio = false;
     playAudio(gender);
   }
-
 
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));

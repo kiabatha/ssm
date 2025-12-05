@@ -123,42 +123,99 @@
       padding: 12px;
     }
 
+    /* Hide native audio element */
     #audioBar {
       display: none;
-      margin: 10px auto 0;
-      width: 100%;
+    }
+
+    /* Custom Audio Player */
+    #customAudioPlayer {
+      display: none;
+      margin: 15px auto 0;
       max-width: 600px;
-      border-radius: 0;
-      padding: 0;
-      background-color: transparent;
+      background-color: #f5f5f5;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    /* Style the audio progress bar */
-    #audioBar::-webkit-media-controls-panel {
-      background-color: transparent;
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    /* The gray track background - change to blue */
-    #audioBar::-webkit-media-controls-timeline {
+    .play-pause-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       background-color: #2196F3;
-      border-radius: 25px;
-      margin-left: 10px;
-      margin-right: 10px;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    /* The played portion (progress) */
-    #audioBar::-webkit-media-controls-timeline-track {
+    .play-pause-btn:active {
+      transform: scale(0.95);
+    }
+
+    .time-display {
+      font-size: 12px;
+      color: #666;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .progress-container {
+      flex: 1;
+      position: relative;
+      height: 6px;
+      background-color: #e0e0e0;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 100%;
       background-color: #2196F3;
+      border-radius: 3px;
+      width: 0%;
+      position: relative;
+      transition: width 0.1s linear;
     }
 
-    #audioBar::-webkit-media-controls-current-time-display,
-    #audioBar::-webkit-media-controls-time-remaining-display {
-      color: #1976D2;
+    .progress-handle {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background-color: #2196F3;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .volume-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: transparent;
+      color: #666;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
     }
 
     #scrollSpeedContainer {
       display: none;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     .scroll-speed-row {
@@ -177,6 +234,28 @@
     #scrollSpeedSlider {
       width: 170px;
       height: 6px;
+      -webkit-appearance: none;
+      background: #e0e0e0;
+      border-radius: 3px;
+      outline: none;
+    }
+
+    #scrollSpeedSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: #2196F3;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    #scrollSpeedSlider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: #2196F3;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
     }
   </style>
 </head>
@@ -194,7 +273,23 @@
       <button class="action-button red-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
-    <audio id="audioBar" controls controlsList="nodownload"></audio>
+    <!-- Hidden native audio element -->
+    <audio id="audioBar"></audio>
+
+    <!-- Custom Audio Player -->
+    <div id="customAudioPlayer">
+      <div class="audio-controls">
+        <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">▶</button>
+        <span class="time-display" id="currentTime">0:00</span>
+        <div class="progress-container" id="progressContainer" onclick="seekAudio(event)">
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-handle"></div>
+          </div>
+        </div>
+        <span class="time-display" id="totalTime">0:00</span>
+        <button class="volume-btn" onclick="toggleMute()">🔊</button>
+      </div>
+    </div>
 
     <div id="scrollSpeedContainer">
       <div class="scroll-speed-row">
@@ -225,11 +320,15 @@
     audioBar.removeEventListener('pause', handlePause);
     audioBar.removeEventListener('ended', handleEnded);
     audioBar.removeEventListener('seeked', handleSeeked);
+    audioBar.removeEventListener('timeupdate', updateProgress);
+    audioBar.removeEventListener('loadedmetadata', updateTotalTime);
 
     audioBar.addEventListener('play', handlePlay);
     audioBar.addEventListener('pause', handlePause);
     audioBar.addEventListener('ended', handleEnded);
     audioBar.addEventListener('seeked', handleSeeked);
+    audioBar.addEventListener('timeupdate', updateProgress);
+    audioBar.addEventListener('loadedmetadata', updateTotalTime);
     
     audioListenersSetup = true;
     console.log("Audio listeners setup complete");
@@ -238,8 +337,9 @@
   function handlePlay() {
     console.log("Audio playing");
     if (window.Android) window.Android.onAudioStateChange(true);
-    document.getElementById("audioBar").style.display = "block";
+    document.getElementById("customAudioPlayer").style.display = "block";
     document.getElementById("scrollSpeedContainer").style.display = "block";
+    document.getElementById("playPauseBtn").textContent = "⏸";
     userInteractedWithAudio = false;
     startScrolling();
   }
@@ -249,20 +349,17 @@
     const audioBar = document.getElementById("audioBar");
     if (window.Android) window.Android.onAudioStateChange(false);
     
-    // Stop scrolling when paused
     clearInterval(scrollInterval);
+    document.getElementById("playPauseBtn").textContent = "▶";
     
-    // Check if audio ended naturally
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
     
-    // Only hide controls if audio ended, NOT on regular pause
     if (hasEnded) {
       console.log("Audio ended, hiding controls");
-      audioBar.style.display = "none";
+      document.getElementById("customAudioPlayer").style.display = "none";
       document.getElementById("scrollSpeedContainer").style.display = "none";
     } else {
       console.log("Audio paused by user, keeping controls visible");
-      // Controls stay visible so user can resume
     }
     
     if (isAutoplayActive && !hasEnded) {
@@ -277,8 +374,9 @@
     const audioBar = document.getElementById("audioBar");
     if (window.Android) window.Android.onAudioStateChange(false);
     clearInterval(scrollInterval);
-    audioBar.style.display = "none";
+    document.getElementById("customAudioPlayer").style.display = "none";
     document.getElementById("scrollSpeedContainer").style.display = "none";
+    document.getElementById("playPauseBtn").textContent = "▶";
     
     if (isAutoplayActive) {
       console.log("Autoplay is active, calling onAudioEnded");
@@ -296,6 +394,54 @@
     if (isAutoplayActive) {
       userInteractedWithAudio = true;
     }
+  }
+
+  function updateProgress() {
+    const audioBar = document.getElementById("audioBar");
+    const progressBar = document.getElementById("progressBar");
+    const currentTimeDisplay = document.getElementById("currentTime");
+    
+    const progress = (audioBar.currentTime / audioBar.duration) * 100;
+    progressBar.style.width = progress + '%';
+    currentTimeDisplay.textContent = formatTime(audioBar.currentTime);
+  }
+
+  function updateTotalTime() {
+    const audioBar = document.getElementById("audioBar");
+    const totalTimeDisplay = document.getElementById("totalTime");
+    totalTimeDisplay.textContent = formatTime(audioBar.duration);
+  }
+
+  function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return mins + ':' + (secs < 10 ? '0' : '') + secs;
+  }
+
+  function togglePlayPause() {
+    const audioBar = document.getElementById("audioBar");
+    if (audioBar.paused) {
+      audioBar.play();
+    } else {
+      audioBar.pause();
+    }
+  }
+
+  function seekAudio(event) {
+    const audioBar = document.getElementById("audioBar");
+    const progressContainer = document.getElementById("progressContainer");
+    const clickX = event.offsetX;
+    const width = progressContainer.offsetWidth;
+    const seekTime = (clickX / width) * audioBar.duration;
+    audioBar.currentTime = seekTime;
+  }
+
+  function toggleMute() {
+    const audioBar = document.getElementById("audioBar");
+    const volumeBtn = event.target;
+    audioBar.muted = !audioBar.muted;
+    volumeBtn.textContent = audioBar.muted ? '🔇' : '🔊';
   }
 
   const params = new URLSearchParams(window.location.search);

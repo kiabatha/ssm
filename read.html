@@ -131,59 +131,62 @@
     /* Custom Audio Player */
     #customAudioPlayer {
       display: none;
-      margin: 15px auto 0;
+      margin: 20px auto 0;
       max-width: 600px;
-      background-color: #f5f5f5;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: white;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
     }
 
     .audio-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
     .play-pause-btn {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background-color: #2196F3;
       color: white;
       border: none;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
     }
 
     .play-pause-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
     }
 
     .time-display {
-      font-size: 12px;
-      color: #666;
-      min-width: 40px;
+      font-size: 11px;
+      color: #2196F3;
+      min-width: 35px;
       text-align: center;
+      font-weight: 600;
     }
 
     .progress-container {
       flex: 1;
       position: relative;
-      height: 6px;
-      background-color: #e0e0e0;
-      border-radius: 3px;
+      height: 4px;
+      background-color: #E3F2FD;
+      border-radius: 2px;
       cursor: pointer;
+      margin: 0 4px;
     }
 
     .progress-bar {
       height: 100%;
       background-color: #2196F3;
-      border-radius: 3px;
+      border-radius: 2px;
       width: 0%;
       position: relative;
       transition: width 0.1s linear;
@@ -191,24 +194,24 @@
 
     .progress-handle {
       position: absolute;
-      right: -8px;
+      right: -6px;
       top: 50%;
       transform: translateY(-50%);
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
       background-color: #2196F3;
       border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
     .volume-btn {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background-color: transparent;
-      color: #666;
+      color: #757575;
       border: none;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       flex-shrink: 0;
     }

@@ -349,7 +349,9 @@
       <button class="action-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
-    <audio id="audioBar" preload="metadata"></audio>
+    <audio id="audioBar"></audio>
+    <audio id="audioMan" preload="auto"></audio>
+    <audio id="audioWoman" preload="auto"></audio>
 
     <div id="customAudioPlayer">
       <div class="audio-controls">
@@ -411,9 +413,13 @@
   let currentScrollSpeed = 60;
   let storyData;
   let currentFontSize = 14;
+  let manAudioLoaded = false;
+  let womanAudioLoaded = false;
 
   const params = new URLSearchParams(window.location.search);
   const audioBar = document.getElementById("audioBar");
+  const audioMan = document.getElementById("audioMan");
+  const audioWoman = document.getElementById("audioWoman");
 
   audioBar.addEventListener('play', () => {
     if (window.Android) window.Android.onAudioStateChange(true);
@@ -481,11 +487,33 @@
     document.getElementById("playPauseBtn").classList.add("loading");
   });
 
+  audioMan.addEventListener('canplaythrough', () => {
+    manAudioLoaded = true;
+    checkBothAudiosLoaded();
+  }, { once: true });
+
+  audioWoman.addEventListener('canplaythrough', () => {
+    womanAudioLoaded = true;
+    checkBothAudiosLoaded();
+  }, { once: true });
+
+  function checkBothAudiosLoaded() {
+    if (manAudioLoaded && womanAudioLoaded && window.Android) {
+      window.Android.onBothAudiosPreloaded();
+    }
+  }
+
   fetch(`https://kiabatha.github.io/ssm/${params.get("file")}.json`)
     .then(res => res.json())
     .then(data => {
       storyData = data[params.get("id")];
       if (!storyData) throw new Error("Story not found");
+
+      audioMan.src = `https://kiabatha.github.io/ssm/${storyData.audio_man}`;
+      audioWoman.src = `https://kiabatha.github.io/ssm/${storyData.audio_woman}`;
+      
+      audioMan.load();
+      audioWoman.load();
 
       fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
         .then(res => res.text())
@@ -574,21 +602,18 @@
   }
 
   function playAudio(gender) {
-    const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
-    audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
+    const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+    
+    audioBar.src = preloadedAudio.src;
+    audioBar.currentTime = 0;
     audioBar.volume = 1.0;
-    audioBar.load();
+    
     document.getElementById("storyText").scrollTop = 0;
     if (scrollInterval) clearInterval(scrollInterval);
     scrollInterval = null;
-    document.getElementById("playPauseBtn").classList.add("loading");
     
-    audioBar.addEventListener('canplaythrough', function playOnce() {
-      document.getElementById("storyText").scrollTop = 0;
-      audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
-      document.getElementById("storyText").style.display = "block";
-      audioBar.removeEventListener('canplaythrough', playOnce);
-    });
+    audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
+    document.getElementById("storyText").style.display = "block";
   }
 
   function playAudioFromApp(gender) {

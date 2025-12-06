@@ -255,22 +255,7 @@
     }
 
     .replay-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: #E3F2FD;
-      color: #2196F3;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .replay-btn.show {
-      display: flex;
+      display: none !important;
     }
 
     .menu-btn {
@@ -366,7 +351,7 @@
           </div>
         </div>
         <span class="time-display" id="totalTime">0:00</span>
-        <button class="replay-btn" id="replayBtn" onclick="replayAudio()">↻</button>
+
         <button class="menu-btn" id="menuBtn" onclick="toggleSpeedMenu(event)">
           ⋮
           <div class="speed-menu" id="speedMenu">
@@ -425,7 +410,6 @@
     if (window.Android) window.Android.onAudioStateChange(true);
     document.getElementById("customAudioPlayer").style.display = "block";
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "⏸";
-    document.getElementById("replayBtn").classList.remove("show");
     document.getElementById("errorMessage").style.display = "none";
     startScrolling();
   });
@@ -437,9 +421,6 @@
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
     
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
-    if (hasEnded) {
-      document.getElementById("replayBtn").classList.add("show");
-    }
     
     if (isAutoplayActive && !hasEnded) {
       if (window.Android) window.Android.onUserStoppedAudio();
@@ -452,7 +433,7 @@
     clearInterval(scrollInterval);
     scrollInterval = null;
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
-    document.getElementById("replayBtn").classList.add("show");
+    document.getElementById("customAudioPlayer").style.display = "none";
     
     if (isAutoplayActive && window.Android) {
       window.Android.onAudioEnded();

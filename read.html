@@ -254,10 +254,6 @@
       text-align: center;
     }
 
-    .replay-btn {
-      display: none !important;
-    }
-
     .menu-btn {
       width: 36px;
       height: 36px;
@@ -329,7 +325,7 @@
 
     <div class="button-row">
       <button class="action-button" onclick="playAudio('man')">Man</button>
-      <button class="round-button" onclick="adjustFontSize(-1)">−</button>
+      <button class="round-button" onclick="adjustFontSize(-1)">-</button>
       <button class="round-button" onclick="adjustFontSize(1)">+</button>
       <button class="action-button" onclick="playAudio('woman')">Woman</button>
     </div>
@@ -341,7 +337,7 @@
     <div id="customAudioPlayer">
       <div class="audio-controls">
         <button class="play-pause-btn" id="playPauseBtn" onclick="togglePlayPause()">
-          <span class="btn-icon">▶</span>
+          <span class="btn-icon">&#9654;</span>
           <span class="spinner"></span>
         </button>
         <span class="time-display" id="currentTime">0:00</span>
@@ -351,33 +347,32 @@
           </div>
         </div>
         <span class="time-display" id="totalTime">0:00</span>
-
         <button class="menu-btn" id="menuBtn" onclick="toggleSpeedMenu(event)">
-          ⋮
+          &#8942;
           <div class="speed-menu" id="speedMenu">
             <div class="speed-option" onclick="setPlaybackSpeed(0.5, event)" data-speed="0.5">
               <span>0.5x</span>
-              <span class="checkmark">✓</span>
+              <span class="checkmark">&#10003;</span>
             </div>
             <div class="speed-option" onclick="setPlaybackSpeed(0.75, event)" data-speed="0.75">
               <span>0.75x</span>
-              <span class="checkmark">✓</span>
+              <span class="checkmark">&#10003;</span>
             </div>
             <div class="speed-option active" onclick="setPlaybackSpeed(1, event)" data-speed="1">
               <span>Normal</span>
-              <span class="checkmark">✓</span>
+              <span class="checkmark">&#10003;</span>
             </div>
             <div class="speed-option" onclick="setPlaybackSpeed(1.25, event)" data-speed="1.25">
               <span>1.25x</span>
-              <span class="checkmark">✓</span>
+              <span class="checkmark">&#10003;</span>
             </div>
             <div class="speed-option" onclick="setPlaybackSpeed(1.5, event)" data-speed="1.5">
               <span>1.5x</span>
-              <span class="checkmark">✓</span>
+              <span class="checkmark">&#10003;</span>
             </div>
             <div class="speed-option" onclick="setPlaybackSpeed(2, event)" data-speed="2">
               <span>2x</span>
-              <span class="checkmark">✓</span>
+              <span class="checkmark">&#10003;</span>
             </div>
           </div>
         </button>
@@ -406,19 +401,19 @@
   const audioMan = document.getElementById("audioMan");
   const audioWoman = document.getElementById("audioWoman");
 
-  audioBar.addEventListener('play', () => {
+  audioBar.addEventListener('play', function() {
     if (window.Android) window.Android.onAudioStateChange(true);
     document.getElementById("customAudioPlayer").style.display = "block";
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "⏸";
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u23F8";
     document.getElementById("errorMessage").style.display = "none";
     startScrolling();
   });
 
-  audioBar.addEventListener('pause', () => {
+  audioBar.addEventListener('pause', function() {
     if (window.Android) window.Android.onAudioStateChange(false);
     clearInterval(scrollInterval);
     scrollInterval = null;
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
     
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
     
@@ -428,11 +423,11 @@
     }
   });
 
-  audioBar.addEventListener('ended', () => {
+  audioBar.addEventListener('ended', function() {
     if (window.Android) window.Android.onAudioStateChange(false);
     clearInterval(scrollInterval);
     scrollInterval = null;
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
     document.getElementById("customAudioPlayer").style.display = "none";
     
     if (isAutoplayActive && window.Android) {
@@ -440,7 +435,7 @@
     }
   });
 
-  audioBar.addEventListener('timeupdate', () => {
+  audioBar.addEventListener('timeupdate', function() {
     if (audioBar.duration) {
       const progress = (audioBar.currentTime / audioBar.duration) * 100;
       document.getElementById("progressBar").style.width = Math.max(0, progress) + '%';
@@ -448,32 +443,32 @@
     }
   });
 
-  audioBar.addEventListener('loadedmetadata', () => {
+  audioBar.addEventListener('loadedmetadata', function() {
     if (audioBar.duration && !isNaN(audioBar.duration)) {
       document.getElementById("totalTime").textContent = formatTime(audioBar.duration);
     }
   });
 
-  audioBar.addEventListener('canplaythrough', () => {
+  audioBar.addEventListener('canplaythrough', function() {
     document.getElementById("playPauseBtn").classList.remove("loading");
   });
 
-  audioBar.addEventListener('error', () => {
+  audioBar.addEventListener('error', function() {
     document.getElementById("errorMessage").style.display = "block";
     document.getElementById("playPauseBtn").classList.remove("loading");
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "▶";
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
   });
 
-  audioBar.addEventListener('waiting', () => {
+  audioBar.addEventListener('waiting', function() {
     document.getElementById("playPauseBtn").classList.add("loading");
   });
 
-  audioMan.addEventListener('canplaythrough', () => {
+  audioMan.addEventListener('canplaythrough', function() {
     manAudioLoaded = true;
     checkBothAudiosLoaded();
   }, { once: true });
 
-  audioWoman.addEventListener('canplaythrough', () => {
+  audioWoman.addEventListener('canplaythrough', function() {
     womanAudioLoaded = true;
     checkBothAudiosLoaded();
   }, { once: true });
@@ -484,23 +479,23 @@
     }
   }
 
-  fetch(`https://kiabatha.github.io/ssm/${params.get("file")}.json`)
-    .then(res => res.json())
-    .then(data => {
+  fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
       storyData = data[params.get("id")];
       if (!storyData) throw new Error("Story not found");
 
-      audioMan.src = `https://kiabatha.github.io/ssm/${storyData.audio_man}`;
-      audioWoman.src = `https://kiabatha.github.io/ssm/${storyData.audio_woman}`;
+      audioMan.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_man;
+      audioWoman.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_woman;
       
       audioMan.load();
       audioWoman.load();
 
-      fetch(`https://kiabatha.github.io/ssm/${storyData.text}`)
-        .then(res => res.text())
-        .then(text => {
+      fetch('https://kiabatha.github.io/ssm/' + storyData.text)
+        .then(function(res) { return res.text(); })
+        .then(function(text) {
           document.getElementById("storyText").innerText = text;
-          document.getElementById("storyImage").src = `https://kiabatha.github.io/ssm/${storyData.image}`;
+          document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
           if (params.get("mode") === "manual") {
             document.getElementById("storyText").style.display = "block";
           }
@@ -510,7 +505,7 @@
           }
         });
     })
-    .catch(() => {
+    .catch(function() {
       document.getElementById("storyText").innerText = "Failed to load story.";
       if (window.Android) {
         window.Android.onContentReady();
@@ -526,7 +521,9 @@
 
   function togglePlayPause() {
     if (audioBar.paused) {
-      audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
+      audioBar.play().catch(function() { 
+        document.getElementById("errorMessage").style.display = "block"; 
+      });
     } else {
       audioBar.pause();
     }
@@ -539,12 +536,6 @@
     audioBar.currentTime = Math.max(0, Math.min(seekTime, audioBar.duration));
   }
 
-  function replayAudio() {
-    audioBar.currentTime = 0;
-    document.getElementById("storyText").scrollTop = 0;
-    audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
-  }
-
   function toggleSpeedMenu(event) {
     event.stopPropagation();
     document.getElementById("speedMenu").classList.toggle("show");
@@ -554,12 +545,13 @@
     event.stopPropagation();
     audioBar.playbackRate = speed;
     
-    document.querySelectorAll('.speed-option').forEach(option => {
-      option.classList.remove('active');
-      if (parseFloat(option.dataset.speed) === speed) {
-        option.classList.add('active');
+    const options = document.querySelectorAll('.speed-option');
+    for (let i = 0; i < options.length; i++) {
+      options[i].classList.remove('active');
+      if (parseFloat(options[i].dataset.speed) === speed) {
+        options[i].classList.add('active');
       }
-    });
+    }
     
     document.getElementById("speedMenu").classList.remove("show");
   }
@@ -567,7 +559,7 @@
   function startScrolling() {
     if (scrollInterval) clearInterval(scrollInterval);
     currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
-    scrollInterval = setInterval(() => {
+    scrollInterval = setInterval(function() {
       document.getElementById("storyText").scrollBy(0, 1);
     }, currentScrollSpeed);
   }
@@ -576,7 +568,7 @@
     if (scrollInterval) {
       clearInterval(scrollInterval);
       currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
-      scrollInterval = setInterval(() => {
+      scrollInterval = setInterval(function() {
         document.getElementById("storyText").scrollBy(0, 1);
       }, currentScrollSpeed);
     }
@@ -593,7 +585,9 @@
     if (scrollInterval) clearInterval(scrollInterval);
     scrollInterval = null;
     
-    audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
+    audioBar.play().catch(function() { 
+      document.getElementById("errorMessage").style.display = "block"; 
+    });
     document.getElementById("storyText").style.display = "block";
   }
 
@@ -607,7 +601,7 @@
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
 
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', function(e) {
     const menu = document.getElementById("speedMenu");
     const menuBtn = document.getElementById("menuBtn");
     if (menu && !menuBtn.contains(e.target)) {
@@ -615,7 +609,7 @@
     }
   });
 
-  document.addEventListener("visibilitychange", () => {
+  document.addEventListener("visibilitychange", function() {
     if (document.hidden && !audioBar.paused) {
       audioBar.pause();
       if (scrollInterval) {
@@ -625,7 +619,7 @@
     }
   });
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (document.getElementById("customAudioPlayer").style.display === "block") {
       if (e.code === 'Space') {
         e.preventDefault();

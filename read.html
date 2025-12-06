@@ -411,9 +411,6 @@
 
 <script>
 
-  // ✅ ADD THIS TO YOUR read.html FILE
-  let audioPreloaded = false;
-
   // Preload both audio files
   function preloadAllAudio() {
       const manAudio = document.getElementById('audioMan');
@@ -424,7 +421,6 @@
 
       function checkBothLoaded() {
           if (manLoaded && womanLoaded) {
-              audioPreloaded = true;
               if (typeof Android !== 'undefined') {
                   Android.onAudioPreloaded();  // Tell Java audio is ready
               }
@@ -445,10 +441,11 @@
       womanAudio.load();
   }
 
-  // Call this automatically when page loads
+  // ✅ Paste this at the end of the script
   window.addEventListener('load', function() {
-   
+      preloadAllAudio();  // call preload immediately
   });
+
   
   let isAutoplayActive = false;
   let scrollInterval = null;

@@ -410,6 +410,46 @@
   </div>
 
 <script>
+
+  // ✅ ADD THIS TO YOUR read.html FILE
+  let audioPreloaded = false;
+
+  // Preload both audio files
+  function preloadAllAudio() {
+      const manAudio = document.getElementById('audioMan');
+      const womanAudio = document.getElementById('audioWoman');
+
+      let manLoaded = false;
+      let womanLoaded = false;
+
+      function checkBothLoaded() {
+          if (manLoaded && womanLoaded) {
+              audioPreloaded = true;
+              if (typeof Android !== 'undefined') {
+                  Android.onAudioPreloaded();  // Tell Java audio is ready
+              }
+          }
+      }
+
+      manAudio.addEventListener('canplaythrough', function() {
+          manLoaded = true;
+          checkBothLoaded();
+      }, { once: true });
+
+      womanAudio.addEventListener('canplaythrough', function() {
+          womanLoaded = true;
+          checkBothLoaded();
+      }, { once: true });
+
+      manAudio.load();
+      womanAudio.load();
+  }
+
+  // Call this automatically when page loads
+  window.addEventListener('load', function() {
+   
+  });
+  
   let isAutoplayActive = false;
   let scrollInterval = null;
   let currentScrollSpeed = 60;

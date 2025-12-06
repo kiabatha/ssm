@@ -573,51 +573,6 @@
     }
   }
 
-  // ✅ ADD THIS TO YOUR read.html FILE
-
-let audioPreloaded = false;
-
-// Preload both audio files
-function preloadAllAudio() {
-    const manAudio = document.getElementById('audioMan');
-    const womanAudio = document.getElementById('audioWoman');
-    
-    let manLoaded = false;
-    let womanLoaded = false;
-    
-    // Check if both are loaded
-    function checkBothLoaded() {
-        if (manLoaded && womanLoaded) {
-            audioPreloaded = true;
-            if (typeof Android !== 'undefined') {
-                Android.onAudioPreloaded();  // Tell Java audio is ready
-            }
-        }
-    }
-    
-    // Preload man voice
-    manAudio.addEventListener('canplaythrough', function() {
-        manLoaded = true;
-        checkBothLoaded();
-    }, { once: true });
-    
-    // Preload woman voice
-    womanAudio.addEventListener('canplaythrough', function() {
-        womanLoaded = true;
-        checkBothLoaded();
-    }, { once: true });
-    
-    // Force load
-    manAudio.load();
-    womanAudio.load();
-}
-
-// Call this automatically when page loads
-window.addEventListener('load', function() {
-    // Don't auto-preload, wait for Java to trigger it
-    // This gives Java control over when to start preloading
-});
-
   function playAudio(gender) {
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;

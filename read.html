@@ -102,10 +102,6 @@
       padding: 12px;
     }
 
-    #audioBar {
-      display: none;
-    }
-
     #customAudioPlayer {
       display: none;
       margin: 10px auto 0;
@@ -353,7 +349,7 @@
       <button class="action-button" onclick="playAudio('woman')">Woman</button>
     </div>
 
-    <audio id="audioBar" preload="auto"></audio>
+    <audio id="audioBar" preload="metadata"></audio>
 
     <div id="customAudioPlayer">
       <div class="audio-controls">
@@ -410,43 +406,6 @@
   </div>
 
 <script>
-
-  // Preload both audio files
-  function preloadAllAudio() {
-      const manAudio = document.getElementById('audioMan');
-      const womanAudio = document.getElementById('audioWoman');
-
-      let manLoaded = false;
-      let womanLoaded = false;
-
-      function checkBothLoaded() {
-          if (manLoaded && womanLoaded) {
-              if (typeof Android !== 'undefined') {
-                  Android.onAudioPreloaded();  // Tell Java audio is ready
-              }
-          }
-      }
-
-      manAudio.addEventListener('canplaythrough', function() {
-          manLoaded = true;
-          checkBothLoaded();
-      }, { once: true });
-
-      womanAudio.addEventListener('canplaythrough', function() {
-          womanLoaded = true;
-          checkBothLoaded();
-      }, { once: true });
-
-      manAudio.load();
-      womanAudio.load();
-  }
-
-  // ✅ Paste this at the end of the script
-  window.addEventListener('load', function() {
-      preloadAllAudio();  // call preload immediately
-  });
-
-  
   let isAutoplayActive = false;
   let scrollInterval = null;
   let currentScrollSpeed = 60;
@@ -455,9 +414,7 @@
 
   const params = new URLSearchParams(window.location.search);
   const audioBar = document.getElementById("audioBar");
-  
 
-  // Setup audio event listeners
   audioBar.addEventListener('play', () => {
     if (window.Android) window.Android.onAudioStateChange(true);
     document.getElementById("customAudioPlayer").style.display = "block";
@@ -510,7 +467,7 @@
     }
   });
 
-  audioBar.addEventListener('canplay', () => {
+  audioBar.addEventListener('canplaythrough', () => {
     document.getElementById("playPauseBtn").classList.remove("loading");
   });
 
@@ -524,7 +481,6 @@
     document.getElementById("playPauseBtn").classList.add("loading");
   });
 
-  // Load story data
   fetch(`https://kiabatha.github.io/ssm/${params.get("file")}.json`)
     .then(res => res.json())
     .then(data => {
@@ -539,10 +495,17 @@
           if (params.get("mode") === "manual") {
             document.getElementById("storyText").style.display = "block";
           }
+          
+          if (window.Android) {
+            window.Android.onContentReady();
+          }
         });
     })
     .catch(() => {
       document.getElementById("storyText").innerText = "Failed to load story.";
+      if (window.Android) {
+        window.Android.onContentReady();
+      }
     });
 
   function formatTime(seconds) {
@@ -614,16 +577,18 @@
     const audioPath = gender === "woman" ? storyData.audio_woman : storyData.audio_man;
     audioBar.src = `https://kiabatha.github.io/ssm/${audioPath}`;
     audioBar.volume = 1.0;
+    audioBar.load();
     document.getElementById("storyText").scrollTop = 0;
     if (scrollInterval) clearInterval(scrollInterval);
     scrollInterval = null;
     document.getElementById("playPauseBtn").classList.add("loading");
     
-    audioBar.oncanplaythrough = () => {
+    audioBar.addEventListener('canplaythrough', function playOnce() {
       document.getElementById("storyText").scrollTop = 0;
       audioBar.play().catch(() => document.getElementById("errorMessage").style.display = "block");
       document.getElementById("storyText").style.display = "block";
-    };
+      audioBar.removeEventListener('canplaythrough', playOnce);
+    });
   }
 
   function playAudioFromApp(gender) {
@@ -668,7 +633,6 @@
       }
     }
   });
-  
 </script>
 </body>
 </html>

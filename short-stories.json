@@ -1,0 +1,1725 @@
+{
+  "the-monkeys-secret-path": {
+    "title": "The Monkey’s Secret Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-monkeys-secret-path.txt",
+    "image": "short-stories/the-monkeys-secret-path.webp",
+    "audio_woman": "short-stories/audio/the-monkeys-secret-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-monkeys-secret-path-man.mp3"
+ },
+
+"the-lost-button": {
+    "title": "The Lost Button",
+    "folder": "short-stories",
+    "text": "short-stories/the-lost-button.txt",
+    "image": "short-stories/the-lost-button.webp",
+    "audio_woman": "short-stories/audio/the-lost-button-woman.mp3",
+    "audio_man": "short-stories/audio/the-lost-button-man.mp3"
+
+ },
+
+"the-cloud-that-couldnt-cry": {
+    "title": "The Cloud That Couldn’t Cry",
+    "folder": "short-stories",
+    "text": "short-stories/the-cloud-that-couldnt-cry.txt",
+    "image": "short-stories/the-cloud-that-couldnt-cry.webp",
+    "audio_woman": "short-stories/audio/the-cloud-that-couldnt-cry-woman.mp3",
+    "audio_man": "short-stories/audio/the-cloud-that-couldnt-cry-man.mp3"
+
+ },
+
+"the-brave-little-ant": {
+    "title": "The Brave Little Ant",
+    "folder": "short-stories",
+    "text": "short-stories/the-brave-little-ant.txt",
+    "image": "short-stories/the-brave-little-ant.webp",
+    "audio_woman": "short-stories/audio/the-brave-little-ant-woman.mp3",
+    "audio_man": "short-stories/audio/the-brave-little-ant-man.mp3"
+
+},
+
+"the-balloon-that-flew-too-far": {
+    "title": "The Balloon That Flew Too Far",
+    "folder": "short-stories",
+    "text": "short-stories/the-balloon-that-flew-too-far.txt",
+    "image": "short-stories/the-balloon-that-flew-too-far.webp",
+    "audio_woman": "short-stories/audio/the-balloon-that-flew-too-far-woman.mp3",
+    "audio_man": "short-stories/audio/the-balloon-that-flew-too-far-man.mp3"
+
+},
+
+"forest-school-house": {
+    "title": "Forest School House",
+    "folder": "short-stories",
+    "text": "short-stories/forest-school-house.txt",
+    "image": "short-stories/forest-school-house.webp",
+    "audio_woman": "short-stories/audio/forest-school-house-woman.mp3",
+    "audio_man": "short-stories/audio/forest-school-house-man.mp3"
+ },
+
+"the-bridge-of-kindness": {
+    "title": "The Bridge of Kindness",
+    "folder": "short-stories",
+    "text": "short-stories/the-bridge-of-kindness.txt",
+    "image": "short-stories/the-bridge-of-kindness.webp",
+    "audio_woman": "short-stories/audio/the-bridge-of-kindness-woman.mp3",
+    "audio_man": "short-stories/audio/the-bridge-of-kindness-man.mp3"
+
+ },
+
+"the-bridge-of-rainbow-light": {
+    "title": "The Bridge of Rainbow Light",
+    "folder": "short-stories",
+    "text": "short-stories/the-bridge-of-rainbow-light.txt",
+    "image": "short-stories/the-bridge-of-rainbow-light.webp",
+    "audio_woman": "short-stories/audio/the-bridge-of-rainbow-light-woman.mp3",
+    "audio_man": "short-stories/audio/the-bridge-of-rainbow-light-man.mp3"
+
+ },
+
+"the-cave-of-courage": {
+    "title": "The Cave of Courage",
+    "folder": "short-stories",
+    "text": "short-stories/the-cave-of-courage.txt",
+    "image": "short-stories/the-cave-of-courage.webp",
+    "audio_woman": "short-stories/audio/the-cave-of-courage-woman.mp3",
+    "audio_man": "short-stories/audio/the-cave-of-courage-man.mp3"
+
+ },
+
+"the-cave-of-shining-crystals": {
+    "title": "The Cave of Shining Crystals",
+    "folder": "short-stories",
+    "text": "short-stories/the-cave-of-shining-crystals.txt",
+    "image": "short-stories/the-cave-of-shining-crystals.webp",
+    "audio_woman": "short-stories/audio/the-cave-of-shining-crystals-woman.mp3",
+    "audio_man": "short-stories/audio/the-cave-of-shining-crystals-man.mp3"
+
+ },
+
+"the-cloud-gentle-journey": {
+    "title": "The Cloud’s Gentle Journey",
+    "folder": "short-stories",
+    "text": "short-stories/the-cloud-gentle-journey.txt",
+    "image": "short-stories/the-cloud-gentle-journey.webp",
+    "audio_woman": "short-stories/audio/the-cloud-gentle-journey-woman.mp3",
+    "audio_man": "short-stories/audio/the-cloud-gentle-journey-man.mp3"
+
+ },
+
+"the-forest-of-gentle-giants": {
+    "title": "The Forest of Gentle Giants",
+    "folder": "short-stories",
+    "text": "short-stories/the-forest-of-gentle-giants.txt",
+    "image": "short-stories/the-forest-of-gentle-giants.webp",
+    "audio_woman": "short-stories/audio/the-forest-of-gentle-giants-woman.mp3",
+    "audio_man": "short-stories/audio/the-forest-of-gentle-giants-man.mp3"
+
+ },
+
+"the-forest-of-peaceful-steps": {
+    "title": "The Forest of Peaceful Steps",
+    "folder": "short-stories",
+    "text": "short-stories/the-forest-of-peaceful-steps.txt",
+    "image": "short-stories/the-forest-of-peaceful-steps.webp",
+    "audio_woman": "short-stories/audio/the-forest-of-peaceful-steps-woman.mp3",
+    "audio_man": "short-stories/audio/the-forest-of-peaceful-steps-man.mp3"
+
+ },
+
+"the-garden-of-caring-hands": {
+    "title": "The Garden of Caring Hands",
+    "folder": "short-stories",
+    "text": "short-stories/the-garden-of-caring-hands.txt",
+    "image": "short-stories/the-garden-of-caring-hands.webp",
+    "audio_woman": "short-stories/audio/the-garden-of-caring-hands-woman.mp3",
+    "audio_man": "short-stories/audio/the-garden-of-caring-hands-man.mp3"
+
+ },
+
+"the-hidden-garden-gate": {
+    "title": "The Hidden Garden Gate",
+    "folder": "short-stories",
+    "text": "short-stories/the-hidden-garden-gate.txt",
+    "image": "short-stories/the-hidden-garden-gate.webp",
+    "audio_woman": "short-stories/audio/the-hidden-garden-gate-woman.mp3",
+    "audio_man": "short-stories/audio/the-hidden-garden-gate-man.mp3"
+
+
+ },
+
+"the-hidden-nest-in-the-woods": {
+    "title": "The Hidden Nest in the Woods",
+    "folder": "short-stories",
+    "text": "short-stories/the-hidden-nest-in-the-woods.txt",
+    "image": "short-stories/the-hidden-nest-in-the-woods.webp",
+    "audio_woman": "short-stories/audio/the-hidden-nest-in-the-woods-woman.mp3",
+    "audio_man": "short-stories/audio/the-hidden-nest-in-the-woods-man.mp3"
+
+
+ },
+
+"the-hidden-orchard-of-joy": {
+    "title": "The Hidden Orchard of Joy",
+    "folder": "short-stories",
+    "text": "short-stories/the-hidden-orchard-of-joy.txt",
+    "image": "short-stories/the-hidden-orchard-of-joy.webp",
+    "audio_woman": "short-stories/audio/the-hidden-orchard-of-joy-woman.mp3",
+    "audio_man": "short-stories/audio/the-hidden-orchard-of-joy-man.mp3"
+
+ },
+
+"the-hidden-spring-of-dreams": {
+    "title": "The Hidden Spring of Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-hidden-spring-of-dreams.txt",
+    "image": "short-stories/the-hidden-spring-of-dreams.webp",
+    "audio_woman": "short-stories/audio/the-hidden-spring-of-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-hidden-spring-of-dreams-man.mp3"
+
+ },
+
+"the-hill-of-honest-voices": {
+    "title": "The Hill of Honest Voices",
+    "folder": "short-stories",
+    "text": "short-stories/the-hill-of-honest-voices.txt",
+    "image": "short-stories/the-hill-of-honest-voices.webp",
+    "audio_woman": "short-stories/audio/the-hill-of-honest-voices-woman.mp3",
+    "audio_man": "short-stories/audio/the-hill-of-honest-voices-man.mp3"
+
+ },
+
+"the-hill-of-kind-lanterns": {
+    "title": "The Hill of Kind Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-hill-of-kind-lanterns.txt",
+    "image": "short-stories/the-hill-of-kind-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-hill-of-kind-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-hill-of-kind-lanterns-man.mp3"
+
+ },
+
+"the-lake-of-dancing-shadows": {
+    "title": "The Lake of Dancing Shadows",
+    "folder": "short-stories",
+    "text": "short-stories/the-lake-of-dancing-shadows.txt",
+    "image": "short-stories/the-lake-of-dancing-shadows.webp",
+    "audio_woman": "short-stories/audio/the-lake-of-dancing-shadows-woman.mp3",
+    "audio_man": "short-stories/audio/the-lake-of-dancing-shadows-man.mp3"
+
+ },
+
+"the-lake-of-honest-reflections": {
+    "title": "The Lake of Honest Reflections",
+    "folder": "short-stories",
+    "text": "short-stories/the-lake-of-honest-reflections.txt",
+    "image": "short-stories/the-lake-of-honest-reflections.webp",
+    "audio_woman": "short-stories/audio/the-lake-of-honest-reflections-woman.mp3",
+    "audio_man": "short-stories/audio/the-lake-of-honest-reflections-man.mp3"
+
+ },
+
+"the-lanterns-of-the-forest-fair": {
+    "title": "The Lanterns of the Forest Fair",
+    "folder": "short-stories",
+    "text": "short-stories/the-lanterns-of-the-forest-fair.txt",
+    "image": "short-stories/the-lanterns-of-the-forest-fair.webp",
+    "audio_woman": "short-stories/audio/the-lanterns-of-the-forest-fair-woman.mp3",
+    "audio_man": "short-stories/audio/the-lanterns-of-the-forest-fair-man.mp3"
+
+ },
+
+"the-meadow-of-caring-stars": {
+    "title": "The Meadow of Caring Stars",
+    "folder": "short-stories",
+    "text": "short-stories/the-meadow-of-caring-stars.txt",
+    "image": "short-stories/the-meadow-of-caring-stars.webp",
+    "audio_woman": "short-stories/audio/the-meadow-of-caring-stars-woman.mp3",
+    "audio_man": "short-stories/audio/the-meadow-of-caring-stars-man.mp3"
+
+ },
+
+"the-meadow-of-golden-dreams": {
+    "title": "The Meadow of Golden Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-meadow-of-golden-dreams.txt",
+    "image": "short-stories/the-meadow-of-golden-dreams.webp",
+    "audio_woman": "short-stories/audio/the-meadow-of-golden-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-meadow-of-golden-dreams-man.mp3"
+
+ },
+
+"the-mountain-of-brave-steps": {
+    "title": "The Mountain of Brave Steps",
+    "folder": "short-stories",
+    "text": "short-stories/the-mountain-of-brave-steps.txt",
+    "image": "short-stories/the-mountain-of-brave-steps.webp",
+    "audio_woman": "short-stories/audio/the-mountain-of-brave-steps-woman.mp3",
+    "audio_man": "short-stories/audio/the-mountain-of-brave-steps-man.mp3"
+
+ },
+
+"the-orchard-of-sharing-apples": {
+    "title": "The Orchard of Sharing Apples",
+    "folder": "short-stories",
+    "text": "short-stories/the-orchard-of-sharing-apples.txt",
+    "image": "short-stories/the-orchard-of-sharing-apples.webp",
+    "audio_woman": "short-stories/audio/the-orchard-of-sharing-apples-woman.mp3",
+    "audio_man": "short-stories/audio/the-orchard-of-sharing-apples-man.mp3"
+
+ },
+
+"the-path-of-brave-lanterns": {
+    "title": "The Path of Brave Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-path-of-brave-lanterns.txt",
+    "image": "short-stories/the-path-of-brave-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-path-of-brave-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-path-of-brave-lanterns-man.mp3"
+
+ },
+
+"the-path-of-silver-stones": {
+    "title": "The Path of Silver Stones",
+    "folder": "short-stories",
+    "text": "short-stories/the-path-of-silver-stones.txt",
+    "image": "short-stories/the-path-of-silver-stones.webp",
+    "audio_woman": "short-stories/audio/the-path-of-silver-stones-woman.mp3",
+    "audio_man": "short-stories/audio/the-path-of-silver-stones-man.mp3"
+
+ },
+
+"the-rainbow-hilltop": {
+    "title": "The Rainbow Hilltop",
+    "folder": "short-stories",
+    "text": "short-stories/the-rainbow-hilltop.txt",
+    "image": "short-stories/the-rainbow-hilltop.webp",
+    "audio_woman": "short-stories/audio/the-rainbow-hilltop-woman.mp3",
+    "audio_man": "short-stories/audio/the-rainbow-hilltop-man.mp3"
+
+ },
+
+"the-riverbank-of-friendship": {
+    "title": "The Riverbank of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-riverbank-of-friendship.txt",
+    "image": "short-stories/the-riverbank-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-riverbank-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-riverbank-of-friendship-man.mp3"
+
+ },
+
+"the-river-of-gentle-promises": {
+    "title": "The River of Gentle Promises",
+    "folder": "short-stories",
+    "text": "short-stories/the-river-of-gentle-promises.txt",
+    "image": "short-stories/the-river-of-gentle-promises.webp",
+    "audio_woman": "short-stories/audio/the-river-of-gentle-promises-woman.mp3",
+    "audio_man": "short-stories/audio/the-river-of-gentle-promises-man.mp3"
+
+ },
+
+"the-river-secret-song": {
+    "title": "The River’s Secret Song",
+    "folder": "short-stories",
+    "text": "short-stories/the-river-secret-song.txt",
+    "image": "short-stories/the-river-secret-song.webp",
+    "audio_woman": "short-stories/audio/the-river-secret-song-woman.mp3",
+    "audio_man": "short-stories/audio/the-river-secret-song-man.mp3"
+
+ },
+
+"the-secret-garden-schoolhouse": {
+    "title": "The Secret Garden Schoolhouse",
+    "folder": "short-stories",
+    "text": "short-stories/the-secret-garden-schoolhouse.txt",
+    "image": "short-stories/the-secret-garden-schoolhouse.webp",
+    "audio_woman": "short-stories/audio/the-secret-garden-schoolhouse-woman.mp3",
+    "audio_man": "short-stories/audio/the-secret-garden-schoolhouse-man.mp3"
+
+ },
+
+"the-secret-grove-of-smiles": {
+    "title": "The Secret Grove of Smiles",
+    "folder": "short-stories",
+    "text": "short-stories/the-secret-grove-of-smiles.txt",
+    "image": "short-stories/the-secret-grove-of-smiles.webp",
+    "audio_woman": "short-stories/audio/the-secret-grove-of-smiles-woman.mp3",
+    "audio_man": "short-stories/audio/the-secret-grove-of-smiles-man.mp3"
+
+ },
+
+"the-secret-meadow-school": {
+    "title": "The Secret Meadow School",
+    "folder": "short-stories",
+    "text": "short-stories/the-secret-meadow-school.txt",
+    "image": "short-stories/the-secret-meadow-school.webp",
+    "audio_woman": "short-stories/audio/the-secret-meadow-school-woman.mp3",
+    "audio_man": "short-stories/audio/the-secret-meadow-school-man.mp3"
+
+ },
+
+"the-secret-tunnel-of-hope": {
+    "title": "The Secret Tunnel of Hope",
+    "folder": "short-stories",
+    "text": "short-stories/the-secret-tunnel-of-hope.txt",
+    "image": "short-stories/the-secret-tunnel-of-hope.webp",
+    "audio_woman": "short-stories/audio/the-secret-tunnel-of-hope-woman.mp3",
+    "audio_man": "short-stories/audio/the-secret-tunnel-of-hope-man.mp3"
+
+ },
+
+"the-starry-campfire-night": {
+    "title": "The Starry Campfire Night",
+    "folder": "short-stories",
+    "text": "short-stories/the-starry-campfire-night.txt",
+    "image": "short-stories/the-starry-campfire-night.webp",
+    "audio_woman": "short-stories/audio/the-starry-campfire-night-woman.mp3",
+    "audio_man": "short-stories/audio/the-starry-campfire-night-man.mp3"
+
+ },
+
+"the-tower-of-friendship-lights": {
+    "title": "The Tower of Friendship Lights",
+    "folder": "short-stories",
+    "text": "short-stories/the-tower-of-friendship-lights.txt",
+    "image": "short-stories/the-tower-of-friendship-lights.webp",
+    "audio_woman": "short-stories/audio/the-tower-of-friendship-lights-woman.mp3",
+    "audio_man": "short-stories/audio/the-tower-of-friendship-lights-man.mp3"
+
+ },
+
+"the-tower-of-kind-wishes": {
+    "title": "The Tower of Kind Wishes",
+    "folder": "short-stories",
+    "text": "short-stories/the-tower-of-kind-wishes.txt",
+    "image": "short-stories/the-tower-of-kind-wishes.webp",
+    "audio_woman": "short-stories/audio/the-tower-of-kind-wishes-woman.mp3",
+    "audio_man": "short-stories/audio/the-tower-of-kind-wishes-man.mp3"
+
+ },
+
+"the-treehouse-of-brave-hearts": {
+    "title": "The Treehouse of Brave Hearts",
+    "folder": "short-stories",
+    "text": "short-stories/the-treehouse-of-brave-hearts.txt",
+    "image": "short-stories/the-treehouse-of-brave-hearts.webp",
+    "audio_woman": "short-stories/audio/the-treehouse-of-brave-hearts-woman.mp3",
+    "audio_man": "short-stories/audio/the-treehouse-of-brave-hearts-man.mp3"
+
+ },
+
+"the-valley-of-gentle-winds": {
+    "title": "The Valley of Gentle Winds",
+    "folder": "short-stories",
+    "text": "short-stories/the-valley-of-gentle-winds.txt",
+    "image": "short-stories/the-valley-of-gentle-winds.webp",
+    "audio_woman": "short-stories/audio/the-valley-of-gentle-winds-woman.mp3",
+    "audio_man": "short-stories/audio/the-valley-of-gentle-winds-man.mp3"
+
+ },
+
+"the-valley-of-sharing-songs": {
+    "title": "The Valley of Sharing Songs",
+    "folder": "short-stories",
+    "text": "short-stories/the-valley-of-sharing-songs.txt",
+    "image": "short-stories/the-valley-of-sharing-songs.webp",
+    "audio_woman": "short-stories/audio/the-valley-of-sharing-songs-woman.mp3",
+    "audio_man": "short-stories/audio/the-valley-of-sharing-songs-man.mp3"
+
+ },
+
+"the-whispering-cave-of-truth": {
+    "title": "The Whispering Cave of Truth",
+    "folder": "short-stories",
+    "text": "short-stories/the-whispering-cave-of-truth.txt",
+    "image": "short-stories/the-whispering-cave-of-truth.webp",
+    "audio_woman": "short-stories/audio/the-whispering-cave-of-truth-woman.mp3",
+    "audio_man": "short-stories/audio/the-whispering-cave-of-truth-man.mp3"
+
+ },
+
+"the-whispering-willow-tree": {
+    "title": "The Whispering Willow Tree",
+    "folder": "short-stories",
+    "text": "short-stories/the-whispering-willow-tree.txt",
+    "image": "short-stories/the-whispering-willow-tree.webp",
+    "audio_woman": "short-stories/audio/the-whispering-willow-tree-woman.mp3",
+    "audio_man": "short-stories/audio/the-whispering-willow-tree-man.mp3"
+
+},
+
+"the-backpack-of-friendship": {
+    "title": "The Backpack of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-backpack-of-friendship.txt",
+    "image": "short-stories/the-backpack-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-backpack-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-backpack-of-friendship-man.mp3"
+ },
+
+"the-backpack-of-honest-dreams": {
+    "title": "The Backpack of Honest Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-backpack-of-honest-dreams.txt",
+    "image": "short-stories/the-backpack-of-honest-dreams.webp",
+    "audio_woman": "short-stories/audio/the-backpack-of-honest-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-backpack-of-honest-dreams-man.mp3"
+
+ },
+
+"the-blackboard-of-courage": {
+    "title": "The Blackboard of Courage",
+    "folder": "short-stories",
+    "text": "short-stories/the-blackboard-of-courage.txt",
+    "image": "short-stories/the-blackboard-of-courage.webp",
+    "audio_woman": "short-stories/audio/the-blackboard-of-courage-woman.mp3",
+    "audio_man": "short-stories/audio/the-blackboard-of-courage-man.mp3"
+
+ },
+
+"the-blackboard-of-gentle-lessons": {
+    "title": "The Blackboard of Gentle Lessons",
+    "folder": "short-stories",
+    "text": "short-stories/the-blackboard-of-gentle-lessons.txt",
+    "image": "short-stories/the-blackboard-of-gentle-lessons.webp",
+    "audio_woman": "short-stories/audio/the-blackboard-of-gentle-lessons-woman.mp3",
+    "audio_man": "short-stories/audio/the-blackboard-of-gentle-lessons-man.mp3"
+
+ },
+
+"the-chalkboard-of-honest-words": {
+    "title": "The Chalkboard of Honest Words",
+    "folder": "short-stories",
+    "text": "short-stories/the-chalkboard-of-honest-words.txt",
+    "image": "short-stories/the-chalkboard-of-honest-words.webp",
+    "audio_woman": "short-stories/audio/the-chalkboard-of-honest-words-woman.mp3",
+    "audio_man": "short-stories/audio/the-chalkboard-of-honest-words-man.mp3"
+
+ },
+
+"the-classroom-of-brave-voices": {
+    "title": "The Classroom of Brave Voices",
+    "folder": "short-stories",
+    "text": "short-stories/the-classroom-of-brave-voices.txt",
+    "image": "short-stories/the-classroom-of-brave-voices.webp",
+    "audio_woman": "short-stories/audio/the-classroom-of-brave-voices-woman.mp3",
+    "audio_man": "short-stories/audio/the-classroom-of-brave-voices-man.mp3"
+
+ },
+
+"the-classroom-of-caring-hands": {
+    "title": "The Classroom of Caring Hands",
+    "folder": "short-stories",
+    "text": "short-stories/the-classroom-of-caring-hands.txt",
+    "image": "short-stories/the-classroom-of-caring-hands.webp",
+    "audio_woman": "short-stories/audio/the-classroom-of-caring-hands-woman.mp3",
+    "audio_man": "short-stories/audio/the-classroom-of-caring-hands-man.mp3"
+
+ },
+
+"the-classroom-of-courage": {
+    "title": "The Classroom of Courage",
+    "folder": "short-stories",
+    "text": "short-stories/the-classroom-of-courage.txt",
+    "image": "short-stories/the-classroom-of-courage.webp",
+    "audio_woman": "short-stories/audio/the-classroom-of-courage-woman.mp3",
+    "audio_man": "short-stories/audio/the-classroom-of-courage-man.mp3"
+
+ },
+
+"the-classroom-of-honest-dreams": {
+    "title": "The Classroom of Honest Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-classroom-of-honest-dreams.txt",
+    "image": "short-stories/the-classroom-of-honest-dreams.webp",
+    "audio_woman": "short-stories/audio/the-classroom-of-honest-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-classroom-of-honest-dreams-man.mp3"
+
+ },
+
+"the-classroom-of-kind-lanterns": {
+    "title": "The Classroom of Kind Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-classroom-of-kind-lanterns.txt",
+    "image": "short-stories/the-classroom-of-kind-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-classroom-of-kind-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-classroom-of-kind-lanterns-man.mp3"
+
+ },
+
+"the-desk-of-friendship": {
+    "title": "The Desk of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-desk-of-friendship.txt",
+    "image": "short-stories/the-desk-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-desk-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-desk-of-friendship-man.mp3"
+
+ },
+
+"the-desk-of-kind-lanterns": {
+    "title": "The Desk of Kind Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-desk-of-kind-lanterns.txt",
+    "image": "short-stories/the-desk-of-kind-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-desk-of-kind-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-desk-of-kind-lanterns-man.mp3"
+
+ },
+
+"the-library-of-brave-tales": {
+    "title": "The Library of Brave Tales",
+    "folder": "short-stories",
+    "text": "short-stories/the-library-of-brave-tales.txt",
+    "image": "short-stories/the-library-of-brave-tales.webp",
+    "audio_woman": "short-stories/audio/the-library-of-brave-tales-woman.mp3",
+    "audio_man": "short-stories/audio/the-library-of-brave-tales-man.mp3"
+
+ },
+
+"the-library-of-friendship-lights": {
+    "title": "The Library of Friendship Lights",
+    "folder": "short-stories",
+    "text": "short-stories/the-library-of-friendship-lights.txt",
+    "image": "short-stories/the-library-of-friendship-lights.webp",
+    "audio_woman": "short-stories/audio/the-library-of-friendship-lights-woman.mp3",
+    "audio_man": "short-stories/audio/the-library-of-friendship-lights-man.mp3"
+
+ },
+
+"the-library-of-gentle-stories": {
+    "title": "The Library of Gentle Stories",
+    "folder": "short-stories",
+    "text": "short-stories/the-library-of-gentle-stories.txt",
+    "image": "short-stories/the-library-of-gentle-stories.webp",
+    "audio_woman": "short-stories/audio/the-library-of-gentle-stories-woman.mp3",
+    "audio_man": "short-stories/audio/the-library-of-gentle-stories-man.mp3"
+
+ },
+
+"the-lunchbox-of-honest-sharing": {
+    "title": "The Lunchbox of Honest Sharing",
+    "folder": "short-stories",
+    "text": "short-stories/the-lunchbox-of-honest-sharing.txt",
+    "image": "short-stories/the-lunchbox-of-honest-sharing.webp",
+    "audio_woman": "short-stories/audio/the-lunchbox-of-honest-sharing-woman.mp3",
+    "audio_man": "short-stories/audio/the-lunchbox-of-honest-sharing-man.mp3"
+
+ },
+
+"the-lunchbox-of-sharing-treats": {
+    "title": "The Lunchbox of Sharing Treats",
+    "folder": "short-stories",
+    "text": "short-stories/the-lunchbox-of-sharing-treats.txt",
+    "image": "short-stories/the-lunchbox-of-sharing-treats.webp",
+    "audio_woman": "short-stories/audio/the-lunchbox-of-sharing-treats-woman.mp3",
+    "audio_man": "short-stories/audio/the-lunchbox-of-sharing-treats-man.mp3"
+
+ },
+
+"the-notebook-of-caring-thoughts": {
+    "title": "The Notebook of Caring Thoughts",
+    "folder": "short-stories",
+    "text": "short-stories/the-notebook-of-caring-thoughts.txt",
+    "image": "short-stories/the-notebook-of-caring-thoughts.webp",
+    "audio_woman": "short-stories/audio/the-notebook-of-caring-thoughts-woman.mp3",
+    "audio_man": "short-stories/audio/the-notebook-of-caring-thoughts-man.mp3"
+
+ },
+
+"the-notebook-of-gentle-wishes": {
+    "title": "The Notebook of Gentle Wishes",
+    "folder": "short-stories",
+    "text": "short-stories/the-notebook-of-gentle-wishes.txt",
+    "image": "short-stories/the-notebook-of-gentle-wishes.webp",
+    "audio_woman": "short-stories/audio/the-notebook-of-gentle-wishes-woman.mp3",
+    "audio_man": "short-stories/audio/the-notebook-of-gentle-wishes-man.mp3"
+
+ },
+
+"the-notebook-of-kind-promises": {
+    "title": "The Notebook of Kind Promises",
+    "folder": "short-stories",
+    "text": "short-stories/the-notebook-of-kind-promises.txt",
+    "image": "short-stories/the-notebook-of-kind-promises.webp",
+    "audio_woman": "short-stories/audio/the-notebook-of-kind-promises-woman.mp3",
+    "audio_man": "short-stories/audio/the-notebook-of-kind-promises-man.mp3"
+
+ },
+
+"the-pencil-of-brave-writing": {
+    "title": "The Pencil of Brave Writing",
+    "folder": "short-stories",
+    "text": "short-stories/the-pencil-of-brave-writing.txt",
+    "image": "short-stories/the-pencil-of-brave-writing.webp",
+    "audio_woman": "short-stories/audio/the-pencil-of-brave-writing-woman.mp3",
+    "audio_man": "short-stories/audio/the-pencil-of-brave-writing-man.mp3"
+
+ },
+
+"the-playground-of-brave-hearts": {
+    "title": "The Playground of Brave Hearts",
+    "folder": "short-stories",
+    "text": "short-stories/the-playground-of-brave-hearts.txt",
+    "image": "short-stories/the-playground-of-brave-hearts.webp",
+    "audio_woman": "short-stories/audio/the-playground-of-brave-hearts-woman.mp3",
+    "audio_man": "short-stories/audio/the-playground-of-brave-hearts-man.mp3"
+
+ },
+
+"the-playground-of-caring-songs": {
+    "title": "The Playground of Caring Songs",
+    "folder": "short-stories",
+    "text": "short-stories/the-playground-of-caring-songs.txt",
+    "image": "short-stories/the-playground-of-caring-songs.webp",
+    "audio_woman": "short-stories/audio/the-playground-of-caring-songs-woman.mp3",
+    "audio_man": "short-stories/audio/the-playground-of-caring-songs-man.mp3"
+
+ },
+
+"the-playground-of-caring-stars": {
+    "title": "The Playground of Caring Stars",
+    "folder": "short-stories",
+    "text": "short-stories/the-playground-of-caring-stars.txt",
+    "image": "short-stories/the-playground-of-caring-stars.webp",
+    "audio_woman": "short-stories/audio/the-playground-of-caring-stars-woman.mp3",
+    "audio_man": "short-stories/audio/the-playground-of-caring-stars-man.mp3"
+
+ },
+
+"the-playground-of-honest-steps": {
+    "title": "The Playground of Honest Steps",
+    "folder": "short-stories",
+    "text": "short-stories/the-playground-of-honest-steps.txt",
+    "image": "short-stories/the-playground-of-honest-steps.webp",
+    "audio_woman": "short-stories/audio/the-playground-of-honest-steps-woman.mp3",
+    "audio_man": "short-stories/audio/the-playground-of-honest-steps-man.mp3"
+
+ },
+
+"the-playground-of-sharing-games": {
+    "title": "The Playground of Sharing Games",
+    "folder": "short-stories",
+    "text": "short-stories/the-playground-of-sharing-games.txt",
+    "image": "short-stories/the-playground-of-sharing-games.webp",
+    "audio_woman": "short-stories/audio/the-playground-of-sharing-games-woman.mp3",
+    "audio_man": "short-stories/audio/the-playground-of-sharing-games-man.mp3"
+
+ },
+
+"the-school-bell-of-courage": {
+    "title": "The School Bell of Courage",
+    "folder": "short-stories",
+    "text": "short-stories/the-school-bell-of-courage.txt",
+    "image": "short-stories/the-school-bell-of-courage.webp",
+    "audio_woman": "short-stories/audio/the-school-bell-of-courage-woman.mp3",
+    "audio_man": "short-stories/audio/the-school-bell-of-courage-man.mp3"
+
+
+ },
+
+"the-school-bell-of-friendship": {
+    "title": "The School Bell of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-school-bell-of-friendship.txt",
+    "image": "short-stories/the-school-bell-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-school-bell-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-school-bell-of-friendship-man.mp3"
+
+ },
+
+"the-school-bell-of-kindness": {
+    "title": "The School Bell of Kindness",
+    "folder": "short-stories",
+    "text": "short-stories/the-school-bell-of-kindness.txt",
+    "image": "short-stories/the-school-bell-of-kindness.webp",
+    "audio_woman": "short-stories/audio/the-school-bell-of-kindness-woman.mp3",
+    "audio_man": "short-stories/audio/the-school-bell-of-kindness-man.mp3"
+
+ },
+
+"the-school-gate-of-friendship": {
+    "title": "The School Gate of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-school-gate-of-friendship.txt",
+    "image": "short-stories/the-school-gate-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-school-gate-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-school-gate-of-friendship-man.mp3"
+
+ },
+
+"the-school-gate-of-kindness": {
+    "title": "The School Gate of Kindness",
+    "folder": "short-stories",
+    "text": "short-stories/the-school-gate-of-kindness.txt",
+    "image": "short-stories/the-school-gate-of-kindness.webp",
+    "audio_woman": "short-stories/audio/the-school-gate-of-kindness-woman.mp3",
+    "audio_man": "short-stories/audio/the-school-gate-of-kindness-man.mp3"
+
+ },
+
+"the-schoolyard-of-gentle-giants": {
+    "title": "The Schoolyard of Gentle Giants",
+    "folder": "short-stories",
+    "text": "short-stories/the-schoolyard-of-gentle-giants.txt",
+    "image": "short-stories/the-schoolyard-of-gentle-giants.webp",
+    "audio_woman": "short-stories/audio/the-schoolyard-of-gentle-giants-woman.mp3",
+    "audio_man": "short-stories/audio/the-schoolyard-of-gentle-giants-man.mp3"
+
+ },
+
+"the-schoolyard-of-gentle-voices": {
+    "title": "The Schoolyard of Gentle Voices",
+    "folder": "short-stories",
+    "text": "short-stories/the-schoolyard-of-gentle-voices.txt",
+    "image": "short-stories/the-schoolyard-of-gentle-voices.webp",
+    "audio_woman": "short-stories/audio/the-schoolyard-of-gentle-voices-woman.mp3",
+    "audio_man": "short-stories/audio/the-schoolyard-of-gentle-voices-man.mp3"
+
+ },
+
+"the-schoolyard-of-kind-dreams": {
+    "title": "The Schoolyard of Kind Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-schoolyard-of-kind-dreams.txt",
+    "image": "short-stories/the-schoolyard-of-kind-dreams.webp",
+    "audio_woman": "short-stories/audio/the-schoolyard-of-kind-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-schoolyard-of-kind-dreams-man.mp3"
+
+ },
+
+"the-teacher-brave-promise": {
+    "title": "The Teacher’s Brave Promise",
+    "folder": "short-stories",
+    "text": "short-stories/the-teacher-brave-promise.txt",
+    "image": "short-stories/the-teacher-brave-promise.webp",
+    "audio_woman": "short-stories/audio/the-teacher-brave-promise-woman.mp3",
+    "audio_man": "short-stories/audio/the-teacher-brave-promise-man.mp3"
+
+ },
+
+"the-teacher-gentle-song": {
+    "title": "The Teacher’s Gentle Song",
+    "folder": "short-stories",
+    "text": "short-stories/the-teacher-gentle-song.txt",
+    "image": "short-stories/the-teacher-gentle-song.webp",
+    "audio_woman": "short-stories/audio/the-teacher-gentle-song-woman.mp3",
+    "audio_man": "short-stories/audio/the-teacher-gentle-song-man.mp3"
+
+ },
+
+"the-teacher-honest-path": {
+    "title": "The Teacher’s Honest Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-teacher-honest-path.txt",
+    "image": "short-stories/the-teacher-honest-path.webp",
+    "audio_woman": "short-stories/audio/the-teacher-honest-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-teacher-honest-path-man.mp3"
+
+ },
+
+"the-teacher-lantern-of-hope": {
+    "title": "The Teacher’s Lantern of Hope",
+    "folder": "short-stories",
+    "text": "short-stories/the-teacher-lantern-of-hope.txt",
+    "image": "short-stories/the-teacher-lantern-of-hope.webp",
+    "audio_woman": "short-stories/audio/the-teacher-lantern-of-hope-woman.mp3",
+    "audio_man": "short-stories/audio/the-teacher-lantern-of-hope-man.mp3"
+
+},
+
+"the-teacher-lantern-of-truth": {
+    "title": "The Teacher’s Lantern of Hope",
+    "folder": "short-stories",
+    "text": "short-stories/the-teacher-lantern-of-truth.txt",
+    "image": "short-stories/the-teacher-lantern-of-truth.webp",
+    "audio_woman": "short-stories/audio/the-teacher-lantern-of-truth-woman.mp3",
+    "audio_man": "short-stories/audio/the-teacher-lantern-of-truth-man.mp3"
+
+
+ },
+
+"the-bench-of-sharing": {
+    "title": "The Bench of Sharing",
+    "folder": "short-stories",
+    "text": "short-stories/the-bench-of-sharing.txt",
+    "image": "short-stories/the-bench-of-sharing.webp",
+    "audio_woman": "short-stories/audio/the-bench-of-sharing-woman.mp3",
+    "audio_man": "short-stories/audio/the-bench-of-sharing-man.mp3"
+ },
+
+"the-candle-of-kind-promises": {
+    "title": "The Candle of Kind Promises",
+    "folder": "short-stories",
+    "text": "short-stories/the-candle-of-kind-promises.txt",
+    "image": "short-stories/the-candle-of-kind-promises.webp",
+    "audio_woman": "short-stories/audio/the-candle-of-kind-promises-woman.mp3",
+    "audio_man": "short-stories/audio/the-candle-of-kind-promises-man.mp3"
+
+},
+
+"the-coin-of-honest-sharing": {
+    "title": "The Coin of Honest Sharing",
+    "folder": "short-stories",
+    "text": "short-stories/the-coin-of-honest-sharing.txt",
+    "image": "short-stories/the-coin-of-honest-sharing.webp",
+    "audio_woman": "short-stories/audio/the-coin-of-honest-sharing-woman.mp3",
+    "audio_man": "short-stories/audio/the-coin-of-honest-sharing-man.mp3"
+
+
+},
+
+"the-dove-of-kindness": {
+    "title": "The Dove of Kindness",
+    "folder": "short-stories",
+    "text": "short-stories/the-dove-of-kindness.txt",
+    "image": "short-stories/the-dove-of-kindness.webp",
+    "audio_woman": "short-stories/audio/the-dove-of-kindness-woman.mp3",
+    "audio_man": "short-stories/audio/the-dove-of-kindness-man.mp3"
+
+
+},
+
+"the-friendship-treehouse": {
+    "title": "The Friendship Treehouse",
+    "folder": "short-stories",
+    "text": "short-stories/the-friendship-treehouse.txt",
+    "image": "short-stories/the-friendship-treehouse.webp",
+    "audio_woman": "short-stories/audio/the-friendship-treehouse-woman.mp3",
+    "audio_man": "short-stories/audio/the-friendship-treehouse-man.mp3"
+
+
+},
+
+"the-garden-of-friendship": {
+    "title": "The Garden of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-garden-of-friendship.txt",
+    "image": "short-stories/the-garden-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-garden-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-garden-of-friendship-man.mp3"
+
+
+},
+
+"the-house-of-friendship": {
+    "title": "The House of Friendship",
+    "folder": "short-stories",
+    "text": "short-stories/the-house-of-friendship.txt",
+    "image": "short-stories/the-house-of-friendship.webp",
+    "audio_woman": "short-stories/audio/the-house-of-friendship-woman.mp3",
+    "audio_man": "short-stories/audio/the-house-of-friendship-man.mp3"
+
+
+},
+
+"the-letter-of-kind-words": {
+    "title": "The Letter of Kind Words",
+    "folder": "short-stories",
+    "text": "short-stories/the-letter-of-kind-words.txt",
+    "image": "short-stories/the-letter-of-kind-words.webp",
+    "audio_woman": "short-stories/audio/the-letter-of-kind-words-woman.mp3",
+    "audio_man": "short-stories/audio/the-letter-of-kind-words-man.mp3"
+
+
+},
+
+"the-mirror-of-kind-hearts": {
+    "title": "The Mirror of Kind Hearts",
+    "folder": "short-stories",
+    "text": "short-stories/the-mirror-of-kind-hearts.txt",
+    "image": "short-stories/the-mirror-of-kind-hearts.webp",
+    "audio_woman": "short-stories/audio/the-mirror-of-kind-hearts-woman.mp3",
+    "audio_man": "short-stories/audio/the-mirror-of-kind-hearts-man.mp3"
+
+
+},
+
+"the-path-of-friendship-steps": {
+    "title": "The Path of Friendship Steps",
+    "folder": "short-stories",
+    "text": "short-stories/the-path-of-friendship-steps.txt",
+    "image": "short-stories/the-path-of-friendship-steps.webp",
+    "audio_woman": "short-stories/audio/the-path-of-friendship-steps-woman.mp3",
+    "audio_man": "short-stories/audio/the-path-of-friendship-steps-man.mp3"
+
+
+},
+
+"the-rainbow-of-gentle-words": {
+    "title": "The Rainbow of Gentle Words",
+    "folder": "short-stories",
+    "text": "short-stories/the-rainbow-of-gentle-words.txt",
+    "image": "short-stories/the-rainbow-of-gentle-words.webp",
+    "audio_woman": "short-stories/audio/the-rainbow-of-gentle-words-woman.mp3",
+    "audio_man": "short-stories/audio/the-rainbow-of-gentle-words-man.mp3"
+
+
+},
+
+"the-song-of-friendship-voices": {
+    "title": "The Song of Friendship Voices",
+    "folder": "short-stories",
+    "text": "short-stories/the-song-of-friendship-voices.txt",
+    "image": "short-stories/the-song-of-friendship-voices.webp",
+    "audio_woman": "short-stories/audio/the-song-of-friendship-voices-woman.mp3",
+    "audio_man": "short-stories/audio/the-song-of-friendship-voices-man.mp3"
+
+
+},
+
+"the-tree-of-kind-sharing": {
+    "title": "The Tree of Kind Sharing",
+    "folder": "short-stories",
+    "text": "short-stories/the-tree-of-kind-sharing.txt",
+    "image": "short-stories/the-tree-of-kind-sharing.webp",
+    "audio_woman": "short-stories/audio/the-tree-of-kind-sharing-woman.mp3",
+    "audio_man": "short-stories/audio/the-tree-of-kind-sharing-man.mp3"
+
+},
+
+ "the street of honest giants": {
+    "title": "The Street of Honest Giants",
+    "folder": "short-stories",
+    "text": "short-stories/the street of honest giants.txt",
+    "image": "short-stories/the street of honest giants.webp",
+    "audio_woman": "short-stories/audio/the street of honest giants-woman.mp3",
+    "audio_man": "short-stories/audio/the street of honest giants-man.mp3"
+ },
+
+"the-bakery-of-brave-bread": {
+    "title": "The Bakery of Brave Bread",
+    "folder": "short-stories",
+    "text": "short-stories/the-bakery-of-brave-bread.txt",
+    "image": "short-stories/the-bakery-of-brave-bread.webp",
+    "audio_woman": "short-stories/audio/the-bakery-of-brave-bread-woman.mp3",
+    "audio_man": "short-stories/audio/the-bakery-of-brave-bread-man.mp3"
+
+},
+
+"the-bakery-of-friendship-courage": {
+    "title": "The Bakery of Friendship Courage",
+    "folder": "short-stories",
+    "text": "short-stories/the-bakery-of-friendship-courage.txt",
+    "image": "short-stories/the-bakery-of-friendship-courage.webp",
+    "audio_woman": "short-stories/audio/the-bakery-of-friendship-courage-woman.mp3",
+    "audio_man": "short-stories/audio/the-bakery-of-friendship-courage-man.mp3"
+
+},
+
+"the-bakery-of-gentle-cakes": {
+    "title": "The Bakery of Gentle Cakes",
+    "folder": "short-stories",
+    "text": "short-stories/the-bakery-of-gentle-cakes.txt",
+    "image": "short-stories/the-bakery-of-gentle-cakes.webp",
+    "audio_woman": "short-stories/audio/the-bakery-of-gentle-cakes-woman.mp3",
+    "audio_man": "short-stories/audio/the-bakery-of-gentle-cakes-man.mp3"
+
+},
+
+"the-bakery-of-honest-bread": {
+    "title": "The Bakery of Honest Bread",
+    "folder": "short-stories",
+    "text": "short-stories/the-bakery-of-honest-bread.txt",
+    "image": "short-stories/the-bakery-of-honest-bread.webp",
+    "audio_woman": "short-stories/audio/the-bakery-of-honest-bread-woman.mp3",
+    "audio_man": "short-stories/audio/the-bakery-of-honest-bread-man.mp3"
+
+},
+
+"the-bridge-of-brave-steps": {
+    "title": "The Bridge of Brave Steps",
+    "folder": "short-stories",
+    "text": "short-stories/the-bridge-of-brave-steps.txt",
+    "image": "short-stories/the-bridge-of-brave-steps.webp",
+    "audio_woman": "short-stories/audio/the-bridge-of-brave-steps-woman.mp3",
+    "audio_man": "short-stories/audio/the-bridge-of-brave-steps-man.mp3"
+
+},
+
+"the-bridge-of-caring-dreams": {
+    "title": "The Bridge of Caring Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-bridge-of-caring-dreams.txt",
+    "image": "short-stories/the-bridge-of-caring-dreams.webp",
+    "audio_woman": "short-stories/audio/the-bridge-of-caring-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-bridge-of-caring-dreams-man.mp3"
+
+},
+
+"the-bridge-of-gentle-stars": {
+    "title": "The Bridge of Gentle Stars",
+    "folder": "short-stories",
+    "text": "short-stories/the-bridge-of-gentle-stars.txt",
+    "image": "short-stories/the-bridge-of-gentle-stars.webp",
+    "audio_woman": "short-stories/audio/the-bridge-of-gentle-stars-woman.mp3",
+    "audio_man": "short-stories/audio/the-bridge-of-gentle-stars-man.mp3"
+
+},
+
+"the-house-of-brave-lanterns": {
+    "title": "The House of Brave Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-house-of-brave-lanterns.txt",
+    "image": "short-stories/the-house-of-brave-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-house-of-brave-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-house-of-brave-lanterns-man.mp3"
+
+},
+
+"the-bridge-of-honest-work": {
+    "title": "The Bridge of Honest Work",
+    "folder": "short-stories",
+    "text": "short-stories/the-bridge-of-honest-work.txt",
+    "image": "short-stories/the-bridge-of-honest-work.webp",
+    "audio_woman": "short-stories/audio/the-bridge-of-honest-work-woman.mp3",
+    "audio_man": "short-stories/audio/the-bridge-of-honest-work-man.mp3"
+
+},
+
+"the-garden-of-friendship-seeds": {
+    "title": "The Garden of Friendship Seeds",
+    "folder": "short-stories",
+    "text": "short-stories/the-garden-of-friendship-seeds.txt",
+    "image": "short-stories/the-garden-of-friendship-seeds.webp",
+    "audio_woman": "short-stories/audio/the-garden-of-friendship-seeds-woman.mp3",
+    "audio_man": "short-stories/audio/the-garden-of-friendship-seeds-man.mp3"
+
+},
+
+"the-house-of-caring-hearts": {
+    "title": "The House of Caring Hearts",
+    "folder": "short-stories",
+    "text": "short-stories/the-house-of-caring-hearts.txt",
+    "image": "short-stories/the-house-of-caring-hearts.webp",
+    "audio_woman": "short-stories/audio/the-house-of-caring-hearts-woman.mp3",
+    "audio_man": "short-stories/audio/the-house-of-caring-hearts-man.mp3"
+
+},
+
+"the-house-of-friendship-glow": {
+    "title": "The House of Friendship Glow",
+    "folder": "short-stories",
+    "text": "short-stories/the-house-of-friendship-glow.txt",
+    "image": "short-stories/the-house-of-friendship-glow.webp",
+    "audio_woman": "short-stories/audio/the-house-of-friendship-glow-woman.mp3",
+    "audio_man": "short-stories/audio/the-house-of-friendship-glow-man.mp3"
+
+},
+
+"the-house-of-honest-dreams": {
+    "title": "The House of Honest Dreams",
+    "folder": "short-stories",
+    "text": "short-stories/the-house-of-honest-dreams.txt",
+    "image": "short-stories/the-house-of-honest-dreams.webp",
+    "audio_woman": "short-stories/audio/the-house-of-honest-dreams-woman.mp3",
+    "audio_man": "short-stories/audio/the-house-of-honest-dreams-man.mp3"
+
+},
+
+"the-market-of-brave-promises": {
+    "title": "The Market of Brave Promises",
+    "folder": "short-stories",
+    "text": "short-stories/the-market-of-brave-promises.txt",
+    "image": "short-stories/the-market-of-brave-promises.webp",
+    "audio_woman": "short-stories/audio/the-market-of-brave-promises-woman.mp3",
+    "audio_man": "short-stories/audio/the-market-of-brave-promises-man.mp3"
+
+},
+
+"the-market-of-caring-hands": {
+    "title": "The Market of Caring Hands",
+    "folder": "short-stories",
+    "text": "short-stories/the-market-of-caring-hands.txt",
+    "image": "short-stories/the-market-of-caring-hands.webp",
+    "audio_woman": "short-stories/audio/the-market-of-caring-hands-woman.mp3",
+    "audio_man": "short-stories/audio/the-market-of-caring-hands-man.mp3"
+
+},
+
+"the-market-of-friendship-lights": {
+    "title": "The Market of Friendship Lights",
+    "folder": "short-stories",
+    "text": "short-stories/the-market-of-friendship-lights.txt",
+    "image": "short-stories/the-market-of-friendship-lights.webp",
+    "audio_woman": "short-stories/audio/the-market-of-friendship-lights-woman.mp3",
+    "audio_man": "short-stories/audio/the-market-of-friendship-lights-man.mp3"
+
+},
+
+"the-market-of-honest-stars": {
+    "title": "The Market of Honest Stars",
+    "folder": "short-stories",
+    "text": "short-stories/the-market-of-honest-stars.txt",
+    "image": "short-stories/the-market-of-honest-stars.webp",
+    "audio_woman": "short-stories/audio/the-market-of-honest-stars-woman.mp3",
+    "audio_man": "short-stories/audio/the-market-of-honest-stars-man.mp3"
+
+},
+
+"the-park-of-caring-stars": {
+    "title": "The Park of Caring Stars",
+    "folder": "short-stories",
+    "text": "short-stories/the-park-of-caring-stars.txt",
+    "image": "short-stories/the-park-of-caring-stars.webp",
+    "audio_woman": "short-stories/audio/the-park-of-caring-stars-woman.mp3",
+    "audio_man": "short-stories/audio/the-park-of-caring-stars-man.mp3"
+
+},
+
+"the-park-of-friendship-songs": {
+    "title": "The Park of Friendship Songs",
+    "folder": "short-stories",
+    "text": "short-stories/the-park-of-friendship-songs.txt",
+    "image": "short-stories/the-park-of-friendship-songs.webp",
+    "audio_woman": "short-stories/audio/the-park-of-friendship-songs-woman.mp3",
+    "audio_man": "short-stories/audio/the-park-of-friendship-songs-man.mp3"
+
+},
+
+"the-park-of-gentle-giants": {
+    "title": "The Park of Gentle Giants",
+    "folder": "short-stories",
+    "text": "short-stories/the-park-of-gentle-giants.txt",
+    "image": "short-stories/the-park-of-gentle-giants.webp",
+    "audio_woman": "short-stories/audio/the-park-of-gentle-giants-woman.mp3",
+    "audio_man": "short-stories/audio/the-park-of-gentle-giants-man.mp3"
+
+},
+
+"the-park-of-honest-lanterns": {
+    "title": "The Park of Honest Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-park-of-honest-lanterns.txt",
+    "image": "short-stories/the-park-of-honest-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-park-of-honest-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-park-of-honest-lanterns-man.mp3"
+
+},
+
+"the-shop-of-brave-smiles": {
+    "title": "The Shop of Brave Smiles",
+    "folder": "short-stories",
+    "text": "short-stories/the-shop-of-brave-smiles.txt",
+    "image": "short-stories/the-shop-of-brave-smiles.webp",
+    "audio_woman": "short-stories/audio/the-shop-of-brave-smiles-woman.mp3",
+    "audio_man": "short-stories/audio/the-shop-of-brave-smiles-man.mp3"
+
+},
+
+"the-shop-of-gentle-smiles": {
+    "title": "The Shop of Gentle Smiles",
+    "folder": "short-stories",
+    "text": "short-stories/the-shop-of-gentle-smiles.txt",
+    "image": "short-stories/the-shop-of-gentle-smiles.webp",
+    "audio_woman": "short-stories/audio/the-shop-of-gentle-smiles-woman.mp3",
+    "audio_man": "short-stories/audio/the-shop-of-gentle-smiles-man.mp3"
+
+},
+
+"the-shop-of-honest-promises": {
+    "title": "The Shop of Honest Promises",
+    "folder": "short-stories",
+    "text": "short-stories/the-shop-of-honest-promises.txt",
+    "image": "short-stories/the-shop-of-honest-promises.webp",
+    "audio_woman": "short-stories/audio/the-shop-of-honest-promises-woman.mp3",
+    "audio_man": "short-stories/audio/the-shop-of-honest-promises-man.mp3"
+
+},
+
+"the-square-of-brave-voices": {
+    "title": "The Square of Brave Voices",
+    "folder": "short-stories",
+    "text": "short-stories/the-square-of-brave-voices.txt",
+    "image": "short-stories/the-square-of-brave-voices.webp",
+    "audio_woman": "short-stories/audio/the-square-of-brave-voices-woman.mp3",
+    "audio_man": "short-stories/audio/the-square-of-brave-voices-man.mp3"
+
+},
+
+"the-square-of-gentle-wishes": {
+    "title": "The Square of Gentle Wishes",
+    "folder": "short-stories",
+    "text": "short-stories/the-square-of-gentle-wishes.txt",
+    "image": "short-stories/the-square-of-gentle-wishes.webp",
+    "audio_woman": "short-stories/audio/the-square-of-gentle-wishes-woman.mp3",
+    "audio_man": "short-stories/audio/the-square-of-gentle-wishes-man.mp3"
+
+},
+
+"the-square-of-kind-lanterns": {
+    "title": "The Square of Kind Lanterns",
+    "folder": "short-stories",
+    "text": "short-stories/the-square-of-kind-lanterns.txt",
+    "image": "short-stories/the-square-of-kind-lanterns.webp",
+    "audio_woman": "short-stories/audio/the-square-of-kind-lanterns-woman.mp3",
+    "audio_man": "short-stories/audio/the-square-of-kind-lanterns-man.mp3"
+
+},
+
+"the-street-of-caring-songs": {
+    "title": "The Street of Caring Songs",
+    "folder": "short-stories",
+    "text": "short-stories/the-street-of-caring-songs.txt",
+    "image": "short-stories/the-street-of-caring-songs.webp",
+    "audio_woman": "short-stories/audio/the-street-of-caring-songs-woman.mp3",
+    "audio_man": "short-stories/audio/the-street-of-caring-songs-man.mp3"
+
+},
+
+"the-street-of-gentle-voices": {
+    "title": "The Street of Gentle Voices",
+    "folder": "short-stories",
+    "text": "short-stories/the-street-of-gentle-voices.txt",
+    "image": "short-stories/the-street-of-gentle-voices.webp",
+    "audio_woman": "short-stories/audio/the-street-of-gentle-voices-woman.mp3",
+    "audio_man": "short-stories/audio/the-street-of-gentle-voices-man.mp3"
+
+},
+
+"the-street-of-kind-neighbors": {
+    "title": "The Street of Kind Neighbors",
+    "folder": "short-stories",
+    "text": "short-stories/the-street-of-kind-neighbors.txt",
+    "image": "short-stories/the-street-of-kind-neighbors.webp",
+    "audio_woman": "short-stories/audio/the-street-of-kind-neighbors-woman.mp3",
+    "audio_man": "short-stories/audio/the-street-of-kind-neighbors-man.mp3"
+
+
+},
+
+"the-badger-brave-lantern": {
+    "title": "The Badger’s Brave Lantern",
+    "folder": "short-stories",
+    "text": "short-stories/the-badger-brave-lantern.txt",
+    "image": "short-stories/the-badger-brave-lantern.webp",
+    "audio_woman": "short-stories/audio/the-badger-brave-lantern-woman.mp3",
+    "audio_man": "short-stories/audio/the-badger-brave-lantern-man.mp3"
+ },
+
+"the-badger-caring-burrow": {
+    "title": "The Badger’s Caring Burrow",
+    "folder": "short-stories",
+    "text": "short-stories/the-badger-caring-burrow.txt",
+    "image": "short-stories/the-badger-caring-burrow.webp",
+    "audio_woman": "short-stories/audio/the-badger-caring-burrow-woman.mp3",
+    "audio_man": "short-stories/audio/the-badger-caring-burrow-man.mp3"
+
+ },
+
+"the-badger-gentle-guard": {
+    "title": "The Badger’s Gentle Guard",
+    "folder": "short-stories",
+    "text": "short-stories/the-badger-gentle-guard.txt",
+    "image": "short-stories/the-badger-gentle-guard.webp",
+    "audio_woman": "short-stories/audio/the-badger-gentle-guard-woman.mp3",
+    "audio_man": "short-stories/audio/the-badger-gentle-guard-man.mp3"
+
+
+ },
+
+"the-badger-gentle-path": {
+    "title": "The Badger’s Gentle Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-badger-gentle-path.txt",
+    "image": "short-stories/the-badger-gentle-path.webp",
+    "audio_woman": "short-stories/audio/the-badger-gentle-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-badger-gentle-path-man.mp3"
+
+
+ },
+
+"the-badger-honest-burrow": {
+    "title": "The Badger’s Honest Burrow",
+    "folder": "short-stories",
+    "text": "short-stories/the-badger-honest-burrow.txt",
+    "image": "short-stories/the-badger-honest-burrow.webp",
+    "audio_woman": "short-stories/audio/the-badger-honest-burrow-woman.mp3",
+    "audio_man": "short-stories/audio/the-badger-honest-burrow-man.mp3"
+
+
+ },
+
+"the-donkey-honest-journey": {
+    "title": "The Donkey’s Honest Journey",
+    "folder": "short-stories",
+    "text": "short-stories/the-donkey-honest-journey.txt",
+    "image": "short-stories/the-donkey-honest-journey.webp",
+    "audio_woman": "short-stories/audio/the-donkey-honest-journey-woman.mp3",
+    "audio_man": "short-stories/audio/the-donkey-honest-journey-man.mp3"
+
+
+ },
+
+"the-ferret-caring-hug": {
+    "title": "The Ferret’s Caring Hug",
+    "folder": "short-stories",
+    "text": "short-stories/the-ferret-caring-hug.txt",
+    "image": "short-stories/the-ferret-caring-hug.webp",
+    "audio_woman": "short-stories/audio/the-ferret-caring-hug-woman.mp3",
+    "audio_man": "short-stories/audio/the-ferret-caring-hug-man.mp3"
+
+
+ },
+
+"the-ferret-gentle-leap": {
+    "title": "The Ferret’s Gentle Leap",
+    "folder": "short-stories",
+    "text": "short-stories/the-ferret-gentle-leap.txt",
+    "image": "short-stories/the-ferret-gentle-leap.webp",
+    "audio_woman": "short-stories/audio/the-ferret-gentle-leap-woman.mp3",
+    "audio_man": "short-stories/audio/the-ferret-gentle-leap-man.mp3"
+
+
+ },
+
+"the-ferret-honest-treasure": {
+    "title": "The Ferret’s Honest Treasure",
+    "folder": "short-stories",
+    "text": "short-stories/the-ferret-honest-treasure.txt",
+    "image": "short-stories/the-ferret-honest-treasure.webp",
+    "audio_woman": "short-stories/audio/the-ferret-honest-treasure-woman.mp3",
+    "audio_man": "short-stories/audio/the-ferret-honest-treasure-man.mp3"
+
+
+ },
+
+"the-ferret-sharing-game": {
+    "title": "The Ferret’s Sharing Game",
+    "folder": "short-stories",
+    "text": "short-stories/the-ferret-sharing-game.txt",
+    "image": "short-stories/the-ferret-sharing-game.webp",
+    "audio_woman": "short-stories/audio/the-ferret-sharing-game-woman.mp3",
+    "audio_man": "short-stories/audio/the-ferret-sharing-game-man.mp3"
+
+
+ },
+
+"the-ferret-kind-treasure": {
+    "title": "The Ferret’s Kind Treasure",
+    "folder": "short-stories",
+    "text": "short-stories/the-ferret-kind-treasure.txt",
+    "image": "short-stories/the-ferret-kind-treasure.webp",
+    "audio_woman": "short-stories/audio/the-ferret-kind-treasure-woman.mp3",
+    "audio_man": "short-stories/audio/the-ferret-kind-treasure-man.mp3"
+
+
+ },
+
+"the-goose-brave-swim": {
+    "title": "The Goose’s Brave Swim",
+    "folder": "short-stories",
+    "text": "short-stories/the-goose-brave-swim.txt",
+    "image": "short-stories/the-goose-brave-swim.webp",
+    "audio_woman": "short-stories/audio/the-goose-brave-swim-woman.mp3",
+    "audio_man": "short-stories/audio/the-goose-brave-swim-man.mp3"
+
+
+ },
+
+"the-goose-caring-swim": {
+    "title": "The Goose’s Caring Swim",
+    "folder": "short-stories",
+    "text": "short-stories/the-goose-caring-swim.txt",
+    "image": "short-stories/the-goose-caring-swim.webp",
+    "audio_woman": "short-stories/audio/the-goose-caring-swim-woman.mp3",
+    "audio_man": "short-stories/audio/the-goose-caring-swim-man.mp3"
+
+
+ },
+
+"the-goose-gentle-parade": {
+    "title": "The Goose’s Gentle Parade",
+    "folder": "short-stories",
+    "text": "short-stories/the-goose-gentle-parade.txt",
+    "image": "short-stories/the-goose-gentle-parade.webp",
+    "audio_woman": "short-stories/audio/the-goose-gentle-parade-woman.mp3",
+    "audio_man": "short-stories/audio/the-goose-gentle-parade-man.mp3"
+
+
+ },
+
+"the-goose-honest-path": {
+    "title": "The Goose’s Honest Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-goose-honest-path.txt",
+    "image": "short-stories/the-goose-honest-path.webp",
+    "audio_woman": "short-stories/audio/the-goose-honest-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-goose-honest-path-man.mp3"
+
+
+ },
+
+"the-goose-kind-parade": {
+    "title": "The Goose’s Kind Parade",
+    "folder": "short-stories",
+    "text": "short-stories/the-goose-kind-parade.txt",
+    "image": "short-stories/the-goose-kind-parade.webp",
+    "audio_woman": "short-stories/audio/the-goose-kind-parade-woman.mp3",
+    "audio_man": "short-stories/audio/the-goose-kind-parade-man.mp3"
+
+
+ },
+
+"the-hedgehog-brave-song": {
+    "title": "The Hedgehog’s Brave Song",
+    "folder": "short-stories",
+    "text": "short-stories/the-hedgehog-brave-song.txt",
+    "image": "short-stories/the-hedgehog-brave-song.webp",
+    "audio_woman": "short-stories/audio/the-hedgehog-brave-song-woman.mp3",
+    "audio_man": "short-stories/audio/the-hedgehog-brave-song-man.mp3"
+
+
+ },
+
+"the-hedgehog-caring-hug": {
+    "title": "The Hedgehog’s Caring Hug",
+    "folder": "short-stories",
+    "text": "short-stories/the-hedgehog-caring-hug.txt",
+    "image": "short-stories/the-hedgehog-caring-hug.webp",
+    "audio_woman": "short-stories/audio/the-hedgehog-caring-hug-woman.mp3",
+    "audio_man": "short-stories/audio/the-hedgehog-caring-hug-man.mp3"
+
+
+ },
+
+"the-hedgehog-honest-lantern": {
+    "title": "The Hedgehog’s Honest Lantern",
+    "folder": "short-stories",
+    "text": "short-stories/the-hedgehog-honest-lantern.txt",
+    "image": "short-stories/the-hedgehog-honest-lantern.webp",
+    "audio_woman": "short-stories/audio/the-hedgehog-honest-lantern-woman.mp3",
+    "audio_man": "short-stories/audio/the-hedgehog-honest-lantern-man.mp3"
+
+
+ },
+
+"the-hedgehog-lantern-of-hope": {
+    "title": "The Hedgehog’s Lantern of Hope",
+    "folder": "short-stories",
+    "text": "short-stories/the-hedgehog-lantern-of-hope.txt",
+    "image": "short-stories/the-hedgehog-lantern-of-hope.webp",
+    "audio_woman": "short-stories/audio/the-hedgehog-lantern-of-hope-woman.mp3",
+    "audio_man": "short-stories/audio/the-hedgehog-lantern-of-hope-man.mp3"
+
+
+ },
+
+"the-hedgehog-secret-path": {
+    "title": "The Hedgehog’s Secret Path",
+    "folder": "short-stories",
+    "text": "short-stories/the-hedgehog-secret-path.txt",
+    "image": "short-stories/the-hedgehog-secret-path.webp",
+    "audio_woman": "short-stories/audio/the-hedgehog-secret-path-woman.mp3",
+    "audio_man": "short-stories/audio/the-hedgehog-secret-path-man.mp3"
+
+
+ },
+
+"the-lynx-brave-leap": {
+    "title": "The Lynx’s Brave Leap",
+    "folder": "short-stories",
+    "text": "short-stories/the-lynx-brave-leap.txt",
+    "image": "short-stories/the-lynx-brave-leap.webp",
+    "audio_woman": "short-stories/audio/the-lynx-brave-leap-woman.mp3",
+    "audio_man": "short-stories/audio/the-lynx-brave-leap-man.mp3"
+
+
+ },
+
+"the-lynx-caring-steps": {
+    "title": "The Lynx’s Caring Steps",
+    "folder": "short-stories",
+    "text": "short-stories/the-lynx-caring-steps.txt",
+    "image": "short-stories/the-lynx-caring-steps.webp",
+    "audio_woman": "short-stories/audio/the-lynx-caring-steps-woman.mp3",
+    "audio_man": "short-stories/audio/the-lynx-caring-steps-man.mp3"
+
+
+ },
+
+"the-lynx-gentle-dream": {
+    "title": "The Lynx’s Gentle Dream",
+    "folder": "short-stories",
+    "text": "short-stories/the-lynx-gentle-dream.txt",
+    "image": "short-stories/the-lynx-gentle-dream.webp",
+    "audio_woman": "short-stories/audio/the-lynx-gentle-dream-woman.mp3",
+    "audio_man": "short-stories/audio/the-lynx-gentle-dream-man.mp3"
+
+
+ },
+
+"the-lynx-honest-hunt": {
+    "title": "The Lynx’s Honest Hunt",
+    "folder": "short-stories",
+    "text": "short-stories/the-lynx-honest-hunt.txt",
+    "image": "short-stories/the-lynx-honest-hunt.webp",
+    "audio_woman": "short-stories/audio/the-lynx-honest-hunt-woman.mp3",
+    "audio_man": "short-stories/audio/the-lynx-honest-hunt-man.mp3"
+
+
+ },
+
+"the-lynx-kind-leap": {
+    "title": "The Lynx’s Kind Leap",
+    "folder": "short-stories",
+    "text": "short-stories/the-lynx-kind-leap.txt",
+    "image": "short-stories/the-lynx-kind-leap.webp",
+    "audio_woman": "short-stories/audio/the-lynx-kind-leap-woman.mp3",
+    "audio_man": "short-stories/audio/the-lynx-kind-leap-man.mp3"
+
+
+ },
+
+"the-peacock-brave-dance": {
+    "title": "The Peacock’s Brave Dance",
+    "folder": "short-stories",
+    "text": "short-stories/the-peacock-brave-dance.txt",
+    "image": "short-stories/the-peacock-brave-dance.webp",
+    "audio_woman": "short-stories/audio/the-peacock-brave-dance-woman.mp3",
+    "audio_man": "short-stories/audio/the-peacock-brave-dance-man.mp3"
+
+
+ },
+
+"the-peacock-brave-feathers": {
+    "title": "The Peacock’s Brave Feathers",
+    "folder": "short-stories",
+    "text": "short-stories/the-peacock-brave-feathers.txt",
+    "image": "short-stories/the-peacock-brave-feathers.webp",
+    "audio_woman": "short-stories/audio/the-peacock-brave-feathers-woman.mp3",
+    "audio_man": "short-stories/audio/the-peacock-brave-feathers-man.mp3"
+
+
+ },
+
+"the-peacock-caring-feathers": {
+    "title": "The Peacock’s Caring Feathers",
+    "folder": "short-stories",
+    "text": "short-stories/the-peacock-caring-feathers.txt",
+    "image": "short-stories/the-peacock-caring-feathers.webp",
+    "audio_woman": "short-stories/audio/the-peacock-caring-feathers-woman.mp3",
+    "audio_man": "short-stories/audio/the-peacock-caring-feathers-man.mp3"
+
+
+ },
+
+"the-peacock-honest-glow": {
+    "title": "The Peacock’s Honest Glow",
+    "folder": "short-stories",
+    "text": "short-stories/the-peacock-honest-glow.txt",
+    "image": "short-stories/the-peacock-honest-glow.webp",
+    "audio_woman": "short-stories/audio/the-peacock-honest-glow-woman.mp3",
+    "audio_man": "short-stories/audio/the-peacock-honest-glow-man.mp3"
+
+
+ },
+
+"the-peacock-kind-dance": {
+    "title": "The Peacock’s Kind Dance",
+    "folder": "short-stories",
+    "text": "short-stories/the-peacock-kind-dance.txt",
+    "image": "short-stories/the-peacock-kind-dance.webp",
+    "audio_woman": "short-stories/audio/the-peacock-kind-dance-woman.mp3",
+    "audio_man": "short-stories/audio/the-peacock-kind-dance-man.mp3"
+
+
+ },
+
+"the-stork-brave-nest": {
+    "title": "The Stork’s Brave Nest",
+    "folder": "short-stories",
+    "text": "short-stories/the-stork-brave-nest.txt",
+    "image": "short-stories/the-stork-brave-nest.webp",
+    "audio_woman": "short-stories/audio/the-stork-brave-nest-woman.mp3",
+    "audio_man": "short-stories/audio/the-stork-brave-nest-man.mp3"
+
+
+ },
+
+"the-stork-caring-journey": {
+    "title": "The Stork’s Caring Journey",
+    "folder": "short-stories",
+    "text": "short-stories/the-stork-caring-journey.txt",
+    "image": "short-stories/the-stork-caring-journey.webp",
+    "audio_woman": "short-stories/audio/the-stork-caring-journey-woman.mp3",
+    "audio_man": "short-stories/audio/the-stork-caring-journey-man.mp3"
+
+
+ },
+
+"the-stork-gentle-flight": {
+    "title": "The Stork’s Gentle Flight",
+    "folder": "short-stories",
+    "text": "short-stories/the-stork-gentle-flight.txt",
+    "image": "short-stories/the-stork-gentle-flight.webp",
+    "audio_woman": "short-stories/audio/the-stork-gentle-flight-woman.mp3",
+    "audio_man": "short-stories/audio/the-stork-gentle-flight-man.mp3"
+
+
+ },
+
+"the-stork-honest-flight": {
+    "title": "The Stork’s Honest Flight",
+    "folder": "short-stories",
+    "text": "short-stories/the-stork-honest-flight.txt",
+    "image": "short-stories/the-stork-honest-flight.webp",
+    "audio_woman": "short-stories/audio/the-stork-honest-flight-woman.mp3",
+    "audio_man": "short-stories/audio/the-stork-honest-flight-man.mp3"
+
+
+ },
+
+"the-stork-honest-nest": {
+    "title": "The Stork’s Honest Nest",
+    "folder": "short-stories",
+    "text": "short-stories/the-stork-honest-nest.txt",
+    "image": "short-stories/the-stork-honest-nest.webp",
+    "audio_woman": "short-stories/audio/the-stork-honest-nest-woman.mp3",
+    "audio_man": "short-stories/audio/the-stork-honest-nest-man.mp3"
+
+
+ },
+
+"the-wolf-pup-gentle-song": {
+    "title": "The Wolf Pup’s Gentle Song",
+    "folder": "short-stories",
+    "text": "short-stories/the-wolf-pup-gentle-song.txt",
+    "image": "short-stories/the-wolf-pup-gentle-song.webp",
+    "audio_woman": "short-stories/audio/the-wolf-pup-gentle-song-woman.mp3",
+    "audio_man": "short-stories/audio/the-wolf-pup-gentle-song-man.mp3"
+
+
+ },
+
+"the-wolf-pup-honest-heart": {
+    "title": "The Wolf Pup’s Honest Heart",
+    "folder": "short-stories",
+    "text": "short-stories/the-wolf-pup-honest-heart.txt",
+    "image": "short-stories/the-wolf-pup-honest-heart.webp",
+    "audio_woman": "short-stories/audio/the-wolf-pup-honest-heart-woman.mp3",
+    "audio_man": "short-stories/audio/the-wolf-pup-honest-heart-man.mp3"
+
+
+ },
+
+"the-wolf-pup-kind-roar": {
+    "title": "The Wolf Pup’s Kind Roar",
+    "folder": "short-stories",
+    "text": "short-stories/the-wolf-pup-kind-roar.txt",
+    "image": "short-stories/the-wolf-pup-kind-roar.webp",
+    "audio_woman": "short-stories/audio/the-wolf-pup-kind-roar-woman.mp3",
+    "audio_man": "short-stories/audio/the-wolf-pup-kind-roar-man.mp3"
+
+
+  }
+
+}
+
+
+
+
+
+
+

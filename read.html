@@ -87,23 +87,26 @@
       cursor: pointer;
     }
 
-    #storyText {
-      display: block;
-      white-space: pre-wrap;
-      text-align: justify;
-      font-size: 14px;
-      line-height: 1.4;
-      margin-top: 10px;
-      max-height: 400px;
-      overflow-y: auto;
-      background-color: white;
-      border-radius: 12px;
-      color: #000;
-      padding: 12px;
-    }
-    #storyText p {
-  margin-top: 0;
-  margin-bottom: 2px;  /* Adjust this value: smaller = less space */
+#storyText {
+  display: block;
+  text-align: justify;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 12px;
+  color: #000;
+  padding: 12px;
+}
+
+#storyText p {
+  margin: 0 0 10px 0;  /* Change 10px to whatever spacing you want */
+}
+
+#storyText p:last-child {
+  margin-bottom: 0;
 }
 
     #customAudioPlayer {
@@ -498,7 +501,9 @@
       fetch('https://kiabatha.github.io/ssm/' + storyData.text)
         .then(function(res) { return res.text(); })
         .then(function(text) {
-          document.getElementById("storyText").innerText = text;
+         const paragraphs = text.split('\n\n').filter(p => p.trim() !== '');
+         const formattedText = paragraphs.map(p => '<p>' + p.trim() + '</p>').join('');
+         document.getElementById("storyText").innerHTML = formattedText;
           document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
           if (params.get("mode") === "manual") {
             document.getElementById("storyText").style.display = "block";

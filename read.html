@@ -89,7 +89,7 @@
 
     #storyText {
       display: block;
-     white-space: pre-wrap;
+      white-space: pre-line;
       text-align: justify;
       font-size: 14px;
       line-height: 1.4;
@@ -491,11 +491,11 @@
       audioMan.load();
       audioWoman.load();
 
-     fetch('https://kiabatha.github.io/ssm/' + storyData.text)
-  .then(function(res) { return res.text(); })
-  .then(function(text) {
-    const cleanedText = text.replace(/\n\s*\n\s*\n+/g, '\n\n');
-    document.getElementById("storyText").innerText = cleanedText;
+      fetch('https://kiabatha.github.io/ssm/' + storyData.text)
+        .then(function(res) { return res.text(); })
+        .then(function(text) {
+          const cleanedText = text.replace(/\n\s*\n\s*\n+/g, '\n\n');
+          document.getElementById("storyText").innerText = cleanedText;
           document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
           if (params.get("mode") === "manual") {
             document.getElementById("storyText").style.display = "block";

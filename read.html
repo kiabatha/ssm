@@ -89,7 +89,6 @@
 
     #storyText {
       display: block;
-      white-space: pre-line;
       text-align: justify;
       font-size: 14px;
       line-height: 1.4;
@@ -100,6 +99,11 @@
       border-radius: 12px;
       color: #000;
       padding: 12px;
+    }
+
+    #storyText p {
+      margin: 6px 0;
+      text-align: justify;
     }
 
     #customAudioPlayer {
@@ -494,8 +498,9 @@
       fetch('https://kiabatha.github.io/ssm/' + storyData.text)
         .then(function(res) { return res.text(); })
         .then(function(text) {
-          const cleanedText = text.replace(/\n\s*\n\s*\n+/g, '\n\n');
-          document.getElementById("storyText").innerText = cleanedText;
+          const paragraphs = text.trim().split('\n').filter(function(p) { return p.trim() !== ''; });
+          const html = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+          document.getElementById("storyText").innerHTML = html;
           document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
           if (params.get("mode") === "manual") {
             document.getElementById("storyText").style.display = "block";

@@ -68,7 +68,172 @@
     "audio_woman": "long-stories/audio/amelia-and-the-swan-queen-woman.mp3",
     "audio_man": "long-stories/audio/amelia-and-the-swan-queen-man.mp3"
 
+    },
+
+  "the-boy-who-painted-weather": {
+    "title": "The Boy Who Painted Weather",
+    "folder": "long-stories",
+    "text": "long-stories/the-boy-who-painted-weather.txt",
+    "image": "long-stories/the-boy-who-painted-weather.webp",
+    "audio_woman": "long-stories/audio/the-boy-who-painted-weather-woman.mp3",
+    "audio_man": "long-stories/audio/the-boy-who-painted-weather-man.mp3"
+
+    },
+
+  "the-clockmaker-apprentice": {
+    "title": "The Clockmaker's Apprentice",
+    "folder": "long-stories",
+    "text": "long-stories/the-clockmaker-apprentice.txt",
+    "image": "long-stories/the-clockmaker-apprentice.webp",
+    "audio_woman": "long-stories/audio/the-clockmaker-apprentice-woman.mp3",
+    "audio_man": "long-stories/audio/the-clockmaker-apprentice-man.mp3"
+
+ },
+
+  "the-girl-who-asked-why": {
+    "title": "The Girl Who Asked Why",
+    "folder": "long-stories",
+    "text": "long-stories/the-girl-who-asked-why.txt",
+    "image": "long-stories/the-girl-who-asked-why.webp",
+    "audio_woman": "long-stories/audio/the-girl-who-asked-why-woman.mp3",
+    "audio_man": "long-stories/audio/the-girl-who-asked-why-man.mp3"
+
+
+ },
+
+  "the-inventor-mistakes": {
+    "title": "The Inventor's Mistakes",
+    "folder": "long-stories",
+    "text": "long-stories/the-inventor-mistakes.txt",
+    "image": "long-stories/the-inventor-mistakes.webp",
+    "audio_woman": "long-stories/audio/the-inventor-mistakes-woman.mp3",
+    "audio_man": "long-stories/audio/the-inventor-mistakes-man.mp3"
+
+
+ },
+
+  "the-island-of-lost-ships": {
+    "title": "The Island of Lost Ships",
+    "folder": "long-stories",
+    "text": "long-stories/the-island-of-lost-ships.txt",
+    "image": "long-stories/the-island-of-lost-ships.webp",
+    "audio_woman": "long-stories/audio/the-island-of-lost-ships-woman.mp3",
+    "audio_man": "long-stories/audio/the-island-of-lost-ships-man.mp3"
+
+
+ },
+
+  "the-library-of-forgotten-tales": {
+    "title": "The Library of Forgotten Tales",
+    "folder": "long-stories",
+    "text": "long-stories/the-library-of-forgotten-tales.txt",
+    "image": "long-stories/the-library-of-forgotten-tales.webp",
+    "audio_woman": "long-stories/audio/the-library-of-forgotten-tales-woman.mp3",
+    "audio_man": "long-stories/audio/the-library-of-forgotten-tales-man.mp3"
+
+
+ },
+
+  "the-math-in-everything": {
+    "title": "The Math in Everything",
+    "folder": "long-stories",
+    "text": "long-stories/the-math-in-everything.txt",
+    "image": "long-stories/the-math-in-everything.webp",
+    "audio_woman": "long-stories/audio/the-math-in-everything-woman.mp3",
+    "audio_man": "long-stories/audio/the-math-in-everything-man.mp3"
+
+
+ },
+
+  "the-mirror-maker-daughter": {
+    "title": "The Mirror Maker's Daughter",
+    "folder": "long-stories",
+    "text": "long-stories/the-mirror-maker-daughter.txt",
+    "image": "long-stories/the-mirror-maker-daughter.webp",
+    "audio_woman": "long-stories/audio/the-mirror-maker-daughter-woman.mp3",
+    "audio_man": "long-stories/audio/the-mirror-maker-daughter-man.mp3"
+
+
+ },
+
+  "the-moonstone-garden": {
+    "title": "The Moonstone Garden",
+    "folder": "long-stories",
+    "text": "long-stories/the-moonstone-garden.txt",
+    "image": "long-stories/the-moonstone-garden.webp",
+    "audio_woman": "long-stories/audio/the-moonstone-garden-woman.mp3",
+    "audio_man": "long-stories/audio/the-moonstone-garden-man.mp3"
+
+
+ },
+
+  "the-mountain-behind-the-clouds": {
+    "title": "The Mountain Behind the Clouds",
+    "folder": "long-stories",
+    "text": "long-stories/the-mountain-behind-the-clouds.txt",
+    "image": "long-stories/the-mountain-behind-the-clouds.webp",
+    "audio_woman": "long-stories/audio/the-mountain-behind-the-clouds-woman.mp3",
+    "audio_man": "long-stories/audio/the-mountain-behind-the-clouds-man.mp3"
+
+
+ },
+
+  "the-night-train-to-anywhere": {
+    "title": "The Night Train to Anywhere",
+    "folder": "long-stories",
+    "text": "long-stories/the-night-train-to-anywhere.txt",
+    "image": "long-stories/the-night-train-to-anywhere.webp",
+    "audio_woman": "long-stories/audio/the-night-train-to-anywhere-woman.mp3",
+    "audio_man": "long-stories/audio/the-night-train-to-anywhere-man.mp3"
+
+
+ },
+
+  "the-power-of-listening": {
+    "title": "The Power of Listening",
+    "folder": "long-stories",
+    "text": "long-stories/the-power-of-listening.txt",
+    "image": "long-stories/the-power-of-listening.webp",
+    "audio_woman": "long-stories/audio/the-power-of-listening-woman.mp3",
+    "audio_man": "long-stories/audio/the-power-of-listening-man.mp3"
+
+
+ },
+
+  "the-secret-of-willow-creek-bridge": {
+    "title": "The Secret of Willow Creek Bridge",
+    "folder": "long-stories",
+    "text": "long-stories/the-secret-of-willow-creek-bridge.txt",
+    "image": "long-stories/the-secret-of-willow-creek-bridge.webp",
+    "audio_woman": "long-stories/audio/the-secret-of-willow-creek-bridge-woman.mp3",
+    "audio_man": "long-stories/audio/the-secret-of-willow-creek-bridge-man.mp3"
+
+
+ },
+
+  "the-singing-river": {
+    "title": "The Singing River",
+    "folder": "long-stories",
+    "text": "long-stories/the-singing-river.txt",
+    "image": "long-stories/the-singing-river.webp",
+    "audio_woman": "long-stories/audio/the-singing-river-woman.mp3",
+    "audio_man": "long-stories/audio/the-singing-river-man.mp3"
+
+
+ },
+
+  "the-words-that-built-worlds": {
+    "title": "The Words That Built Worlds",
+    "folder": "long-stories",
+    "text": "long-stories/the-words-that-built-worlds.txt",
+    "image": "long-stories/the-words-that-built-worlds.webp",
+    "audio_woman": "long-stories/audio/the-words-that-built-worlds-woman.mp3",
+    "audio_man": "long-stories/audio/the-words-that-built-worlds-man.mp3"
+
+
+
 
   }
+
 
 }

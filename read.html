@@ -73,6 +73,11 @@
       max-width: 100px;
       flex: 1 1 auto;
       background-color: #E53935;
+      transition: background-color 0.3s ease;
+    }
+
+    .action-button.playing {
+      background-color: #4CAF50;
     }
 
     .round-button {
@@ -399,6 +404,7 @@
   let currentFontSize = 14;
   let manAudioLoaded = false;
   let womanAudioLoaded = false;
+  let currentGender = null;
 
   const params = new URLSearchParams(window.location.search);
   const audioBar = document.getElementById("audioBar");
@@ -410,6 +416,7 @@
     document.getElementById("customAudioPlayer").style.display = "block";
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u23F8";
     document.getElementById("errorMessage").style.display = "none";
+    updateButtonStates();
     startScrolling();
   });
 
@@ -418,6 +425,7 @@
     clearInterval(scrollInterval);
     scrollInterval = null;
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+    updateButtonStates();
     
     const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
     
@@ -433,6 +441,8 @@
     scrollInterval = null;
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
     document.getElementById("customAudioPlayer").style.display = "none";
+    currentGender = null;
+    updateButtonStates();
     
     if (isAutoplayActive && window.Android) {
       window.Android.onAudioEnded();
@@ -583,6 +593,7 @@
   function playAudio(gender) {
     const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
     
+    currentGender = gender;
     audioBar.src = preloadedAudio.src;
     audioBar.currentTime = 0;
     audioBar.volume = 1.0;
@@ -595,6 +606,22 @@
       document.getElementById("errorMessage").style.display = "block"; 
     });
     document.getElementById("storyText").style.display = "block";
+  }
+
+  function updateButtonStates() {
+    const manBtn = document.querySelector('.action-button[onclick="playAudio(\'man\')"]');
+    const womanBtn = document.querySelector('.action-button[onclick="playAudio(\'woman\')"]');
+    
+    manBtn.classList.remove('playing');
+    womanBtn.classList.remove('playing');
+    
+    if (!audioBar.paused && currentGender) {
+      if (currentGender === 'man') {
+        manBtn.classList.add('playing');
+      } else if (currentGender === 'woman') {
+        womanBtn.classList.add('playing');
+      }
+    }
   }
 
   function playAudioFromApp(gender) {

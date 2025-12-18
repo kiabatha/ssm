@@ -405,6 +405,11 @@
   let manAudioLoaded = false;
   let womanAudioLoaded = false;
   let currentGender = null;
+  
+  // Audio fade variables
+  let fadeInterval = null;
+  const FADE_IN_DURATION = 800;  // 800ms fade in
+  const FADE_OUT_DURATION = 600; // 600ms fade out
 
   const params = new URLSearchParams(window.location.search);
   const audioBar = document.getElementById("audioBar");
@@ -528,6 +533,52 @@
       }
     });
 
+  // ============= FADE FUNCTIONS - NEW CODE =============
+  
+  function fadeInAudio() {
+    if (fadeInterval) clearInterval(fadeInterval);
+    
+    audioBar.volume = 0;
+    const steps = 50;
+    const stepDuration = FADE_IN_DURATION / steps;
+    const volumeIncrement = 1.0 / steps;
+    let currentStep = 0;
+    
+    fadeInterval = setInterval(function() {
+      currentStep++;
+      audioBar.volume = Math.min(audioBar.volume + volumeIncrement, 1.0);
+      
+      if (currentStep >= steps || audioBar.volume >= 1.0) {
+        clearInterval(fadeInterval);
+        audioBar.volume = 1.0;
+        fadeInterval = null;
+      }
+    }, stepDuration);
+  }
+  
+  function fadeOutAudio(callback) {
+    if (fadeInterval) clearInterval(fadeInterval);
+    
+    const steps = 50;
+    const stepDuration = FADE_OUT_DURATION / steps;
+    const volumeDecrement = audioBar.volume / steps;
+    let currentStep = 0;
+    
+    fadeInterval = setInterval(function() {
+      currentStep++;
+      audioBar.volume = Math.max(audioBar.volume - volumeDecrement, 0);
+      
+      if (currentStep >= steps || audioBar.volume <= 0) {
+        clearInterval(fadeInterval);
+        audioBar.volume = 0;
+        fadeInterval = null;
+        if (callback) callback();
+      }
+    }, stepDuration);
+  }
+  
+  // ============= END FADE FUNCTIONS =============
+
   function formatTime(seconds) {
     if (isNaN(seconds) || seconds === Infinity) return '0:00';
     const mins = Math.floor(seconds / 60);
@@ -541,7 +592,10 @@
         document.getElementById("errorMessage").style.display = "block"; 
       });
     } else {
-      audioBar.pause();
+      // Apply fade-out when user manually pauses
+      fadeOutAudio(function() {
+        audioBar.pause();
+      });
     }
   }
 
@@ -596,15 +650,19 @@
     currentGender = gender;
     audioBar.src = preloadedAudio.src;
     audioBar.currentTime = 0;
-    audioBar.volume = 1.0;
+    audioBar.volume = 0; // Start at 0 for fade-in
     
     document.getElementById("storyText").scrollTop = 0;
     if (scrollInterval) clearInterval(scrollInterval);
     scrollInterval = null;
     
-    audioBar.play().catch(function() { 
+    audioBar.play().then(function() {
+      // Apply fade-in after audio starts playing
+      fadeInAudio();
+    }).catch(function() { 
       document.getElementById("errorMessage").style.display = "block"; 
     });
+    
     document.getElementById("storyText").style.display = "block";
   }
 
@@ -644,11 +702,14 @@
 
   document.addEventListener("visibilitychange", function() {
     if (document.hidden && !audioBar.paused) {
-      audioBar.pause();
-      if (scrollInterval) {
-        clearInterval(scrollInterval);
-        scrollInterval = null;
-      }
+      // Apply fade-out when page becomes hidden
+      fadeOutAudio(function() {
+        audioBar.pause();
+        if (scrollInterval) {
+          clearInterval(scrollInterval);
+          scrollInterval = null;
+        }
+      });
     }
   });
 

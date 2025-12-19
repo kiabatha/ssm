@@ -80,6 +80,26 @@
       background-color: #de8a14;
     }
 
+    .action-button.loading {
+      position: relative;
+      background-color: #2196F3;
+    }
+
+    .action-button.loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .action-button.loading span {
+      visibility: hidden;
+    }
+
     .round-button {
       width: 30px;
       height: 30px;
@@ -324,19 +344,191 @@
     .speed-option.active .checkmark {
       display: inline;
     }
+
+    /* Loading Overlay for Auto-play */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.9);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .loading-overlay.active {
+      display: flex;
+    }
+
+    .loading-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 300px;
+      width: 80%;
+    }
+
+    .loading-spinner-large {
+      width: 50px;
+      height: 50px;
+      border: 4px solid #E3F2FD;
+      border-top: 4px solid #2196F3;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      font-size: 14px;
+      color: #424242;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .loading-subtext {
+      font-size: 12px;
+      color: #757575;
+    }
+
+    .progress-container-slim {
+      width: 100%;
+      height: 4px;
+      background-color: #E3F2FD;
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background-color: #2196F3;
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    /* Audio bar skeleton loading */
+    .audio-skeleton {
+      display: none;
+      margin: 10px auto 0;
+      max-width: 600px;
+      background-color: #fafafa;
+      border-radius: 10px;
+      padding: 12px 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .audio-skeleton.active {
+      display: block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.3; }
+    }
+
+    .skeleton-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skeleton-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+    }
+
+    .skeleton-time {
+      width: 38px;
+      height: 14px;
+      background-color: #e0e0e0;
+      border-radius: 3px;
+    }
+
+    .skeleton-progress {
+      flex: 1;
+      height: 8px;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+    }
+
+    .skeleton-menu {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+    }
+
+    .network-warning {
+      display: none;
+      background-color: #FFF3CD;
+      color: #856404;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin: 10px auto;
+      max-width: 600px;
+      border: 1px solid #FFEAA7;
+      text-align: center;
+    }
+
+    .network-warning.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
+  <!-- Loading Overlay for Auto-play -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-card">
+      <div class="loading-spinner-large"></div>
+      <div class="loading-text" id="loadingMessage">Loading story...</div>
+      <div class="loading-subtext" id="loadingSubtext">Please wait while we prepare your story</div>
+      <div class="progress-container-slim">
+        <div class="progress-fill" id="loadingProgress"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="content">
     <div class="image-container">
       <img id="storyImage" src="" alt="Story Illustration" />
     </div>
 
+    <!-- Network Warning -->
+    <div class="network-warning" id="networkWarning">
+      ⚠️ Slow network detected. Loading may take longer than usual.
+    </div>
+
     <div class="button-row">
-      <button class="action-button" onclick="playAudio('man')">Man</button>
+      <button class="action-button" id="manButton" onclick="playAudio('man')">
+        <span>Man</span>
+      </button>
       <button class="round-button" onclick="adjustFontSize(-1)">-</button>
       <button class="round-button" onclick="adjustFontSize(1)">+</button>
-      <button class="action-button" onclick="playAudio('woman')">Woman</button>
+      <button class="action-button" id="womanButton" onclick="playAudio('woman')">
+        <span>Woman</span>
+      </button>
+    </div>
+
+    <!-- Audio Skeleton Loader -->
+    <div class="audio-skeleton" id="audioSkeleton">
+      <div class="skeleton-controls">
+        <div class="skeleton-button"></div>
+        <div class="skeleton-time"></div>
+        <div class="skeleton-progress"></div>
+        <div class="skeleton-time"></div>
+        <div class="skeleton-menu"></div>
+      </div>
     </div>
 
     <audio id="audioBar"></audio>
@@ -351,7 +543,7 @@
         </button>
         <span class="time-display" id="currentTime">0:00</span>
         <div class="progress-container" id="progressContainer" onclick="seekAudio(event)">
-          <div class="progress-bar" id="progressBar">
+          <div class="progressBar" id="progressBar">
             <div class="progress-handle"></div>
           </div>
         </div>
@@ -405,6 +597,9 @@
   let manAudioLoaded = false;
   let womanAudioLoaded = false;
   let currentGender = null;
+  let isAutoPlayMode = false;
+  let isLoading = false;
+  let networkCheckStartTime = null;
   
   // Audio fade variables
   let fadeInterval = null;
@@ -415,87 +610,154 @@
   const audioBar = document.getElementById("audioBar");
   const audioMan = document.getElementById("audioMan");
   const audioWoman = document.getElementById("audioWoman");
+  const manButton = document.getElementById("manButton");
+  const womanButton = document.getElementById("womanButton");
 
-  audioBar.addEventListener('play', function() {
-    if (window.Android) window.Android.onAudioStateChange(true);
-    document.getElementById("customAudioPlayer").style.display = "block";
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u23F8";
-    document.getElementById("errorMessage").style.display = "none";
-    updateButtonStates();
-    startScrolling();
-  });
+  // Initialize audio events
+  initializeAudioEvents();
 
-  audioBar.addEventListener('pause', function() {
-    if (window.Android) window.Android.onAudioStateChange(false);
-    clearInterval(scrollInterval);
-    scrollInterval = null;
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-    updateButtonStates();
-    
-    const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
-    
-    if (isAutoplayActive && !hasEnded) {
-      if (window.Android) window.Android.onUserStoppedAudio();
-      isAutoplayActive = false;
-    }
-  });
+  function initializeAudioEvents() {
+    audioBar.addEventListener('play', function() {
+      if (window.Android) window.Android.onAudioStateChange(true);
+      document.getElementById("customAudioPlayer").style.display = "block";
+      document.getElementById("audioSkeleton").classList.remove("active");
+      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u23F8";
+      document.getElementById("errorMessage").style.display = "none";
+      updateButtonStates();
+      startScrolling();
+      
+      // Hide loading overlay if visible
+      hideLoadingOverlay();
+    });
 
-  audioBar.addEventListener('ended', function() {
-    if (window.Android) window.Android.onAudioStateChange(false);
-    clearInterval(scrollInterval);
-    scrollInterval = null;
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-    document.getElementById("customAudioPlayer").style.display = "none";
-    currentGender = null;
-    updateButtonStates();
-    
-    if (isAutoplayActive && window.Android) {
-      window.Android.onAudioEnded();
-    }
-  });
+    audioBar.addEventListener('pause', function() {
+      if (window.Android) window.Android.onAudioStateChange(false);
+      clearInterval(scrollInterval);
+      scrollInterval = null;
+      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+      updateButtonStates();
+      
+      const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
+      
+      if (isAutoplayActive && !hasEnded) {
+        if (window.Android) window.Android.onUserStoppedAudio();
+        isAutoplayActive = false;
+      }
+    });
 
-  audioBar.addEventListener('timeupdate', function() {
-    if (audioBar.duration) {
-      const progress = (audioBar.currentTime / audioBar.duration) * 100;
-      document.getElementById("progressBar").style.width = Math.max(0, progress) + '%';
-      document.getElementById("currentTime").textContent = formatTime(audioBar.currentTime);
-    }
-  });
+    audioBar.addEventListener('ended', function() {
+      if (window.Android) window.Android.onAudioStateChange(false);
+      clearInterval(scrollInterval);
+      scrollInterval = null;
+      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+      document.getElementById("customAudioPlayer").style.display = "none";
+      currentGender = null;
+      updateButtonStates();
+      
+      if (isAutoplayActive && window.Android) {
+        window.Android.onAudioEnded();
+      }
+    });
 
-  audioBar.addEventListener('loadedmetadata', function() {
-    if (audioBar.duration && !isNaN(audioBar.duration)) {
-      document.getElementById("totalTime").textContent = formatTime(audioBar.duration);
-    }
-  });
+    audioBar.addEventListener('timeupdate', function() {
+      if (audioBar.duration) {
+        const progress = (audioBar.currentTime / audioBar.duration) * 100;
+        document.getElementById("progressBar").style.width = Math.max(0, progress) + '%';
+        document.getElementById("currentTime").textContent = formatTime(audioBar.currentTime);
+      }
+    });
 
-  audioBar.addEventListener('canplaythrough', function() {
-    document.getElementById("playPauseBtn").classList.remove("loading");
-  });
+    audioBar.addEventListener('loadedmetadata', function() {
+      if (audioBar.duration && !isNaN(audioBar.duration)) {
+        document.getElementById("totalTime").textContent = formatTime(audioBar.duration);
+      }
+    });
 
-  audioBar.addEventListener('error', function() {
-    document.getElementById("errorMessage").style.display = "block";
-    document.getElementById("playPauseBtn").classList.remove("loading");
-    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-  });
+    audioBar.addEventListener('canplaythrough', function() {
+      document.getElementById("playPauseBtn").classList.remove("loading");
+      if (isAutoPlayMode) {
+        updateLoadingProgress(100);
+      }
+    });
 
-  audioBar.addEventListener('waiting', function() {
-    document.getElementById("playPauseBtn").classList.add("loading");
-  });
+    audioBar.addEventListener('error', function() {
+      document.getElementById("errorMessage").style.display = "block";
+      document.getElementById("playPauseBtn").classList.remove("loading");
+      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+      hideLoadingOverlay();
+    });
 
-  audioMan.addEventListener('canplaythrough', function() {
-    manAudioLoaded = true;
-    checkBothAudiosLoaded();
-  }, { once: true });
+    audioBar.addEventListener('waiting', function() {
+      document.getElementById("playPauseBtn").classList.add("loading");
+      if (networkCheckStartTime) {
+        const loadTime = Date.now() - networkCheckStartTime;
+        if (loadTime > 2000) { // Show warning after 2 seconds
+          document.getElementById("networkWarning").classList.add("show");
+        }
+      }
+    });
 
-  audioWoman.addEventListener('canplaythrough', function() {
-    womanAudioLoaded = true;
-    checkBothAudiosLoaded();
-  }, { once: true });
+    audioMan.addEventListener('canplaythrough', function() {
+      manAudioLoaded = true;
+      checkBothAudiosLoaded();
+    }, { once: true });
+
+    audioWoman.addEventListener('canplaythrough', function() {
+      womanAudioLoaded = true;
+      checkBothAudiosLoaded();
+    }, { once: true });
+  }
 
   function checkBothAudiosLoaded() {
     if (manAudioLoaded && womanAudioLoaded && window.Android) {
       window.Android.onBothAudiosPreloaded();
+      if (isAutoPlayMode) {
+        updateLoadingProgress(75);
+      }
     }
+  }
+
+  // Show loading overlay with progress
+  function showLoadingOverlay(message = "Loading story...", subtext = "Please wait while we prepare your story") {
+    document.getElementById("loadingMessage").textContent = message;
+    document.getElementById("loadingSubtext").textContent = subtext;
+    document.getElementById("loadingOverlay").classList.add("active");
+    document.getElementById("loadingProgress").style.width = "0%";
+    isLoading = true;
+  }
+
+  // Hide loading overlay
+  function hideLoadingOverlay() {
+    document.getElementById("loadingOverlay").classList.remove("active");
+    document.getElementById("networkWarning").classList.remove("show");
+    isLoading = false;
+  }
+
+  // Update loading progress
+  function updateLoadingProgress(percent) {
+    const progressBar = document.getElementById("loadingProgress");
+    if (progressBar) {
+      progressBar.style.width = Math.min(100, Math.max(0, percent)) + "%";
+    }
+  }
+
+  // Check network speed
+  function checkNetworkSpeed() {
+    networkCheckStartTime = Date.now();
+    const testImage = new Image();
+    testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now();
+    
+    testImage.onload = function() {
+      const loadTime = Date.now() - networkCheckStartTime;
+      if (loadTime > 3000) { // Very slow network
+        document.getElementById("networkWarning").classList.add("show");
+      }
+    };
+    
+    testImage.onerror = function() {
+      // If test image fails, network is likely slow
+      document.getElementById("networkWarning").classList.add("show");
+    };
   }
 
   fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
@@ -503,6 +765,12 @@
     .then(function(data) {
       storyData = data[params.get("id")];
       if (!storyData) throw new Error("Story not found");
+
+      // Start network check
+      checkNetworkSpeed();
+      
+      // Show audio skeleton loader immediately
+      document.getElementById("audioSkeleton").classList.add("active");
 
       audioMan.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_man;
       audioWoman.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_woman;
@@ -521,19 +789,28 @@
             document.getElementById("storyText").style.display = "block";
           }
           
+          // Hide audio skeleton when content is loaded
+          document.getElementById("audioSkeleton").classList.remove("active");
+          
           if (window.Android) {
             window.Android.onContentReady();
+          }
+          
+          if (isAutoPlayMode) {
+            updateLoadingProgress(50);
           }
         });
     })
     .catch(function() {
       document.getElementById("storyText").innerText = "Failed to load story.";
+      document.getElementById("audioSkeleton").classList.remove("active");
+      hideLoadingOverlay();
       if (window.Android) {
         window.Android.onContentReady();
       }
     });
 
-  // ============= FADE FUNCTIONS - NEW CODE =============
+  // ============= FADE FUNCTIONS =============
   
   function fadeInAudio() {
     if (fadeInterval) clearInterval(fadeInterval);
@@ -645,9 +922,21 @@
   }
 
   function playAudio(gender) {
-    const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+    if (isLoading) return;
     
     currentGender = gender;
+    const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+    
+    // Show loading on button
+    const button = gender === "man" ? manButton : womanButton;
+    button.classList.add("loading");
+    
+    // Show audio skeleton loader
+    document.getElementById("audioSkeleton").classList.add("active");
+    
+    // Show loading on play button
+    document.getElementById("playPauseBtn").classList.add("loading");
+    
     audioBar.src = preloadedAudio.src;
     audioBar.currentTime = 0;
     audioBar.volume = 0; // Start at 0 for fade-in
@@ -656,35 +945,68 @@
     if (scrollInterval) clearInterval(scrollInterval);
     scrollInterval = null;
     
+    networkCheckStartTime = Date.now();
+    
     audioBar.play().then(function() {
       // Apply fade-in after audio starts playing
       fadeInAudio();
+      button.classList.remove("loading");
     }).catch(function() { 
       document.getElementById("errorMessage").style.display = "block"; 
+      button.classList.remove("loading");
+      document.getElementById("audioSkeleton").classList.remove("active");
     });
     
     document.getElementById("storyText").style.display = "block";
   }
 
-  function updateButtonStates() {
-    const manBtn = document.querySelector('.action-button[onclick="playAudio(\'man\')"]');
-    const womanBtn = document.querySelector('.action-button[onclick="playAudio(\'woman\')"]');
+  // New function for auto-play from Android
+  function playAudioFromApp(gender) {
+    isAutoplayActive = true;
+    isAutoPlayMode = true;
     
-    manBtn.classList.remove('playing');
-    womanBtn.classList.remove('playing');
+    // Show loading overlay for auto-play
+    showLoadingOverlay(
+      "Preparing stories for auto-play...", 
+      "Loading the first story. Please wait."
+    );
+    
+    // Show audio skeleton immediately
+    document.getElementById("audioSkeleton").classList.add("active");
+    
+    // Start loading progress simulation
+    let progress = 10;
+    updateLoadingProgress(progress);
+    
+    const progressInterval = setInterval(function() {
+      if (progress < 90) {
+        progress += 5;
+        updateLoadingProgress(progress);
+      }
+    }, 500);
+    
+    // Clear interval when audio can play
+    audioBar.addEventListener('canplaythrough', function() {
+      clearInterval(progressInterval);
+    }, { once: true });
+    
+    // Play audio after a short delay to ensure everything is ready
+    setTimeout(function() {
+      playAudio(gender);
+    }, 300);
+  }
+
+  function updateButtonStates() {
+    manButton.classList.remove('playing');
+    womanButton.classList.remove('playing');
     
     if (!audioBar.paused && currentGender) {
       if (currentGender === 'man') {
-        manBtn.classList.add('playing');
+        manButton.classList.add('playing');
       } else if (currentGender === 'woman') {
-        womanBtn.classList.add('playing');
+        womanButton.classList.add('playing');
       }
     }
-  }
-
-  function playAudioFromApp(gender) {
-    isAutoplayActive = true;
-    playAudio(gender);
   }
 
   function adjustFontSize(change) {
@@ -726,6 +1048,12 @@
         audioBar.currentTime = Math.min(audioBar.duration, audioBar.currentTime + 5);
       }
     }
+  });
+
+  // Reset auto-play mode when page loads
+  window.addEventListener('load', function() {
+    isAutoPlayMode = false;
+    hideLoadingOverlay();
   });
 </script>
 </body>

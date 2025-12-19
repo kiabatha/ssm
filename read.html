@@ -742,65 +742,39 @@
   }
 
   // Check network speed
-  function checkNetworkSpeed() {
-    networkCheckStartTime = Date.now();
-    const testImage = new Image();
-    testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now();
-    
-    testImage.onload = function() {
-      const loadTime = Date.now() - networkCheckStartTime;
-      if (loadTime > 5000) {
-        document.getElementById("networkWarning").classList.add("show");
-      }
-    };
-  }
-
-  fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      storyData = data[params.get("id")];
-      if (!storyData) throw new Error("Story not found");
-
-      checkNetworkSpeed();
-      
-      document.getElementById("audioSkeleton").classList.add("active");
-
-      audioMan.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_man;
-      audioWoman.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_woman;
-      
-      audioMan.load();
-      audioWoman.load();
-
-      fetch('https://kiabatha.github.io/ssm/' + storyData.text)
-        .then(function(res) { return res.text(); })
-        .then(function(text) {
-          const paragraphs = text.trim().split('\n').filter(function(p) { return p.trim() !== ''; });
-          const html = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
-          document.getElementById("storyText").innerHTML = html;
-          document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
-          if (params.get("mode") === "manual") {
-            document.getElementById("storyText").style.display = "block";
-          }
-          
-          document.getElementById("audioSkeleton").classList.remove("active");
-          
-          if (window.Android) {
-            window.Android.onContentReady();
-          }
-          
-          if (isAutoPlayMode) {
-            updateLoadingProgress(50);
-          }
-        });
-    })
-    .catch(function() {
-      document.getElementById("storyText").innerText = "Failed to load story.";
-      document.getElementById("audioSkeleton").classList.remove("active");
-      hideLoadingOverlay();
-      if (window.Android) {
-        window.Android.onContentReady();
-      }
+ // Check network speed - UPDATED VERSION
+function checkNetworkSpeed() {
+    return new Promise((resolve) => {
+        networkCheckStartTime = Date.now();
+        const testImage = new Image();
+        testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now() + '&size=1kb';
+        
+        testImage.onload = function() {
+            const loadTime = Date.now() - networkCheckStartTime;
+            // Store network speed globally
+            window.networkSpeed = loadTime;
+            
+            if (loadTime > 5000) { // Very slow (>5 seconds)
+                resolve('slow');
+            } else if (loadTime > 2000) { // Slow (>2 seconds)
+                resolve('medium');
+            } else { // Fast (<2 seconds)
+                resolve('fast');
+            }
+        };
+        
+        testImage.onerror = function() {
+            window.networkSpeed = 10000; // Assume slow if test fails
+            resolve('slow');
+        };
+        
+        // Timeout after 8 seconds
+        setTimeout(() => {
+            window.networkSpeed = 8000;
+            resolve('slow');
+        }, 8000);
     });
+}
 
   // ============= FADE FUNCTIONS =============
   

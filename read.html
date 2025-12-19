@@ -345,73 +345,75 @@
       display: inline;
     }
 
-    /* Loading Overlay for Auto-play */
-    .loading-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(255, 255, 255, 0.95);
-      z-index: 10000;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+/* Loading Overlay for Auto-play - UPDATED TRANSPARENT VERSION */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85); /* More transparent */
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  backdrop-filter: blur(2px); /* Optional: Adds blur effect */
+}
 
-    .loading-overlay.active {
-      display: flex;
-    }
+.loading-overlay.active {
+  display: flex;
+}
 
-    .loading-card {
-      background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      text-align: center;
-      max-width: 300px;
-      width: 80%;
-    }
+.loading-card {
+  background: rgba(255, 255, 255, 0.95); /* Slightly transparent card */
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 280px;
+  width: 80%;
+  border: 1px solid rgba(33, 150, 243, 0.1);
+}
 
-    .loading-spinner-large {
-      width: 50px;
-      height: 50px;
-      border: 4px solid #E3F2FD;
-      border-top: 4px solid #2196F3;
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      animation: spin 1s linear infinite;
-    }
+.loading-spinner-large {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #E3F2FD;
+  border-top: 3px solid #2196F3;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  animation: spin 1s linear infinite;
+}
 
-    .loading-text {
-      font-size: 14px;
-      color: #424242;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
+.loading-text {
+  font-size: 14px;
+  color: #424242;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
 
-    .loading-subtext {
-      font-size: 12px;
-      color: #757575;
-    }
+.loading-subtext {
+  font-size: 12px;
+  color: #757575;
+}
 
-    .progress-container-slim {
-      width: 100%;
-      height: 4px;
-      background-color: #E3F2FD;
-      border-radius: 2px;
-      margin-top: 12px;
-      overflow: hidden;
-    }
+.progress-container-slim {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(227, 242, 253, 0.5);
+  border-radius: 2px;
+  margin-top: 10px;
+  overflow: hidden;
+}
 
-    .progress-fill {
-      height: 100%;
-      background-color: #2196F3;
-      width: 0%;
-      transition: width 0.3s ease;
-      border-radius: 2px;
-    }
+.progress-fill {
+  height: 100%;
+  background-color: #2196F3;
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
 
     /* Audio bar skeleton loading */
     .audio-skeleton {
@@ -488,16 +490,17 @@
 </head>
 <body>
   <!-- Loading Overlay for Auto-play -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-card">
-      <div class="loading-spinner-large"></div>
-      <div class="loading-text" id="loadingMessage">Loading story...</div>
-      <div class="loading-subtext" id="loadingSubtext">Please wait while we prepare your story</div>
-      <div class="progress-container-slim">
-        <div class="progress-fill" id="loadingProgress"></div>
-      </div>
+<!-- Loading Overlay for Auto-play - TRANSPARENT VERSION -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-card">
+    <div class="loading-spinner-large"></div>
+    <div class="loading-text" id="loadingMessage">Loading story...</div>
+    <div class="loading-subtext" id="loadingSubtext">Please wait</div>
+    <div class="progress-container-slim">
+      <div class="progress-fill" id="loadingProgress"></div>
     </div>
   </div>
+</div>
 
   <div class="content">
     <div class="image-container">

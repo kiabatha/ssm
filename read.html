@@ -353,7 +353,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.95);
       z-index: 10000;
       justify-content: center;
       align-items: center;
@@ -543,7 +543,7 @@
         </button>
         <span class="time-display" id="currentTime">0:00</span>
         <div class="progress-container" id="progressContainer" onclick="seekAudio(event)">
-          <div class="progressBar" id="progressBar">
+          <div class="progress-bar" id="progressBar">
             <div class="progress-handle"></div>
           </div>
         </div>
@@ -691,7 +691,7 @@
       document.getElementById("playPauseBtn").classList.add("loading");
       if (networkCheckStartTime) {
         const loadTime = Date.now() - networkCheckStartTime;
-        if (loadTime > 2000) { // Show warning after 2 seconds
+        if (loadTime > 2000) {
           document.getElementById("networkWarning").classList.add("show");
         }
       }
@@ -718,9 +718,9 @@
   }
 
   // Show loading overlay with progress
-  function showLoadingOverlay(message = "Loading story...", subtext = "Please wait while we prepare your story") {
-    document.getElementById("loadingMessage").textContent = message;
-    document.getElementById("loadingSubtext").textContent = subtext;
+  function showLoadingOverlay(message, subtext) {
+    if (message) document.getElementById("loadingMessage").textContent = message;
+    if (subtext) document.getElementById("loadingSubtext").textContent = subtext;
     document.getElementById("loadingOverlay").classList.add("active");
     document.getElementById("loadingProgress").style.width = "0%";
     isLoading = true;
@@ -734,23 +734,26 @@
   }
 
   // Update loading progress
-function checkNetworkSpeed() {
+  function updateLoadingProgress(percent) {
+    const progressBar = document.getElementById("loadingProgress");
+    if (progressBar) {
+      progressBar.style.width = Math.min(100, Math.max(0, percent)) + "%";
+    }
+  }
+
+  // Check network speed
+  function checkNetworkSpeed() {
     networkCheckStartTime = Date.now();
     const testImage = new Image();
     testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now();
     
     testImage.onload = function() {
-        const loadTime = Date.now() - networkCheckStartTime;
-        // Only show warning if network is VERY slow (more than 5 seconds)
-        if (loadTime > 5000) {
-            document.getElementById("networkWarning").classList.add("show");
-        }
+      const loadTime = Date.now() - networkCheckStartTime;
+      if (loadTime > 5000) {
+        document.getElementById("networkWarning").classList.add("show");
+      }
     };
-    
-    testImage.onerror = function() {
-        // Don't show warning for test image failure
-    };
-}
+  }
 
   fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
     .then(function(res) { return res.json(); })
@@ -758,10 +761,8 @@ function checkNetworkSpeed() {
       storyData = data[params.get("id")];
       if (!storyData) throw new Error("Story not found");
 
-      // Start network check
       checkNetworkSpeed();
       
-      // Show audio skeleton loader immediately
       document.getElementById("audioSkeleton").classList.add("active");
 
       audioMan.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_man;
@@ -781,7 +782,6 @@ function checkNetworkSpeed() {
             document.getElementById("storyText").style.display = "block";
           }
           
-          // Hide audio skeleton when content is loaded
           document.getElementById("audioSkeleton").classList.remove("active");
           
           if (window.Android) {
@@ -861,7 +861,6 @@ function checkNetworkSpeed() {
         document.getElementById("errorMessage").style.display = "block"; 
       });
     } else {
-      // Apply fade-out when user manually pauses
       fadeOutAudio(function() {
         audioBar.pause();
       });
@@ -931,7 +930,7 @@ function checkNetworkSpeed() {
     
     audioBar.src = preloadedAudio.src;
     audioBar.currentTime = 0;
-    audioBar.volume = 0; // Start at 0 for fade-in
+    audioBar.volume = 0;
     
     document.getElementById("storyText").scrollTop = 0;
     if (scrollInterval) clearInterval(scrollInterval);
@@ -940,7 +939,6 @@ function checkNetworkSpeed() {
     networkCheckStartTime = Date.now();
     
     audioBar.play().then(function() {
-      // Apply fade-in after audio starts playing
       fadeInAudio();
       button.classList.remove("loading");
     }).catch(function() { 
@@ -954,38 +952,80 @@ function checkNetworkSpeed() {
 
   // New function for auto-play from Android
   function playAudioFromApp(gender) {
+    console.log("Auto-play triggered for:", gender);
     isAutoplayActive = true;
     isAutoPlayMode = true;
     
     // Show loading overlay for auto-play
     showLoadingOverlay(
-      "Preparing stories for auto-play...", 
-      "Loading the first story. Please wait."
+        "Starting story...", 
+        "Loading audio..."
     );
     
     // Show audio skeleton immediately
     document.getElementById("audioSkeleton").classList.add("active");
     
-    // Start loading progress simulation
+    // Start loading progress
     let progress = 10;
     updateLoadingProgress(progress);
     
     const progressInterval = setInterval(function() {
-      if (progress < 90) {
-        progress += 5;
-        updateLoadingProgress(progress);
-      }
+        if (progress < 90) {
+            progress += 5;
+            updateLoadingProgress(progress);
+        }
     }, 500);
     
     // Clear interval when audio can play
     audioBar.addEventListener('canplaythrough', function() {
-      clearInterval(progressInterval);
+        clearInterval(progressInterval);
     }, { once: true });
     
-    // Play audio after a short delay to ensure everything is ready
+    // Use force playback after a short delay
     setTimeout(function() {
-      playAudio(gender);
-    }, 300);
+        startAutoPlayback(gender);
+    }, 800);
+  }
+
+  function startAutoPlayback(gender) {
+    console.log("Starting auto playback for:", gender);
+    
+    const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+    
+    if (preloadedAudio && preloadedAudio.src) {
+        currentGender = gender;
+        audioBar.src = preloadedAudio.src;
+        audioBar.currentTime = 0;
+        audioBar.volume = 0;
+        
+        // Reset UI
+        document.getElementById("storyText").scrollTop = 0;
+        if (scrollInterval) {
+            clearInterval(scrollInterval);
+            scrollInterval = null;
+        }
+        
+        // Show player
+        document.getElementById("customAudioPlayer").style.display = "block";
+        document.getElementById("audioSkeleton").classList.remove("active");
+        document.getElementById("playPauseBtn").classList.add("loading");
+        
+        // Try to play
+        audioBar.play().then(function() {
+            console.log("Auto-playback started successfully");
+            fadeInAudio();
+            document.getElementById("playPauseBtn").classList.remove("loading");
+            startScrolling();
+        }).catch(function(error) {
+            console.log("Auto-playback failed:", error);
+            document.getElementById("errorMessage").style.display = "block";
+            document.getElementById("playPauseBtn").classList.remove("loading");
+            hideLoadingOverlay();
+        });
+    } else {
+        console.error("Audio source not available for auto-play");
+        hideLoadingOverlay();
+    }
   }
 
   function updateButtonStates() {
@@ -1016,7 +1056,6 @@ function checkNetworkSpeed() {
 
   document.addEventListener("visibilitychange", function() {
     if (document.hidden && !audioBar.paused) {
-      // Apply fade-out when page becomes hidden
       fadeOutAudio(function() {
         audioBar.pause();
         if (scrollInterval) {

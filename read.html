@@ -677,6 +677,8 @@
       if (window.Android) window.Android.onUserStoppedAudio();
       isAutoplayActive = false;
     }
+    
+    // Don't reset volume to 0 on pause - keep it for resume
   }
 
   /**
@@ -879,10 +881,16 @@
    */
   function togglePlayPause() {
     if (audioBar.paused) {
+      // Resume audio
       audioBar.play().catch(function() { 
         document.getElementById("errorMessage").style.display = "block"; 
       });
+      // Fade in from current volume
+      if (audioBar.volume < 1.0) {
+        fadeInAudio();
+      }
     } else {
+      // Pause audio with fade out
       fadeOutAudio(function() {
         audioBar.pause();
       });

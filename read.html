@@ -659,6 +659,11 @@
     updateButtonStates();
     startScrolling();
     hideLoadingOverlay();
+    
+    // Always fade in when play event fires
+    if (audioBar.volume < 1.0) {
+      fadeInAudio();
+    }
   }
 
   /**
@@ -824,15 +829,18 @@
   function fadeInAudio() {
     if (fadeInterval) clearInterval(fadeInterval);
     
-    audioBar.volume = 0;
+    const startVolume = audioBar.volume;
+    const targetVolume = 1.0;
+    const volumeDiff = targetVolume - startVolume;
+    
     const steps = 50;
     const stepDuration = FADE_IN_DURATION / steps;
-    const volumeIncrement = 1.0 / steps;
+    const volumeIncrement = volumeDiff / steps;
     let currentStep = 0;
     
     fadeInterval = setInterval(function() {
       currentStep++;
-      audioBar.volume = Math.min(audioBar.volume + volumeIncrement, 1.0);
+      audioBar.volume = Math.min(startVolume + (volumeIncrement * currentStep), 1.0);
       
       if (currentStep >= steps || audioBar.volume >= 1.0) {
         clearInterval(fadeInterval);
@@ -881,14 +889,10 @@
    */
   function togglePlayPause() {
     if (audioBar.paused) {
-      // Resume audio
+      // Resume audio - it will trigger 'play' event which handles fade in
       audioBar.play().catch(function() { 
         document.getElementById("errorMessage").style.display = "block"; 
       });
-      // Fade in from current volume
-      if (audioBar.volume < 1.0) {
-        fadeInAudio();
-      }
     } else {
       // Pause audio with fade out
       fadeOutAudio(function() {

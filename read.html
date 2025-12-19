@@ -659,11 +659,6 @@
     updateButtonStates();
     startScrolling();
     hideLoadingOverlay();
-    
-    // Always fade in when play event fires
-    if (audioBar.volume < 1.0) {
-      fadeInAudio();
-    }
   }
 
   /**
@@ -829,9 +824,15 @@
   function fadeInAudio() {
     if (fadeInterval) clearInterval(fadeInterval);
     
+    // Always start from current volume (usually 0) and go to 1.0
     const startVolume = audioBar.volume;
     const targetVolume = 1.0;
     const volumeDiff = targetVolume - startVolume;
+    
+    if (volumeDiff <= 0) {
+      audioBar.volume = 1.0;
+      return;
+    }
     
     const steps = 50;
     const stepDuration = FADE_IN_DURATION / steps;
@@ -842,7 +843,7 @@
       currentStep++;
       audioBar.volume = Math.min(startVolume + (volumeIncrement * currentStep), 1.0);
       
-      if (currentStep >= steps || audioBar.volume >= 1.0) {
+      if (currentStep >= steps || audioBar.volume >= 0.99) {
         clearInterval(fadeInterval);
         audioBar.volume = 1.0;
         fadeInterval = null;
@@ -889,14 +890,21 @@
    */
   function togglePlayPause() {
     if (audioBar.paused) {
-      // Resume audio - it will trigger 'play' event which handles fade in
-      audioBar.play().catch(function() { 
+      // Set volume to 0 before playing to prevent crackling
+      audioBar.volume = 0;
+      
+      // Resume audio
+      audioBar.play().then(function() {
+        // Now fade in from 0 to 1
+        fadeInAudio();
+      }).catch(function() { 
         document.getElementById("errorMessage").style.display = "block"; 
       });
     } else {
       // Pause audio with fade out
       fadeOutAudio(function() {
         audioBar.pause();
+        // Keep volume at 0 for next resume
       });
     }
   }
@@ -956,7 +964,7 @@
     
     audioBar.src = preloadedAudio.src;
     audioBar.currentTime = 0;
-    audioBar.volume = 0;
+    audioBar.volume = 0; // Start at 0 volume to prevent crackling
     
     document.getElementById("storyText").scrollTop = 0;
     stopScrolling();
@@ -964,6 +972,7 @@
     networkCheckStartTime = Date.now();
     
     audioBar.play().then(function() {
+      // Audio is playing at volume 0, now fade in
       fadeInAudio();
       button.classList.remove("loading");
     }).catch(function() {
@@ -1018,7 +1027,7 @@
       currentGender = gender;
       audioBar.src = preloadedAudio.src;
       audioBar.currentTime = 0;
-      audioBar.volume = 0;
+      audioBar.volume = 0; // Start at 0 to prevent crackling
       
       document.getElementById("storyText").scrollTop = 0;
       stopScrolling();
@@ -1029,7 +1038,7 @@
       
       audioBar.play().then(function() {
         console.log("Auto-playback started successfully");
-        fadeInAudio();
+        fadeInAudio(); // Fade in from 0 to 1
         document.getElementById("playPauseBtn").classList.remove("loading");
       }).catch(function(error) {
         console.log("Auto-playback failed:", error);

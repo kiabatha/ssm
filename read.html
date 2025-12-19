@@ -734,31 +734,23 @@
   }
 
   // Update loading progress
-  function updateLoadingProgress(percent) {
-    const progressBar = document.getElementById("loadingProgress");
-    if (progressBar) {
-      progressBar.style.width = Math.min(100, Math.max(0, percent)) + "%";
-    }
-  }
-
-  // Check network speed
-  function checkNetworkSpeed() {
+function checkNetworkSpeed() {
     networkCheckStartTime = Date.now();
     const testImage = new Image();
     testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now();
     
     testImage.onload = function() {
-      const loadTime = Date.now() - networkCheckStartTime;
-      if (loadTime > 3000) { // Very slow network
-        document.getElementById("networkWarning").classList.add("show");
-      }
+        const loadTime = Date.now() - networkCheckStartTime;
+        // Only show warning if network is VERY slow (more than 5 seconds)
+        if (loadTime > 5000) {
+            document.getElementById("networkWarning").classList.add("show");
+        }
     };
     
     testImage.onerror = function() {
-      // If test image fails, network is likely slow
-      document.getElementById("networkWarning").classList.add("show");
+        // Don't show warning for test image failure
     };
-  }
+}
 
   fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
     .then(function(res) { return res.json(); })

@@ -769,6 +769,7 @@
     if (isSwitchingVoice) {
       // Voice is being switched during playback - use smooth transition
       isAudioSwitching = true;
+      alert("🔄 Tap again to restart");
       const savedTime = audioBar.currentTime;
       currentGender = gender;
       

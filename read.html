@@ -345,84 +345,81 @@
       display: inline;
     }
 
-/* Loading Overlay for Auto-play - COMPLETELY TRANSPARENT BACKGROUND */
-.loading-overlay {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10000;
-}
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+    }
 
-.loading-overlay.active {
-  display: block;
-}
+    .loading-overlay.active {
+      display: block;
+    }
 
-.loading-card {
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  min-width: 250px;
-  max-width: 300px;
-  border: 1px solid rgba(33, 150, 243, 0.1);
-  /* Add subtle animation */
-  animation: fadeInScale 0.3s ease-out;
-}
+    .loading-card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      min-width: 250px;
+      max-width: 300px;
+      border: 1px solid rgba(33, 150, 243, 0.1);
+      animation: fadeInScale 0.3s ease-out;
+    }
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-.loading-spinner-large {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #E3F2FD;
-  border-top: 3px solid #2196F3;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-  animation: spin 1s linear infinite;
-}
+    .loading-spinner-large {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #E3F2FD;
+      border-top: 3px solid #2196F3;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      animation: spin 1s linear infinite;
+    }
 
-.loading-text {
-  font-size: 14px;
-  color: #424242;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
+    .loading-text {
+      font-size: 14px;
+      color: #424242;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
 
-.loading-subtext {
-  font-size: 12px;
-  color: #757575;
-  margin-bottom: 10px;
-}
+    .loading-subtext {
+      font-size: 12px;
+      color: #757575;
+      margin-bottom: 10px;
+    }
 
-.progress-container-slim {
-  width: 100%;
-  height: 3px;
-  background-color: #E3F2FD;
-  border-radius: 2px;
-  overflow: hidden;
-}
+    .progress-container-slim {
+      width: 100%;
+      height: 3px;
+      background-color: #E3F2FD;
+      border-radius: 2px;
+      overflow: hidden;
+    }
 
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #2196F3, #21CBF3);
-  width: 0%;
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2196F3, #21CBF3);
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
     
-    /* Audio bar skeleton loading */
     .audio-skeleton {
       display: none;
       margin: 10px auto 0;
@@ -496,18 +493,16 @@
   </style>
 </head>
 <body>
-  <!-- Loading Overlay for Auto-play -->
-<!-- Loading Overlay for Auto-play - TRANSPARENT VERSION -->
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="loading-card">
-    <div class="loading-spinner-large"></div>
-    <div class="loading-text" id="loadingMessage">Loading story...</div>
-    <div class="loading-subtext" id="loadingSubtext">Please wait</div>
-    <div class="progress-container-slim">
-      <div class="progress-fill" id="loadingProgress"></div>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-card">
+      <div class="loading-spinner-large"></div>
+      <div class="loading-text" id="loadingMessage">Loading story...</div>
+      <div class="loading-subtext" id="loadingSubtext">Please wait</div>
+      <div class="progress-container-slim">
+        <div class="progress-fill" id="loadingProgress"></div>
+      </div>
     </div>
   </div>
-</div>
 
   <div class="content">
     <div class="image-container">
@@ -525,7 +520,6 @@
       </button>
     </div>
 
-    <!-- Audio Skeleton Loader -->
     <div class="audio-skeleton" id="audioSkeleton">
       <div class="skeleton-controls">
         <div class="skeleton-button"></div>
@@ -594,8 +588,11 @@
   </div>
 
 <script>
+  // Global state variables
   let isAutoplayActive = false;
   let scrollInterval = null;
+  let scrollTimeout = null;
+  let hasStartedScrolling = false;
   let currentScrollSpeed = 80;
   let storyData;
   let currentFontSize = 14;
@@ -608,9 +605,11 @@
   
   // Audio fade variables
   let fadeInterval = null;
-  const FADE_IN_DURATION = 800;  // 800ms fade in
-  const FADE_OUT_DURATION = 600; // 600ms fade out
+  const FADE_IN_DURATION = 800;
+  const FADE_OUT_DURATION = 600;
+  const SCROLL_START_DELAY = 5000;
 
+  // DOM element references
   const params = new URLSearchParams(window.location.search);
   const audioBar = document.getElementById("audioBar");
   const audioMan = document.getElementById("audioMan");
@@ -618,89 +617,22 @@
   const manButton = document.getElementById("manButton");
   const womanButton = document.getElementById("womanButton");
 
-  // Initialize audio events
+  // Initialize application
   initializeAudioEvents();
+  loadStoryData();
 
+  /**
+   * Initialize all audio event listeners
+   */
   function initializeAudioEvents() {
-    audioBar.addEventListener('play', function() {
-      if (window.Android) window.Android.onAudioStateChange(true);
-      document.getElementById("customAudioPlayer").style.display = "block";
-      document.getElementById("audioSkeleton").classList.remove("active");
-      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u23F8";
-      document.getElementById("errorMessage").style.display = "none";
-      updateButtonStates();
-      startScrolling();
-      
-      // Hide loading overlay if visible
-      hideLoadingOverlay();
-    });
-
-    audioBar.addEventListener('pause', function() {
-      if (window.Android) window.Android.onAudioStateChange(false);
-      clearInterval(scrollInterval);
-      scrollInterval = null;
-      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-      updateButtonStates();
-      
-      const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
-      
-      if (isAutoplayActive && !hasEnded) {
-        if (window.Android) window.Android.onUserStoppedAudio();
-        isAutoplayActive = false;
-      }
-    });
-
-    audioBar.addEventListener('ended', function() {
-      if (window.Android) window.Android.onAudioStateChange(false);
-      clearInterval(scrollInterval);
-      scrollInterval = null;
-      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-      document.getElementById("customAudioPlayer").style.display = "none";
-      currentGender = null;
-      updateButtonStates();
-      
-      if (isAutoplayActive && window.Android) {
-        window.Android.onAudioEnded();
-      }
-    });
-
-    audioBar.addEventListener('timeupdate', function() {
-      if (audioBar.duration) {
-        const progress = (audioBar.currentTime / audioBar.duration) * 100;
-        document.getElementById("progressBar").style.width = Math.max(0, progress) + '%';
-        document.getElementById("currentTime").textContent = formatTime(audioBar.currentTime);
-      }
-    });
-
-    audioBar.addEventListener('loadedmetadata', function() {
-      if (audioBar.duration && !isNaN(audioBar.duration)) {
-        document.getElementById("totalTime").textContent = formatTime(audioBar.duration);
-      }
-    });
-
-    audioBar.addEventListener('canplaythrough', function() {
-      document.getElementById("playPauseBtn").classList.remove("loading");
-      if (isAutoPlayMode) {
-        updateLoadingProgress(100);
-      }
-    });
-
-    audioBar.addEventListener('error', function() {
-      document.getElementById("errorMessage").style.display = "block";
-      document.getElementById("playPauseBtn").classList.remove("loading");
-      document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-      hideLoadingOverlay();
-    });
-
-    audioBar.addEventListener('waiting', function() {
-      document.getElementById("playPauseBtn").classList.add("loading");
-      if (networkCheckStartTime) {
-        const loadTime = Date.now() - networkCheckStartTime;
-        if (loadTime > 2000) {
-          document.getElementById("networkWarning").classList.add("show");
-        }
-      }
-    });
+    audioBar.addEventListener('play', handleAudioPlay);
+    audioBar.addEventListener('pause', handleAudioPause);
+    audioBar.addEventListener('ended', handleAudioEnded);
+    audioBar.addEventListener('timeupdate', handleTimeUpdate);
+    audioBar.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audioBar.addEventListener('canplaythrough', handleCanPlayThrough);
+    audioBar.addEventListener('error', handleAudioError);
+    audioBar.addEventListener('waiting', handleAudioWaiting);
 
     audioMan.addEventListener('canplaythrough', function() {
       manAudioLoaded = true;
@@ -713,6 +645,115 @@
     }, { once: true });
   }
 
+  /**
+   * Handle audio play event
+   */
+  function handleAudioPlay() {
+    if (window.Android) window.Android.onAudioStateChange(true);
+    
+    document.getElementById("customAudioPlayer").style.display = "block";
+    document.getElementById("audioSkeleton").classList.remove("active");
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u23F8";
+    document.getElementById("errorMessage").style.display = "none";
+    
+    updateButtonStates();
+    startScrolling();
+    hideLoadingOverlay();
+  }
+
+  /**
+   * Handle audio pause event
+   */
+  function handleAudioPause() {
+    if (window.Android) window.Android.onAudioStateChange(false);
+    
+    stopScrolling();
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+    updateButtonStates();
+    
+    const hasEnded = Math.abs(audioBar.currentTime - audioBar.duration) < 0.5;
+    
+    if (isAutoplayActive && !hasEnded) {
+      if (window.Android) window.Android.onUserStoppedAudio();
+      isAutoplayActive = false;
+    }
+  }
+
+  /**
+   * Handle audio ended event
+   */
+  function handleAudioEnded() {
+    if (window.Android) window.Android.onAudioStateChange(false);
+    
+    stopScrolling();
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+    document.getElementById("customAudioPlayer").style.display = "none";
+    
+    currentGender = null;
+    hasStartedScrolling = false;
+    updateButtonStates();
+    
+    if (isAutoplayActive && window.Android) {
+      window.Android.onAudioEnded();
+    }
+  }
+
+  /**
+   * Handle audio time update
+   */
+  function handleTimeUpdate() {
+    if (audioBar.duration) {
+      const progress = (audioBar.currentTime / audioBar.duration) * 100;
+      document.getElementById("progressBar").style.width = Math.max(0, progress) + '%';
+      document.getElementById("currentTime").textContent = formatTime(audioBar.currentTime);
+    }
+  }
+
+  /**
+   * Handle loaded metadata
+   */
+  function handleLoadedMetadata() {
+    if (audioBar.duration && !isNaN(audioBar.duration)) {
+      document.getElementById("totalTime").textContent = formatTime(audioBar.duration);
+    }
+  }
+
+  /**
+   * Handle can play through event
+   */
+  function handleCanPlayThrough() {
+    document.getElementById("playPauseBtn").classList.remove("loading");
+    if (isAutoPlayMode) {
+      updateLoadingProgress(100);
+    }
+  }
+
+  /**
+   * Handle audio error
+   */
+  function handleAudioError() {
+    document.getElementById("errorMessage").style.display = "block";
+    document.getElementById("playPauseBtn").classList.remove("loading");
+    document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+    hideLoadingOverlay();
+  }
+
+  /**
+   * Handle audio waiting (buffering)
+   */
+  function handleAudioWaiting() {
+    document.getElementById("playPauseBtn").classList.add("loading");
+    if (networkCheckStartTime) {
+      const loadTime = Date.now() - networkCheckStartTime;
+      if (loadTime > 2000) {
+        document.getElementById("networkWarning").classList.add("show");
+      }
+    }
+  }
+
+  /**
+   * Check if both audio files are loaded
+   */
   function checkBothAudiosLoaded() {
     if (manAudioLoaded && womanAudioLoaded && window.Android) {
       window.Android.onBothAudiosPreloaded();
@@ -722,93 +763,62 @@
     }
   }
 
-  // Show loading overlay with progress
-  function showLoadingOverlay(message, subtext) {
-    if (message) document.getElementById("loadingMessage").textContent = message;
-    if (subtext) document.getElementById("loadingSubtext").textContent = subtext;
-    document.getElementById("loadingOverlay").classList.add("active");
-    document.getElementById("loadingProgress").style.width = "0%";
-    isLoading = true;
-  }
-
-  // Hide loading overlay
-  function hideLoadingOverlay() {
-    document.getElementById("loadingOverlay").classList.remove("active");
-    document.getElementById("networkWarning").classList.remove("show");
-    isLoading = false;
-  }
-
-  // Update loading progress
-  function updateLoadingProgress(percent) {
-    const progressBar = document.getElementById("loadingProgress");
-    if (progressBar) {
-      progressBar.style.width = Math.min(100, Math.max(0, percent)) + "%";
+  /**
+   * Start text scrolling with optional delay for first play
+   */
+  function startScrolling() {
+    stopScrolling();
+    
+    currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
+    
+    if (!hasStartedScrolling) {
+      // First play - wait 5 seconds before scrolling
+      scrollTimeout = setTimeout(function() {
+        scrollInterval = setInterval(function() {
+          document.getElementById("storyText").scrollBy(0, 1);
+        }, currentScrollSpeed);
+        hasStartedScrolling = true;
+      }, SCROLL_START_DELAY);
+    } else {
+      // Resume - start scrolling immediately
+      scrollInterval = setInterval(function() {
+        document.getElementById("storyText").scrollBy(0, 1);
+      }, currentScrollSpeed);
     }
   }
 
-  // Check network speed
-  function checkNetworkSpeed() {
-    networkCheckStartTime = Date.now();
-    const testImage = new Image();
-    testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now();
-    
-    testImage.onload = function() {
-      const loadTime = Date.now() - networkCheckStartTime;
-      if (loadTime > 5000) {
-        document.getElementById("networkWarning").classList.add("show");
-      }
-    };
+  /**
+   * Stop text scrolling and clear all timers
+   */
+  function stopScrolling() {
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+      scrollInterval = null;
+    }
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = null;
+    }
   }
 
-  fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      storyData = data[params.get("id")];
-      if (!storyData) throw new Error("Story not found");
+  /**
+   * Update scroll speed while scrolling is active
+   */
+  function updateScrollSpeed() {
+    currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
+    
+    // Only update if scrolling is already active (not during delay)
+    if (scrollInterval) {
+      clearInterval(scrollInterval);
+      scrollInterval = setInterval(function() {
+        document.getElementById("storyText").scrollBy(0, 1);
+      }, currentScrollSpeed);
+    }
+  }
 
-      checkNetworkSpeed();
-      
-      document.getElementById("audioSkeleton").classList.add("active");
-
-      audioMan.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_man;
-      audioWoman.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_woman;
-      
-      audioMan.load();
-      audioWoman.load();
-
-      fetch('https://kiabatha.github.io/ssm/' + storyData.text)
-        .then(function(res) { return res.text(); })
-        .then(function(text) {
-          const paragraphs = text.trim().split('\n').filter(function(p) { return p.trim() !== ''; });
-          const html = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
-          document.getElementById("storyText").innerHTML = html;
-          document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
-          if (params.get("mode") === "manual") {
-            document.getElementById("storyText").style.display = "block";
-          }
-          
-          document.getElementById("audioSkeleton").classList.remove("active");
-          
-          if (window.Android) {
-            window.Android.onContentReady();
-          }
-          
-          if (isAutoPlayMode) {
-            updateLoadingProgress(50);
-          }
-        });
-    })
-    .catch(function() {
-      document.getElementById("storyText").innerText = "Failed to load story.";
-      document.getElementById("audioSkeleton").classList.remove("active");
-      hideLoadingOverlay();
-      if (window.Android) {
-        window.Android.onContentReady();
-      }
-    });
-
-  // ============= FADE FUNCTIONS =============
-  
+  /**
+   * Fade in audio volume
+   */
   function fadeInAudio() {
     if (fadeInterval) clearInterval(fadeInterval);
     
@@ -830,6 +840,9 @@
     }, stepDuration);
   }
   
+  /**
+   * Fade out audio volume
+   */
   function fadeOutAudio(callback) {
     if (fadeInterval) clearInterval(fadeInterval);
     
@@ -850,9 +863,10 @@
       }
     }, stepDuration);
   }
-  
-  // ============= END FADE FUNCTIONS =============
 
+  /**
+   * Format seconds to MM:SS
+   */
   function formatTime(seconds) {
     if (isNaN(seconds) || seconds === Infinity) return '0:00';
     const mins = Math.floor(seconds / 60);
@@ -860,6 +874,9 @@
     return mins + ':' + (secs < 10 ? '0' : '') + secs;
   }
 
+  /**
+   * Toggle audio play/pause
+   */
   function togglePlayPause() {
     if (audioBar.paused) {
       audioBar.play().catch(function() { 
@@ -872,6 +889,9 @@
     }
   }
 
+  /**
+   * Seek audio to specific position
+   */
   function seekAudio(event) {
     const rect = event.target.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
@@ -879,11 +899,17 @@
     audioBar.currentTime = Math.max(0, Math.min(seekTime, audioBar.duration));
   }
 
+  /**
+   * Toggle speed menu visibility
+   */
   function toggleSpeedMenu(event) {
     event.stopPropagation();
     document.getElementById("speedMenu").classList.toggle("show");
   }
 
+  /**
+   * Set audio playback speed
+   */
   function setPlaybackSpeed(speed, event) {
     event.stopPropagation();
     audioBar.playbackRate = speed;
@@ -899,38 +925,21 @@
     document.getElementById("speedMenu").classList.remove("show");
   }
 
-  function startScrolling() {
-    if (scrollInterval) clearInterval(scrollInterval);
-    currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
-    scrollInterval = setInterval(function() {
-      document.getElementById("storyText").scrollBy(0, 1);
-    }, currentScrollSpeed);
-  }
-
-  function updateScrollSpeed() {
-    if (scrollInterval) {
-      clearInterval(scrollInterval);
-      currentScrollSpeed = parseInt(document.getElementById("scrollSpeedSlider").value);
-      scrollInterval = setInterval(function() {
-        document.getElementById("storyText").scrollBy(0, 1);
-      }, currentScrollSpeed);
-    }
-  }
-
+  /**
+   * Play audio by gender selection
+   */
   function playAudio(gender) {
     if (isLoading) return;
     
+    // Reset scrolling state for new audio
+    hasStartedScrolling = false;
     currentGender = gender;
+    
     const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
-    
-    // Show loading on button
     const button = gender === "man" ? manButton : womanButton;
+    
     button.classList.add("loading");
-    
-    // Show audio skeleton loader
     document.getElementById("audioSkeleton").classList.add("active");
-    
-    // Show loading on play button
     document.getElementById("playPauseBtn").classList.add("loading");
     
     audioBar.src = preloadedAudio.src;
@@ -938,15 +947,14 @@
     audioBar.volume = 0;
     
     document.getElementById("storyText").scrollTop = 0;
-    if (scrollInterval) clearInterval(scrollInterval);
-    scrollInterval = null;
+    stopScrolling();
     
     networkCheckStartTime = Date.now();
     
     audioBar.play().then(function() {
       fadeInAudio();
       button.classList.remove("loading");
-    }).catch(function() { 
+    }).catch(function() {
       document.getElementById("errorMessage").style.display = "block"; 
       button.classList.remove("loading");
       document.getElementById("audioSkeleton").classList.remove("active");
@@ -955,84 +963,77 @@
     document.getElementById("storyText").style.display = "block";
   }
 
-  // New function for auto-play from Android
+  /**
+   * Auto-play audio from Android app
+   */
   function playAudioFromApp(gender) {
     console.log("Auto-play triggered for:", gender);
     isAutoplayActive = true;
     isAutoPlayMode = true;
     
-    // Show loading overlay for auto-play
-    showLoadingOverlay(
-        "Starting story...", 
-        "Loading audio..."
-    );
-    
-    // Show audio skeleton immediately
+    showLoadingOverlay("Starting story...", "Loading audio...");
     document.getElementById("audioSkeleton").classList.add("active");
     
-    // Start loading progress
     let progress = 10;
     updateLoadingProgress(progress);
     
     const progressInterval = setInterval(function() {
-        if (progress < 90) {
-            progress += 5;
-            updateLoadingProgress(progress);
-        }
+      if (progress < 90) {
+        progress += 5;
+        updateLoadingProgress(progress);
+      }
     }, 500);
     
-    // Clear interval when audio can play
     audioBar.addEventListener('canplaythrough', function() {
-        clearInterval(progressInterval);
+      clearInterval(progressInterval);
     }, { once: true });
     
-    // Use force playback after a short delay
     setTimeout(function() {
-        startAutoPlayback(gender);
+      startAutoPlayback(gender);
     }, 800);
   }
 
+  /**
+   * Start auto playback for Android app
+   */
   function startAutoPlayback(gender) {
     console.log("Starting auto playback for:", gender);
     
     const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
     
     if (preloadedAudio && preloadedAudio.src) {
-        currentGender = gender;
-        audioBar.src = preloadedAudio.src;
-        audioBar.currentTime = 0;
-        audioBar.volume = 0;
-        
-        // Reset UI
-        document.getElementById("storyText").scrollTop = 0;
-        if (scrollInterval) {
-            clearInterval(scrollInterval);
-            scrollInterval = null;
-        }
-        
-        // Show player
-        document.getElementById("customAudioPlayer").style.display = "block";
-        document.getElementById("audioSkeleton").classList.remove("active");
-        document.getElementById("playPauseBtn").classList.add("loading");
-        
-        // Try to play
-        audioBar.play().then(function() {
-            console.log("Auto-playback started successfully");
-            fadeInAudio();
-            document.getElementById("playPauseBtn").classList.remove("loading");
-            startScrolling();
-        }).catch(function(error) {
-            console.log("Auto-playback failed:", error);
-            document.getElementById("errorMessage").style.display = "block";
-            document.getElementById("playPauseBtn").classList.remove("loading");
-            hideLoadingOverlay();
-        });
-    } else {
-        console.error("Audio source not available for auto-play");
+      hasStartedScrolling = false;
+      currentGender = gender;
+      audioBar.src = preloadedAudio.src;
+      audioBar.currentTime = 0;
+      audioBar.volume = 0;
+      
+      document.getElementById("storyText").scrollTop = 0;
+      stopScrolling();
+      
+      document.getElementById("customAudioPlayer").style.display = "block";
+      document.getElementById("audioSkeleton").classList.remove("active");
+      document.getElementById("playPauseBtn").classList.add("loading");
+      
+      audioBar.play().then(function() {
+        console.log("Auto-playback started successfully");
+        fadeInAudio();
+        document.getElementById("playPauseBtn").classList.remove("loading");
+      }).catch(function(error) {
+        console.log("Auto-playback failed:", error);
+        document.getElementById("errorMessage").style.display = "block";
+        document.getElementById("playPauseBtn").classList.remove("loading");
         hideLoadingOverlay();
+      });
+    } else {
+      console.error("Audio source not available for auto-play");
+      hideLoadingOverlay();
     }
   }
 
+  /**
+   * Update button states based on playback
+   */
   function updateButtonStates() {
     manButton.classList.remove('playing');
     womanButton.classList.remove('playing');
@@ -1046,11 +1047,113 @@
     }
   }
 
+  /**
+   * Adjust font size
+   */
   function adjustFontSize(change) {
     currentFontSize = Math.max(14, Math.min(28, currentFontSize + change));
     document.getElementById("storyText").style.fontSize = currentFontSize + "px";
   }
 
+  /**
+   * Show loading overlay
+   */
+  function showLoadingOverlay(message, subtext) {
+    if (message) document.getElementById("loadingMessage").textContent = message;
+    if (subtext) document.getElementById("loadingSubtext").textContent = subtext;
+    document.getElementById("loadingOverlay").classList.add("active");
+    document.getElementById("loadingProgress").style.width = "0%";
+    isLoading = true;
+  }
+
+  /**
+   * Hide loading overlay
+   */
+  function hideLoadingOverlay() {
+    document.getElementById("loadingOverlay").classList.remove("active");
+    document.getElementById("networkWarning").classList.remove("show");
+    isLoading = false;
+  }
+
+  /**
+   * Update loading progress bar
+   */
+  function updateLoadingProgress(percent) {
+    const progressBar = document.getElementById("loadingProgress");
+    if (progressBar) {
+      progressBar.style.width = Math.min(100, Math.max(0, percent)) + "%";
+    }
+  }
+
+  /**
+   * Check network speed
+   */
+  function checkNetworkSpeed() {
+    networkCheckStartTime = Date.now();
+    const testImage = new Image();
+    testImage.src = 'https://kiabatha.github.io/ssm/test.jpg?t=' + Date.now();
+    
+    testImage.onload = function() {
+      const loadTime = Date.now() - networkCheckStartTime;
+      if (loadTime > 5000) {
+        document.getElementById("networkWarning").classList.add("show");
+      }
+    };
+  }
+
+  /**
+   * Load story data from JSON
+   */
+  function loadStoryData() {
+    fetch('https://kiabatha.github.io/ssm/' + params.get("file") + '.json')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        storyData = data[params.get("id")];
+        if (!storyData) throw new Error("Story not found");
+
+        checkNetworkSpeed();
+        document.getElementById("audioSkeleton").classList.add("active");
+
+        audioMan.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_man;
+        audioWoman.src = 'https://kiabatha.github.io/ssm/' + storyData.audio_woman;
+        
+        audioMan.load();
+        audioWoman.load();
+
+        fetch('https://kiabatha.github.io/ssm/' + storyData.text)
+          .then(function(res) { return res.text(); })
+          .then(function(text) {
+            const paragraphs = text.trim().split('\n').filter(function(p) { return p.trim() !== ''; });
+            const html = paragraphs.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+            document.getElementById("storyText").innerHTML = html;
+            document.getElementById("storyImage").src = 'https://kiabatha.github.io/ssm/' + storyData.image;
+            
+            if (params.get("mode") === "manual") {
+              document.getElementById("storyText").style.display = "block";
+            }
+            
+            document.getElementById("audioSkeleton").classList.remove("active");
+            
+            if (window.Android) {
+              window.Android.onContentReady();
+            }
+            
+            if (isAutoPlayMode) {
+              updateLoadingProgress(50);
+            }
+          });
+      })
+      .catch(function() {
+        document.getElementById("storyText").innerText = "Failed to load story.";
+        document.getElementById("audioSkeleton").classList.remove("active");
+        hideLoadingOverlay();
+        if (window.Android) {
+          window.Android.onContentReady();
+        }
+      });
+  }
+
+  // Event Listeners
   document.addEventListener('click', function(e) {
     const menu = document.getElementById("speedMenu");
     const menuBtn = document.getElementById("menuBtn");
@@ -1063,10 +1166,7 @@
     if (document.hidden && !audioBar.paused) {
       fadeOutAudio(function() {
         audioBar.pause();
-        if (scrollInterval) {
-          clearInterval(scrollInterval);
-          scrollInterval = null;
-        }
+        stopScrolling();
       });
     }
   });
@@ -1086,7 +1186,6 @@
     }
   });
 
-  // Reset auto-play mode when page loads
   window.addEventListener('load', function() {
     isAutoPlayMode = false;
     hideLoadingOverlay();

@@ -496,6 +496,7 @@
   let manAudioLoaded = false;
   let womanAudioLoaded = false;
   let currentGender = null;
+  let isAudioSwitching = false;  // NEW: Prevent double triggering
   
   // Audio fade variables
   let fadeInterval = null;
@@ -601,6 +602,7 @@
     document.getElementById("errorMessage").style.display = "block";
     document.getElementById("playPauseBtn").classList.remove("loading");
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
+    isAudioSwitching = false; // Reset on error
   }
 
   function handleAudioWaiting() {
@@ -754,34 +756,74 @@
     document.getElementById("speedMenu").classList.remove("show");
   }
 
+  // UPDATED FUNCTION - Fixes audio crackling when switching voices
   function playAudio(gender) {
-    hasStartedScrolling = false;
-    currentGender = gender;
+    // Prevent double triggering
+    if (isAudioSwitching) {
+      console.log("Audio switch already in progress, ignoring...");
+      return;
+    }
     
-    const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
-    const button = gender === "man" ? manButton : womanButton;
+    const isSwitchingVoice = !audioBar.paused && currentGender && currentGender !== gender;
     
-    button.classList.add("loading");
-    document.getElementById("audioSkeleton").classList.add("active");
-    document.getElementById("playPauseBtn").classList.add("loading");
-    
-    audioBar.src = preloadedAudio.src;
-    audioBar.currentTime = 0;
-    audioBar.volume = 0;
-    
-    document.getElementById("storyText").scrollTop = 0;
-    stopScrolling();
-    
-    audioBar.play().then(function() {
-      fadeInAudio();
-      button.classList.remove("loading");
-    }).catch(function() {
-      document.getElementById("errorMessage").style.display = "block"; 
-      button.classList.remove("loading");
-      document.getElementById("audioSkeleton").classList.remove("active");
-    });
-    
-    document.getElementById("storyText").style.display = "block";
+    if (isSwitchingVoice) {
+      // Voice is being switched during playback - use smooth transition
+      isAudioSwitching = true;
+      const savedTime = audioBar.currentTime;
+      currentGender = gender;
+      
+      // Fade out current audio
+      fadeOutAudio(function() {
+        // Switch to new voice
+        const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+        audioBar.src = preloadedAudio.src;
+        audioBar.currentTime = savedTime;
+        audioBar.volume = 0;
+        
+        // Play with fade in
+        audioBar.play().then(function() {
+          fadeInAudio();
+          updateButtonStates();
+          isAudioSwitching = false; // Reset flag
+        }).catch(function() {
+          document.getElementById("errorMessage").style.display = "block";
+          updateButtonStates();
+          isAudioSwitching = false; // Reset flag
+        });
+      });
+    } else {
+      // Fresh start - normal behavior
+      isAudioSwitching = true;
+      hasStartedScrolling = false;
+      currentGender = gender;
+      
+      const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+      const button = gender === "man" ? manButton : womanButton;
+      
+      button.classList.add("loading");
+      document.getElementById("audioSkeleton").classList.add("active");
+      document.getElementById("playPauseBtn").classList.add("loading");
+      
+      audioBar.src = preloadedAudio.src;
+      audioBar.currentTime = 0;
+      audioBar.volume = 0;
+      
+      document.getElementById("storyText").scrollTop = 0;
+      stopScrolling();
+      
+      audioBar.play().then(function() {
+        fadeInAudio();
+        button.classList.remove("loading");
+        isAudioSwitching = false; // Reset flag
+      }).catch(function() {
+        document.getElementById("errorMessage").style.display = "block"; 
+        button.classList.remove("loading");
+        document.getElementById("audioSkeleton").classList.remove("active");
+        isAudioSwitching = false; // Reset flag
+      });
+      
+      document.getElementById("storyText").style.display = "block";
+    }
   }
 
   function playAudioFromApp(gender) {

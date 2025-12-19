@@ -925,41 +925,68 @@ function checkNetworkSpeed() {
   }
 
   // New function for auto-play from Android
-  function playAudioFromApp(gender) {
+// New function for auto-play from Android - UPDATED VERSION
+async function playAudioFromApp(gender) {
     console.log("Auto-play triggered for:", gender);
     isAutoplayActive = true;
     isAutoPlayMode = true;
     
-    // Show loading overlay for auto-play
-    showLoadingOverlay(
-        "Starting story...", 
-        "Loading audio..."
-    );
+    // Check network speed first
+    const networkSpeed = await checkNetworkSpeed();
+    
+    if (networkSpeed === 'fast') {
+        // Fast network - show brief loading (1 second max)
+        showLoadingOverlay(
+            "Starting story...", 
+            "Loading..."
+        );
+        
+        // Hide quickly for fast networks
+        setTimeout(() => {
+            hideLoadingOverlay();
+        }, 1000);
+        
+    } else if (networkSpeed === 'medium') {
+        // Medium network - show loading with progress
+        showLoadingOverlay(
+            "Loading story...", 
+            "Please wait a moment"
+        );
+        
+        document.getElementById("networkWarning").classList.add("show");
+        
+    } else {
+        // Slow network - show detailed loading with warning
+        showLoadingOverlay(
+            "Loading story...", 
+            "Slow network detected. This may take longer."
+        );
+        
+        document.getElementById("networkWarning").classList.add("show");
+    }
     
     // Show audio skeleton immediately
     document.getElementById("audioSkeleton").classList.add("active");
     
     // Start loading progress
     let progress = 10;
-    updateLoadingProgress(progress);
-    
     const progressInterval = setInterval(function() {
         if (progress < 90) {
             progress += 5;
             updateLoadingProgress(progress);
         }
-    }, 500);
+    }, (networkSpeed === 'fast' ? 50 : 500)); // Faster progress for fast networks
     
     // Clear interval when audio can play
     audioBar.addEventListener('canplaythrough', function() {
         clearInterval(progressInterval);
     }, { once: true });
     
-    // Use force playback after a short delay
+    // Start playback
     setTimeout(function() {
         startAutoPlayback(gender);
-    }, 800);
-  }
+    }, (networkSpeed === 'fast' ? 300 : 800)); // Faster start for fast networks
+}
 
   function startAutoPlayback(gender) {
     console.log("Starting auto playback for:", gender);

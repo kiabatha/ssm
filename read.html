@@ -51,6 +51,7 @@
     }
 
     .button-row {
+      position: relative;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -110,6 +111,36 @@
       color: white;
       border: none;
       cursor: pointer;
+    }
+
+    #voiceToast {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 10px;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 9999;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      white-space: nowrap;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
     }
 
     #storyText {
@@ -415,6 +446,9 @@
       <button class="action-button" id="womanButton" onclick="playAudio('woman')">
         <span>Woman</span>
       </button>
+      
+      <!-- Toast notification appears below buttons -->
+      <div id="voiceToast">🔄 Tap again to restart</div>
     </div>
 
     <div class="audio-skeleton" id="audioSkeleton">
@@ -496,7 +530,7 @@
   let manAudioLoaded = false;
   let womanAudioLoaded = false;
   let currentGender = null;
-  let isAudioSwitching = false;  // NEW: Prevent double triggering
+  let isAudioSwitching = false;
   
   // Audio fade variables
   let fadeInterval = null;
@@ -515,6 +549,15 @@
   // Initialize application
   initializeAudioEvents();
   loadStoryData();
+
+  // Show toast notification
+  function showVoiceToast() {
+    const toast = document.getElementById("voiceToast");
+    toast.style.display = "block";
+    setTimeout(function() {
+      toast.style.display = "none";
+    }, 3000);
+  }
 
   function initializeAudioEvents() {
     audioBar.addEventListener('play', handleAudioPlay);
@@ -602,7 +645,7 @@
     document.getElementById("errorMessage").style.display = "block";
     document.getElementById("playPauseBtn").classList.remove("loading");
     document.getElementById("playPauseBtn").querySelector('.btn-icon').textContent = "\u25B6";
-    isAudioSwitching = false; // Reset on error
+    isAudioSwitching = false;
   }
 
   function handleAudioWaiting() {
@@ -756,44 +799,63 @@
     document.getElementById("speedMenu").classList.remove("show");
   }
 
-  // UPDATED FUNCTION - Fixes audio crackling when switching voices
   function playAudio(gender) {
-    // Prevent double triggering
     if (isAudioSwitching) {
-      console.log("Audio switch already in progress, ignoring...");
       return;
     }
     
     const isSwitchingVoice = !audioBar.paused && currentGender && currentGender !== gender;
+    const isRestartingSameVoice = !audioBar.paused && currentGender && currentGender === gender;
     
-    if (isSwitchingVoice) {
-      // Voice is being switched during playback - use smooth transition
+    if (isRestartingSameVoice) {
       isAudioSwitching = true;
-      alert("🔄 Tap again to restart");
+      
+      const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
+      
+      fadeOutAudio(function() {
+        audioBar.src = preloadedAudio.src;
+        audioBar.currentTime = 0;
+        audioBar.volume = 0;
+        
+        document.getElementById("storyText").scrollTop = 0;
+        stopScrolling();
+        hasStartedScrolling = false;
+        
+        audioBar.play().then(function() {
+          fadeInAudio();
+          updateButtonStates();
+          isAudioSwitching = false;
+        }).catch(function() {
+          document.getElementById("errorMessage").style.display = "block";
+          updateButtonStates();
+          isAudioSwitching = false;
+        });
+      });
+      
+    } else if (isSwitchingVoice) {
+      isAudioSwitching = true;
       const savedTime = audioBar.currentTime;
       currentGender = gender;
       
-      // Fade out current audio
+      showVoiceToast();
+      
       fadeOutAudio(function() {
-        // Switch to new voice
         const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
         audioBar.src = preloadedAudio.src;
         audioBar.currentTime = savedTime;
         audioBar.volume = 0;
         
-        // Play with fade in
         audioBar.play().then(function() {
           fadeInAudio();
           updateButtonStates();
-          isAudioSwitching = false; // Reset flag
+          isAudioSwitching = false;
         }).catch(function() {
           document.getElementById("errorMessage").style.display = "block";
           updateButtonStates();
-          isAudioSwitching = false; // Reset flag
+          isAudioSwitching = false;
         });
       });
     } else {
-      // Fresh start - normal behavior
       isAudioSwitching = true;
       hasStartedScrolling = false;
       currentGender = gender;
@@ -815,12 +877,12 @@
       audioBar.play().then(function() {
         fadeInAudio();
         button.classList.remove("loading");
-        isAudioSwitching = false; // Reset flag
+        isAudioSwitching = false;
       }).catch(function() {
         document.getElementById("errorMessage").style.display = "block"; 
         button.classList.remove("loading");
         document.getElementById("audioSkeleton").classList.remove("active");
-        isAudioSwitching = false; // Reset flag
+        isAudioSwitching = false;
       });
       
       document.getElementById("storyText").style.display = "block";
@@ -828,7 +890,6 @@
   }
 
   function playAudioFromApp(gender) {
-    console.log("Auto-play triggered for:", gender);
     isAutoplayActive = true;
     
     document.getElementById("audioSkeleton").classList.add("active");
@@ -839,8 +900,6 @@
   }
 
   function startAutoPlayback(gender) {
-    console.log("Starting auto playback for:", gender);
-    
     const preloadedAudio = (gender === "woman") ? audioWoman : audioMan;
     
     if (preloadedAudio && preloadedAudio.src) {
@@ -858,16 +917,12 @@
       document.getElementById("playPauseBtn").classList.add("loading");
       
       audioBar.play().then(function() {
-        console.log("Auto-playback started successfully");
         fadeInAudio();
         document.getElementById("playPauseBtn").classList.remove("loading");
       }).catch(function(error) {
-        console.log("Auto-playback failed:", error);
         document.getElementById("errorMessage").style.display = "block";
         document.getElementById("playPauseBtn").classList.remove("loading");
       });
-    } else {
-      console.error("Audio source not available for auto-play");
     }
   }
 

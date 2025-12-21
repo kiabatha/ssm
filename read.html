@@ -74,7 +74,7 @@
       max-width: 100px;
       flex: 1 1 auto;
       background-color: #E53935;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     }
 
     .action-button.playing {
@@ -99,6 +99,13 @@
 
     .action-button.loading span {
       visibility: hidden;
+    }
+
+    /* NEW: Hidden state for buttons */
+    .action-button.hidden {
+      opacity: 0;
+      transform: scale(0.8);
+      pointer-events: none;
     }
 
     .round-button {
